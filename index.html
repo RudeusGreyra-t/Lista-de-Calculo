@@ -90,31 +90,31 @@
     transition: background 0.15s, transform 0.15s;
   }
   nav.index a:hover { background: var(--bg); transform: translateY(-1px); }
-  nav.index a .count { color: var(--text-muted); font-size: 12px; margin-left: 4px; }
+  nav.index a .count { color: var(--accent); font-size: 12px; margin-left: 4px; font-weight: 600; }
 
   .tray {
     max-width: 1100px;
     margin: 18px auto 0;
-    padding: 16px 20px;
+    padding: 18px 20px 14px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 8px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   }
 
-  /* Instruções com redação aprimorada e fonte maior */
   .filter-instructions {
     margin: 0 0 14px 0;
-    font-size: 15px;
+    font-size: 14.5px;
     color: var(--text-muted);
     line-height: 1.5;
   }
   .filter-instructions strong { color: var(--text-main); }
 
+  /* ZONA SUPERIOR: FILTROS */
   .filters-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
     align-items: center;
     width: 100%;
   }
@@ -160,7 +160,6 @@
     gap: 2px;
   }
 
-  /* Estilização para os botões internos do dropdown */
   .dropdown-actions {
     display: flex;
     gap: 6px;
@@ -200,11 +199,41 @@
 
   .divider { width: 1px; height: 24px; background: var(--border); margin: 0 4px; }
 
-  .actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-left: auto; }
+  /* ZONA INFERIOR: AÇÕES GLOBAIS E RESPOSTAS */
+  .tray-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+
+  .tray-footer-left {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .tray-footer-right {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .global-counter {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
   button.btn {
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 500;
-    padding: 8px 14px;
+    padding: 7px 12px;
     border-radius: 6px;
     border: 1px solid var(--border);
     background: var(--surface);
@@ -218,10 +247,11 @@
     background: var(--accent);
     color: white;
     border: none;
+    font-weight: 600;
+    padding: 8px 16px;
   }
   button.btn.primary:hover { background: var(--accent-hover); }
 
-  .progress-wrap { width: 100%; text-align: right; margin-top: 12px; }
   .progress { font-size: 13px; color: var(--text-muted); font-weight: 500; }
 
   main { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
@@ -260,7 +290,6 @@
   .card.reviewed { opacity: 0.55; }
   .card.hidden { display: none; }
 
-  /* Correção para evitar quebra de linha no código da questão no mobile */
   .card-head {
     display: flex;
     justify-content: space-between;
@@ -435,14 +464,12 @@
     border-top: 1px solid var(--border);
   }
 
-  @media (max-width: 900px) {
-    .actions { margin-left: 0; width: 100%; margin-top: 8px; justify-content: flex-start; }
-  }
   @media (max-width: 640px) {
     .divider { display: none; }
     .dropdown { flex: 1 1 45%; }
     .dropdown-btn { width: 100%; justify-content: space-between; }
-    .actions button { flex: 1; text-align: center; justify-content: center; }
+    .tray-footer { flex-direction: column; align-items: stretch; }
+    .tray-footer-right { margin-left: 0; justify-content: space-between; flex-wrap: wrap; }
   }
 </style>
 </head>
@@ -456,9 +483,9 @@
 <nav class="index" id="indexNav"></nav>
 
 <div class="tray">
-  <!-- Redação revisada e fonte ampliada -->
   <p class="filter-instructions"><strong>Personalize sua lista:</strong> Todos os tópicos vêm selecionados por padrão. Desmarque o que deseja ocultar ou utilize os menus abaixo para focar em conteúdos específicos.</p>
   
+  <!-- ZONA SUPERIOR: FILTROS -->
   <div class="filters-row">
     <details class="dropdown" id="dd-origem">
       <summary class="dropdown-btn">Origem <span class="count"></span> ▾</summary>
@@ -491,16 +518,19 @@
       <summary class="dropdown-btn">Integrais <span class="count"></span> ▾</summary>
       <div class="dropdown-content" id="filterIntegrais"></div>
     </details>
+  </div>
 
-    <div class="actions">
-      <button class="btn" id="checkAll">Marcar Todos</button>
-      <button class="btn" id="uncheckAll">Desmarcar Todos</button>
+  <!-- ZONA INFERIOR: AÇÕES GLOBAIS E RESPOSTAS -->
+  <div class="tray-footer">
+    <div class="tray-footer-left">
+      <button class="btn" id="checkAll">Marcar Todos (Matérias)</button>
+      <button class="btn" id="uncheckAll">Desmarcar Todos (Matérias)</button>
+    </div>
+    <div class="tray-footer-right">
+      <span class="global-counter" id="globalCounter">0 visíveis</span>
+      <span class="progress" id="progressLabel"></span>
       <button class="btn primary" id="toggleAllAnswers">Revelar Respostas</button>
     </div>
-  </div>
-  
-  <div class="progress-wrap">
-    <span class="progress" id="progressLabel"></span>
   </div>
 </div>
 
@@ -772,6 +802,7 @@ function origCSSClass(origem){
 }
 
 const REVIEWED_KEY = "calc1_revisados";
+let reviewedMap = getReviewed();
 function getReviewed(){
   try{ return JSON.parse(localStorage.getItem(REVIEWED_KEY) || "{}"); }
   catch(e){ return {}; }
@@ -785,10 +816,9 @@ function setReviewed(map){
 const origensDisponiveis = [...new Set(DATA.flatMap(g => g.exercicios.map(e => origemCategoria(e.origem))))];
 const dificuldadesDisponiveis = ["Fácil","Médio","Difícil","Muito difícil"];
 
-let selectedOrigens = new Set(origensDisponiveis);
-let selectedDificuldades = new Set(dificuldadesDisponiveis);
+const selectedOrigens = new Set(origensDisponiveis);
+const selectedDificuldades = new Set(dificuldadesDisponiveis);
 
-// Cada matéria controla os seus próprios subtópicos selecionados de forma isolada
 const materiaSubtopicos = {};
 ["Limites", "Continuidade", "Derivadas", "Integrais"].forEach(topico => {
     const subs = DATA.filter(g => g.materia === topico).map(g => g.subtopico);
@@ -799,7 +829,7 @@ let allAnswersShown = false;
 
 
 /* ======================= RENDERIZAR MENUS DROPDOWN ======================= */
-function renderDropdownOptions(container, options, selectedSet, onchangeCallback){
+function renderDropdownOptions(container, options, selectedSet){
   container.innerHTML = "";
   options.forEach(opt=>{
     const value = typeof opt === "string" ? opt : opt.value;
@@ -810,7 +840,6 @@ function renderDropdownOptions(container, options, selectedSet, onchangeCallback
     
     labelEl.querySelector("input").addEventListener("change", (e)=>{
       if(e.target.checked) selectedSet.add(value); else selectedSet.delete(value);
-      if(onchangeCallback) onchangeCallback();
       applyFilters();
       updateDropdownButton(container.closest('.dropdown'));
     });
@@ -819,7 +848,6 @@ function renderDropdownOptions(container, options, selectedSet, onchangeCallback
   updateDropdownButton(container.closest('.dropdown'));
 }
 
-/* Criação do menu dropdown customizado com os botões internos de Marcar/Desmarcar Todos */
 function setupDropdownWithActions(dropdownId, title, options, selectedSet) {
     const details = document.getElementById(dropdownId);
     details.innerHTML = `
@@ -867,11 +895,9 @@ function updateDropdownButton(detailsEl) {
    }
 }
 
-// Configuração dos Dropdowns Globais
 setupDropdownWithActions("dd-origem", "Origem", origensDisponiveis, selectedOrigens);
 setupDropdownWithActions("dd-dificuldade", "Dificuldade", dificuldadesDisponiveis, selectedDificuldades);
 
-// Configuração dos Dropdowns por Matéria com seus respectivos subtópicos
 ["Limites", "Continuidade", "Derivadas", "Integrais"].forEach(topico => {
     const subtopicos = DATA.filter(g => g.materia === topico).map(g => g.subtopico);
     setupDropdownWithActions(`dd-${topico.toLowerCase()}`, topico, subtopicos, materiaSubtopicos[topico]);
@@ -890,9 +916,7 @@ document.getElementById("checkAll").addEventListener("click", ()=>{
       DATA.filter(g => g.materia === m).map(g => g.subtopico).forEach(s => materiaSubtopicos[m].add(s));
   });
   
-  // Seleciona explicitamente apenas os checkboxes das matérias
   document.querySelectorAll('#dd-limites .dropdown-item input, #dd-continuidade .dropdown-item input, #dd-derivadas .dropdown-item input, #dd-integrais .dropdown-item input').forEach(inp => inp.checked = true);
-  
   ['dd-limites', 'dd-continuidade', 'dd-derivadas', 'dd-integrais'].forEach(id => updateDropdownButton(document.getElementById(id)));
   applyFilters();
 });
@@ -900,38 +924,12 @@ document.getElementById("checkAll").addEventListener("click", ()=>{
 document.getElementById("uncheckAll").addEventListener("click", ()=>{
   Object.keys(materiaSubtopicos).forEach(m => materiaSubtopicos[m].clear());
   
-  // Desmarca explicitamente apenas os checkboxes das matérias, preservando Origem e Dificuldade
   document.querySelectorAll('#dd-limites .dropdown-item input, #dd-continuidade .dropdown-item input, #dd-derivadas .dropdown-item input, #dd-integrais .dropdown-item input').forEach(inp => inp.checked = false);
-  
   ['dd-limites', 'dd-continuidade', 'dd-derivadas', 'dd-integrais'].forEach(id => updateDropdownButton(document.getElementById(id)));
-  applyFilters();
-});
-
-document.getElementById("uncheckAll").addEventListener("click", ()=>{
-  // Apenas as matérias/subtópicos são desmarcadas globalmente
-  Object.keys(materiaSubtopicos).forEach(m => materiaSubtopicos[m].clear());
-  
-  // Desmarca apenas os inputs dos dropdowns de matéria
-  document.querySelectorAll('#dd-limites input, #dd-continuidade input, #dd-derivadas input, #dd-integrais input').forEach(inp => inp.checked = false);
-  
-  // Atualiza apenas os contadores desses dropdowns
-  ['dd-limites', 'dd-continuidade', 'dd-derivadas', 'dd-integrais'].forEach(id => updateDropdownButton(document.getElementById(id)));
-  applyFilters();
-});
-
-document.getElementById("uncheckAll").addEventListener("click", ()=>{
-  selectedOrigens.clear();
-  selectedDificuldades.clear();
-  Object.keys(materiaSubtopicos).forEach(m => materiaSubtopicos[m].clear());
-  
-  document.querySelectorAll('.dropdown-content input').forEach(inp => inp.checked = false);
-  document.querySelectorAll('.dropdown').forEach(updateDropdownButton);
   applyFilters();
 });
 
 /* ======================= CONSTRUIR INTERFACE DE CARTÕES ======================= */
-const reviewedMap = getReviewed();
-
 function buildNav(){
   const nav = document.getElementById("indexNav");
   nav.innerHTML = "";
@@ -939,7 +937,7 @@ function buildNav(){
     const total = DATA.filter(g=>g.secId===secId).reduce((n,g)=>n+g.exercicios.length,0);
     const a = document.createElement("a");
     a.href = "#" + secId;
-    a.innerHTML = SECTION_TITLES[secId] + ` <span class="count">(${total})</span>`;
+    a.innerHTML = `${SECTION_TITLES[secId]} <span class="count" id="nav-count-${secId}">(${total}/${total})</span>`;
     nav.appendChild(a);
   });
 }
@@ -957,7 +955,7 @@ function buildContent(){
     section.className = "topic";
     section.id = secId;
 
-    section.innerHTML = `<h2>${SECTION_TITLES[secId]}</h2><div class="topic-count">${total} exercícios</div>`;
+    section.innerHTML = `<h2>${SECTION_TITLES[secId]}</h2><div class="topic-count sec-count" data-sec="${secId}">${total} exercícios</div>`;
 
     groups.forEach(group=>{
       const h3 = document.createElement("h3");
@@ -1044,7 +1042,6 @@ function applyFilters(){
     const okOrigem = selectedOrigens.has(card.dataset.origemCat);
     const okDif = selectedDificuldades.has(card.dataset.dificuldade);
     
-    // Validação correta checando o conjunto isolado de subtópicos da matéria correspondente
     const materiaCard = card.dataset.materia;
     const subtopicoCard = card.dataset.subtopico;
     const okTema = materiaSubtopicos[materiaCard] && materiaSubtopicos[materiaCard].has(subtopicoCard);
@@ -1054,23 +1051,42 @@ function applyFilters(){
     if(visible) visibleCount++;
   });
 
-  document.querySelectorAll("section.topic").forEach(sec=>{
+  // Atualiza contadores dinâmicos por seção (matéria) e na barra de navegação
+  SECTION_ORDER.forEach(secId => {
+    const sec = document.getElementById(secId);
+    if (!sec) return;
+    
     const secCards = sec.querySelectorAll(".card");
-    const anyVisible = [...secCards].some(c=>!c.classList.contains("hidden"));
+    const visibleCardsInSec = [...secCards].filter(c=>!c.classList.contains("hidden"));
+    const anyVisible = visibleCardsInSec.length > 0;
+    
     sec.style.display = anyVisible ? "" : "none";
-  });
-  
-  document.querySelectorAll("h3.subtopic").forEach(h=>{
-    let sib = h.nextElementSibling;
-    let anyVisible = false;
-    while(sib && sib.tagName === "ARTICLE"){
-      if(!sib.classList.contains("hidden")) anyVisible = true;
-      sib = sib.nextElementSibling;
+    
+    const countEl = sec.querySelector(".sec-count");
+    const totalSec = secCards.length;
+    const visibleCountSec = visibleCardsInSec.length;
+    
+    if(countEl) {
+        if(visibleCountSec === totalSec) {
+            countEl.textContent = `${totalSec} exercícios`;
+        } else {
+            countEl.textContent = `${visibleCountSec} de ${totalSec} exercícios visíveis`;
+        }
     }
-    h.style.display = anyVisible ? "" : "none";
+
+    // Atualiza contador da barra de navegação (xx/yy)
+    const navCountEl = document.getElementById(`nav-count-${secId}`);
+    if(navCountEl) {
+        navCountEl.textContent = `(${visibleCountSec}/${totalSec})`;
+    }
   });
 
   document.getElementById("emptyMsg").style.display = visibleCount===0 ? "block" : "none";
+  
+  // Atualiza contador global na barra inferior
+  const totalGeral = cards.length;
+  document.getElementById("globalCounter").textContent = `${visibleCount} de ${totalGeral} visíveis`;
+  
   updateProgress();
 }
 
