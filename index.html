@@ -241,7 +241,8 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 12px;
+    gap: 16px;
+    flex-wrap: nowrap;
   }
   
   .card-head h4 {
@@ -252,6 +253,8 @@
     background: var(--bg);
     padding: 4px 8px;
     border-radius: 4px;
+    white-space: nowrap; /* Impede que o nome da questão quebre linha */
+    flex-shrink: 0;      /* Garante que o código não seja espremido */
   }
   
   .badges-wrapper {
