@@ -886,14 +886,28 @@ document.addEventListener('click', (e) => {
 });
 
 document.getElementById("checkAll").addEventListener("click", ()=>{
-  origensDisponiveis.forEach(o => selectedOrigens.add(o));
-  dificuldadesDisponiveis.forEach(d => selectedDificuldades.add(d));
+  // Apenas as matérias/subtópicos são marcadas globalmente
   Object.keys(materiaSubtopicos).forEach(m => {
       DATA.filter(g => g.materia === m).map(g => g.subtopico).forEach(s => materiaSubtopicos[m].add(s));
   });
   
-  document.querySelectorAll('.dropdown-content input').forEach(inp => inp.checked = true);
-  document.querySelectorAll('.dropdown').forEach(updateDropdownButton);
+  // Marca apenas os inputs dos dropdowns de matéria (limites, continuidade, derivadas, integrais)
+  document.querySelectorAll('#dd-limites input, #dd-continuidade input, #dd-derivadas input, #dd-integrais input').forEach(inp => inp.checked = true);
+  
+  // Atualiza apenas os contadores desses dropdowns
+  ['dd-limites', 'dd-continuidade', 'dd-derivadas', 'dd-integrais'].forEach(id => updateDropdownButton(document.getElementById(id)));
+  applyFilters();
+});
+
+document.getElementById("uncheckAll").addEventListener("click", ()=>{
+  // Apenas as matérias/subtópicos são desmarcadas globalmente
+  Object.keys(materiaSubtopicos).forEach(m => materiaSubtopicos[m].clear());
+  
+  // Desmarca apenas os inputs dos dropdowns de matéria
+  document.querySelectorAll('#dd-limites input, #dd-continuidade input, #dd-derivadas input, #dd-integrais input').forEach(inp => inp.checked = false);
+  
+  // Atualiza apenas os contadores desses dropdowns
+  ['dd-limites', 'dd-continuidade', 'dd-derivadas', 'dd-integrais'].forEach(id => updateDropdownButton(document.getElementById(id)));
   applyFilters();
 });
 
