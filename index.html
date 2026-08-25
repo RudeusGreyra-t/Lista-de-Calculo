@@ -102,10 +102,10 @@
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   }
 
-  /* Texto de instruções revisado e com fonte ampliada */
+  /* Instruções com redação aprimorada e fonte maior */
   .filter-instructions {
     margin: 0 0 14px 0;
-    font-size: 15px; /* Fonte aumentada conforme solicitado */
+    font-size: 15px;
     color: var(--text-muted);
     line-height: 1.5;
   }
@@ -153,11 +153,34 @@
     border-radius: 6px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     padding: 8px;
-    min-width: 220px;
+    min-width: 230px;
     z-index: 100;
     display: flex;
     flex-direction: column;
     gap: 2px;
+  }
+
+  /* Estilização para os botões internos do dropdown */
+  .dropdown-actions {
+    display: flex;
+    gap: 6px;
+    padding: 4px 4px 8px 4px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+  }
+  .dropdown-actions button {
+    flex: 1;
+    font-size: 11.5px;
+    padding: 4px 6px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  .dropdown-actions button:hover {
+    background: var(--border);
   }
   
   .dropdown-item {
@@ -237,6 +260,7 @@
   .card.reviewed { opacity: 0.55; }
   .card.hidden { display: none; }
 
+  /* Correção para evitar quebra de linha no código da questão no mobile */
   .card-head {
     display: flex;
     justify-content: space-between;
@@ -253,8 +277,8 @@
     background: var(--bg);
     padding: 4px 8px;
     border-radius: 4px;
-    white-space: nowrap; /* Impede que o nome da questão quebre linha */
-    flex-shrink: 0;      /* Garante que o código não seja espremido */
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   
   .badges-wrapper {
@@ -281,7 +305,6 @@
     letter-spacing: 0.5px;
   }
   
-  /* Cores específicas das origens */
   .badge.orig-prova { background: #F97316; color: #ffffff; border: none; }
   .badge.orig-aula { background: #eab308; color: #ffffff; border: none; }
   .badge.orig-ia { background: var(--accent); color: #ffffff; border: none; }
@@ -291,7 +314,6 @@
   .badge.dif-dificil { background: var(--hard); color: #ffffff; border: none; }
   .badge.dif-muitodificil { background: var(--hard2); color: #ffffff; border: none; }
   
-  /* Relevância limpa e discreta, sem poluir o cartão */
   .badge.rel {
     background: transparent;
     color: var(--text-muted);
@@ -434,8 +456,8 @@
 <nav class="index" id="indexNav"></nav>
 
 <div class="tray">
-  <!-- Texto de instruções revisado, mais direto, intuitivo e com fonte maior -->
-  <p class="filter-instructions"><strong>Dica de uso:</strong> Os filtros vêm todos ativados por padrão. Basta desmarcar os itens que você deseja ocultar para personalizar a sua lista de estudos.</p>
+  <!-- Redação revisada e fonte ampliada -->
+  <p class="filter-instructions"><strong>Personalize sua lista:</strong> Todos os tópicos vêm selecionados por padrão. Desmarque o que deseja ocultar ou utilize os menus abaixo para focar em conteúdos específicos.</p>
   
   <div class="filters-row">
     <details class="dropdown" id="dd-origem">
@@ -762,16 +784,22 @@ function setReviewed(map){
 /* ======================= STATE E FILTROS ======================= */
 const origensDisponiveis = [...new Set(DATA.flatMap(g => g.exercicios.map(e => origemCategoria(e.origem))))];
 const dificuldadesDisponiveis = ["Fácil","Médio","Difícil","Muito difícil"];
-const allSubtopics = DATA.map(g => g.subtopico);
 
 let selectedOrigens = new Set(origensDisponiveis);
-let selectedTemas = new Set(allSubtopics);
 let selectedDificuldades = new Set(dificuldadesDisponiveis);
+
+// Cada matéria controla os seus próprios subtópicos selecionados de forma isolada
+const materiaSubtopicos = {};
+["Limites", "Continuidade", "Derivadas", "Integrais"].forEach(topico => {
+    const subs = DATA.filter(g => g.materia === topico).map(g => g.subtopico);
+    materiaSubtopicos[topico] = new Set(subs);
+});
+
 let allAnswersShown = false;
 
 
 /* ======================= RENDERIZAR MENUS DROPDOWN ======================= */
-function renderDropdownOptions(container, options, selectedSet){
+function renderDropdownOptions(container, options, selectedSet, onchangeCallback){
   container.innerHTML = "";
   options.forEach(opt=>{
     const value = typeof opt === "string" ? opt : opt.value;
@@ -782,6 +810,7 @@ function renderDropdownOptions(container, options, selectedSet){
     
     labelEl.querySelector("input").addEventListener("change", (e)=>{
       if(e.target.checked) selectedSet.add(value); else selectedSet.delete(value);
+      if(onchangeCallback) onchangeCallback();
       applyFilters();
       updateDropdownButton(container.closest('.dropdown'));
     });
@@ -790,10 +819,44 @@ function renderDropdownOptions(container, options, selectedSet){
   updateDropdownButton(container.closest('.dropdown'));
 }
 
+/* Criação do menu dropdown customizado com os botões internos de Marcar/Desmarcar Todos */
+function setupDropdownWithActions(dropdownId, title, options, selectedSet) {
+    const details = document.getElementById(dropdownId);
+    details.innerHTML = `
+      <summary class="dropdown-btn">${title} <span class="count"></span> ▾</summary>
+      <div class="dropdown-content">
+        <div class="dropdown-actions">
+          <button type="button" class="select-all">Todos</button>
+          <button type="button" class="deselect-all">Nenhum</button>
+        </div>
+        <div class="dropdown-items-container"></div>
+      </div>
+    `;
+    
+    const container = details.querySelector('.dropdown-items-container');
+    renderDropdownOptions(container, options, selectedSet);
+
+    details.querySelector('.select-all').addEventListener('click', (e) => {
+        e.preventDefault();
+        options.forEach(o => selectedSet.add(o));
+        container.querySelectorAll('input').forEach(i => i.checked = true);
+        applyFilters();
+        updateDropdownButton(details);
+    });
+
+    details.querySelector('.deselect-all').addEventListener('click', (e) => {
+        e.preventDefault();
+        selectedSet.clear();
+        container.querySelectorAll('input').forEach(i => i.checked = false);
+        applyFilters();
+        updateDropdownButton(details);
+    });
+}
+
 function updateDropdownButton(detailsEl) {
    if(!detailsEl) return;
-   const checkedCount = detailsEl.querySelectorAll('input:checked').length;
-   const totalCount = detailsEl.querySelectorAll('input').length;
+   const checkedCount = detailsEl.querySelectorAll('.dropdown-item input:checked').length;
+   const totalCount = detailsEl.querySelectorAll('.dropdown-item input').length;
    const summaryCount = detailsEl.querySelector('.count');
    if(summaryCount) {
        if(checkedCount === totalCount) {
@@ -804,12 +867,14 @@ function updateDropdownButton(detailsEl) {
    }
 }
 
-renderDropdownOptions(document.getElementById("filterOrigem"), origensDisponiveis, selectedOrigens);
-renderDropdownOptions(document.getElementById("filterDificuldade"), dificuldadesDisponiveis, selectedDificuldades);
+// Configuração dos Dropdowns Globais
+setupDropdownWithActions("dd-origem", "Origem", origensDisponiveis, selectedOrigens);
+setupDropdownWithActions("dd-dificuldade", "Dificuldade", dificuldadesDisponiveis, selectedDificuldades);
 
+// Configuração dos Dropdowns por Matéria com seus respectivos subtópicos
 ["Limites", "Continuidade", "Derivadas", "Integrais"].forEach(topico => {
     const subtopicos = DATA.filter(g => g.materia === topico).map(g => g.subtopico);
-    renderDropdownOptions(document.getElementById(`filter${topico}`), subtopicos, selectedTemas);
+    setupDropdownWithActions(`dd-${topico.toLowerCase()}`, topico, subtopicos, materiaSubtopicos[topico]);
 });
 
 document.addEventListener('click', (e) => {
@@ -823,7 +888,9 @@ document.addEventListener('click', (e) => {
 document.getElementById("checkAll").addEventListener("click", ()=>{
   origensDisponiveis.forEach(o => selectedOrigens.add(o));
   dificuldadesDisponiveis.forEach(d => selectedDificuldades.add(d));
-  allSubtopics.forEach(t => selectedTemas.add(t));
+  Object.keys(materiaSubtopicos).forEach(m => {
+      DATA.filter(g => g.materia === m).map(g => g.subtopico).forEach(s => materiaSubtopicos[m].add(s));
+  });
   
   document.querySelectorAll('.dropdown-content input').forEach(inp => inp.checked = true);
   document.querySelectorAll('.dropdown').forEach(updateDropdownButton);
@@ -833,7 +900,7 @@ document.getElementById("checkAll").addEventListener("click", ()=>{
 document.getElementById("uncheckAll").addEventListener("click", ()=>{
   selectedOrigens.clear();
   selectedDificuldades.clear();
-  selectedTemas.clear();
+  Object.keys(materiaSubtopicos).forEach(m => materiaSubtopicos[m].clear());
   
   document.querySelectorAll('.dropdown-content input').forEach(inp => inp.checked = false);
   document.querySelectorAll('.dropdown').forEach(updateDropdownButton);
@@ -894,7 +961,6 @@ function buildContent(){
         const svgInEnunciado = (ex.svg && ex.svgPos !== "resposta") ? svgHTML : "";
         const svgInResposta = (ex.svg && ex.svgPos === "resposta") ? svgHTML : "";
 
-        // CARTÃO COM RELEVÂNCIA DISCRETA E LIMPA
         card.innerHTML = `
           <div class="card-head">
             <h4>${ex.id}</h4>
@@ -954,8 +1020,12 @@ function applyFilters(){
   
   cards.forEach(card=>{
     const okOrigem = selectedOrigens.has(card.dataset.origemCat);
-    const okTema = selectedTemas.has(card.dataset.subtopico);
     const okDif = selectedDificuldades.has(card.dataset.dificuldade);
+    
+    // Validação correta checando o conjunto isolado de subtópicos da matéria correspondente
+    const materiaCard = card.dataset.materia;
+    const subtopicoCard = card.dataset.subtopico;
+    const okTema = materiaSubtopicos[materiaCard] && materiaSubtopicos[materiaCard].has(subtopicoCard);
     
     const visible = okOrigem && okTema && okDif;
     card.classList.toggle("hidden", !visible);
