@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Revisão Cálculo 1</title>
+
+<style>
+  :root {
+    /* TEMA CLARO (PADRÃO) */
+    --bg: #f3f4f6;
+    --surface: #ffffff;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #2563eb; 
+    --accent-hover: #1d4ed8;
+    
+    /* Cores das Badges de Dificuldade */
+    --easy: #10b981;
+    --medium: #f59e0b;
+    --hard: #ef4444;
+    --hard2: #991b1b;
+
+    /* Tipografia Limpa */
+    --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-text: Georgia, 'Times New Roman', serif;
+  }
+
+  [data-theme="dark"] {
+    /* TEMA ESCURO */
+    --bg: #111827;
+    --surface: #1f2937;
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --border: #374151;
+    --accent: #3b82f6; 
+    --accent-hover: #60a5fa;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text-main);
+    font-family: var(--font-ui);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding-bottom: 80px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  header.top {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  header.top h1 {
+    margin: 0;
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 700;
+  }
+
+  nav.index {
+    max-width: 1100px;
+    margin: 22px auto 0;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  nav.index a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    transition: background 0.15s, transform 0.15s;
+  }
+  nav.index a:hover { background: var(--bg); transform: translateY(-1px); }
+  nav.index a .count { color: var(--text-muted); font-size: 12px; margin-left: 4px; }
+
+  .tray {
+    max-width: 1100px;
+    margin: 18px auto 0;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+
+  /* Texto de instruções revisado e com fonte ampliada */
+  .filter-instructions {
+    margin: 0 0 14px 0;
+    font-size: 15px; /* Fonte aumentada conforme solicitado */
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .filter-instructions strong { color: var(--text-main); }
+
+  .filters-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .dropdown { position: relative; }
+  .dropdown-btn {
+    list-style: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .dropdown-btn::-webkit-details-marker { display: none; }
+  .dropdown-btn:hover { border-color: var(--text-muted); }
+  .dropdown[open] .dropdown-btn { 
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+  }
+  .dropdown-btn .count { color: var(--accent); font-size: 12px; font-weight: bold; }
+  
+  .dropdown-content {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 8px;
+    min-width: 220px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--text-main);
+    transition: background 0.1s;
+    user-select: none;
+  }
+  .dropdown-item:hover { background: var(--bg); }
+  .dropdown-item input { accent-color: var(--accent); cursor: pointer; width: 16px; height: 16px; }
+
+  .divider { width: 1px; height: 24px; background: var(--border); margin: 0 4px; }
+
+  .actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-left: auto; }
+  button.btn {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-main);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  button.btn:hover { background: var(--bg); border-color: var(--text-muted); }
+  button.btn.primary {
+    background: var(--accent);
+    color: white;
+    border: none;
+  }
+  button.btn.primary:hover { background: var(--accent-hover); }
+
+  .progress-wrap { width: 100%; text-align: right; margin-top: 12px; }
+  .progress { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+  section.topic { margin-top: 40px; }
+  section.topic h2 {
+    color: var(--text-main);
+    font-size: clamp(20px, 3vw, 24px);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+  }
+  .topic-count { font-size: 13px; color: var(--text-muted); margin-bottom: 18px; }
+
+  h3.subtopic {
+    color: var(--accent);
+    font-size: 18px;
+    margin: 26px 0 12px;
+    padding-left: 10px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--text-muted);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  }
+  .card.dif-facil { border-left-color: var(--easy); }
+  .card.dif-medio { border-left-color: var(--medium); }
+  .card.dif-dificil { border-left-color: var(--hard); }
+  .card.dif-muitodificil { border-left-color: var(--hard2); }
+  .card.reviewed { opacity: 0.55; }
+  .card.hidden { display: none; }
+
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .card-head h4 {
+    margin: 0;
+    font-family: monospace;
+    color: var(--text-muted);
+    font-size: 16px;
+    background: var(--bg);
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  
+  .badges-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .badges-top {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .badge {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Cores específicas das origens */
+  .badge.orig-prova { background: #F97316; color: #ffffff; border: none; }
+  .badge.orig-aula { background: #eab308; color: #ffffff; border: none; }
+  .badge.orig-ia { background: var(--accent); color: #ffffff; border: none; }
+  
+  .badge.dif-facil { background: var(--easy); color: #ffffff; border: none; }
+  .badge.dif-medio { background: var(--medium); color: #ffffff; border: none; }
+  .badge.dif-dificil { background: var(--hard); color: #ffffff; border: none; }
+  .badge.dif-muitodificil { background: var(--hard2); color: #ffffff; border: none; }
+  
+  /* Relevância limpa e discreta, sem poluir o cartão */
+  .badge.rel {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px dashed var(--border);
+    font-weight: 500;
+  }
+
+  .meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 12px 0 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+  }
+  .meta span b { color: var(--text-main); font-weight: 600; }
+
+  .enunciado {
+    font-size: 16px;
+    font-family: var(--font-text);
+    color: var(--text-main);
+    margin: 10px 0 16px;
+  }
+  
+  .webtex-block {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0;
+    overflow-x: auto;
+  }
+  .webtex-block img { max-width: 100%; height: auto; }
+  .webtex-inline {
+    vertical-align: middle;
+    margin: 0 4px;
+    transform: translateY(-2px);
+  }
+  
+  [data-theme="dark"] .webtex-block img,
+  [data-theme="dark"] .webtex-inline {
+    filter: invert(1) hue-rotate(180deg);
+  }
+
+  .svg-wrap {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    margin: 10px 0 16px;
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+  }
+  .svg-wrap svg { max-width: 100%; height: auto; }
+
+  .card-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  
+  button.toggle-answer {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  button.toggle-answer:hover { background: rgba(37, 99, 235, 0.08); }
+
+  label.reviewed-toggle {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+  label.reviewed-toggle input { accent-color: var(--easy); cursor: pointer; width: 16px; height: 16px; }
+
+  .resposta {
+    display: none;
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: var(--font-text);
+    color: var(--text-main);
+  }
+  .resposta.show { display: block; }
+  .resposta .label {
+    font-family: var(--font-ui);
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .empty-msg {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 16px;
+    font-weight: 500;
+    padding: 60px 20px;
+    display: none;
+  }
+
+  footer.credit {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-top: 60px;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 900px) {
+    .actions { margin-left: 0; width: 100%; margin-top: 8px; justify-content: flex-start; }
+  }
+  @media (max-width: 640px) {
+    .divider { display: none; }
+    .dropdown { flex: 1 1 45%; }
+    .dropdown-btn { width: 100%; justify-content: space-between; }
+    .actions button { flex: 1; text-align: center; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>Lista de Revisão Cálculo 1</h1>
+  <button id="themeToggle" class="btn">🌓 Alternar Tema</button>
+</header>
+
+<nav class="index" id="indexNav"></nav>
+
+<div class="tray">
+  <!-- Texto de instruções revisado, mais direto, intuitivo e com fonte maior -->
+  <p class="filter-instructions"><strong>Dica de uso:</strong> Os filtros vêm todos ativados por padrão. Basta desmarcar os itens que você deseja ocultar para personalizar a sua lista de estudos.</p>
+  
+  <div class="filters-row">
+    <details class="dropdown" id="dd-origem">
+      <summary class="dropdown-btn">Origem <span class="count"></span> ▾</summary>
+      <div class="dropdown-content" id="filterOrigem"></div>
+    </details>
+    
+    <details class="dropdown" id="dd-dificuldade">
+      <summary class="dropdown-btn">Dificuldade <span class="count"></span> ▾</summary>
+      <div class="dropdown-content" id="filterDificuldade"></div>
+    </details>
+    
+    <div class="divider"></div>
+
+    <details class="dropdown" id="dd-limites">
+      <summary class="dropdown-btn">Limites <span class="count"></span> ▾</summary>
+      <div class="dropdown-content" id="filterLimites"></div>
+    </details>
+
+    <details class="dropdown" id="dd-continuidade">
+      <summary class="dropdown-btn">Continuidade <span class="count"></span> ▾</summary>
+      <div class="dropdown-content" id="filterContinuidade"></div>
+    </details>
+
+    <details class="dropdown" id="dd-derivadas">
+      <summary class="dropdown-btn">Derivadas <span class="count"></span> ▾</summary>
+      <div class="dropdown-content" id="filterDerivadas"></div>
+    </details>
+
+    <details class="dropdown" id="dd-integrais">
+      <summary class="dropdown-btn">Integrais <span class="count"></span> ▾</summary>
+      <div class="dropdown-content" id="filterIntegrais"></div>
+    </details>
+
+    <div class="actions">
+      <button class="btn" id="checkAll">Marcar Todos</button>
+      <button class="btn" id="uncheckAll">Desmarcar Todos</button>
+      <button class="btn primary" id="toggleAllAnswers">Revelar Respostas</button>
+    </div>
+  </div>
+  
+  <div class="progress-wrap">
+    <span class="progress" id="progressLabel"></span>
+  </div>
+</div>
+
+<main id="mainContent"></main>
+
+<p class="empty-msg" id="emptyMsg">🧹 Nenhum exercício bate com os filtros selecionados.</p>
+
+<footer class="credit">Interface limpa adaptável (Claro/Escuro). Fórmulas matemáticas via WebTeX.</footer>
+
+<script>
+/* ======================= MODO CLARO/ESCURO ======================= */
+const themeBtn = document.getElementById('themeToggle');
+const root = document.documentElement;
+let isDark = localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+if(isDark) root.setAttribute('data-theme', 'dark');
+
+themeBtn.addEventListener('click', () => {
+    isDark = !isDark;
+    if(isDark) {
+        root.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        root.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+    }
+});
+
+/* ======================= DADOS (LATEX PURO) ======================= */
+const SVG_LIM_INF_001 = `<svg width="500" height="350" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+  <line x1="20" y1="60" x2="480" y2="60" stroke="black" stroke-width="1.5" />
+  <text x="475" y="50" font-family="sans-serif" font-size="16" font-style="italic" fill="black">x</text>
+  <line x1="100" y1="10" x2="100" y2="340" stroke="black" stroke-width="1.5" />
+  <text x="110" y="25" font-family="sans-serif" font-size="16" font-style="italic" fill="black">f(x)</text>
+  <line x1="250" y1="10" x2="250" y2="340" stroke="#d62728" stroke-width="2" stroke-dasharray="6,4" />
+  <text x="260" y="50" font-family="sans-serif" font-size="18" font-style="italic" fill="#d62728">a</text>
+  <path d="M 20 62 C 180 62, 235 80, 245 340" fill="none" stroke="#1f77b4" stroke-width="3" />
+  <path d="M 480 62 C 320 62, 265 80, 255 340" fill="none" stroke="#1f77b4" stroke-width="3" />
+  <text x="290" y="220" font-family="sans-serif" font-size="20" fill="black">lim f(x) = -∞</text>
+  <text x="290" y="235" font-family="sans-serif" font-size="14" fill="black">x→a</text>
+</svg>`;
+
+const SVG_CON_GRA_001 = `<svg width="650" height="350" viewBox="0 0 650 350" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="black" />
+    </marker>
+  </defs>
+  <line x1="40" y1="200" x2="610" y2="200" stroke="black" stroke-width="2" marker-end="url(#arrow)" />
+  <line x1="325" y1="320" x2="325" y2="40" stroke="black" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="620" y="205" font-family="sans-serif" font-size="20" font-style="italic" fill="black">x</text>
+  <text x="340" y="45" font-family="sans-serif" font-size="20" font-style="italic" fill="black">y</text>
+  <line x1="185" y1="130" x2="185" y2="270" stroke="black" stroke-width="0.8" stroke-dasharray="6,4" />
+  <line x1="465" y1="90" x2="465" y2="270" stroke="black" stroke-width="0.8" stroke-dasharray="6,4" />
+  <text x="165" y="235" font-family="sans-serif" font-size="20" font-style="italic" fill="black">p</text>
+  <text x="478" y="235" font-family="sans-serif" font-size="20" font-style="italic" fill="black">q</text>
+  <line x1="40" y1="130" x2="185" y2="130" stroke="black" stroke-width="3" />
+  <line x1="185" y1="270" x2="465" y2="270" stroke="black" stroke-width="3" />
+  <path d="M 465 90 C 495 150, 545 150, 575 100 S 615 60, 630 80" fill="none" stroke="black" stroke-width="3" />
+  <circle cx="185" cy="130" r="5" fill="white" stroke="black" stroke-width="2" />
+  <circle cx="185" cy="270" r="5" fill="black" stroke="black" stroke-width="2" />
+  <circle cx="465" cy="270" r="5" fill="white" stroke="black" stroke-width="2" />
+  <circle cx="465" cy="90" r="5" fill="white" stroke="black" stroke-width="2" />
+</svg>`;
+
+const DATA = [
+{materia:"Limites", subtopico:"Substituição direta", secId:"limites", exercicios:[
+  {id:"LIM-SUB-001", origem:"Prova antiga", dificuldade:"Fácil", relevancia:"Baixa",
+   enunciado:"Calcule o limite: $$ \\lim_{x \\to 0} \\frac{5+\\cos(x)}{x+3} $$",
+   resposta: "$$ 2 $$"},
+  {id:"LIM-SUB-002", origem:"Dado em aula 21/07/2026", dificuldade:"Fácil", relevancia:"Baixa",
+   enunciado:"Calcule o limite: $$ \\lim_{x \\to 0} \\left[ e^{\\frac{x^2}{3}} + x^3 + 5 + \\cos(x) \\right] $$",
+   resposta: "$$ 7 $$"},
+  {id:"LIM-SUB-003", origem:"Gerado a partir das listas Lista 2", dificuldade:"Fácil", relevancia:"Baixa",
+   enunciado:"Calcule: $$ \\lim_{x \\to \\pi} [2\\cos(x) + \\sin(x/2)] $$",
+   resposta: "$$ -1 $$"},
+]},
+{materia:"Limites", subtopico:"Fatoração e produtos notáveis", secId:"limites", exercicios:[
+  {id:"LIM-FAT-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Calcule o limite: $$ \\lim_{x \\to 3} \\frac{x-3}{x^3-27} $$",
+   resposta: "$$ \\frac{1}{27} $$"},
+  {id:"LIM-FAT-002", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
+   enunciado:"Calcule: $$ \\lim_{x \\to 2} \\frac{x^6-64}{x-2} $$",
+   resposta: "$$ 192 $$"},
+  {id:"LIM-FAT-003", origem:"Dado em aula 28/07/2026", dificuldade:"Médio", relevancia:"Média",
+   enunciado:"Calcule o limite: $$ \\lim_{x \\to 2} \\frac{x^5-32}{x-2} $$",
+   resposta: "$$ 80 $$"},
+  {id:"LIM-FAT-004", origem:"Gerado a partir das listas Lista 2", dificuldade:"Fácil", relevancia:"Baixa",
+   enunciado:"Calcule, por fatoração: $$ \\lim_{x \\to 4} \\frac{x^2-16}{x-4} $$",
+   resposta: "$$ 8 $$"},
+]},
+{materia:"Limites", subtopico:"Racionalização (Raízes)", secId:"limites", exercicios:[
+  {id:"LIM-RAC-001", origem:"Prova antiga", dificuldade:"Muito difícil", relevancia:"Alta",
+   enunciado:"Calcule o limite: $$ \\lim_{x \\to 8} \\frac{x-8}{\\sqrt[3]{x} - \\sqrt[3]{8}} $$",
+   resposta: "$$ 12 $$"},
+  {id:"LIM-RAC-002", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
+   enunciado:"Calcule: $$ \\lim_{x \\to 1/3} \\frac{\\sqrt[6]{3x}-1}{\\sqrt{3x-1}} $$",
+   resposta: "$$ 0 $$"},
+  {id:"LIM-RAC-003", origem:"Gerado a partir das listas Lista 2", dificuldade:"Médio", relevancia:"Média",
+   enunciado:"Calcule, racionalizando: $$ \\lim_{x \\to 4} \\frac{\\sqrt{x+5}-3}{x-4} $$",
+   resposta: "$$ \\frac{1}{6} $$"},
+]},
+{materia:"Limites", subtopico:"Trigonométricos clássicos", secId:"limites", exercicios:[
+  {id:"LIM-TRI-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Calcule o limite: $$ \\lim_{x \\to 0} \\frac{1-\\cos(x)}{x} $$",
+   resposta: "$$ 0 $$"},
+  {id:"LIM-TRI-002", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Calcule o limite: $$ \\lim_{x \\to 0} \\frac{\\sin(15x)}{3x} $$",
+   resposta: "$$ 5 $$"},
+  {id:"LIM-TRI-003", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
+   enunciado:"Calcule os seguintes limites: $$ \\lim_{x \\to 0} \\frac{\\sin(2x)}{\\sin(7x)} $$",
+   resposta: "$$ \\frac{2}{7} $$"},
+  {id:"LIM-TRI-004", origem:"Prova antiga", dificuldade:"Muito difícil", relevancia:"Alta",
+   enunciado:"Calcule os seguintes limites: $$ \\lim_{x \\to 0} \\frac{4-(2\\cos(x))^2}{x^2(3-\\cos(5x))} $$",
+   resposta: "$$ 2 $$"},
+]},
+{materia:"Limites", subtopico:"Laterais e módulo", secId:"limites", exercicios:[
+  {id:"LIM-LAT-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Calcule, caso exista: $$ \\lim_{x \\to 5} \\frac{|x-5|}{2x-10} $$",
+   resposta:"O limite não existe (limite lateral esquerdo é \\( -\\frac{1}{2} \\) e o direito é \\( \\frac{1}{2} \\))."},
+  {id:"LIM-LAT-002", origem:"Gerado a partir das listas Lista 2", dificuldade:"Fácil", relevancia:"Média",
+   enunciado:"Determine os limites laterais e diga se o limite bilateral existe para \\( f(x) = 2x + 1 \\) se \\( x < 1 \\); e \\( f(x) = x + 4 \\), se \\( x \\ge 1 \\), quando \\( x \\to 1 \\).",
+   resposta:"\\( \\lim_{x \\to 1^-} f(x) = 3 \\) e \\( \\lim_{x \\to 1^+} f(x) = 5 \\). O limite bilateral não existe."},
+]},
+{materia:"Limites", subtopico:"Teorema do Confronto", secId:"limites", exercicios:[
+  {id:"LIM-CON-001", origem:"Gerado a partir das listas Lista 1", dificuldade:"Médio", relevancia:"Média",
+   enunciado:"Sabendo que \\( -1 \\le \\sin\\left(\\frac{1}{x}\\right) \\le 1 \\), calcule: $$ \\lim_{x \\to 0} x^2 \\sin\\left(\\frac{1}{x}\\right) $$",
+   resposta: "$$ 0 $$"},
+]},
+{materia:"Limites", subtopico:"Infinitos e assíntotas", secId:"limites", exercicios:[
+  {id:"LIM-INF-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Sejam \\( f : \\mathbb{R} \\to \\mathbb{R} \\) uma função e \\( a \\in \\mathbb{R} \\). Defina o significado da expressão $$ \\lim_{x \\to a} f(x) = -\\infty $$ Esboce um desenho para representar.",
+   resposta:"Significa que os valores de \\( f(x) \\) decrescem ilimitadamente (ficam arbitrariamente negativos) à medida que \\( x \\) se aproxima de \\( a \\).",
+   svg: SVG_LIM_INF_001, 
+   svgPos: "resposta"},
+]},
+{materia:"Continuidade", subtopico:"Análise de gráficos", secId:"continuidade", exercicios:[
+  {id:"CON-GRA-001", origem:"Prova antiga", dificuldade:"Fácil", relevancia:"Alta",
+   enunciado:"Analise a continuidade da função cujo gráfico é dado abaixo.",
+   resposta:"A função apresenta descontinuidades de salto nos pontos \\( p \\) e \\( q \\), pois os limites laterais nesses pontos existem, mas são distintos. É contínua no restante do domínio.",
+   svg: SVG_CON_GRA_001},
+]},
+{materia:"Continuidade", subtopico:"Funções por partes", secId:"continuidade", exercicios:[
+  {id:"CON-PAR-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Determine o valor de L para que a função dada abaixo seja contínua em 3: $$ f(x) = \\begin{cases} 2x+1, & \\text{se } x \\ne 3 \\\\ L, & \\text{se } x = 3 \\end{cases} $$",
+   resposta: "$$ L = 7 $$"},
+  {id:"CON-PAR-002", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
+   enunciado:"Seja $$ f(x) = \\begin{cases} \\frac{x^2-1}{x-1}, & \\text{se } x \\ne 1 \\\\ 2x, & \\text{se } x = 1 \\end{cases} $$ Calcule, caso exista, \\( \\lim_{x \\to 1} f(x) \\). A função \\( f \\) é contínua em \\( x = 1 \\)?",
+   resposta: "$$ \\lim_{x \\to 1} f(x) = 2 $$ Sim, a função é contínua em \\( x = 1 \\)."},
+  {id:"CON-PAR-003", origem:"Dado em aula 21/07/2026", dificuldade:"Médio", relevancia:"Média",
+   enunciado:"Considere a função $$ f(x) = \\begin{cases} \\frac{x^3-8}{x-2}, & \\text{se } x \\ne 2 \\\\ 5, & \\text{se } x = 2 \\end{cases} $$ Essa função é contínua em \\( x = 2 \\)? (Justifique usando limites). Caso não seja, qual deveria ser o valor de \\( f(2) \\) para que ela se tornasse contínua?",
+   resposta:"Não é contínua (o limite quando \\( x \\to 2 \\) é 12, mas \\( f(2) = 5 \\)). Para ser contínua, o valor de \\( f(2) \\) deveria ser 12."},
+  {id:"CON-PAR-004", origem:"Prova antiga", dificuldade:"Muito difícil", relevancia:"Alta",
+   enunciado:"Considere a função \\( f : \\mathbb{R} \\to \\mathbb{R} \\) dada por: $$ f(x) = \\begin{cases} \\cos(x^2-1)-4, & \\text{se } x > 1 \\\\ \\frac{x^2-x-2}{x+1}, & \\text{se } x < 1 \\\\ 2, & \\text{se } x = 1 \\end{cases} $$ a) Existe \\( \\lim_{x \\to 1} f(x) \\)? b) \\( f \\) é contínua no ponto \\( x = 1 \\)?",
+   resposta:"a) Não existe (o limite à esquerda é −1 e o limite à direita é −3). b) Não, pois o limite bilateral não existe."},
+]},
+{materia:"Continuidade", subtopico:"Definição formal", secId:"continuidade", exercicios:[
+  {id:"CON-DEF-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"a) Pela definição, o que significa dizer que uma função \\( f \\) é contínua num ponto \\( p \\) do seu domínio? b) Pela definição, o que significa dizer que uma função \\( f \\) é contínua?",
+   resposta:"a) Significa que \\( \\lim_{x \\to p} f(x) = f(p) \\). b) Significa que a função é contínua em todos os pontos do seu domínio."},
+]},
+{materia:"Derivadas", subtopico:"Pela definição formal", secId:"derivadas", exercicios:[
+  {id:"DER-DEF-001", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
+   enunciado:"Seja \\( f(x) = x^4 - 16 \\). Calcule \\( f'(2) \\) pela definição.",
+   resposta: "$$ 32 $$"},
+  {id:"DER-DEF-002", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Use a definição de derivada para calcular \\( f'(x) \\) onde \\( f(x) = x^2 - 3x \\).",
+   resposta:"$$ f'(x) = 2x - 3 $$"},
+  {id:"DER-DEF-003", origem:"Dado em aula 04/08/2026", dificuldade:"Difícil", relevancia:"Média",
+   enunciado:"Calcule \\( f'(3) \\) usando a definição para a função \\( f(x) = ax^2 + bx + c \\).",
+   resposta:"$$ f'(3) = 6a + b $$"},
+]},
+{materia:"Derivadas", subtopico:"Regras do produto e quociente", secId:"derivadas", exercicios:[
+  {id:"DER-PRO-001", origem:"Dado em aula 04/08/2026", dificuldade:"Fácil", relevancia:"Média",
+   enunciado:"Calcule a derivada de \\( f(x) = x^{13} + \\sin(x) - e^x \\).",
+   resposta:"$$ f'(x) = 13x^{12} + \\cos(x) - e^x $$"},
+  {id:"DER-PRO-002", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Calcule a derivada de \\( y = e^x + x^3\\cos(x) \\).",
+   resposta:"$$ y' = e^x + x^2(3\\cos(x) - x\\sin(x)) $$"},
+  {id:"DER-PRO-003", origem:"Dado em aula 04/08/2026", dificuldade:"Médio", relevancia:"Média",
+   enunciado:"Calcule a derivada de \\( f(x) = \\cos(x) \\cdot \\ln(x) \\).",
+   resposta:"$$ f'(x) = \\frac{\\cos(x)}{x} - \\sin(x)\\ln(x) $$"},
+  {id:"DER-PRO-004", origem:"Prova antiga", dificuldade:"Fácil", relevancia:"Alta",
+   enunciado:"Derive a função: \\( g(x) = \\frac{2x+1}{x} \\).",
+   resposta:"$$ g'(x) = -\\frac{1}{x^2} $$"},
+  {id:"DER-PRO-005", origem:"Dado em aula 04/08/2026", dificuldade:"Fácil", relevancia:"Baixa",
+   enunciado:"Calcule a derivada de \\( f(x) = \\tan(x) \\) (Dica: utilize \\( \\frac{\\sin(x)}{\\cos(x)} \\) e a regra do quociente).",
+   resposta:"$$ f'(x) = \\sec^2(x) $$"},
+]},
+{materia:"Derivadas", subtopico:"Regra da cadeia", secId:"derivadas", exercicios:[
+  {id:"DER-CAD-001", origem:"Dado em aula 11/08/2026", dificuldade:"Fácil", relevancia:"Média",
+   enunciado:"Calcule a derivada de \\( f(x) = \\sin(x^3) \\).",
+   resposta:"$$ f'(x) = 3x^2\\cos(x^3) $$"},
+  {id:"DER-CAD-002", origem:"Dado em aula 14/08/2026", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Calcule a derivada de \\( f(x) = \\tan(e^{x^2+2}) \\).",
+   resposta:"$$ f'(x) = 2xe^{x^2+2}\\sec^2(e^{x^2+2}) $$"},
+  {id:"DER-CAD-003", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
+   enunciado:"Calcule a derivada de \\( y = \\sin(\\ln(x^2+e^x)) \\).",
+   resposta:"$$ y' = \\cos(\\ln(x^2+e^x)) \\cdot \\frac{2x+e^x}{x^2+e^x} $$"},
+  {id:"DER-CAD-004", origem:"Dado em aula 14/08/2026", dificuldade:"Difícil", relevancia:"Alta",
+   enunciado:"Calcule a derivada de \\( f(x) = (x\\cos(x^5))^4 \\).",
+   resposta:"$$ f'(x) = 4x^3\\cos^3(x^5)[\\cos(x^5) - 5x^5\\sin(x^5)] $$"},
+  {id:"DER-CAD-005", origem:"Dado em aula 14/08/2026", dificuldade:"Muito difícil", relevancia:"Média",
+   enunciado:"Calcule a derivada de $$ f(x) = \\frac{-\\sin(\\cos(e^{x^3}))}{\\ln(x^2+1)} $$",
+   resposta:"$$ f'(x) = \\frac{3x^2e^{x^3}\\sin(e^{x^3})\\cos(\\cos(e^{x^3}))\\ln(x^2+1) + \\sin(\\cos(e^{x^3}))\\left(\\frac{2x}{x^2+1}\\right)}{(\\ln(x^2+1))^2} $$"},
+]},
+{materia:"Integrais", subtopico:"Integração direta", secId:"integrais", exercicios:[
+  {id:"INT-DIR-001", origem:"Prova antiga", dificuldade:"Fácil", relevancia:"Alta",
+   enunciado:"Calcule a integral abaixo e verifique se o resultado obtido está correto: $$ \\int (3x^2 - 4x + 2) \\, dx $$",
+   resposta: "$$ x^3 - 2x^2 + 2x + C $$"},
+  {id:"INT-DIR-002", origem:"Gerado a partir das listas Lista 1", dificuldade:"Médio", relevancia:"Média",
+   enunciado:"Calcule a seguinte integral indefinida usando métodos diretos: $$ \\int \\left(\\frac{1}{x} + \\sec^2(x) - e^x\\right) \\, dx $$",
+   resposta: "$$ \\ln|x| + \\tan(x) - e^x + C $$"},
+  {id:"INT-DIR-003", origem:"Dado em aula 18/08/2026", dificuldade:"Fácil", relevancia:"Baixa",
+   enunciado:"Calcule a integral: $$ \\int x^{73} \\, dx $$",
+   resposta: "$$ \\frac{x^{74}}{74} + C $$"},
+]},
+{materia:"Integrais", subtopico:"Substituição simples", secId:"integrais", exercicios:[
+  {id:"INT-SUB-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Calcule a integral abaixo e verifique se o resultado obtido está correto: $$ \\int 2x\\cos(x^2) \\, dx $$",
+   resposta: "$$ \\sin(x^2) + C $$"},
+  {id:"INT-SUB-002", origem:"Dado em aula 18/08/2026", dificuldade:"Fácil", relevancia:"Alta",
+   enunciado:"Use o Método da Substituição ensinado em aula para resolver: $$ \\int \\cos(2x) \\, dx $$",
+   resposta: "$$ \\frac{\\sin(2x)}{2} + C $$"},
+  {id:"INT-SUB-003", origem:"Gerado a partir das listas Lista 3", dificuldade:"Fácil", relevancia:"Média",
+   enunciado:"Calcule a integral: $$ \\int e^{7x} \\, dx $$",
+   resposta: "$$ \\frac{e^{7x}}{7} + C $$"},
+  {id:"INT-SUB-004", origem:"Gerado a partir das listas Lista 3", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Calcule a integral: $$ \\int 6x\\cos(3x^2) \\, dx $$",
+   resposta: "$$ \\sin(3x^2) + C $$"},
+]},
+];
+
+const SECTION_TITLES = {limites:"Limites", continuidade:"Continuidade", derivadas:"Derivadas", integrais:"Integrais"};
+const SECTION_ORDER = ["limites","continuidade","derivadas","integrais"];
+
+
+/* ======================= FUNÇÃO CORE: WEBTEX (API CodeCogs) ======================= */
+function parseWebTex(text) {
+  if (!text) return "";
+  
+  text = text.replace(/\$\$(.*?)\$\$/g, (match, tex) => {
+    const url = "https://latex.codecogs.com/svg.image?\\Large\\displaystyle " + encodeURIComponent(tex.trim());
+    return `<div class="webtex-block"><img src="${url}" alt="Formula"></div>`;
+  });
+  
+  text = text.replace(/\\\((.*?)\\\)/g, (match, tex) => {
+    const url = "https://latex.codecogs.com/svg.image?\\large\\textstyle " + encodeURIComponent(tex.trim());
+    return `<img class="webtex-inline" src="${url}" alt="Formula">`;
+  });
+  
+  return text;
+}
+
+/* ======================= HELPERS GERAIS ======================= */
+function difClass(dif){
+  return "dif-" + dif.toLowerCase().replace(/\s+/g,"").normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+}
+function origemCategoria(origem){
+  if(origem.startsWith("Prova antiga")) return "Prova antiga";
+  if(origem.startsWith("Dado em aula")) return "Dado em aula";
+  if(origem.startsWith("Gerado a partir")) return "Listas de IA"; 
+  return origem;
+}
+function origCSSClass(origem){
+  if(origem.startsWith("Prova antiga")) return "orig-prova";
+  if(origem.startsWith("Dado em aula")) return "orig-aula";
+  return "orig-ia";
+}
+
+const REVIEWED_KEY = "calc1_revisados";
+function getReviewed(){
+  try{ return JSON.parse(localStorage.getItem(REVIEWED_KEY) || "{}"); }
+  catch(e){ return {}; }
+}
+function setReviewed(map){
+  try{ localStorage.setItem(REVIEWED_KEY, JSON.stringify(map)); }catch(e){}
+}
+
+
+/* ======================= STATE E FILTROS ======================= */
+const origensDisponiveis = [...new Set(DATA.flatMap(g => g.exercicios.map(e => origemCategoria(e.origem))))];
+const dificuldadesDisponiveis = ["Fácil","Médio","Difícil","Muito difícil"];
+const allSubtopics = DATA.map(g => g.subtopico);
+
+let selectedOrigens = new Set(origensDisponiveis);
+let selectedTemas = new Set(allSubtopics);
+let selectedDificuldades = new Set(dificuldadesDisponiveis);
+let allAnswersShown = false;
+
+
+/* ======================= RENDERIZAR MENUS DROPDOWN ======================= */
+function renderDropdownOptions(container, options, selectedSet){
+  container.innerHTML = "";
+  options.forEach(opt=>{
+    const value = typeof opt === "string" ? opt : opt.value;
+    const label = typeof opt === "string" ? opt : opt.label;
+    const labelEl = document.createElement("label");
+    labelEl.className = "dropdown-item";
+    labelEl.innerHTML = `<input type="checkbox" ${selectedSet.has(value)?"checked":""}> ${label}`;
+    
+    labelEl.querySelector("input").addEventListener("change", (e)=>{
+      if(e.target.checked) selectedSet.add(value); else selectedSet.delete(value);
+      applyFilters();
+      updateDropdownButton(container.closest('.dropdown'));
+    });
+    container.appendChild(labelEl);
+  });
+  updateDropdownButton(container.closest('.dropdown'));
+}
+
+function updateDropdownButton(detailsEl) {
+   if(!detailsEl) return;
+   const checkedCount = detailsEl.querySelectorAll('input:checked').length;
+   const totalCount = detailsEl.querySelectorAll('input').length;
+   const summaryCount = detailsEl.querySelector('.count');
+   if(summaryCount) {
+       if(checkedCount === totalCount) {
+          summaryCount.textContent = ""; 
+       } else {
+          summaryCount.textContent = `(${checkedCount})`;
+       }
+   }
+}
+
+renderDropdownOptions(document.getElementById("filterOrigem"), origensDisponiveis, selectedOrigens);
+renderDropdownOptions(document.getElementById("filterDificuldade"), dificuldadesDisponiveis, selectedDificuldades);
+
+["Limites", "Continuidade", "Derivadas", "Integrais"].forEach(topico => {
+    const subtopicos = DATA.filter(g => g.materia === topico).map(g => g.subtopico);
+    renderDropdownOptions(document.getElementById(`filter${topico}`), subtopicos, selectedTemas);
+});
+
+document.addEventListener('click', (e) => {
+  document.querySelectorAll('details.dropdown').forEach(details => {
+    if (details.open && !details.contains(e.target)) {
+      details.removeAttribute('open');
+    }
+  });
+});
+
+document.getElementById("checkAll").addEventListener("click", ()=>{
+  origensDisponiveis.forEach(o => selectedOrigens.add(o));
+  dificuldadesDisponiveis.forEach(d => selectedDificuldades.add(d));
+  allSubtopics.forEach(t => selectedTemas.add(t));
+  
+  document.querySelectorAll('.dropdown-content input').forEach(inp => inp.checked = true);
+  document.querySelectorAll('.dropdown').forEach(updateDropdownButton);
+  applyFilters();
+});
+
+document.getElementById("uncheckAll").addEventListener("click", ()=>{
+  selectedOrigens.clear();
+  selectedDificuldades.clear();
+  selectedTemas.clear();
+  
+  document.querySelectorAll('.dropdown-content input').forEach(inp => inp.checked = false);
+  document.querySelectorAll('.dropdown').forEach(updateDropdownButton);
+  applyFilters();
+});
+
+/* ======================= CONSTRUIR INTERFACE DE CARTÕES ======================= */
+const reviewedMap = getReviewed();
+
+function buildNav(){
+  const nav = document.getElementById("indexNav");
+  nav.innerHTML = "";
+  SECTION_ORDER.forEach(secId=>{
+    const total = DATA.filter(g=>g.secId===secId).reduce((n,g)=>n+g.exercicios.length,0);
+    const a = document.createElement("a");
+    a.href = "#" + secId;
+    a.innerHTML = SECTION_TITLES[secId] + ` <span class="count">(${total})</span>`;
+    nav.appendChild(a);
+  });
+}
+
+function buildContent(){
+  const main = document.getElementById("mainContent");
+  main.innerHTML = "";
+
+  SECTION_ORDER.forEach(secId=>{
+    const groups = DATA.filter(g=>g.secId===secId);
+    if(groups.length===0) return;
+    const total = groups.reduce((n,g)=>n+g.exercicios.length,0);
+
+    const section = document.createElement("section");
+    section.className = "topic";
+    section.id = secId;
+
+    section.innerHTML = `<h2>${SECTION_TITLES[secId]}</h2><div class="topic-count">${total} exercícios</div>`;
+
+    groups.forEach(group=>{
+      const h3 = document.createElement("h3");
+      h3.className = "subtopic";
+      h3.textContent = group.subtopico;
+      section.appendChild(h3);
+
+      group.exercicios.forEach(ex=>{
+        const dc = difClass(ex.dificuldade);
+        const card = document.createElement("article");
+        card.className = "card " + dc;
+        card.dataset.materia = group.materia;
+        card.dataset.subtopico = group.subtopico;
+        card.dataset.origemCat = origemCategoria(ex.origem);
+        card.dataset.dificuldade = ex.dificuldade;
+        card.id = "ex-" + ex.id;
+        if(reviewedMap[ex.id]) card.classList.add("reviewed");
+
+        const enunciadoFormatado = parseWebTex(ex.enunciado);
+        const respostaFormatada = parseWebTex(ex.resposta);
+        
+        const svgHTML = ex.svg ? `<div class="svg-wrap">${ex.svg}</div>` : "";
+        const svgInEnunciado = (ex.svg && ex.svgPos !== "resposta") ? svgHTML : "";
+        const svgInResposta = (ex.svg && ex.svgPos === "resposta") ? svgHTML : "";
+
+        // CARTÃO COM RELEVÂNCIA DISCRETA E LIMPA
+        card.innerHTML = `
+          <div class="card-head">
+            <h4>${ex.id}</h4>
+            <div class="badges-wrapper">
+              <div class="badges-top">
+                <span class="badge ${dc}">${ex.dificuldade}</span>
+                <span class="badge rel">Relevância: ${ex.relevancia}</span>
+              </div>
+              <span class="badge orig ${origCSSClass(ex.origem)}">${origemCategoria(ex.origem)}</span>
+            </div>
+          </div>
+          <div class="meta">
+            <span><b>Matéria:</b> ${group.materia}</span>
+            <span><b>Subtópico:</b> ${group.subtopico}</span>
+          </div>
+          <div class="enunciado">${enunciadoFormatado}</div>
+          ${svgInEnunciado}
+          <div class="card-foot">
+            <button class="toggle-answer">Mostrar resposta</button>
+            <label class="reviewed-toggle">
+              <input type="checkbox" ${reviewedMap[ex.id]?"checked":""}> marcar como revisado
+            </label>
+          </div>
+          <div class="resposta">
+            <span class="label">Resposta final</span>
+            ${respostaFormatada}
+            ${svgInResposta}
+          </div>
+        `;
+
+        const answerBox = card.querySelector(".resposta");
+        const toggleBtn = card.querySelector(".toggle-answer");
+        toggleBtn.addEventListener("click", ()=>{
+          const showing = answerBox.classList.toggle("show");
+          toggleBtn.textContent = showing ? "Esconder resposta" : "Mostrar resposta";
+        });
+
+        const reviewedCheckbox = card.querySelector(".reviewed-toggle input");
+        reviewedCheckbox.addEventListener("change", (e)=>{
+          reviewedMap[ex.id] = e.target.checked;
+          setReviewed(reviewedMap);
+          card.classList.toggle("reviewed", e.target.checked);
+          updateProgress();
+        });
+
+        section.appendChild(card);
+      });
+    });
+
+    main.appendChild(section);
+  });
+}
+
+function applyFilters(){
+  const cards = document.querySelectorAll(".card");
+  let visibleCount = 0;
+  
+  cards.forEach(card=>{
+    const okOrigem = selectedOrigens.has(card.dataset.origemCat);
+    const okTema = selectedTemas.has(card.dataset.subtopico);
+    const okDif = selectedDificuldades.has(card.dataset.dificuldade);
+    
+    const visible = okOrigem && okTema && okDif;
+    card.classList.toggle("hidden", !visible);
+    if(visible) visibleCount++;
+  });
+
+  document.querySelectorAll("section.topic").forEach(sec=>{
+    const secCards = sec.querySelectorAll(".card");
+    const anyVisible = [...secCards].some(c=>!c.classList.contains("hidden"));
+    sec.style.display = anyVisible ? "" : "none";
+  });
+  
+  document.querySelectorAll("h3.subtopic").forEach(h=>{
+    let sib = h.nextElementSibling;
+    let anyVisible = false;
+    while(sib && sib.tagName === "ARTICLE"){
+      if(!sib.classList.contains("hidden")) anyVisible = true;
+      sib = sib.nextElementSibling;
+    }
+    h.style.display = anyVisible ? "" : "none";
+  });
+
+  document.getElementById("emptyMsg").style.display = visibleCount===0 ? "block" : "none";
+  updateProgress();
+}
+
+function updateProgress(){
+  const total = document.querySelectorAll(".card:not(.hidden)").length; 
+  const reviewed = document.querySelectorAll(".card.reviewed:not(.hidden)").length;
+  document.getElementById("progressLabel").textContent = `${reviewed}/${total} revisados`;
+}
+
+document.getElementById("toggleAllAnswers").addEventListener("click", (e)=>{
+  allAnswersShown = !allAnswersShown;
+  document.querySelectorAll(".resposta").forEach(r=> r.classList.toggle("show", allAnswersShown));
+  document.querySelectorAll(".toggle-answer").forEach(b=> b.textContent = allAnswersShown ? "Esconder resposta" : "Mostrar resposta");
+  e.target.textContent = allAnswersShown ? "Ocultar Respostas" : "Revelar Respostas";
+});
+
+/* ======================= INIT ======================= */
+buildNav();
+buildContent();
+applyFilters(); 
+</script>
+</body>
+</html>
