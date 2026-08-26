@@ -58,33 +58,48 @@
     transition: background-color 0.3s, color 0.3s;
   }
 
-  /* BARRA SUPERIOR FLUTUANTE (MINI NAVBAR) */
+  /* BARRA SUPERIOR FLUTUANTE (CENTRAL DE CONTROLE RÁPIDO) */
   .floating-bar {
     position: fixed;
-    top: -60px; /* Inicialmente escondida acima da tela */
+    top: -65px;
     left: 0;
     width: 100%;
     background: var(--surface);
     border-bottom: 1px solid var(--border);
-    padding: 8px 24px;
+    padding: 8px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
     z-index: 1000;
     transition: top 0.3s ease-in-out;
   }
   .floating-bar.visible {
     top: 0;
   }
+  .floating-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
   .floating-bar-title {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-main);
+  }
+  .floating-bar-progress {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    font-weight: 500;
+    background: var(--bg);
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
   }
   .floating-bar-actions {
     display: flex;
     gap: 8px;
+    align-items: center;
   }
 
   header.top {
@@ -416,7 +431,7 @@
     transform: translateY(-2px);
   }
   
-  /* CORREÇÃO DO MODO ESCURO: Apenas as fórmulas geradas por imagem são invertidas. Gráficos SVG ficam intactos. */
+  /* Apenas fórmulas WebTeX invertem no tema escuro */
   [data-theme="dark"] .webtex-block img,
   [data-theme="dark"] .webtex-inline {
     filter: invert(1) hue-rotate(180deg);
@@ -507,17 +522,22 @@
     .dropdown-btn { width: 100%; justify-content: space-between; }
     .tray-footer { flex-direction: column; align-items: stretch; }
     .tray-footer-right { margin-left: 0; justify-content: space-between; flex-wrap: wrap; }
+    .floating-bar-progress { display: none; }
   }
 </style>
 </head>
 <body>
 
-<!-- BARRA SUPERIOR FLUTUANTE (APARECE AO ROLAR) -->
+<!-- BARRA FLUTUANTE CENTRAL DE CONTROLE -->
 <div class="floating-bar" id="floatingBar">
-  <span class="floating-bar-title">📐 Cálculo 1</span>
+  <div class="floating-bar-left">
+    <span class="floating-bar-title">📐 Cálculo 1</span>
+    <span class="floating-bar-progress" id="floatingProgress">0/0 revisados</span>
+  </div>
   <div class="floating-bar-actions">
-    <button id="scrollTopBtn" class="btn">⬆️ Topo</button>
+    <button id="toggleAllAnswersFloat" class="btn">Respostas</button>
     <button id="themeToggleFloat" class="btn">🌓 Tema</button>
+    <button id="scrollTopBtn" class="btn primary">⬆️ Topo</button>
   </div>
 </div>
 
@@ -591,6 +611,7 @@
 const themeBtn = document.getElementById('themeToggle');
 const themeBtnFloat = document.getElementById('themeToggleFloat');
 const scrollTopBtn = document.getElementById('scrollTopBtn');
+const toggleAllAnswersFloat = document.getElementById('toggleAllAnswersFloat');
 const floatingBar = document.getElementById('floatingBar');
 const root = document.documentElement;
 
@@ -616,7 +637,10 @@ function toggleTheme() {
 themeBtn.addEventListener('click', toggleTheme);
 themeBtnFloat.addEventListener('click', toggleTheme);
 
-// Comportamento da barra flutuante ao rolar a página
+toggleAllAnswersFloat.addEventListener('click', () => {
+    document.getElementById('toggleAllAnswers').click();
+});
+
 window.addEventListener('scroll', () => {
     if (window.scrollY > 300) {
         floatingBar.classList.add('visible');
@@ -867,7 +891,7 @@ const DATA = [
   {id:"INT-SUB-002", origem:"Dado em aula 18/08/2026", dificuldade:"Fácil", relevancia:"Alta",
    enunciado:"Use o Método da Substituição ensinado em aula para resolver: $$ \\int \\cos(2x) \\, dx $$",
    resposta: "$$ \\frac{\\sin(2x)}{2} + C $$"},
-  {id:"INT-SUB-003", origem:"Gerado a partir das listas Lista 3", drizzle:"Fácil", relevancia:"Média",
+  {id:"INT-SUB-003", origem:"Gerado a partir das listas Lista 3", dificuldade:"Fácil", relevancia:"Média",
    enunciado:"Calcule a integral: $$ \\int e^{7x} \\, dx $$",
    resposta: "$$ \\frac{e^{7x}}{7} + C $$"},
   {id:"INT-SUB-004", origem:"Gerado a partir das listas Lista 3", dificuldade:"Médio", relevancia:"Alta",
@@ -1211,6 +1235,11 @@ function updateProgress(){
   const total = document.querySelectorAll(".card:not(.hidden)").length; 
   const reviewed = document.querySelectorAll(".card.reviewed:not(.hidden)").length;
   document.getElementById("progressLabel").textContent = `${reviewed}/${total} revisados`;
+  
+  const floatingProg = document.getElementById("floatingProgress");
+  if(floatingProg) {
+      floatingProg.textContent = `${reviewed}/${total} revisados`;
+  }
 }
 
 document.getElementById("toggleAllAnswers").addEventListener("click", (e)=>{
@@ -1218,6 +1247,7 @@ document.getElementById("toggleAllAnswers").addEventListener("click", (e)=>{
   document.querySelectorAll(".resposta").forEach(r=> r.classList.toggle("show", allAnswersShown));
   document.querySelectorAll(".toggle-answer").forEach(b=> b.textContent = allAnswersShown ? "Esconder resposta" : "Mostrar resposta");
   e.target.textContent = allAnswersShown ? "Ocultar Respostas" : "Revelar Respostas";
+  toggleAllAnswersFloat.textContent = allAnswersShown ? "Ocultar" : "Respostas";
 });
 
 /* ======================= INIT ======================= */
