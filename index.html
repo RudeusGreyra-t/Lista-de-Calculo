@@ -58,6 +58,35 @@
     transition: background-color 0.3s, color 0.3s;
   }
 
+  /* BARRA SUPERIOR FLUTUANTE (MINI NAVBAR) */
+  .floating-bar {
+    position: fixed;
+    top: -60px; /* Inicialmente escondida acima da tela */
+    left: 0;
+    width: 100%;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    z-index: 1000;
+    transition: top 0.3s ease-in-out;
+  }
+  .floating-bar.visible {
+    top: 0;
+  }
+  .floating-bar-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+  .floating-bar-actions {
+    display: flex;
+    gap: 8px;
+  }
+
   header.top {
     background: var(--surface);
     border-bottom: 1px solid var(--border);
@@ -387,6 +416,7 @@
     transform: translateY(-2px);
   }
   
+  /* CORREÇÃO DO MODO ESCURO: Apenas as fórmulas geradas por imagem são invertidas. Gráficos SVG ficam intactos. */
   [data-theme="dark"] .webtex-block img,
   [data-theme="dark"] .webtex-inline {
     filter: invert(1) hue-rotate(180deg);
@@ -482,6 +512,15 @@
 </head>
 <body>
 
+<!-- BARRA SUPERIOR FLUTUANTE (APARECE AO ROLAR) -->
+<div class="floating-bar" id="floatingBar">
+  <span class="floating-bar-title">📐 Cálculo 1</span>
+  <div class="floating-bar-actions">
+    <button id="scrollTopBtn" class="btn">⬆️ Topo</button>
+    <button id="themeToggleFloat" class="btn">🌓 Tema</button>
+  </div>
+</div>
+
 <header class="top">
   <h1>Lista de Revisão Cálculo 1</h1>
   <button id="themeToggle" class="btn">🌓 Alternar Tema</button>
@@ -548,22 +587,46 @@
 <footer class="credit">Interface limpa adaptável (Claro/Escuro). Fórmulas matemáticas via WebTeX.</footer>
 
 <script>
-/* ======================= MODO CLARO/ESCURO ======================= */
+/* ======================= MODO CLARO/ESCURO & NAVBAR FLUTUANTE ======================= */
 const themeBtn = document.getElementById('themeToggle');
+const themeBtnFloat = document.getElementById('themeToggleFloat');
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+const floatingBar = document.getElementById('floatingBar');
 const root = document.documentElement;
+
 let isDark = localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
-if(isDark) root.setAttribute('data-theme', 'dark');
-
-themeBtn.addEventListener('click', () => {
-    isDark = !isDark;
-    if(isDark) {
+function applyTheme(dark) {
+    if(dark) {
         root.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
     } else {
         root.removeAttribute('data-theme');
         localStorage.setItem('theme', 'light');
     }
+}
+
+applyTheme(isDark);
+
+function toggleTheme() {
+    isDark = !isDark;
+    applyTheme(isDark);
+}
+
+themeBtn.addEventListener('click', toggleTheme);
+themeBtnFloat.addEventListener('click', toggleTheme);
+
+// Comportamento da barra flutuante ao rolar a página
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        floatingBar.classList.add('visible');
+    } else {
+        floatingBar.classList.remove('visible');
+    }
+});
+
+scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 /* ======================= DADOS (LATEX PURO) ======================= */
@@ -804,7 +867,7 @@ const DATA = [
   {id:"INT-SUB-002", origem:"Dado em aula 18/08/2026", dificuldade:"Fácil", relevancia:"Alta",
    enunciado:"Use o Método da Substituição ensinado em aula para resolver: $$ \\int \\cos(2x) \\, dx $$",
    resposta: "$$ \\frac{\\sin(2x)}{2} + C $$"},
-  {id:"INT-SUB-003", origem:"Gerado a partir das listas Lista 3", dificuldade:"Fácil", relevancia:"Média",
+  {id:"INT-SUB-003", origem:"Gerado a partir das listas Lista 3", drizzle:"Fácil", relevancia:"Média",
    enunciado:"Calcule a integral: $$ \\int e^{7x} \\, dx $$",
    resposta: "$$ \\frac{e^{7x}}{7} + C $$"},
   {id:"INT-SUB-004", origem:"Gerado a partir das listas Lista 3", dificuldade:"Médio", relevancia:"Alta",
