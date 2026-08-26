@@ -58,7 +58,7 @@
     transition: background-color 0.3s, color 0.3s;
   }
 
-  /* BARRA SUPERIOR FLUTUANTE (CENTRAL DE CONTROLE RÁPIDO) */
+  /* BARRA SUPERIOR FLUTUANTE */
   .floating-bar {
     position: fixed;
     top: -65px;
@@ -431,7 +431,6 @@
     transform: translateY(-2px);
   }
   
-  /* Apenas fórmulas WebTeX invertem no tema escuro */
   [data-theme="dark"] .webtex-block img,
   [data-theme="dark"] .webtex-inline {
     filter: invert(1) hue-rotate(180deg);
@@ -814,7 +813,7 @@ const DATA = [
    enunciado:"a) Pela definição, o que significa dizer que uma função \\( f \\) é contínua num ponto \\( p \\) do seu domínio? b) Pela definição, o que significa dizer que uma função \\( f \\) é contínua?",
    resposta:"a) Significa que \\( \\lim_{x \\to p} f(x) = f(p) \\). b) Significa que a função é contínua em todos os pontos do seu domínio."},
   {id:"CON-DEF-002", origem:"Aula de revisão", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"A afirmação \\( \\exists \\lim_{x\\to x_0} f(x) \\implies f \\text{ é contínua em } x_0 \\) é verdadeira ou falsa? Justifique sua resposta e esboce um gráfico que ilustre a situação.",
+   enunciado:"A afirmação \\( \\exists \\lim_{x\\to x_0} f(x) \\implies f \\) é contínua em \\( x_0 \\), é verdadeira ou falsa? Justifique sua resposta e esboce um gráfico que ilustre a situação.",
    resposta:"Falsa. A existência do limite \\( \\lim_{x\\to x_0} f(x) = L \\) não garante continuidade, pois o ponto pode não pertencer ao domínio (\\( x_0 \\notin \\text{Dom}(f) \\)) ou o valor da função pode ser diferente do limite (\\( f(x_0) \\ne L \\)).",
    svg: SVG_CON_DEF_002,
    svgPos: "resposta"},
@@ -906,7 +905,6 @@ const DATA = [
 const SECTION_TITLES = {limites:"Limites", continuidade:"Continuidade", derivadas:"Derivadas", integrais:"Integrais"};
 const SECTION_ORDER = ["limites","continuidade","derivadas","integrais"];
 
-
 /* ======================= FUNÇÃO CORE: WEBTEX (API CodeCogs) ======================= */
 function parseWebTex(text) {
   if (!text) return "";
@@ -952,7 +950,6 @@ function setReviewed(map){
   try{ localStorage.setItem(REVIEWED_KEY, JSON.stringify(map)); }catch(e){}
 }
 
-
 /* ======================= STATE E FILTROS ======================= */
 const origensDisponiveis = [...new Set(DATA.flatMap(g => g.exercicios.map(e => origemCategoria(e.origem))))];
 const dificuldadesDisponiveis = ["Fácil","Médio","Difícil","Muito difícil"];
@@ -967,7 +964,6 @@ const materiaSubtopicos = {};
 });
 
 let allAnswersShown = false;
-
 
 /* ======================= RENDERIZAR MENUS DROPDOWN ======================= */
 function renderDropdownOptions(container, options, selectedSet){
@@ -1192,7 +1188,6 @@ function applyFilters(){
     if(visible) visibleCount++;
   });
 
-  // Atualiza contadores dinâmicos por seção (matéria) e na barra de navegação
   SECTION_ORDER.forEach(secId => {
     const sec = document.getElementById(secId);
     if (!sec) return;
@@ -1215,7 +1210,6 @@ function applyFilters(){
         }
     }
 
-    // Atualiza contador da barra de navegação (xx/yy)
     const navCountEl = document.getElementById(`nav-count-${secId}`);
     if(navCountEl) {
         navCountEl.textContent = `(${visibleCountSec}/${totalSec})`;
@@ -1224,7 +1218,6 @@ function applyFilters(){
 
   document.getElementById("emptyMsg").style.display = visibleCount===0 ? "block" : "none";
   
-  // Atualiza contador global na barra inferior
   const totalGeral = cards.length;
   document.getElementById("globalCounter").textContent = `${visibleCount} de ${totalGeral} visíveis`;
   
