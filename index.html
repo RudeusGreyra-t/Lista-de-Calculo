@@ -720,7 +720,7 @@ const DATA = [
    resposta:"a) Não existe (o limite à esquerda é −1 e o limite à direita é −3). b) Não, pois o limite bilateral não existe."},
   {id:"CON-PAR-005", origem:"Aula de revisão", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Seja \\( f(x) = \\begin{cases} 2x + 1, & \\text{se } x \\ne 2 \\\\ L, & \\text{se } x = 2 \\end{cases} \\). Encontre o valor de \\( L \\) para que \\( f \\) seja contínua em \\( 2 \\).",
-   resposta:"\\( L = 5 \\)"},
+   resposta:"Para \\( f \\) ser contínua em \\( 2 \\), devemos ter \\( \\lim_{x\\to 2} f(x) = f(2) = L \\). Como \\( \\lim_{x\\to 2} (2x + 1) = 2(2) + 1 = 5 \\), segue que \\( L = 5 \\).<br><br><strong>Resposta final:</strong> \\( L = 5 \\)"},
 ]},
 {materia:"Continuidade", subtopico:"Definição formal", secId:"continuidade", exercicios:[
   {id:"CON-DEF-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
@@ -744,7 +744,7 @@ const DATA = [
    resposta:"$$ f'(3) = 6a + b $$"},
   {id:"DER-DEF-004", origem:"Aula de revisão", dificuldade:"Difícil", relevancia:"Alta",
    enunciado:"Use a definição de derivada para encontrar \\( f'(2) \\), sendo \\( f(x) = x^4 - 16 \\).",
-   resposta:"\\( f'(2) = 32 \\)"},
+   resposta:"$$ f'(2) = \\lim_{x\\to 2} \\frac{f(x) - f(2)}{x - 2} = \\lim_{x\\to 2} \\frac{x^4 - 16}{x - 2} = \\lim_{x\\to 2} \\frac{(x-2)(x^3 + 2x^2 + 4x + 8)}{x-2} $$<br><br>$$ = 2^3 + 2(2^2) + 4(2) + 8 = 32 $$<br><br><strong>Resposta final:</strong> \\( f'(2) = 32 \\)"},
 ]},
 {materia:"Derivadas", subtopico:"Regras do produto e quociente", secId:"derivadas", exercicios:[
   {id:"DER-PRO-001", origem:"Dado em aula 04/08/2026", dificuldade:"Fácil", relevancia:"Média",
@@ -851,7 +851,7 @@ function origemCategoria(origem){
 function origCSSClass(origem){
   if(origem.startsWith("Prova antiga")) return "orig-prova";
   if(origem.startsWith("Dado em aula")) return "orig-aula";
-  if(origem === "Aula de revisão") return "orig-aula"; // Usa amarelo para aula de revisão também
+  if(origem === "Aula de revisão") return "orig-aula";
   return "orig-ia";
 }
 
