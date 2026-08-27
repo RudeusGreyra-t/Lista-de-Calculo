@@ -266,6 +266,7 @@
     display: flex;
     gap: 8px;
     align-items: center;
+    flex-wrap: wrap;
   }
 
   .tray-footer-right {
@@ -276,28 +277,61 @@
     flex-wrap: wrap;
   }
 
+  /* ABAS RÁPIDAS DE STATUS */
+  .status-tabs {
+    display: inline-flex;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .status-tab {
+    background: transparent;
+    border: none;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .status-tab:hover {
+    background: var(--surface);
+  }
+  .status-tab.active {
+    background: var(--surface);
+    color: var(--accent);
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+
+  /* GRUPO DE PROGRESSO (ALINHAMENTO CORRIGIDO) */
   .progress-group {
     display: inline-flex;
     align-items: center;
     background: var(--bg);
-    padding: 2px 4px 2px 10px;
+    padding: 3px 4px 3px 12px;
     border-radius: 6px;
     border: 1px solid var(--border);
   }
-
   .progress { 
     font-size: 13px; 
     color: var(--text-muted); 
     font-weight: 500;
-    line-height: 1;
-    display: flex;
-    align-items: center;
   }
-
-  .global-counter {
-    font-size: 13.5px;
+  button.btn.btn-subtle {
+    font-size: 12.5px;
+    padding: 4px 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    margin-left: 4px;
     font-weight: 600;
-    color: var(--accent);
+  }
+  button.btn.btn-subtle:hover {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--hard);
   }
 
   button.btn {
@@ -313,24 +347,6 @@
     transition: background 0.15s, border-color 0.15s;
   }
   button.btn:hover { background: var(--bg); border-color: var(--text-muted); }
-  
-  button.btn.btn-subtle {
-    font-size: 12.5px;
-    padding: 6px 8px;
-    background: transparent;
-    border: 1px solid transparent;
-    color: var(--text-muted);
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    margin-left: 4px;
-  }
-  button.btn.btn-subtle:hover {
-    background: var(--surface);
-    border-color: var(--border);
-    color: var(--hard);
-  }
-
   button.btn.primary {
     background: var(--accent);
     color: white;
@@ -472,6 +488,7 @@
     filter: invert(1) hue-rotate(180deg);
   }
 
+  /* O fundo branco protege os SVGs puros de perderem as linhas pretas no modo escuro */
   .svg-wrap {
     background: #ffffff;
     border: 1px solid var(--border);
@@ -556,7 +573,7 @@
     .dropdown { flex: 1 1 45%; }
     .dropdown-btn { width: 100%; justify-content: space-between; }
     .tray-footer { flex-direction: column; align-items: stretch; }
-    .tray-footer-right { margin-left: 0; justify-content: space-between; flex-wrap: wrap; }
+    .tray-footer-right { margin-left: 0; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
     .floating-bar-progress { display: none; }
   }
 </style>
@@ -588,11 +605,6 @@
   
   <!-- ZONA SUPERIOR: FILTROS -->
   <div class="filters-row">
-    <details class="dropdown" id="dd-status">
-      <summary class="dropdown-btn">Status <span class="count"></span> ▾</summary>
-      <div class="dropdown-content" id="filterStatus"></div>
-    </details>
-
     <details class="dropdown" id="dd-origem">
       <summary class="dropdown-btn">Origem <span class="count"></span> ▾</summary>
       <div class="dropdown-content" id="filterOrigem"></div>
@@ -629,15 +641,25 @@
   <!-- ZONA INFERIOR: AÇÕES GLOBAIS E RESPOSTAS -->
   <div class="tray-footer">
     <div class="tray-footer-left">
-      <button class="btn" id="checkAll">Marcar Todos (Matérias)</button>
-      <button class="btn" id="uncheckAll">Desmarcar Todos (Matérias)</button>
+      <button class="btn" id="checkAll">Marcar Todos</button>
+      <button class="btn" id="uncheckAll">Desmarcar Todos</button>
     </div>
+    
     <div class="tray-footer-right">
-      <span class="global-counter" id="globalCounter">0 visíveis</span>
-      <div class="progress-group">
-        <span class="progress" id="progressLabel"></span>
-        <button class="btn btn-subtle" id="resetReviewed" title="Desmarca todas as questões e limpa a sessão">Limpar Revisões</button>
+      
+      <!-- Controle Rápido de Abas de Status -->
+      <div class="status-tabs">
+        <button class="status-tab active" data-status="all" title="Ver todas as questões filtradas">Todas</button>
+        <button class="status-tab" data-status="pending" title="Ver apenas as não revisadas">Pendentes</button>
+        <button class="status-tab" data-status="reviewed" title="Ver apenas as revisadas">Revisadas</button>
       </div>
+
+      <!-- Métricas de Progresso Estáveis -->
+      <div class="progress-group">
+        <span class="progress" id="progressLabel">0/0 revisados</span>
+        <button class="btn btn-subtle" id="resetReviewed" title="Desmarca todas as questões da lista">Limpar</button>
+      </div>
+      
       <button class="btn primary" id="toggleAllAnswers">Revelar Respostas</button>
     </div>
   </div>
@@ -997,11 +1019,10 @@ function setReviewed(map){
 /* ======================= STATE E FILTROS ======================= */
 const origensDisponiveis = [...new Set(DATA.flatMap(g => g.exercicios.map(e => origemCategoria(e.origem))))];
 const dificuldadesDisponiveis = ["Fácil","Médio","Difícil","Muito difícil"];
-const statusDisponiveis = ["Não revisados", "Revisados"];
 
 const selectedOrigens = new Set(origensDisponiveis);
 const selectedDificuldades = new Set(dificuldadesDisponiveis);
-const selectedStatus = new Set(statusDisponiveis);
+let currentStatusFilter = "all";
 
 const materiaSubtopicos = {};
 ["Limites", "Continuidade", "Derivadas", "Integrais"].forEach(topico => {
@@ -1078,7 +1099,6 @@ function updateDropdownButton(detailsEl) {
    }
 }
 
-setupDropdownWithActions("dd-status", "Status", statusDisponiveis, selectedStatus);
 setupDropdownWithActions("dd-origem", "Origem", origensDisponiveis, selectedOrigens);
 setupDropdownWithActions("dd-dificuldade", "Dificuldade", dificuldadesDisponiveis, selectedDificuldades);
 
@@ -1111,6 +1131,16 @@ document.getElementById("uncheckAll").addEventListener("click", ()=>{
   document.querySelectorAll('#dd-limites .dropdown-item input, #dd-continuidade .dropdown-item input, #dd-derivadas .dropdown-item input, #dd-integrais .dropdown-item input').forEach(inp => inp.checked = false);
   ['dd-limites', 'dd-continuidade', 'dd-derivadas', 'dd-integrais'].forEach(id => updateDropdownButton(document.getElementById(id)));
   applyFilters();
+});
+
+/* Lógica das abas de Status */
+document.querySelectorAll('.status-tab').forEach(tab => {
+    tab.addEventListener('click', (e) => {
+        document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
+        e.target.classList.add('active');
+        currentStatusFilter = e.target.dataset.status;
+        applyFilters();
+    });
 });
 
 /* ======================= CONSTRUIR INTERFACE DE CARTÕES ======================= */
@@ -1215,8 +1245,7 @@ function buildContent(){
           reviewedMap[ex.id] = e.target.checked;
           setReviewed(reviewedMap);
           card.classList.toggle("reviewed", e.target.checked);
-          updateProgress();
-          applyFilters(); // Esconde a carta na hora se estiver filtrando por status
+          applyFilters();
         });
 
         section.appendChild(card);
@@ -1230,20 +1259,33 @@ function buildContent(){
 function applyFilters(){
   const cards = document.querySelectorAll(".card");
   let visibleCount = 0;
+  let metaTotal = 0;
+  let metaReviewed = 0;
   
   cards.forEach(card=>{
     const okOrigem = selectedOrigens.has(card.dataset.origemCat);
     const okDif = selectedDificuldades.has(card.dataset.dificuldade);
     
-    const isRev = card.classList.contains("reviewed");
-    const statusStr = isRev ? "Revisados" : "Não revisados";
-    const okStatus = selectedStatus.has(statusStr);
-    
     const materiaCard = card.dataset.materia;
     const subtopicoCard = card.dataset.subtopico;
     const okTema = materiaSubtopicos[materiaCard] && materiaSubtopicos[materiaCard].has(subtopicoCard);
     
-    const visible = okOrigem && okTema && okDif && okStatus;
+    const matchesBaseFilters = okOrigem && okTema && okDif;
+    
+    // Contagem da métrica real (Ignora o status)
+    if (matchesBaseFilters) {
+        metaTotal++;
+        if (card.classList.contains("reviewed")) {
+            metaReviewed++;
+        }
+    }
+
+    // Visibilidade na tela (Inclui o status)
+    let okStatus = true;
+    if (currentStatusFilter === "pending") okStatus = !card.classList.contains("reviewed");
+    if (currentStatusFilter === "reviewed") okStatus = card.classList.contains("reviewed");
+    
+    const visible = matchesBaseFilters && okStatus;
     card.classList.toggle("hidden", !visible);
     if(visible) visibleCount++;
   });
@@ -1259,39 +1301,39 @@ function applyFilters(){
     sec.style.display = anyVisible ? "" : "none";
     
     const countEl = sec.querySelector(".sec-count");
-    const totalSec = secCards.length;
+    
+    // Conta quantos pertencem aos filtros base para saber o tamanho original do bloco filtrado
+    const totalSecBase = [...secCards].filter(c => {
+       const m = c.dataset.materia;
+       const s = c.dataset.subtopico;
+       return selectedOrigens.has(c.dataset.origemCat) && 
+              selectedDificuldades.has(c.dataset.dificuldade) && 
+              (materiaSubtopicos[m] && materiaSubtopicos[m].has(s));
+    }).length;
+
     const visibleCountSec = visibleCardsInSec.length;
     
     if(countEl) {
-        if(visibleCountSec === totalSec) {
-            countEl.textContent = `${totalSec} exercícios`;
+        if(visibleCountSec === totalSecBase) {
+            countEl.textContent = `${totalSecBase} exercícios`;
         } else {
-            countEl.textContent = `${visibleCountSec} de ${totalSec} exercícios visíveis`;
+            countEl.textContent = `${visibleCountSec} de ${totalSecBase} exercícios visíveis`;
         }
     }
 
     const navCountEl = document.getElementById(`nav-count-${secId}`);
     if(navCountEl) {
-        navCountEl.textContent = `(${visibleCountSec}/${totalSec})`;
+        navCountEl.textContent = `(${visibleCountSec}/${totalSecBase})`;
     }
   });
 
   document.getElementById("emptyMsg").style.display = visibleCount===0 ? "block" : "none";
   
-  const totalGeral = cards.length;
-  document.getElementById("globalCounter").textContent = `${visibleCount} de ${totalGeral} visíveis`;
-  
-  updateProgress();
-}
-
-function updateProgress(){
-  const total = document.querySelectorAll(".card:not(.hidden)").length; 
-  const reviewed = document.querySelectorAll(".card.reviewed:not(.hidden)").length;
-  document.getElementById("progressLabel").textContent = `${reviewed}/${total} revisados`;
-  
+  // Atualiza métricas de progresso estáveis
+  document.getElementById("progressLabel").textContent = `${metaReviewed}/${metaTotal} revisados`;
   const floatingProg = document.getElementById("floatingProgress");
   if(floatingProg) {
-      floatingProg.textContent = `${reviewed}/${total} revisados`;
+      floatingProg.textContent = `${metaReviewed}/${metaTotal} revisados`;
   }
 }
 
@@ -1303,7 +1345,6 @@ document.getElementById("toggleAllAnswers").addEventListener("click", (e)=>{
   toggleAllAnswersFloat.textContent = allAnswersShown ? "Ocultar" : "Respostas";
 });
 
-/* Limpar e desmarcar todos os exercícios revisados */
 document.getElementById("resetReviewed").addEventListener("click", () => {
   const countReviewed = Object.values(reviewedMap).filter(Boolean).length;
   if (countReviewed === 0) return;
@@ -1315,7 +1356,6 @@ document.getElementById("resetReviewed").addEventListener("click", () => {
     document.querySelectorAll(".card").forEach(card => card.classList.remove("reviewed"));
     document.querySelectorAll(".reviewed-toggle input").forEach(inp => inp.checked = false);
     
-    updateProgress();
     applyFilters();
   }
 });
