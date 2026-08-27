@@ -270,9 +270,20 @@
 
   .tray-footer-right {
     display: flex;
-    gap: 16px;
+    gap: 14px;
     align-items: center;
     margin-left: auto;
+    flex-wrap: wrap;
+  }
+
+  .progress-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg);
+    padding: 3px 6px 3px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
   }
 
   .global-counter {
@@ -294,6 +305,20 @@
     transition: background 0.15s, border-color 0.15s;
   }
   button.btn:hover { background: var(--bg); border-color: var(--text-muted); }
+  
+  button.btn.btn-subtle {
+    font-size: 12px;
+    padding: 3px 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+  }
+  button.btn.btn-subtle:hover {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--hard);
+  }
+
   button.btn.primary {
     background: var(--accent);
     color: white;
@@ -431,6 +456,7 @@
     transform: translateY(-2px);
   }
   
+  /* Apenas fórmulas WebTeX invertem no tema escuro */
   [data-theme="dark"] .webtex-block img,
   [data-theme="dark"] .webtex-inline {
     filter: invert(1) hue-rotate(180deg);
@@ -520,7 +546,7 @@
     .dropdown { flex: 1 1 45%; }
     .dropdown-btn { width: 100%; justify-content: space-between; }
     .tray-footer { flex-direction: column; align-items: stretch; }
-    .tray-footer-right { margin-left: 0; justify-content: space-between; flex-wrap: wrap; }
+    .tray-footer-right { margin-left: 0; justify-content: space-between; }
     .floating-bar-progress { display: none; }
   }
 </style>
@@ -593,7 +619,10 @@
     </div>
     <div class="tray-footer-right">
       <span class="global-counter" id="globalCounter">0 visíveis</span>
-      <span class="progress" id="progressLabel"></span>
+      <div class="progress-group">
+        <span class="progress" id="progressLabel"></span>
+        <button class="btn btn-subtle" id="resetReviewed" title="Desmarca todas as caixas de 'marcar como revisado'">Limpar Revisões</button>
+      </div>
       <button class="btn primary" id="toggleAllAnswers">Revelar Respostas</button>
     </div>
   </div>
@@ -1241,6 +1270,22 @@ document.getElementById("toggleAllAnswers").addEventListener("click", (e)=>{
   document.querySelectorAll(".toggle-answer").forEach(b=> b.textContent = allAnswersShown ? "Esconder resposta" : "Mostrar resposta");
   e.target.textContent = allAnswersShown ? "Ocultar Respostas" : "Revelar Respostas";
   toggleAllAnswersFloat.textContent = allAnswersShown ? "Ocultar" : "Respostas";
+});
+
+/* Limpar e desmarcar todos os exercícios revisados */
+document.getElementById("resetReviewed").addEventListener("click", () => {
+  const countReviewed = Object.values(reviewedMap).filter(Boolean).length;
+  if (countReviewed === 0) return;
+
+  if (confirm("Deseja desmarcar todas as questões marcadas como revisadas?")) {
+    reviewedMap = {};
+    setReviewed(reviewedMap);
+    
+    document.querySelectorAll(".card").forEach(card => card.classList.remove("reviewed"));
+    document.querySelectorAll(".reviewed-toggle input").forEach(inp => inp.checked = false);
+    
+    updateProgress();
+  }
 });
 
 /* ======================= INIT ======================= */
