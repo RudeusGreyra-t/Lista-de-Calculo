@@ -305,7 +305,7 @@
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   }
 
-  /* GRUPO DE PROGRESSO (ALINHAMENTO CORRIGIDO) */
+  /* GRUPO DE PROGRESSO COM ALINHAMENTO CORRIGIDO */
   .progress-group {
     display: inline-flex;
     align-items: center;
@@ -319,6 +319,7 @@
     color: var(--text-muted); 
     font-weight: 500;
   }
+  
   button.btn.btn-subtle {
     font-size: 12.5px;
     padding: 4px 8px;
@@ -327,11 +328,20 @@
     color: var(--text-muted);
     margin-left: 4px;
     font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    border-radius: 4px;
   }
   button.btn.btn-subtle:hover {
     background: var(--surface);
     border-color: var(--border);
     color: var(--hard);
+  }
+
+  .global-counter {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--accent);
   }
 
   button.btn {
@@ -636,13 +646,16 @@
       <summary class="dropdown-btn">Integrais <span class="count"></span> ▾</summary>
       <div class="dropdown-content" id="filterIntegrais"></div>
     </details>
+
+    <!-- BOTÃO PARA LIMPAR TODOS OS FILTROS -->
+    <button class="btn btn-subtle" id="resetFilters" title="Restaura todos os filtros para o padrão" style="margin-left:auto;">🧹 Limpar Filtros</button>
   </div>
 
   <!-- ZONA INFERIOR: AÇÕES GLOBAIS E RESPOSTAS -->
   <div class="tray-footer">
     <div class="tray-footer-left">
-      <button class="btn" id="checkAll">Marcar Todos</button>
-      <button class="btn" id="uncheckAll">Desmarcar Todos</button>
+      <!-- BOTÃO DINÂMICO DE MATÉRIAS -->
+      <button class="btn" id="toggleMaterias">Desmarcar Matérias</button>
     </div>
     
     <div class="tray-footer-right">
@@ -1016,21 +1029,44 @@ function setReviewed(map){
   try{ localStorage.setItem(REVIEWED_KEY, JSON.stringify(map)); }catch(e){}
 }
 
-/* ======================= STATE E FILTROS ======================= */
+/* ======================= STATE E FILTROS PERSISTENTES ======================= */
 const origensDisponiveis = [...new Set(DATA.flatMap(g => g.exercicios.map(e => origemCategoria(e.origem))))];
 const dificuldadesDisponiveis = ["Fácil","Médio","Difícil","Muito difícil"];
 
-const selectedOrigens = new Set(origensDisponiveis);
-const selectedDificuldades = new Set(dificuldadesDisponiveis);
-let currentStatusFilter = "all";
+const savedFiltersStr = localStorage.getItem("calc1_filters");
+let savedFilters = null;
+if (savedFiltersStr) {
+    try { savedFilters = JSON.parse(savedFiltersStr); } catch(e){}
+}
+
+const selectedOrigens = savedFilters && savedFilters.origens ? new Set(savedFilters.origens) : new Set(origensDisponiveis);
+const selectedDificuldades = savedFilters && savedFilters.dificuldades ? new Set(savedFilters.dificuldades) : new Set(dificuldadesDisponiveis);
+let currentStatusFilter = savedFilters && savedFilters.status ? savedFilters.status : "all";
 
 const materiaSubtopicos = {};
 ["Limites", "Continuidade", "Derivadas", "Integrais"].forEach(topico => {
-    const subs = DATA.filter(g => g.materia === topico).map(g => g.subtopico);
-    materiaSubtopicos[topico] = new Set(subs);
+    const allSubs = DATA.filter(g => g.materia === topico).map(g => g.subtopico);
+    if (savedFilters && savedFilters.materias && savedFilters.materias[topico]) {
+        materiaSubtopicos[topico] = new Set(savedFilters.materias[topico]);
+    } else {
+        materiaSubtopicos[topico] = new Set(allSubs);
+    }
 });
 
 let allAnswersShown = false;
+
+function saveFilters() {
+    const filterState = {
+        origens: Array.from(selectedOrigens),
+        dificuldades: Array.from(selectedDificuldades),
+        materias: {},
+        status: currentStatusFilter
+    };
+    for (const m in materiaSubtopicos) {
+        filterState.materias[m] = Array.from(materiaSubtopicos[m]);
+    }
+    localStorage.setItem("calc1_filters", JSON.stringify(filterState));
+}
 
 /* ======================= RENDERIZAR MENUS DROPDOWN ======================= */
 function renderDropdownOptions(container, options, selectedSet){
@@ -1044,6 +1080,7 @@ function renderDropdownOptions(container, options, selectedSet){
     
     labelEl.querySelector("input").addEventListener("change", (e)=>{
       if(e.target.checked) selectedSet.add(value); else selectedSet.delete(value);
+      saveFilters();
       applyFilters();
       updateDropdownButton(container.closest('.dropdown'));
     });
@@ -1072,6 +1109,7 @@ function setupDropdownWithActions(dropdownId, title, options, selectedSet) {
         e.preventDefault();
         options.forEach(o => selectedSet.add(o));
         container.querySelectorAll('input').forEach(i => i.checked = true);
+        saveFilters();
         applyFilters();
         updateDropdownButton(details);
     });
@@ -1080,6 +1118,7 @@ function setupDropdownWithActions(dropdownId, title, options, selectedSet) {
         e.preventDefault();
         selectedSet.clear();
         container.querySelectorAll('input').forEach(i => i.checked = false);
+        saveFilters();
         applyFilters();
         updateDropdownButton(details);
     });
@@ -1115,30 +1154,58 @@ document.addEventListener('click', (e) => {
   });
 });
 
-document.getElementById("checkAll").addEventListener("click", ()=>{
-  Object.keys(materiaSubtopicos).forEach(m => {
-      DATA.filter(g => g.materia === m).map(g => g.subtopico).forEach(s => materiaSubtopicos[m].add(s));
-  });
-  
-  document.querySelectorAll('#dd-limites .dropdown-item input, #dd-continuidade .dropdown-item input, #dd-derivadas .dropdown-item input, #dd-integrais .dropdown-item input').forEach(inp => inp.checked = true);
-  ['dd-limites', 'dd-continuidade', 'dd-derivadas', 'dd-integrais'].forEach(id => updateDropdownButton(document.getElementById(id)));
-  applyFilters();
+/* Botão Dinâmico de Matérias */
+document.getElementById("toggleMaterias").addEventListener("click", () => {
+    let allChecked = true;
+    const topicos = ["Limites", "Continuidade", "Derivadas", "Integrais"];
+    
+    topicos.forEach(m => {
+        const totalSubs = DATA.filter(g => g.materia === m).map(g => g.subtopico).length;
+        if(materiaSubtopicos[m].size < totalSubs) allChecked = false;
+    });
+
+    if (allChecked) {
+        topicos.forEach(m => materiaSubtopicos[m].clear());
+        document.querySelectorAll('#dd-limites .dropdown-item input, #dd-continuidade .dropdown-item input, #dd-derivadas .dropdown-item input, #dd-integrais .dropdown-item input').forEach(inp => inp.checked = false);
+    } else {
+        topicos.forEach(m => {
+            DATA.filter(g => g.materia === m).map(g => g.subtopico).forEach(s => materiaSubtopicos[m].add(s));
+        });
+        document.querySelectorAll('#dd-limites .dropdown-item input, #dd-continuidade .dropdown-item input, #dd-derivadas .dropdown-item input, #dd-integrais .dropdown-item input').forEach(inp => inp.checked = true);
+    }
+    
+    ['dd-limites', 'dd-continuidade', 'dd-derivadas', 'dd-integrais'].forEach(id => updateDropdownButton(document.getElementById(id)));
+    saveFilters();
+    applyFilters();
 });
 
-document.getElementById("uncheckAll").addEventListener("click", ()=>{
-  Object.keys(materiaSubtopicos).forEach(m => materiaSubtopicos[m].clear());
-  
-  document.querySelectorAll('#dd-limites .dropdown-item input, #dd-continuidade .dropdown-item input, #dd-derivadas .dropdown-item input, #dd-integrais .dropdown-item input').forEach(inp => inp.checked = false);
-  ['dd-limites', 'dd-continuidade', 'dd-derivadas', 'dd-integrais'].forEach(id => updateDropdownButton(document.getElementById(id)));
-  applyFilters();
+/* Reset Global de Filtros */
+document.getElementById("resetFilters").addEventListener("click", () => {
+    origensDisponiveis.forEach(o => selectedOrigens.add(o));
+    dificuldadesDisponiveis.forEach(d => selectedDificuldades.add(d));
+    ["Limites", "Continuidade", "Derivadas", "Integrais"].forEach(topico => {
+        const subs = DATA.filter(g => g.materia === topico).map(g => g.subtopico);
+        subs.forEach(s => materiaSubtopicos[topico].add(s));
+    });
+    
+    currentStatusFilter = "all";
+    document.querySelectorAll('.status-tab').forEach(t => t.classList.toggle('active', t.dataset.status === "all"));
+
+    document.querySelectorAll('.dropdown-content input').forEach(inp => inp.checked = true);
+    document.querySelectorAll('details.dropdown').forEach(updateDropdownButton);
+
+    saveFilters();
+    applyFilters();
 });
 
 /* Lógica das abas de Status */
 document.querySelectorAll('.status-tab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.status === currentStatusFilter);
     tab.addEventListener('click', (e) => {
         document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
         e.target.classList.add('active');
         currentStatusFilter = e.target.dataset.status;
+        saveFilters();
         applyFilters();
     });
 });
@@ -1256,6 +1323,19 @@ function buildContent(){
   });
 }
 
+function updateToggleMateriasButton() {
+    let allChecked = true;
+    const topicos = ["Limites", "Continuidade", "Derivadas", "Integrais"];
+    topicos.forEach(m => {
+        const totalSubs = DATA.filter(g => g.materia === m).map(g => g.subtopico).length;
+        if(materiaSubtopicos[m].size < totalSubs) allChecked = false;
+    });
+    const btn = document.getElementById("toggleMaterias");
+    if (btn) {
+        btn.textContent = allChecked ? "Desmarcar Matérias" : "Marcar Todas as Matérias";
+    }
+}
+
 function applyFilters(){
   const cards = document.querySelectorAll(".card");
   let visibleCount = 0;
@@ -1272,7 +1352,6 @@ function applyFilters(){
     
     const matchesBaseFilters = okOrigem && okTema && okDif;
     
-    // Contagem da métrica real (Ignora o status)
     if (matchesBaseFilters) {
         metaTotal++;
         if (card.classList.contains("reviewed")) {
@@ -1280,7 +1359,6 @@ function applyFilters(){
         }
     }
 
-    // Visibilidade na tela (Inclui o status)
     let okStatus = true;
     if (currentStatusFilter === "pending") okStatus = !card.classList.contains("reviewed");
     if (currentStatusFilter === "reviewed") okStatus = card.classList.contains("reviewed");
@@ -1302,7 +1380,6 @@ function applyFilters(){
     
     const countEl = sec.querySelector(".sec-count");
     
-    // Conta quantos pertencem aos filtros base para saber o tamanho original do bloco filtrado
     const totalSecBase = [...secCards].filter(c => {
        const m = c.dataset.materia;
        const s = c.dataset.subtopico;
@@ -1329,12 +1406,13 @@ function applyFilters(){
 
   document.getElementById("emptyMsg").style.display = visibleCount===0 ? "block" : "none";
   
-  // Atualiza métricas de progresso estáveis
   document.getElementById("progressLabel").textContent = `${metaReviewed}/${metaTotal} revisados`;
   const floatingProg = document.getElementById("floatingProgress");
   if(floatingProg) {
       floatingProg.textContent = `${metaReviewed}/${metaTotal} revisados`;
   }
+  
+  updateToggleMateriasButton();
 }
 
 document.getElementById("toggleAllAnswers").addEventListener("click", (e)=>{
