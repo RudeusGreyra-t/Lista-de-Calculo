@@ -279,11 +279,19 @@
   .progress-group {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
     background: var(--bg);
-    padding: 3px 6px 3px 10px;
+    padding: 2px 4px 2px 10px;
     border-radius: 6px;
     border: 1px solid var(--border);
+  }
+
+  .progress { 
+    font-size: 13px; 
+    color: var(--text-muted); 
+    font-weight: 500;
+    line-height: 1;
+    display: flex;
+    align-items: center;
   }
 
   .global-counter {
@@ -307,11 +315,15 @@
   button.btn:hover { background: var(--bg); border-color: var(--text-muted); }
   
   button.btn.btn-subtle {
-    font-size: 12px;
-    padding: 3px 8px;
+    font-size: 12.5px;
+    padding: 6px 8px;
     background: transparent;
     border: 1px solid transparent;
     color: var(--text-muted);
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    margin-left: 4px;
   }
   button.btn.btn-subtle:hover {
     background: var(--surface);
@@ -327,8 +339,6 @@
     padding: 8px 16px;
   }
   button.btn.primary:hover { background: var(--accent-hover); }
-
-  .progress { font-size: 13px; color: var(--text-muted); font-weight: 500; }
 
   main { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
@@ -546,7 +556,7 @@
     .dropdown { flex: 1 1 45%; }
     .dropdown-btn { width: 100%; justify-content: space-between; }
     .tray-footer { flex-direction: column; align-items: stretch; }
-    .tray-footer-right { margin-left: 0; justify-content: space-between; }
+    .tray-footer-right { margin-left: 0; justify-content: space-between; flex-wrap: wrap; }
     .floating-bar-progress { display: none; }
   }
 </style>
@@ -578,6 +588,11 @@
   
   <!-- ZONA SUPERIOR: FILTROS -->
   <div class="filters-row">
+    <details class="dropdown" id="dd-status">
+      <summary class="dropdown-btn">Status <span class="count"></span> ▾</summary>
+      <div class="dropdown-content" id="filterStatus"></div>
+    </details>
+
     <details class="dropdown" id="dd-origem">
       <summary class="dropdown-btn">Origem <span class="count"></span> ▾</summary>
       <div class="dropdown-content" id="filterOrigem"></div>
@@ -621,7 +636,7 @@
       <span class="global-counter" id="globalCounter">0 visíveis</span>
       <div class="progress-group">
         <span class="progress" id="progressLabel"></span>
-        <button class="btn btn-subtle" id="resetReviewed" title="Desmarca todas as caixas de 'marcar como revisado'">Limpar Revisões</button>
+        <button class="btn btn-subtle" id="resetReviewed" title="Desmarca todas as questões e limpa a sessão">Limpar Revisões</button>
       </div>
       <button class="btn primary" id="toggleAllAnswers">Revelar Respostas</button>
     </div>
@@ -982,9 +997,11 @@ function setReviewed(map){
 /* ======================= STATE E FILTROS ======================= */
 const origensDisponiveis = [...new Set(DATA.flatMap(g => g.exercicios.map(e => origemCategoria(e.origem))))];
 const dificuldadesDisponiveis = ["Fácil","Médio","Difícil","Muito difícil"];
+const statusDisponiveis = ["Não revisados", "Revisados"];
 
 const selectedOrigens = new Set(origensDisponiveis);
 const selectedDificuldades = new Set(dificuldadesDisponiveis);
+const selectedStatus = new Set(statusDisponiveis);
 
 const materiaSubtopicos = {};
 ["Limites", "Continuidade", "Derivadas", "Integrais"].forEach(topico => {
@@ -1061,6 +1078,7 @@ function updateDropdownButton(detailsEl) {
    }
 }
 
+setupDropdownWithActions("dd-status", "Status", statusDisponiveis, selectedStatus);
 setupDropdownWithActions("dd-origem", "Origem", origensDisponiveis, selectedOrigens);
 setupDropdownWithActions("dd-dificuldade", "Dificuldade", dificuldadesDisponiveis, selectedDificuldades);
 
@@ -1143,7 +1161,15 @@ function buildContent(){
         const enunciadoFormatado = parseWebTex(ex.enunciado);
         const respostaFormatada = parseWebTex(ex.resposta);
         
-        const svgHTML = ex.svg ? ex.svg : "";
+        let svgHTML = "";
+        if (ex.svg) {
+            if (ex.svg.trim().startsWith("<div")) {
+                svgHTML = ex.svg;
+            } else {
+                svgHTML = `<div class="svg-wrap">${ex.svg}</div>`;
+            }
+        }
+        
         const svgInEnunciado = (ex.svg && ex.svgPos !== "resposta") ? svgHTML : "";
         const svgInResposta = (ex.svg && ex.svgPos === "resposta") ? svgHTML : "";
 
@@ -1190,6 +1216,7 @@ function buildContent(){
           setReviewed(reviewedMap);
           card.classList.toggle("reviewed", e.target.checked);
           updateProgress();
+          applyFilters(); // Esconde a carta na hora se estiver filtrando por status
         });
 
         section.appendChild(card);
@@ -1208,11 +1235,15 @@ function applyFilters(){
     const okOrigem = selectedOrigens.has(card.dataset.origemCat);
     const okDif = selectedDificuldades.has(card.dataset.dificuldade);
     
+    const isRev = card.classList.contains("reviewed");
+    const statusStr = isRev ? "Revisados" : "Não revisados";
+    const okStatus = selectedStatus.has(statusStr);
+    
     const materiaCard = card.dataset.materia;
     const subtopicoCard = card.dataset.subtopico;
     const okTema = materiaSubtopicos[materiaCard] && materiaSubtopicos[materiaCard].has(subtopicoCard);
     
-    const visible = okOrigem && okTema && okDif;
+    const visible = okOrigem && okTema && okDif && okStatus;
     card.classList.toggle("hidden", !visible);
     if(visible) visibleCount++;
   });
@@ -1285,6 +1316,7 @@ document.getElementById("resetReviewed").addEventListener("click", () => {
     document.querySelectorAll(".reviewed-toggle input").forEach(inp => inp.checked = false);
     
     updateProgress();
+    applyFilters();
   }
 });
 
