@@ -578,6 +578,33 @@
     border-top: 1px solid var(--border);
   }
 
+  /* MODAL DE CONFIRMAÇÃO REFINADO */
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); z-index: 2000;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+    backdrop-filter: blur(2px);
+  }
+  .modal-overlay.active { opacity: 1; pointer-events: auto; }
+  
+  .modal-content {
+    background: var(--surface); padding: 24px; border-radius: 12px;
+    width: 90%; max-width: 380px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border: 1px solid var(--border); transform: translateY(10px);
+    transition: transform 0.2s ease;
+  }
+  .modal-overlay.active .modal-content { transform: translateY(0); }
+  
+  .modal-title { margin: 0 0 8px 0; font-size: 18px; color: var(--text-main); }
+  .modal-text { margin: 0 0 20px 0; font-size: 14.5px; color: var(--text-muted); line-height: 1.5; }
+  
+  .modal-actions { display: flex; flex-direction: column; gap: 8px; }
+  .modal-actions .btn { width: 100%; padding: 10px; justify-content: center; }
+  
+  button.btn.btn-hard { background: var(--hard); color: white; border: none; font-weight: 600; }
+  button.btn.btn-hard:hover { background: var(--hard2); }
+
   @media (max-width: 640px) {
     .divider { display: none; }
     .dropdown { flex: 1 1 45%; }
@@ -670,7 +697,7 @@
       <!-- Métricas de Progresso Estáveis -->
       <div class="progress-group">
         <span class="progress" id="progressLabel">0/0 revisados</span>
-        <button class="btn btn-subtle" id="resetReviewed" title="Desmarca todas as questões da lista">Limpar</button>
+        <button class="btn btn-subtle" id="resetReviewed" title="Gerenciar questões revisadas">Limpar</button>
       </div>
       
       <button class="btn primary" id="toggleAllAnswers">Revelar Respostas</button>
@@ -683,6 +710,19 @@
 <p class="empty-msg" id="emptyMsg">🧹 Nenhum exercício bate com os filtros selecionados.</p>
 
 <footer class="credit">Interface limpa adaptável (Claro/Escuro). Fórmulas matemáticas via WebTeX.</footer>
+
+<!-- JANELA MODAL DE LIMPEZA -->
+<div id="customModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3 class="modal-title">🧹 Limpar Revisões</h3>
+    <p class="modal-text">Você tem exercícios revisados ocultos pelos filtros atuais. O que deseja fazer?</p>
+    <div class="modal-actions">
+      <button class="btn primary" id="btnClearVisible">Limpar apenas visíveis (<span id="countVisibleModal"></span>)</button>
+      <button class="btn btn-hard" id="btnClearAll">Zerar todo o histórico (<span id="countAllModal"></span>)</button>
+      <button class="btn" id="btnCancelModal">Cancelar</button>
+    </div>
+  </div>
+</div>
 
 <script>
 /* ======================= MODO CLARO/ESCURO & NAVBAR FLUTUANTE ======================= */
@@ -879,7 +919,7 @@ const DATA = [
    resposta: "$$ \\lim_{x \\to 1} f(x) = 2 $$ Sim, a função é contínua em \\( x = 1 \\)."},
   {id:"CON-PAR-003", origem:"Dado em aula 21/07/2026", dificuldade:"Médio", relevancia:"Média",
    enunciado:"Considere a função $$ f(x) = \\begin{cases} \\frac{x^3-8}{x-2}, & \\text{se } x \\ne 2 \\\\ 5, & \\text{se } x = 2 \\end{cases} $$ Essa função é contínua em \\( x = 2 \\)? (Justifique usando limites). Caso não seja, qual deveria ser o valor de \\( f(2) \\) para que ela se tornasse contínua?",
-   resposta: "Não é contínua, pois o limite quando \\( x \\to 2 \\) é 12, mas \\( f(2) = 5 \\). Para ser contínua, o valor de \\( f(2) \\) deveria ser 12."},
+   resposta:"Não é contínua, pois o limite quando \\( x \\to 2 \\) é 12, mas \\( f(2) = 5 \\). Para ser contínua, o valor de \\( f(2) \\) deveria ser 12."},
   {id:"CON-PAR-004", origem:"Prova antiga", dificuldade:"Muito difícil", relevancia:"Alta",
    enunciado:"Considere a função \\( f : \\mathbb{R} \\to \\mathbb{R} \\) dada por: $$ f(x) = \\begin{cases} \\cos(x^2-1)-4, & \\text{se } x > 1 \\\\ \\frac{x^2-x-2}{x+1}, & \\text{se } x < 1 \\\\ 2, & \\text{se } x = 1 \\end{cases} $$ a) Existe \\( \\lim_{x \\to 1} f(x) \\)? b) \\( f \\) é contínua no ponto \\( x = 1 \\)?",
    resposta:"a) Não existe (o limite à esquerda é −1 e o limite à direita é −3). b) Não, pois o limite bilateral não existe."},
@@ -1003,7 +1043,7 @@ const DATA = [
    enunciado:"Calcule a integral: $$ \\int 3x^2 e^{x^3} \\, dx $$",
    resposta: "$$ e^{x^3} + C, \\quad C \\in \\mathbb{R} $$"},
   {id:"INT-SUB-008", origem:"Listas de IA", dificuldade:"Fácil", relevancia:"Média",
-   enunciado:"Use o método da substituição para resolver: $$ \\int \\sin(5x) \\, dx $$",
+   enunciado:"Use o methodo da substituição para resolver: $$ \\int \\sin(5x) \\, dx $$",
    resposta: "$$ -\\frac{\\cos(5x)}{5} + C, \\quad C \\in \\mathbb{R} $$"},
   {id:"INT-SUB-009", origem:"Listas de IA", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral usando o método da substituição: $$ \\int 8x\\sin(4x^2) \\, dx $$",
@@ -1456,19 +1496,56 @@ document.getElementById("toggleAllAnswers").addEventListener("click", (e)=>{
   toggleAllAnswersFloat.textContent = allAnswersShown ? "Ocultar" : "Respostas";
 });
 
-document.getElementById("resetReviewed").addEventListener("click", () => {
-  const countReviewed = Object.values(reviewedMap).filter(Boolean).length;
-  if (countReviewed === 0) return;
+/* ======================= MODAL DE LIMPEZA INTELIGENTE ======================= */
+const modal = document.getElementById("customModal");
 
-  if (confirm("Deseja desmarcar todas as questões marcadas como revisadas?")) {
+document.getElementById("resetReviewed").addEventListener("click", () => {
+  const totalReviewed = Object.values(reviewedMap).filter(Boolean).length;
+  if (totalReviewed === 0) return;
+
+  const visibleReviewedCards = document.querySelectorAll(".card.reviewed:not(.hidden)");
+  const visibleReviewedCount = visibleReviewedCards.length;
+
+  const btnClearVisible = document.getElementById("btnClearVisible");
+  document.getElementById("countAllModal").textContent = totalReviewed;
+  document.getElementById("countVisibleModal").textContent = visibleReviewedCount;
+
+  // Ajusta o texto e os botões de acordo com o contexto da tela
+  if (visibleReviewedCount > 0 && visibleReviewedCount < totalReviewed) {
+      document.querySelector(".modal-text").textContent = "Você tem exercícios revisados ocultos pelos filtros atuais. O que deseja fazer?";
+      btnClearVisible.style.display = "flex";
+  } else {
+      document.querySelector(".modal-text").textContent = "Tem certeza de que deseja apagar todo o seu histórico de exercícios revisados?";
+      btnClearVisible.style.display = "none";
+  }
+
+  modal.classList.add("active");
+});
+
+// Ações dos botões dentro do Modal
+document.getElementById("btnCancelModal").addEventListener("click", () => modal.classList.remove("active"));
+
+document.getElementById("btnClearAll").addEventListener("click", () => {
     reviewedMap = {};
     setReviewed(reviewedMap);
-    
-    document.querySelectorAll(".card").forEach(card => card.classList.remove("reviewed"));
+    document.querySelectorAll(".card.reviewed").forEach(card => card.classList.remove("reviewed"));
     document.querySelectorAll(".reviewed-toggle input").forEach(inp => inp.checked = false);
-    
     applyFilters();
-  }
+    modal.classList.remove("active");
+});
+
+document.getElementById("btnClearVisible").addEventListener("click", () => {
+    const visibleReviewedCards = document.querySelectorAll(".card.reviewed:not(.hidden)");
+    visibleReviewedCards.forEach(card => {
+        const exId = card.id.replace("ex-", "");
+        reviewedMap[exId] = false;
+        card.classList.remove("reviewed");
+        const checkbox = card.querySelector(".reviewed-toggle input");
+        if (checkbox) checkbox.checked = false;
+    });
+    setReviewed(reviewedMap);
+    applyFilters();
+    modal.classList.remove("active");
 });
 
 /* ======================= INIT ======================= */
