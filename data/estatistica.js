@@ -24,7 +24,7 @@ window.COURSES_DATA["estatistica"] = {
       "exercicios": [
         {
           "id": "PDF-001",
-          "origem": "PDF",
+          "origem": "PDF Matéria",
           "dificuldade": "Fácil",
           "relevancia": "Média",
           "enunciado": "Do conjunto de valores dados abaixo de uma população de seis elementos, calcule a média. $$ X = \\{3, 5, 8, 4, 8, 6\\} $$",
@@ -32,7 +32,7 @@ window.COURSES_DATA["estatistica"] = {
         },
         {
           "id": "PDF-003",
-          "origem": "PDF",
+          "origem": "PDF Matéria",
           "dificuldade": "Médio",
           "relevancia": "Alta",
           "enunciado": "Do conjunto de valores observados abaixo, calcule a mediana e moda.<br>a) $$ X = \\{3, 5, 8, 4, 8, 6\\} $$<br>b) $$ Y = \\{3, 6, 8, 8, 6, 6, 10, 20, 12\\} $$",
@@ -40,7 +40,7 @@ window.COURSES_DATA["estatistica"] = {
         },
         {
           "id": "PDF-005",
-          "origem": "PDF",
+          "origem": "PDF Matéria",
           "dificuldade": "Fácil",
           "relevancia": "Média",
           "enunciado": "Exercício Relâmpago: Sabendo-se que o nível de colesterol (mg/100 ml) de um conjunto de sete pacientes clínicos foi de 10, 14, 13, 15, 16, 18 e 12, qual o colesterol médio desses pacientes?",
@@ -48,7 +48,7 @@ window.COURSES_DATA["estatistica"] = {
         },
         {
           "id": "PDF-006",
-          "origem": "PDF",
+          "origem": "PDF Matéria",
           "dificuldade": "Fácil",
           "relevancia": "Alta",
           "enunciado": "Exercício Relâmpago: Sabendo-se que o nível de colesterol (mg/100 ml) de um conjunto de oito pacientes clínicos foi de 10, 10, 13, 15, 16, 16, 12 e 18, qual a mediana e a moda do colesterol desses pacientes?",
@@ -71,7 +71,7 @@ window.COURSES_DATA["estatistica"] = {
       "exercicios": [
         {
           "id": "PDF-002",
-          "origem": "PDF",
+          "origem": "PDF Matéria",
           "dificuldade": "Fácil",
           "relevancia": "Alta",
           "enunciado": "Um candidato obteve, nas diversas provas de um concurso, as seguintes notas com seus respectivos pesos descritos abaixo. Calcule a média das notas.<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Matéria</th><th style='border:1px solid var(--border); padding:8px;'>Nota</th><th style='border:1px solid var(--border); padding:8px;'>Peso</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Português</td><td style='border:1px solid var(--border); padding:8px;'>66</td><td style='border:1px solid var(--border); padding:8px;'>3</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Contabilidade</td><td style='border:1px solid var(--border); padding:8px;'>63</td><td style='border:1px solid var(--border); padding:8px;'>3</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Estatística</td><td style='border:1px solid var(--border); padding:8px;'>74</td><td style='border:1px solid var(--border); padding:8px;'>2</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Direito</td><td style='border:1px solid var(--border); padding:8px;'>79</td><td style='border:1px solid var(--border); padding:8px;'>2</td></tr></table>",
@@ -141,7 +141,7 @@ window.COURSES_DATA["estatistica"] = {
       "exercicios": [
         {
           "id": "PDF-004-B",
-          "origem": "PDF",
+          "origem": "PDF Matéria",
           "dificuldade": "Fácil",
           "relevancia": "Muito Alta",
           "enunciado": "Do conjunto de valores observados abaixo por um médico em relação às idades de seus pacientes: $$ X = \\{3, 4, 5, 8, 100\\} $$. Qual a vantagem de utilizar a mediana ao invés da média neste caso?",
