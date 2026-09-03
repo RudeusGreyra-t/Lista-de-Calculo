@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lista de Revisão</title>
-<meta property="og:title" content="Lista de Revisão de Estudos">
+<meta property="og:title" content="Lista de Revisão">
 <meta property="og:description" content="Lista interativa de exercícios com filtros, modo escuro e resoluções.">
 <meta property="og:type" content="website">
 <link rel="stylesheet" href="style.css">
@@ -14,7 +14,7 @@
 <!-- BARRA FLUTUANTE CENTRAL DE CONTROLE -->
 <div class="floating-bar" id="floatingBar">
   <div class="floating-bar-left">
-    <span class="floating-bar-title" id="floatingCourseTitle">📚 Disciplina</span>
+    <span class="floating-bar-title" id="floatingCourseTitle">📐 Disciplina</span>
     <div class="floating-nav" id="floatingNav"></div>
   </div>
   <div class="floating-bar-actions">
@@ -54,21 +54,21 @@
     
     <div class="divider"></div>
 
-    <div id="dynamicTopicFilters" style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;"></div>
+    <!-- Dropdowns dinâmicos das SEÇÕES (ex: Limites, Continuidade...) -->
+    <div id="dynamicSectionFilters" style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;"></div>
 
     <button class="btn btn-subtle" id="resetFilters" title="Restaura todos os filtros para o padrão" style="margin-left:auto;">🧹 Limpar Filtros</button>
   </div>
 
-  <!-- ZONA INFERIOR: AÇÕES GLOBAIS, VISÃO E RESPOSTAS -->
+  <!-- ZONA INFERIOR: AÇÕES GLOBAIS E RESPOSTAS -->
   <div class="tray-footer">
     <div class="tray-footer-left">
       <button class="btn" id="toggleMaterias">Desmarcar Matérias</button>
       
-      <!-- CONTROLE DINÂMICO DE VISÃO (APARECE SOMENTE QUANDO A ORIGEM SELECIONADA FOR SEQUENCIAL) -->
-      <div class="status-tabs" id="viewTabs" style="display: none; margin-left: 4px;">
-        <button class="status-tab active" data-view="topics" title="Organizado por tópicos e subtópicos">📑 Por Tópicos</button>
-        <button class="status-tab" data-view="sequence" title="Ordem cronológica contínua">🔢 Sequencial</button>
-      </div>
+      <!-- BOTÃO SEQUENCIAL DINÂMICO (SÓ APARECE SE A ORIGEM FOR SEQUENCIAL) -->
+      <button class="btn" id="btnToggleSequential" style="display: none; margin-left: 8px; border-color: var(--accent); color: var(--accent);">
+        🔢 Ver em Ordem Sequencial
+      </button>
     </div>
     
     <div class="tray-footer-right">
