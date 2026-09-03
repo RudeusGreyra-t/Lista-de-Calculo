@@ -1,4 +1,3 @@
-
 /* ======================= MODO CLARO/ESCURO & NAVBAR FLUTUANTE ======================= */
 const themeBtn = document.getElementById('themeToggle');
 const themeBtnFloat = document.getElementById('themeToggleFloat');
@@ -44,9 +43,10 @@ function parseWebTex(text) {
 }
 
 function difClass(dif){
-  return "dif-" + dif.toLowerCase().replace(/\s+/g,"").normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  return "dif-" + (dif || "medio").toLowerCase().replace(/\s+/g,"").normalize("NFD").replace(/[\u0300-\u036f]/g,"");
 }
 function origemCategoria(origem){
+  if(!origem) return "Outros";
   if(origem.startsWith("Prova antiga")) return "Prova antiga";
   if(origem.startsWith("Dado em aula")) return "Dado em aula";
   if(origem.startsWith("Gerado a partir")) return "Listas de IA"; 
@@ -54,16 +54,19 @@ function origemCategoria(origem){
   return origem;
 }
 function origCSSClass(origem){
+  if(!origem) return "orig-ia";
   if(origem.startsWith("Prova antiga")) return "orig-prova";
-  if(origem.startsWith("Dado em aula") || origem === "Aula de revisão") return "orig-aula";
+  if(origem.startsWith("Dado em aula") || origem.includes("revisão")) return "orig-aula";
   return "orig-ia";
 }
 
 /* ======================= CONTROLE DE MATÉRIAS E ESTADO ======================= */
 let currentCourseKey = localStorage.getItem("selected_course") || "calc1";
+let currentViewMode = "topics";
 let DATA = [];
 let SECTION_ORDER = [];
 let SECTION_TITLES = {};
+let ORIGIN_CONFIG = {};
 let reviewedMap = {};
 let selectedOrigens = new Set();
 let selectedDificuldades = new Set();
@@ -88,7 +91,12 @@ function loadCourse(courseKey) {
   SECTION_TITLES = {};
   course.sections.forEach(s => SECTION_TITLES[s.id] = s.title);
 
+  ORIGIN_CONFIG = course.originConfig || {};
+
   reviewedMap = JSON.parse(localStorage.getItem(`revisados_${courseKey}`) || "{}");
+
+  currentViewMode = "topics";
+  document.querySelectorAll('#viewTabs .status-tab').forEach(t => t.classList.toggle('active', t.dataset.view === "topics"));
 
   initFilters();
   buildNav();
@@ -182,9 +190,90 @@ function updateDropdownButton(detailsEl) {
   if(summaryCount) summaryCount.textContent = (checkedCount === totalCount) ? "" : `(${checkedCount})`;
 }
 
+/* ======================= CRIAÇÃO DE CARDS ======================= */
+function createCardElement(ex, materia, subtopico, secId, isSequential = false) {
+  const dc = difClass(ex.dificuldade);
+  const card = document.createElement("article");
+  card.className = "card " + dc;
+  card.dataset.materia = materia;
+  card.dataset.subtopico = subtopico;
+  card.dataset.origemCat = origemCategoria(ex.origem);
+  card.dataset.dificuldade = ex.dificuldade;
+  card.dataset.sec = secId;
+  card.id = "ex-" + ex.id;
+  if(reviewedMap[ex.id]) card.classList.add("reviewed");
+
+  let svgHTML = ex.svg ? (ex.svg.trim().startsWith("<div") ? ex.svg : `<div class="svg-wrap">${ex.svg}</div>`) : "";
+
+  const sequentialBadges = isSequential ? `
+    <div style="display:flex; gap:6px; margin-top:6px; flex-wrap:wrap; justify-content:flex-end;">
+      <span class="badge-topic-tag">📘 ${materia}</span>
+      <span class="badge-topic-tag">🔖 ${subtopico}</span>
+    </div>
+  ` : "";
+
+  const metaBlock = !isSequential ? `
+    <div class="meta">
+      <span><b>Matéria:</b> ${materia}</span>
+      <span><b>Subtópico:</b> ${subtopico}</span>
+    </div>
+  ` : "";
+
+  card.innerHTML = `
+    <div class="card-head">
+      <h4>${ex.id}</h4>
+      <div class="badges-wrapper">
+        <div class="badges-top">
+          <span class="badge ${dc}">${ex.dificuldade}</span>
+          <span class="badge rel">Relevância: ${ex.relevancia}</span>
+        </div>
+        <span class="badge orig ${origCSSClass(ex.origem)}">${origemCategoria(ex.origem)}</span>
+        ${sequentialBadges}
+      </div>
+    </div>
+    ${metaBlock}
+    <div class="enunciado">${parseWebTex(ex.enunciado)}</div>
+    ${ex.svg && ex.svgPos !== "resposta" ? svgHTML : ""}
+    <div class="card-foot">
+      <button class="toggle-answer">Mostrar resposta</button>
+      <label class="reviewed-toggle">
+        <input type="checkbox" ${reviewedMap[ex.id] ? "checked" : ""}> marcar como revisado
+      </label>
+    </div>
+    <div class="resposta">
+      <span class="label">Resposta final</span>
+      ${parseWebTex(ex.resposta)}
+      ${ex.svg && ex.svgPos === "resposta" ? svgHTML : ""}
+    </div>
+  `;
+
+  const answerBox = card.querySelector(".resposta");
+  const toggleBtn = card.querySelector(".toggle-answer");
+  toggleBtn.addEventListener("click", () => {
+    const showing = answerBox.classList.toggle("show");
+    toggleBtn.textContent = showing ? "Esconder resposta" : "Mostrar resposta";
+  });
+
+  const reviewedCheckbox = card.querySelector(".reviewed-toggle input");
+  reviewedCheckbox.addEventListener("change", (e) => {
+    reviewedMap[ex.id] = e.target.checked;
+    setReviewed(reviewedMap);
+    card.classList.toggle("reviewed", e.target.checked);
+    applyFilters();
+  });
+
+  return card;
+}
+
 /* ======================= RENDERIZAÇÃO ======================= */
 function buildNavPills(container) {
   container.innerHTML = "";
+  if (currentViewMode === "sequence") {
+    container.style.display = "none";
+    return;
+  }
+  container.style.display = "flex";
+
   SECTION_ORDER.forEach(secId => {
     const pillGroup = document.createElement("div");
     pillGroup.className = "nav-pill-group";
@@ -229,6 +318,37 @@ function buildContent() {
   const main = document.getElementById("mainContent");
   main.innerHTML = "";
 
+  if (currentViewMode === "sequence") {
+    const allExercises = [];
+    DATA.forEach(group => {
+      group.exercicios.forEach(ex => {
+        allExercises.push({
+          ex: ex,
+          materia: group.materia,
+          subtopico: group.subtopico,
+          secId: group.secId
+        });
+      });
+    });
+
+    allExercises.sort((a, b) => {
+      const numA = a.ex.numero !== undefined ? a.ex.numero : parseInt((a.ex.id.match(/\d+/) || [0])[0], 10);
+      const numB = b.ex.numero !== undefined ? b.ex.numero : parseInt((b.ex.id.match(/\d+/) || [0])[0], 10);
+      return numA - numB;
+    });
+
+    const listContainer = document.createElement("div");
+    listContainer.className = "sequential-list";
+
+    allExercises.forEach(item => {
+      const card = createCardElement(item.ex, item.materia, item.subtopico, item.secId, true);
+      listContainer.appendChild(card);
+    });
+
+    main.appendChild(listContainer);
+    return;
+  }
+
   SECTION_ORDER.forEach(secId => {
     const groups = DATA.filter(g => g.secId === secId);
     if(groups.length === 0) return;
@@ -245,64 +365,7 @@ function buildContent() {
       subBlock.innerHTML = `<h3 class="subtopic">${group.subtopico}</h3>`;
 
       group.exercicios.forEach(ex => {
-        const dc = difClass(ex.dificuldade);
-        const card = document.createElement("article");
-        card.className = "card " + dc;
-        card.dataset.materia = group.materia;
-        card.dataset.subtopico = group.subtopico;
-        card.dataset.origemCat = origemCategoria(ex.origem);
-        card.dataset.dificuldade = ex.dificuldade;
-        card.dataset.sec = secId;
-        card.id = "ex-" + ex.id;
-        if(reviewedMap[ex.id]) card.classList.add("reviewed");
-
-        let svgHTML = ex.svg ? (ex.svg.trim().startsWith("<div") ? ex.svg : `<div class="svg-wrap">${ex.svg}</div>`) : "";
-
-        card.innerHTML = `
-          <div class="card-head">
-            <h4>${ex.id}</h4>
-            <div class="badges-wrapper">
-              <div class="badges-top">
-                <span class="badge ${dc}">${ex.dificuldade}</span>
-                <span class="badge rel">Relevância: ${ex.relevancia}</span>
-              </div>
-              <span class="badge orig ${origCSSClass(ex.origem)}">${origemCategoria(ex.origem)}</span>
-            </div>
-          </div>
-          <div class="meta">
-            <span><b>Matéria:</b> ${group.materia}</span>
-            <span><b>Subtópico:</b> ${group.subtopico}</span>
-          </div>
-          <div class="enunciado">${parseWebTex(ex.enunciado)}</div>
-          ${ex.svg && ex.svgPos !== "resposta" ? svgHTML : ""}
-          <div class="card-foot">
-            <button class="toggle-answer">Mostrar resposta</button>
-            <label class="reviewed-toggle">
-              <input type="checkbox" ${reviewedMap[ex.id] ? "checked" : ""}> marcar como revisado
-            </label>
-          </div>
-          <div class="resposta">
-            <span class="label">Resposta final</span>
-            ${parseWebTex(ex.resposta)}
-            ${ex.svg && ex.svgPos === "resposta" ? svgHTML : ""}
-          </div>
-        `;
-
-        const answerBox = card.querySelector(".resposta");
-        const toggleBtn = card.querySelector(".toggle-answer");
-        toggleBtn.addEventListener("click", () => {
-          const showing = answerBox.classList.toggle("show");
-          toggleBtn.textContent = showing ? "Esconder resposta" : "Mostrar resposta";
-        });
-
-        const reviewedCheckbox = card.querySelector(".reviewed-toggle input");
-        reviewedCheckbox.addEventListener("change", (e) => {
-          reviewedMap[ex.id] = e.target.checked;
-          setReviewed(reviewedMap);
-          card.classList.toggle("reviewed", e.target.checked);
-          applyFilters();
-        });
-
+        const card = createCardElement(ex, group.materia, group.subtopico, secId, false);
         subBlock.appendChild(card);
       });
       section.appendChild(subBlock);
@@ -322,6 +385,33 @@ function updateToggleMateriasButton() {
     if (btn) {
         btn.textContent = allChecked ? "Desmarcar Matérias" : "Marcar Todas as Matérias";
     }
+}
+
+/* ======================= DETECÇÃO DINÂMICA DE ORIGEM SEQUENCIAL ======================= */
+function checkSequentialAvailability() {
+  const viewTabs = document.getElementById("viewTabs");
+  if (!viewTabs) return;
+
+  // Verifica se há exatamente uma origem selecionada e se ela possui sequential === true
+  let isSequentialActive = false;
+  if (selectedOrigens.size === 1) {
+    const activeOrigin = [...selectedOrigens][0];
+    if (ORIGIN_CONFIG[activeOrigin] && ORIGIN_CONFIG[activeOrigin].sequential === true) {
+      isSequentialActive = true;
+    }
+  }
+
+  if (isSequentialActive) {
+    viewTabs.style.display = "inline-flex";
+  } else {
+    viewTabs.style.display = "none";
+    if (currentViewMode !== "topics") {
+      currentViewMode = "topics";
+      document.querySelectorAll('#viewTabs .status-tab').forEach(t => t.classList.toggle('active', t.dataset.view === "topics"));
+      buildNav();
+      buildContent();
+    }
+  }
 }
 
 /* ======================= FILTRAGEM ======================= */
@@ -350,28 +440,30 @@ function applyFilters() {
     if(visible) visibleCount++;
   });
 
-  document.querySelectorAll(".subtopic-block").forEach(b => {
-    b.style.display = b.querySelectorAll(".card:not(.hidden)").length > 0 ? "" : "none";
-  });
+  if (currentViewMode === "topics") {
+    document.querySelectorAll(".subtopic-block").forEach(b => {
+      b.style.display = b.querySelectorAll(".card:not(.hidden)").length > 0 ? "" : "none";
+    });
 
-  SECTION_ORDER.forEach(secId => {
-    const sec = document.getElementById(secId);
-    if (!sec) return;
-    const secCards = sec.querySelectorAll(".card");
-    const visibleCardsInSec = [...secCards].filter(c => !c.classList.contains("hidden"));
-    sec.style.display = visibleCardsInSec.length > 0 ? "" : "none";
+    SECTION_ORDER.forEach(secId => {
+      const sec = document.getElementById(secId);
+      if (!sec) return;
+      const secCards = sec.querySelectorAll(".card");
+      const visibleCardsInSec = [...secCards].filter(c => !c.classList.contains("hidden"));
+      sec.style.display = visibleCardsInSec.length > 0 ? "" : "none";
 
-    const totalSecBase = [...secCards].filter(c => {
-      return selectedOrigens.has(c.dataset.origemCat) &&
-             selectedDificuldades.has(c.dataset.dificuldade) &&
-             (materiaSubtopicos[c.dataset.materia] && materiaSubtopicos[c.dataset.materia].has(c.dataset.subtopico));
-    }).length;
+      const totalSecBase = [...secCards].filter(c => {
+        return selectedOrigens.has(c.dataset.origemCat) &&
+               selectedDificuldades.has(c.dataset.dificuldade) &&
+               (materiaSubtopicos[c.dataset.materia] && materiaSubtopicos[c.dataset.materia].has(c.dataset.subtopico));
+      }).length;
 
-    const countEl = sec.querySelector(".sec-count");
-    if (countEl) countEl.textContent = (visibleCardsInSec.length === totalSecBase) ? `${totalSecBase} exercícios` : `${visibleCardsInSec.length} de ${totalSecBase} visíveis`;
+      const countEl = sec.querySelector(".sec-count");
+      if (countEl) countEl.textContent = (visibleCardsInSec.length === totalSecBase) ? `${totalSecBase} exercícios` : `${visibleCardsInSec.length} de ${totalSecBase} visíveis`;
 
-    document.querySelectorAll(`.nav-count-${secId}`).forEach(el => el.textContent = `(${visibleCardsInSec.length}/${totalSecBase})`);
-  });
+      document.querySelectorAll(`.nav-count-${secId}`).forEach(el => el.textContent = `(${visibleCardsInSec.length}/${totalSecBase})`);
+    });
+  }
 
   document.getElementById("emptyMsg").style.display = visibleCount === 0 ? "block" : "none";
   document.getElementById("progressLabel").textContent = `${metaReviewed}/${metaTotal} revisados`;
@@ -379,14 +471,26 @@ function applyFilters() {
   document.getElementById("countAll").textContent = Object.values(reviewedMap).filter(Boolean).length;
   
   updateToggleMateriasButton();
+  checkSequentialAvailability();
 }
 
 /* ======================= EVENT LISTENERS GLOBAIS ======================= */
 document.getElementById("courseSelect").addEventListener("change", (e) => loadCourse(e.target.value));
 
-document.querySelectorAll('.status-tab').forEach(tab => {
+document.querySelectorAll('#viewTabs .status-tab').forEach(tab => {
   tab.addEventListener('click', (e) => {
-    document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('#viewTabs .status-tab').forEach(t => t.classList.remove('active'));
+    e.target.classList.add('active');
+    currentViewMode = e.target.dataset.view;
+    buildNav();
+    buildContent();
+    applyFilters();
+  });
+});
+
+document.querySelectorAll('.tray-footer-right .status-tab').forEach(tab => {
+  tab.addEventListener('click', (e) => {
+    document.querySelectorAll('.tray-footer-right .status-tab').forEach(t => t.classList.remove('active'));
     e.target.classList.add('active');
     currentStatusFilter = e.target.dataset.status;
     applyFilters();
@@ -396,7 +500,7 @@ document.querySelectorAll('.status-tab').forEach(tab => {
 document.getElementById("resetFilters").addEventListener("click", () => {
   initFilters();
   currentStatusFilter = "all";
-  document.querySelectorAll('.status-tab').forEach(t => t.classList.toggle('active', t.dataset.status === "all"));
+  document.querySelectorAll('.tray-footer-right .status-tab').forEach(t => t.classList.toggle('active', t.dataset.status === "all"));
   applyFilters();
 });
 
@@ -461,7 +565,6 @@ document.getElementById("btnClearAllTotal").addEventListener("click", () => {
   resetMenu.classList.remove("open");
 });
 
-// Click fora dos dropdowns fecha eles
 document.addEventListener('click', (e) => {
   document.querySelectorAll('details.dropdown').forEach(details => {
     if (details.open && !details.contains(e.target)) {

@@ -14,7 +14,7 @@
 <!-- BARRA FLUTUANTE CENTRAL DE CONTROLE -->
 <div class="floating-bar" id="floatingBar">
   <div class="floating-bar-left">
-    <span class="floating-bar-title" id="floatingCourseTitle">📐 Disciplina</span>
+    <span class="floating-bar-title" id="floatingCourseTitle">📚 Disciplina</span>
     <div class="floating-nav" id="floatingNav"></div>
   </div>
   <div class="floating-bar-actions">
@@ -59,10 +59,16 @@
     <button class="btn btn-subtle" id="resetFilters" title="Restaura todos os filtros para o padrão" style="margin-left:auto;">🧹 Limpar Filtros</button>
   </div>
 
-  <!-- ZONA INFERIOR: AÇÕES GLOBAIS E RESPOSTAS -->
+  <!-- ZONA INFERIOR: AÇÕES GLOBAIS, VISÃO E RESPOSTAS -->
   <div class="tray-footer">
     <div class="tray-footer-left">
       <button class="btn" id="toggleMaterias">Desmarcar Matérias</button>
+      
+      <!-- CONTROLE DINÂMICO DE VISÃO (APARECE SOMENTE QUANDO A ORIGEM SELECIONADA FOR SEQUENCIAL) -->
+      <div class="status-tabs" id="viewTabs" style="display: none; margin-left: 4px;">
+        <button class="status-tab active" data-view="topics" title="Organizado por tópicos e subtópicos">📑 Por Tópicos</button>
+        <button class="status-tab" data-view="sequence" title="Ordem cronológica contínua">🔢 Sequencial</button>
+      </div>
     </div>
     
     <div class="tray-footer-right">
@@ -95,7 +101,7 @@
 
 <p class="empty-msg" id="emptyMsg">🧹 Nenhum exercício bate com os filtros selecionados.</p>
 
-<footer class="credit">Interface limpa adaptável (Claro/Escuro). Fórmulas matemáticas via WebTeX. Criado com ❤️</footer>
+<footer class="credit">Interface limpa adaptável (Claro/Escuro). Fórmulas matemáticas via WebTeX.</footer>
 
 <!-- DADOS DAS DISCIPLINAS -->
 <script src="data/calculo1.js"></script>
