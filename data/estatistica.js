@@ -141,8 +141,8 @@ window.COURSES_DATA["estatistica"] = {
           "origem": "Lista P1",
           "dificuldade": "Médio",
           "relevancia": "Alta",
-          "enunciado": "Um aluno fez três provas em determinada disciplina. A primeira prova tem peso 1, a segunda tem peso 2 e a terceira tem peso 3. O aluno obteve notas 4, 7 e 6 respectivamente. Calcule a média e a mediana do aluno.",
-          "resposta": "<strong>Média Ponderada:</strong><br>$$ \\bar{x} = \\frac{(4 \\times 1) + (7 \\times 2) + (6 \\times 3)}{1 + 2 + 3} = \\frac{4 + 14 + 18}{6} = \\frac{36}{6} = 6 $$<br><strong>Mediana:</strong><br>Repetindo as notas conforme os seus respectivos pesos:<br>• Nota 4 (peso 1) → 4<br>• Nota 7 (peso 2) → 7, 7<br>• Nota 6 (peso 3) → 6, 6, 6<br><br>Ordenando o Rol: \\( 4, 6, 6, 6, 7, 7 \\) (\\( n = 6 \\), par).<br>Elementos centrais (3ª e 4ª posições): 6 e 6.<br>$$ Md = \\frac{6 + 6}{2} = 6 $$<br><em>Obs.: O gabarito oficial utilizou por engano as notas 3, 6 e 8 nos cálculos, resultando em valores divergentes (6,5 e 7).</em>"
+          "enunciado": "Um aluno fez três provas em determinada disciplina. A primeira prova tem peso 1, a segunda tem peso 2 e a terceira tem peso 3. O aluno obteve notas 3, 6 e 8 respectivamente. Calcule a média e a mediana do aluno.",
+          "resposta": "<strong>Média Ponderada:</strong><br>$$ \\bar{x} = \\frac{(3 \\times 1) + (6 \\times 2) + (8 \\times 3)}{1 + 2 + 3} = \\frac{3 + 12 + 24}{6} = \\frac{39}{6} = 6,5 $$<br><strong>Mediana:</strong><br>É necessário repetir as notas de acordo com os seus respectivos pesos:<br>• Nota 3 (peso 1) → 3<br>• Nota 6 (peso 2) → 6, 6<br>• Nota 8 (peso 3) → 8, 8, 8<br><br>Ordenando o Rol: \\( 3, 6, 6, 8, 8, 8 \\) (\\( n = 6 \\), par).<br>Elementos centrais (3ª e 4ª posições): 6 e 8.<br>$$ Md = \\frac{6 + 8}{2} = 7 $$"
         },
     {
       materia: "Estatística Descritiva",
