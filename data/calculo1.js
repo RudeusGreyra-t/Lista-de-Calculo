@@ -60,6 +60,12 @@ const SVG_CON_GRA_001 = `<svg width="650" height="350" viewBox="0 0 650 350" xml
 
 window.COURSES_DATA["calc1"] = {
   name: "Cálculo 1",
+  originConfig: {
+    "Prova antiga": { sequential: false },
+    "Dado em aula": { sequential: false },
+    "Aula de revisão": { sequential: false },
+    "Listas de IA": { sequential: false }
+  },
   sections: [
     { id: "limites", title: "Limites" },
     { id: "continuidade", title: "Continuidade" },
