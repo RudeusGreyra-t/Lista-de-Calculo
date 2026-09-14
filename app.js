@@ -50,12 +50,13 @@ function origemCategoria(origem){
   if(origem.startsWith("Prova antiga")) return "Prova antiga";
   if(origem.startsWith("Dado em aula")) return "Dado em aula";
   if(origem.startsWith("Gerado a partir")) return "Listas de IA"; 
+  if(origem === "Provas") return "Provas";
   if(origem === "Aula de revisão") return "Aula de revisão";
   return origem;
 }
 function origCSSClass(origem){
   if(!origem) return "orig-ia";
-  if(origem.startsWith("Prova antiga")) return "orig-prova";
+  if(origem.startsWith("Prova antiga") || origem === "Provas") return "orig-prova";
   if(origem.startsWith("Dado em aula") || origem.includes("revisão")) return "orig-aula";
   return "orig-ia";
 }
@@ -65,12 +66,14 @@ let currentCourseKey = localStorage.getItem("selected_course") || "calc1";
 let DATA = [];
 let SECTION_ORDER = [];
 let SECTION_TITLES = {};
+let SECTION_ETAPAS = {};
 let ORIGIN_CONFIG = {};
 let reviewedMap = {};
 let selectedOrigens = new Set();
 let selectedDificuldades = new Set();
 let sectionSubtopicos = {};
 let currentStatusFilter = "all";
+let currentEtapaFilter = "P2"; // Valor padrão para carregar focado na P2
 let isSequentialMode = false;
 let allAnswersShown = false;
 
@@ -89,7 +92,12 @@ function loadCourse(courseKey) {
   DATA = course.topics;
   SECTION_ORDER = course.sections.map(s => s.id);
   SECTION_TITLES = {};
-  course.sections.forEach(s => SECTION_TITLES[s.id] = s.title);
+  SECTION_ETAPAS = {};
+  
+  course.sections.forEach(s => {
+      SECTION_TITLES[s.id] = s.title;
+      SECTION_ETAPAS[s.id] = s.etapa || "P1";
+  });
 
   ORIGIN_CONFIG = course.originConfig || {};
 
@@ -99,12 +107,47 @@ function loadCourse(courseKey) {
   initFilters();
   buildNav();
   buildContent();
+  
+  // Sincroniza visualmente os botões de Etapa de acordo com o estado atual
+  document.querySelectorAll(".etapa-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.etapa === currentEtapaFilter);
+  });
+  
+  updateUIForEtapa();
   applyFilters();
 }
 
 function setReviewed(map){
   try{ localStorage.setItem(`revisados_${currentCourseKey}`, JSON.stringify(map)); }catch(e){}
 }
+
+/* ======================= VISIBILIDADE DAS ETAPAS (P1/P2/PF) ======================= */
+function updateUIForEtapa() {
+    SECTION_ORDER.forEach(secId => {
+        const isVisible = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
+        
+        // Esconde ou exibe o Dropdown de subtopicos
+        const dd = document.getElementById(`dd-${secId}`);
+        if (dd) dd.style.display = isVisible ? "" : "none";
+        
+        // Esconde ou exibe as pílulas de navegação (topo e flutuante)
+        document.querySelectorAll(`.nav-pill-group[data-sec="${secId}"]`).forEach(pill => {
+            pill.style.display = isVisible && !isSequentialMode ? "inline-flex" : "none";
+        });
+    });
+}
+
+// Event Listeners dos Botões de Etapa
+document.querySelectorAll(".etapa-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        document.querySelectorAll(".etapa-btn").forEach(b => b.classList.remove("active"));
+        e.target.classList.add("active");
+        currentEtapaFilter = e.target.dataset.etapa;
+        
+        updateUIForEtapa();
+        applyFilters();
+    });
+});
 
 /* INICIALIZA OS DROPDOWNS BASEADOS EXCLUSIVAMENTE NAS SEÇÕES */
 function initFilters() {
@@ -121,7 +164,6 @@ function initFilters() {
   const dynamicSectionContainer = document.getElementById("dynamicSectionFilters");
   dynamicSectionContainer.innerHTML = "";
 
-  // Cria um dropdown por SEÇÃO PRINCIPAL (idêntico ao Limites, Continuidade, Derivadas...)
   SECTION_ORDER.forEach(secId => {
     const secTitle = SECTION_TITLES[secId];
     const subtopicos = [...new Set(DATA.filter(g => g.secId === secId).map(g => g.subtopico))];
@@ -209,6 +251,10 @@ function buildNavPills(container) {
       </a>
       <button type="button" class="nav-pill-reset" data-sec="${secId}" title="Zerar revisões de ${SECTION_TITLES[secId]}">↺</button>
     `;
+    
+    const isVisible = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
+    pillGroup.style.display = isVisible ? "inline-flex" : "none";
+    
     container.appendChild(pillGroup);
   });
 }
@@ -243,6 +289,11 @@ function createCard(ex, group) {
   const dc = difClass(ex.dificuldade);
   const card = document.createElement("article");
   card.className = "card " + dc;
+  
+  if(ex.oficial) {
+      card.classList.add("card-oficial");
+  }
+  
   card.dataset.secId = group.secId;
   card.dataset.subtopico = group.subtopico;
   card.dataset.origemCat = origemCategoria(ex.origem);
@@ -258,6 +309,7 @@ function createCard(ex, group) {
       <div class="badges-wrapper">
         <div class="badges-top">
           <span class="badge ${dc}">${ex.dificuldade}</span>
+          ${ex.oficial ? `<span class="selo-oficial">${ex.oficial}</span>` : ""}
           <span class="badge rel">Relevância: ${ex.relevancia}</span>
         </div>
         <span class="badge orig ${origCSSClass(ex.origem)}">${origemCategoria(ex.origem)}</span>
@@ -305,7 +357,6 @@ function buildContent() {
   main.innerHTML = "";
 
   if (isSequentialMode) {
-    // Modo Sequencial: Coleta todas as questões e ordena linearmente pelos números do ID
     const all = [];
     DATA.forEach(group => {
       group.exercicios.forEach(ex => all.push({ ex, group }));
@@ -329,7 +380,6 @@ function buildContent() {
     return;
   }
 
-  // Modo Padrão por Tópicos: Mantém a estrutura exata do site original
   SECTION_ORDER.forEach(secId => {
     const groups = DATA.filter(g => g.secId === secId);
     if(groups.length === 0) return;
@@ -357,6 +407,9 @@ function buildContent() {
 function updateToggleMateriasButton() {
     let allChecked = true;
     SECTION_ORDER.forEach(secId => {
+        const isVisible = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
+        if (!isVisible) return; 
+        
         const totalSubs = [...new Set(DATA.filter(g => g.secId === secId).map(g => g.subtopico))].length;
         if(sectionSubtopicos[secId] && sectionSubtopicos[secId].size < totalSubs) allChecked = false;
     });
@@ -371,7 +424,6 @@ function checkSequentialAvailability() {
   const btn = document.getElementById("btnToggleSequential");
   if (!btn) return;
 
-  // Verifica se há exatamente UMA origem selecionada e se ela possui a flag sequential: true
   let isOriginSequential = false;
   if (selectedOrigens.size === 1) {
     const activeOrigin = [...selectedOrigens][0];
@@ -389,6 +441,7 @@ function checkSequentialAvailability() {
       isSequentialMode = false;
       buildNav();
       buildContent();
+      updateUIForEtapa();
     }
   }
 }
@@ -403,8 +456,12 @@ function applyFilters() {
     const okDif = selectedDificuldades.has(card.dataset.dificuldade);
     const secId = card.dataset.secId, s = card.dataset.subtopico;
     const okTema = sectionSubtopicos[secId] && sectionSubtopicos[secId].has(s);
+    
+    // Filtro Global da Etapa
+    const okEtapa = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
 
-    const matchesBase = okOrigem && okDif && okTema;
+    const matchesBase = okOrigem && okDif && okTema && okEtapa;
+    
     if (matchesBase) {
       metaTotal++;
       if (card.classList.contains("reviewed")) metaReviewed++;
@@ -429,7 +486,9 @@ function applyFilters() {
       if (!sec) return;
       const secCards = sec.querySelectorAll(".card");
       const visibleCardsInSec = [...secCards].filter(c => !c.classList.contains("hidden"));
-      sec.style.display = visibleCardsInSec.length > 0 ? "" : "none";
+      
+      const okEtapa = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
+      sec.style.display = (visibleCardsInSec.length > 0 && okEtapa) ? "" : "none";
 
       const totalSecBase = [...secCards].filter(c => {
         return selectedOrigens.has(c.dataset.origemCat) &&
@@ -460,6 +519,7 @@ document.getElementById("btnToggleSequential").addEventListener("click", () => {
   isSequentialMode = !isSequentialMode;
   buildNav();
   buildContent();
+  updateUIForEtapa();
   applyFilters();
 });
 
@@ -490,19 +550,32 @@ document.getElementById("toggleAllAnswers").addEventListener("click", (e) => {
 document.getElementById("toggleMaterias").addEventListener("click", () => {
     let allChecked = true;
     SECTION_ORDER.forEach(secId => {
+        const isVisible = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
+        if (!isVisible) return;
+        
         const totalSubs = [...new Set(DATA.filter(g => g.secId === secId).map(g => g.subtopico))].length;
         if(sectionSubtopicos[secId] && sectionSubtopicos[secId].size < totalSubs) allChecked = false;
     });
 
     if (allChecked) {
-        SECTION_ORDER.forEach(secId => sectionSubtopicos[secId].clear());
-        document.querySelectorAll('#dynamicSectionFilters .dropdown-item input').forEach(inp => inp.checked = false);
+        SECTION_ORDER.forEach(secId => {
+            const isVisible = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
+            if(isVisible) {
+                sectionSubtopicos[secId].clear();
+                const dd = document.getElementById(`dd-${secId}`);
+                if(dd) dd.querySelectorAll('.dropdown-item input').forEach(inp => inp.checked = false);
+            }
+        });
     } else {
         SECTION_ORDER.forEach(secId => {
-            const subs = [...new Set(DATA.filter(g => g.secId === secId).map(g => g.subtopico))];
-            subs.forEach(s => sectionSubtopicos[secId].add(s));
+            const isVisible = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
+            if(isVisible) {
+                const subs = [...new Set(DATA.filter(g => g.secId === secId).map(g => g.subtopico))];
+                subs.forEach(s => sectionSubtopicos[secId].add(s));
+                const dd = document.getElementById(`dd-${secId}`);
+                if(dd) dd.querySelectorAll('.dropdown-item input').forEach(inp => inp.checked = true);
+            }
         });
-        document.querySelectorAll('#dynamicSectionFilters .dropdown-item input').forEach(inp => inp.checked = true);
     }
     
     SECTION_ORDER.forEach(secId => updateDropdownButton(document.getElementById(`dd-${secId}`)));

@@ -662,3 +662,65 @@ footer.credit {
   .tray-footer-right { margin-left: 0; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
   .floating-bar-title { display: none; }
 }
+
+/* =========================================
+   TOGGLE DE ETAPAS (P1 / P2 / PF)
+========================================= */
+.etapa-toggle {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.etapa-btn {
+  background: none;
+  border: none;
+  padding: 6px 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.etapa-btn:hover {
+  background: rgba(128, 128, 128, 0.1);
+}
+
+.etapa-btn.active {
+  background: var(--accent);
+  color: white;
+}
+
+/* =========================================
+   DESTAQUE PROVA OFICIAL
+========================================= */
+.card.card-oficial {
+  border: 2px solid #fbbf24; /* Dourado */
+  background: rgba(251, 191, 36, 0.03);
+}
+
+.selo-oficial {
+  display: inline-block;
+  background: #fbbf24;
+  color: #78350f;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 12px;
+  margin-left: 8px;
+  vertical-align: text-bottom;
+}
+
+/* Ajuste do destaque para o Tema Escuro */
+[data-theme="dark"] .card.card-oficial {
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.05);
+}
+
+[data-theme="dark"] .selo-oficial {
+  background: #f59e0b;
+  color: #451a03;
+}
