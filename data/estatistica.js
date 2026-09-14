@@ -40,7 +40,7 @@ window.COURSES_DATA["estatistica"] = {
     "Lista P1": { sequential: true },
     "PDF Matéria": { sequential: false },
     "Dado em aula": { sequential: false },
-    "Provas": { sequential: true }
+    "Provas": { sequential: true } // Configurado para permitir a listagem ordenada
   },
   sections: [
     { id: "estatistica_descritiva", title: "Estatística Descritiva", etapa: "P1" },
@@ -145,6 +145,7 @@ window.COURSES_DATA["estatistica"] = {
       exercicios: [
         {
           id: "EST-P1-OFI-002",
+          numero: 2,
           origem: "Provas",
           oficial: "⭐ P1 Oficial",
           dificuldade: "Médio",
@@ -154,6 +155,7 @@ window.COURSES_DATA["estatistica"] = {
         },
         {
           id: "EST-P1-OFI-003",
+          numero: 3,
           origem: "Provas",
           oficial: "⭐ P1 Oficial",
           dificuldade: "Médio",
@@ -195,6 +197,7 @@ window.COURSES_DATA["estatistica"] = {
       exercicios: [
         {
           id: "EST-P1-OFI-001",
+          numero: 1,
           origem: "Provas",
           oficial: "⭐ P1 Oficial",
           dificuldade: "Fácil",
@@ -312,6 +315,7 @@ window.COURSES_DATA["estatistica"] = {
       exercicios: [
         {
           id: "EST-P1-OFI-004",
+          numero: 4,
           origem: "Provas",
           oficial: "⭐ P1 Oficial",
           dificuldade: "Médio",
