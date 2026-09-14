@@ -67,10 +67,10 @@ window.COURSES_DATA["calc1"] = {
     "Listas de IA": { sequential: false }
   },
   sections: [
-    { id: "limites", title: "Limites" },
-    { id: "continuidade", title: "Continuidade" },
-    { id: "derivadas", title: "Derivadas" },
-    { id: "integrais", title: "Integrais" }
+    { id: "limites", title: "Limites", etapa: "P1" },
+    { id: "continuidade", title: "Continuidade", etapa: "P1" },
+    { id: "derivadas", title: "Derivadas", etapa: "P1" },
+    { id: "integrais", title: "Integrais", etapa: "P1" }
   ],
   topics: [
 {materia:"Limites", subtopico:"Substituição direta", secId:"limites", exercicios:[
@@ -109,20 +109,6 @@ window.COURSES_DATA["calc1"] = {
    enunciado:"Calcule, racionalizando: $$ \\lim_{x \\to 4} \\frac{\\sqrt{x+5}-3}{x-4} $$",
    resposta: "$$ \\frac{1}{6} $$"},
 ]},
-{materia:"Limites", subtopico:"Trigonométricos clássicos", secId:"limites", exercicios:[
-  {id:"LIM-TRI-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Calcule o limite: $$ \\lim_{x \\to 0} \\frac{1-\\cos(x)}{x} $$",
-   resposta: "$$ 0 $$"},
-  {id:"LIM-TRI-002", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Calcule o limite: $$ \\lim_{x \\to 0} \\frac{\\sin(15x)}{3x} $$",
-   resposta: "$$ 5 $$"},
-  {id:"LIM-TRI-003", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
-   enunciado:"Calcule os seguintes limites: $$ \\lim_{x \\to 0} \\frac{\\sin(2x)}{\\sin(7x)} $$",
-   resposta: "$$ \\frac{2}{7} $$"},
-  {id:"LIM-TRI-004", origem:"Prova antiga", dificuldade:"Muito difícil", relevancia:"Alta",
-   enunciado:"Calcule os seguintes limites: $$ \\lim_{x \\to 0} \\frac{4-(2\\cos(x))^2}{x^2(3-\\cos(5x))} $$",
-   resposta: "$$ 2 $$"},
-]},
 {materia:"Limites", subtopico:"Laterais e módulo", secId:"limites", exercicios:[
   {id:"LIM-LAT-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule, caso exista: $$ \\lim_{x \\to 5} \\frac{|x-5|}{2x-10} $$",
@@ -153,6 +139,9 @@ window.COURSES_DATA["calc1"] = {
    svg: SVG_CON_GRA_001},
 ]},
 {materia:"Continuidade", subtopico:"Funções por partes", secId:"continuidade", exercicios:[
+  {id:"P1-OFI-001", origem:"Prova antiga", oficial:"⭐ P1 Oficial", dificuldade:"Médio", relevancia:"Muito Alta",
+   enunciado:"Analise a continuidade da função \\( f \\) no ponto 2:<br>$$ f(x) = \\begin{cases} \\frac{x^3-8}{x-2}, & \\text{se } x < 2 \\\\ 2x-8, & \\text{se } x \\ge 2 \\end{cases} $$",
+   resposta:"A função não é contínua em \\( x = 2 \\). Para ser contínua, \\( \\lim_{x \\to 2} f(x) \\) deve existir e ser igual a \\( f(2) \\).<br><br>Temos \\( f(2) = 2(2) - 8 = -4 \\).<br><br>Calculando os limites laterais:<br>Pela direita: \\( \\lim_{x \\to 2^+} (2x - 8) = -4 \\)<br>Pela esquerda: \\( \\lim_{x \\to 2^-} \\frac{x^3-8}{x-2} = \\lim_{x \\to 2^-} \\frac{(x-2)(x^2+2x+4)}{x-2} = 4 + 4 + 4 = 12 \\).<br><br>Como os limites laterais são diferentes, o limite global não existe."},
   {id:"CON-PAR-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Determine o valor de L para que a função dada abaixo seja contínua em 3: $$ f(x) = \\begin{cases} 2x+1, & \\text{se } x \\ne 3 \\\\ L, & \\text{se } x = 3 \\end{cases} $$",
    resposta: "$$ L = 7 $$"},
@@ -180,6 +169,9 @@ window.COURSES_DATA["calc1"] = {
    svgPos: "resposta"},
 ]},
 {materia:"Derivadas", subtopico:"Pela definição formal", secId:"derivadas", exercicios:[
+  {id:"P1-OFI-002", origem:"Prova antiga", oficial:"⭐ P1 Oficial", dificuldade:"Fácil", relevancia:"Muito Alta",
+   enunciado:"Use a definição de derivada para encontrar \\( f'(2) \\), sendo \\( f(x) = x^2 \\).",
+   resposta:"$$ f'(2) = \\lim_{x \\to 2} \\frac{f(x) - f(2)}{x - 2} = \\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2} = \\lim_{x \\to 2} \\frac{(x-2)(x+2)}{x-2} = \\lim_{x \\to 2} (x+2) = 4 $$"},
   {id:"DER-DEF-001", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
    enunciado:"Seja \\( f(x) = x^4 - 16 \\). Calcule \\( f'(2) \\) pela definição.",
    resposta: "$$ 32 $$"},
@@ -211,6 +203,9 @@ window.COURSES_DATA["calc1"] = {
    resposta:"$$ f'(x) = \\sec^2(x) $$"},
 ]},
 {materia:"Derivadas", subtopico:"Regra da cadeia", secId:"derivadas", exercicios:[
+  {id:"P1-OFI-003", origem:"Prova antiga", oficial:"⭐ P1 Oficial", dificuldade:"Médio", relevancia:"Muito Alta",
+   enunciado:"Encontre \\( f'(x) \\), sendo \\( f(x) = \\ln(\\sin(x^2)) \\).",
+   resposta:"Aplicando a regra da cadeia sucessivamente:<br>$$ f'(x) = \\frac{1}{\\sin(x^2)} \\cdot [\\sin(x^2)]' = \\frac{1}{\\sin(x^2)} \\cdot \\cos(x^2) \\cdot [x^2]' = \\frac{1}{\\sin(x^2)} \\cdot \\cos(x^2) \\cdot 2x $$<br>$$ f'(x) = 2x \\cot(x^2) $$"},
   {id:"DER-CAD-001", origem:"Dado em aula 11/08/2026", dificuldade:"Fácil", relevancia:"Média",
    enunciado:"Calcule a derivada de \\( f(x) = \\sin(x^3) \\).",
    resposta:"$$ f'(x) = 3x^2\\cos(x^3) $$"},
@@ -231,6 +226,9 @@ window.COURSES_DATA["calc1"] = {
    resposta:"\\( f'(x) = \\frac{2x\\, e^{x^2 + 2}\\ln(\\cos(x^2 + 1)) + 2x\\, e^{x^2 + 2}\\tan(x^2 + 1)}{\\ln^2(\\cos(x^2 + 1))} \\)"},
 ]},
 {materia:"Integrais", subtopico:"Integração direta", secId:"integrais", exercicios:[
+  {id:"P1-OFI-004", origem:"Prova antiga", oficial:"⭐ P1 Oficial", dificuldade:"Fácil", relevancia:"Muito Alta",
+   enunciado:"Calcule a integral: $$ \\int 2x^7 \\, dx $$",
+   resposta:"$$ \\int 2x^7 \\, dx = 2 \\frac{x^8}{8} + C = \\frac{x^8}{4} + C, \\quad C \\in \\mathbb{R} $$"},
   {id:"INT-DIR-001", origem:"Prova antiga", dificuldade:"Fácil", relevancia:"Alta",
    enunciado:"Calcule a integral abaixo e verifique se o resultado obtido está correto: $$ \\int (3x^2 - 4x + 2) \\, dx $$",
    resposta: "$$ x^3 - 2x^2 + 2x + C, \\quad C \\in \\mathbb{R} $$"},
@@ -263,6 +261,9 @@ window.COURSES_DATA["calc1"] = {
    resposta: "$$ \\frac{x^9}{9} - \\cos(x) - e^x + C, \\quad C \\in \\mathbb{R} $$"}
 ]},
 {materia:"Integrais", subtopico:"Substituição simples", secId:"integrais", exercicios:[
+  {id:"P1-OFI-005", origem:"Prova antiga", oficial:"⭐ P1 Oficial", dificuldade:"Médio", relevancia:"Muito Alta",
+   enunciado:"Calcule a integral: $$ \\int 4x^3 \\cos(x^4) \\, dx $$",
+   resposta:"Utilizando o método da substituição, seja \\( u = x^4 \\). Derivando, temos \\( du = 4x^3 \\, dx \\).<br><br>Substituindo na integral:<br>$$ \\int \\cos(u) \\, du = \\sin(u) + C $$<br>Voltando para a variável original:<br>$$ \\sin(x^4) + C, \\quad C \\in \\mathbb{R} $$"},
   {id:"INT-SUB-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral abaixo e verifique se o resultado obtido está correto: $$ \\int 2x\\cos(x^2) \\, dx $$",
    resposta: "$$ \\sin(x^2) + C, \\quad C \\in \\mathbb{R} $$"},

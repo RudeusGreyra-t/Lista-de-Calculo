@@ -39,21 +39,13 @@ window.COURSES_DATA["estatistica"] = {
   originConfig: {
     "Lista P1": { sequential: true },
     "PDF Matéria": { sequential: false },
-    "Dado em aula": { sequential: false }
+    "Dado em aula": { sequential: false },
+    "Provas": { sequential: false }
   },
   sections: [
-    {
-      id: "estatistica_descritiva",
-      title: "Estatística Descritiva"
-    },
-    {
-      id: "analise_exploratoria",
-      title: "Análise Exploratória"
-    },
-    {
-      id: "boxplot_secao",
-      title: "Boxplots"
-    }
+    { id: "estatistica_descritiva", title: "Estatística Descritiva", etapa: "P1" },
+    { id: "analise_exploratoria", title: "Análise Exploratória", etapa: "P1" },
+    { id: "boxplot_secao", title: "Boxplots", etapa: "P1" }
   ],
   topics: [
     {
@@ -152,6 +144,24 @@ window.COURSES_DATA["estatistica"] = {
       secId: "estatistica_descritiva",
       exercicios: [
         {
+          id: "EST-P1-OFI-002",
+          origem: "Provas",
+          oficial: "⭐ P1 Oficial",
+          dificuldade: "Médio",
+          relevancia: "Muito Alta",
+          enunciado: "A Vigilância Sanitária realizou um mutirão de fiscalização em diversos lotes de queijo artesanal. O relatório final informou que a média aritmética do número de autuações por lote inspecionado foi exatamente igual a 1,25. Com base nessas informações, determine o valor da constante \\( K \\), a mediana e a moda dessa distribuição de dados.<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Nº de Autuações (\\(x_i\\))</th><th style='border:1px solid var(--border); padding:8px;'>Quantidade de Lotes (\\(f_i\\))</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>0</td><td style='border:1px solid var(--border); padding:8px;'>12</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>1</td><td style='border:1px solid var(--border); padding:8px;'>18</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>2</td><td style='border:1px solid var(--border); padding:8px;'>K</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>3</td><td style='border:1px solid var(--border); padding:8px;'>5</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>4</td><td style='border:1px solid var(--border); padding:8px;'>2</td></tr></table>",
+          resposta: "<strong>1. Valor de K:</strong><br>Total de lotes (\\(n\\)) = \\(12 + 18 + K + 5 + 2 = 37 + K\\).<br>Somatório (\\(x_i \\cdot f_i\\)) = \\((0 \\cdot 12) + (1 \\cdot 18) + (2 \\cdot K) + (3 \\cdot 5) + (4 \\cdot 2) = 41 + 2K\\).<br>Média = \\(\\frac{41 + 2K}{37 + K} = 1,25\\) (ou \\(5/4\\)).<br>\\(4(41 + 2K) = 5(37 + K) \\Rightarrow 164 + 8K = 185 + 5K \\Rightarrow 3K = 21 \\Rightarrow K = 7\\).<br><br><strong>2. Mediana e Moda:</strong><br>O total de elementos é \\(n = 44\\). Os termos centrais são o 22º e o 23º, ambos ocorrendo em \\(x = 1\\). Logo, <strong>Mediana = 1</strong>.<br>A maior frequência é \\(f = 18\\), que ocorre em \\(x = 1\\). Logo, <strong>Moda = 1</strong>."
+        },
+        {
+          id: "EST-P1-OFI-003",
+          origem: "Provas",
+          oficial: "⭐ P1 Oficial",
+          dificuldade: "Médio",
+          relevancia: "Muito Alta",
+          enunciado: "Uma clínica de saúde coletou os tempos de espera (em minutos) de 40 pacientes até serem chamados para a consulta. Os dados foram organizados na tabela de distribuição de frequências a seguir. Determine a média, a mediana e a moda bruta.<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Tempo de espera (minutos)</th><th style='border:1px solid var(--border); padding:8px;'>Frequência (\\(f_i\\))</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>0 |- 2</td><td style='border:1px solid var(--border); padding:8px;'>8</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>2 |- 4</td><td style='border:1px solid var(--border); padding:8px;'>12</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>4 |- 6</td><td style='border:1px solid var(--border); padding:8px;'>15</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>6 |- 8</td><td style='border:1px solid var(--border); padding:8px;'>5</td></tr></table>",
+          resposta: "<strong>Média:</strong> Calculando pelos pontos médios (\\(x_i\\): 1, 3, 5, 7):<br>\\( \\bar{x} = \\frac{1(8) + 3(12) + 5(15) + 7(5)}{40} = \\frac{154}{40} = 3,85 \\text{ minutos} \\).<br><br><strong>Mediana:</strong> Posição \\(n/2 = 20\\). A classe mediana é 2 |- 4 (frequência acumulada atinge 20 exatamente aqui).<br>\\( Md = 2 + \\left(\\frac{20 - 8}{12}\\right) \\cdot 2 = 2 + 2 = 4,00 \\text{ minutos} \\).<br><br><strong>Moda Bruta:</strong> A classe modal é 4 |- 6. O ponto médio é \\( Mo_{bruta} = \\frac{4+6}{2} = 5,00 \\text{ minutos} \\)."
+        },
+        {
           id: "AULA-001",
           origem: "Dado em aula",
           dificuldade: "Médio",
@@ -183,6 +193,15 @@ window.COURSES_DATA["estatistica"] = {
       subtopico: "Tomada de Decisão (Média vs Mediana)",
       secId: "estatistica_descritiva",
       exercicios: [
+        {
+          id: "EST-P1-OFI-001",
+          origem: "Provas",
+          oficial: "⭐ P1 Oficial",
+          dificuldade: "Fácil",
+          relevancia: "Muito Alta",
+          enunciado: "Em uma pequena cidade do interior, o salário médio dos trabalhadores formais passou de R$ 2.800,00, em 2020, para R$ 4.200,00, em 2025. O prefeito da cidade, em seu discurso de campanha à reeleição, afirmou que 'o trabalhador médio da cidade está 50% mais rico', baseando-se unicamente nesse aumento da média aritmética. No entanto, um jornalista local descobriu que, nesse mesmo período, uma grande multinacional se instalou na cidade, trazendo 10 executivos com salários superiores a R$ 50.000,00, enquanto a grande maioria dos trabalhadores locais (mais de 95% da amostra) teve reajustes salariais anuais inferiores à inflação acumulada do período. Com base apenas na informação da média aritmética e nos conceitos de estatística descritiva, responda:<br><br>a) A afirmação do prefeito está correta? Explique sua resposta, criticando o uso isolado da média nesse contexto.<br>b) Cite uma medida de posição central que poderia ser usada em conjunto com os dados para oferecer uma análise mais fiel da realidade financeira da maioria dos trabalhadores. Justifique brevemente a sua escolha.",
+          resposta: "<strong>a)</strong> A afirmação está incorreta. A média aritmética é sensível a valores discrepantes (outliers). A contratação dos executivos gerou uma distorção positiva na média salarial. Essa elevação não representa a realidade, já que 95% da base teve reajustes abaixo da inflação.<br><strong>b)</strong> A <strong>Mediana</strong> (ou Moda). A mediana é uma medida de tendência central robusta e resistente à presença de valores atípicos. Ela representaria o salário do trabalhador típico da cidade."
+        },
         {
           id: "PDF-004-B",
           origem: "PDF Matéria",
@@ -291,6 +310,15 @@ window.COURSES_DATA["estatistica"] = {
       subtopico: "Comportamento, Dispersão e Outliers",
       secId: "boxplot_secao",
       exercicios: [
+        {
+          id: "EST-P1-OFI-004",
+          origem: "Provas",
+          oficial: "⭐ P1 Oficial",
+          dificuldade: "Médio",
+          relevancia: "Muito Alta",
+          enunciado: "Considere os seguintes tempos (em minutos) que um grupo de estudantes levou para completar uma prova: 22, 24, 25, 27, 28, 29, 30, 31, 33, 35, 90.<br><br>a) Identifique a mediana, os quartis, os limites inferior e superior e os possíveis outliers.<br>b) Explique como o boxplot representa graficamente a presença de outliers nesse caso.",
+          resposta: "<strong>a) Medidas e limites:</strong><br>O rol possui \\(n=11\\) elementos.<br>Mediana (\\(Q_2\\)): 6º termo = 29.<br>Primeiro Quartil (\\(Q_1\\)): Mediana da metade inferior {22, 24, 25, 27, 28} = 25.<br>Terceiro Quartil (\\(Q_3\\)): Mediana da metade superior {30, 31, 33, 35, 90} = 33.<br>IQR = \\(33 - 25 = 8\\).<br>Limite Inferior = \\(Q_1 - 1,5 \\cdot IQR = 25 - 12 = 13\\).<br>Limite Superior = \\(Q_3 + 1,5 \\cdot IQR = 33 + 12 = 45\\).<br>Outliers: Como 90 > 45, o valor 90 é um outlier superior.<br><br><strong>b) Representação no Boxplot:</strong><br>O valor 90 não é conectado à haste principal superior (que termina em 35, o maior valor não discrepante). Ele é plotado como um ponto isolado ou asterisco além da extremidade do bigode superior."
+        },
         {
           id: "LISTA-Q14",
           numero: 14,
