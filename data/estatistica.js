@@ -40,7 +40,7 @@ window.COURSES_DATA["estatistica"] = {
     "Lista P1": { sequential: true },
     "PDF Matéria": { sequential: false },
     "Dado em aula": { sequential: false },
-    "Provas": { sequential: false }
+    "Provas": { sequential: true }
   },
   sections: [
     { id: "estatistica_descritiva", title: "Estatística Descritiva", etapa: "P1" },
