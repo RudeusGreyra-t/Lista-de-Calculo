@@ -44,21 +44,19 @@ window.COURSES_DATA["estatistica"] = {
     "Provas": { sequential: true }
   },
   sections: [
-    { id: "estatistica_descritiva", title: "Estatística Descritiva", etapa: "P1" },
-    { id: "analise_exploratoria", title: "Análise Exploratória", etapa: "P1" },
-    { id: "boxplot_secao", title: "Boxplots", etapa: "P1" },
-    { id: "dispersao_assimetria", title: "Dispersão, Assimetria e Curtose", etapa: "P2" },
-    { id: "normal_correlacao", title: "Distribuição Normal e Correlação", etapa: "P2" },
-    { id: "separatrizes_p2", title: "Separatrizes (Posição)", etapa: "P2" }
+    { id: "estatistica_descritiva_p1", title: "Estatística Descritiva", etapa: "P1" },
+    { id: "analise_exploratoria_p1", title: "Análise Exploratória e Gráficos", etapa: "P1" },
+    { id: "dispersao_forma_p2", title: "Dispersão, Forma e Separatrizes", etapa: "P2" },
+    { id: "normal_correlacao_p2", title: "Distribuição Normal e Correlação", etapa: "P2" }
   ],
   topics: [
     // ==========================================
-    // ETAPA: P1
+    // SEÇÃO 1: ESTATÍSTICA DESCRITIVA (P1)
     // ==========================================
     {
       materia: "Estatística Descritiva",
       subtopico: "Medidas a partir de Dados Brutos",
-      secId: "estatistica_descritiva",
+      secId: "estatistica_descritiva_p1",
       exercicios: [
         {
           id: "PDF-001",
@@ -106,7 +104,7 @@ window.COURSES_DATA["estatistica"] = {
     {
       materia: "Estatística Descritiva",
       subtopico: "Média Ponderada",
-      secId: "estatistica_descritiva",
+      secId: "estatistica_descritiva_p1",
       exercicios: [
         {
           id: "PDF-002",
@@ -135,20 +133,20 @@ window.COURSES_DATA["estatistica"] = {
           resposta: "$$ \\bar{X} = \\frac{(3.400 \\times 2) + (4.500 \\times 4) + (7.000 \\times 1) + (5.500 \\times 3)}{2 + 4 + 1 + 3} = \\frac{48.300}{10} = R\\$ 4.830,00 $$"
         },
         {
-          "id": "LISTA-Q12",
-          "numero": 12,
-          "origem": "Lista P1",
-          "dificuldade": "Médio",
-          "relevancia": "Alta",
-          "enunciado": "Um aluno fez três provas em determinada disciplina. A primeira prova tem peso 1, a segunda tem peso 2 e a terceira tem peso 3. O aluno obteve notas 3, 6 e 8 respectivamente. Calcule a média e a mediana do aluno.",
-          "resposta": "<strong>Média Ponderada:</strong><br>$$ \\bar{x} = \\frac{(3 \\times 1) + (6 \\times 2) + (8 \\times 3)}{1 + 2 + 3} = \\frac{3 + 12 + 24}{6} = \\frac{39}{6} = 6,5 $$<br><strong>Mediana:</strong><br>É necessário repetir as notas de acordo com os seus respectivos pesos:<br>• Nota 3 (peso 1) → 3<br>• Nota 6 (peso 2) → 6, 6<br>• Nota 8 (peso 3) → 8, 8, 8<br><br>Ordenando o Rol: \\( 3, 6, 6, 8, 8, 8 \\) (\\( n = 6 \\), par).<br>Elementos centrais (3ª e 4ª posições): 6 e 8.<br>$$ Md = \\frac{6 + 8}{2} = 7 $$"
+          id: "LISTA-Q12",
+          numero: 12,
+          origem: "Lista P1",
+          dificuldade: "Médio",
+          relevancia: "Alta",
+          enunciado: "Um aluno fez três provas em determinada disciplina. A primeira prova tem peso 1, a segunda tem peso 2 e a terceira tem peso 3. O aluno obteve notas 3, 6 e 8 respectivamente. Calcule a média e a mediana do aluno.",
+          resposta: "<strong>Média Ponderada:</strong><br>$$ \\bar{x} = \\frac{(3 \\times 1) + (6 \\times 2) + (8 \\times 3)}{1 + 2 + 3} = \\frac{3 + 12 + 24}{6} = \\frac{39}{6} = 6,5 $$<br><strong>Mediana:</strong><br>É necessário repetir as notas de acordo com os seus respectivos pesos:<br>• Nota 3 (peso 1) → 3<br>• Nota 6 (peso 2) → 6, 6<br>• Nota 8 (peso 3) → 8, 8, 8<br><br>Ordenando o Rol: \\( 3, 6, 6, 8, 8, 8 \\) (\\( n = 6 \\), par).<br>Elementos centrais (3ª e 4ª posições): 6 e 8.<br>$$ Md = \\frac{6 + 8}{2} = 7 $$"
         }
       ]
     },
     {
       materia: "Estatística Descritiva",
       subtopico: "Medidas em Dados Agrupados (Classes)",
-      secId: "estatistica_descritiva",
+      secId: "estatistica_descritiva_p1",
       exercicios: [
         {
           id: "EST-P1-OFI-002",
@@ -200,7 +198,7 @@ window.COURSES_DATA["estatistica"] = {
     {
       materia: "Estatística Descritiva",
       subtopico: "Tomada de Decisão (Média vs Mediana)",
-      secId: "estatistica_descritiva",
+      secId: "estatistica_descritiva_p1",
       exercicios: [
         {
           id: "EST-P1-OFI-001",
@@ -240,10 +238,14 @@ window.COURSES_DATA["estatistica"] = {
         }
       ]
     },
+
+    // ==========================================
+    // SEÇÃO 2: ANÁLISE EXPLORATÓRIA E GRÁFICOS (P1)
+    // ==========================================
     {
-      materia: "Análise Exploratória",
+      materia: "Análise Exploratória e Gráficos",
       subtopico: "Tipos e Qualidade de Gráficos",
-      secId: "analise_exploratoria",
+      secId: "analise_exploratoria_p1",
       exercicios: [
         {
           id: "LISTA-Q01",
@@ -275,9 +277,9 @@ window.COURSES_DATA["estatistica"] = {
       ]
     },
     {
-      materia: "Análise Exploratória",
+      materia: "Análise Exploratória e Gráficos",
       subtopico: "Cálculo e Interpretação de Taxas",
-      secId: "analise_exploratoria",
+      secId: "analise_exploratoria_p1",
       exercicios: [
         {
           id: "LISTA-Q03",
@@ -291,9 +293,9 @@ window.COURSES_DATA["estatistica"] = {
       ]
     },
     {
-      materia: "Análise Exploratória",
+      materia: "Análise Exploratória e Gráficos",
       subtopico: "Medidas a partir de Gráficos",
-      secId: "analise_exploratoria",
+      secId: "analise_exploratoria_p1",
       exercicios: [
         {
           id: "LISTA-Q10",
@@ -316,9 +318,9 @@ window.COURSES_DATA["estatistica"] = {
       ]
     },
     {
-      materia: "Boxplots",
-      subtopico: "Comportamento, Dispersão e Outliers",
-      secId: "boxplot_secao",
+      materia: "Análise Exploratória e Gráficos",
+      subtopico: "Boxplots e Comportamento",
+      secId: "analise_exploratoria_p1",
       exercicios: [
         {
           id: "EST-P1-OFI-004",
@@ -352,12 +354,37 @@ window.COURSES_DATA["estatistica"] = {
     },
 
     // ==========================================
-    // ETAPA: P2
+    // SEÇÃO 3: DISPERSÃO, FORMA E SEPARATRIZES (P2)
     // ==========================================
     {
-      materia: "Medidas de Dispersão",
-      subtopico: "Dados Agrupados (Classes)",
-      secId: "dispersao_assimetria",
+      materia: "Dispersão, Forma e Separatrizes",
+      subtopico: "Separatrizes e Posição",
+      secId: "dispersao_forma_p2",
+      exercicios: [
+        {
+          id: "LISTAP2-Q11",
+          numero: 11,
+          origem: "Lista P2",
+          dificuldade: "Difícil",
+          relevancia: "Alta",
+          enunciado: "Para a distribuição de frequências abaixo, calcule o nonagésimo quinto percentil (\\( P_{95} \\)), o décimo decil (\\( D_{10} \\)) e a amplitude interquartílica (\\( AIQ \\)).<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Classes</th><th style='border:1px solid var(--border); padding:8px;'>Frequências</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>2.000 |- 4.000</td><td style='border:1px solid var(--border); padding:8px;'>18</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>4.000 |- 6.000</td><td style='border:1px solid var(--border); padding:8px;'>45</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>6.000 |- 8.000</td><td style='border:1px solid var(--border); padding:8px;'>102</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>8.000 |- 10.000</td><td style='border:1px solid var(--border); padding:8px;'>143</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>10.000 |- 12.000</td><td style='border:1px solid var(--border); padding:8px;'>51</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>12.000 |- 14.000</td><td style='border:1px solid var(--border); padding:8px;'>41</td></tr></table>",
+          resposta: "Total de elementos \\( N = 400 \\).<br><br><strong>Décimo Decil (\\(D_{10}\\)):</strong> Mesma posição que o \\(P_{10}\\) (posição 40). A classe contendo a posição 40 é 4.000 |- 6.000.<br>$$ D_{10} = 4.000 + \\left(\\frac{40 - 18}{45}\\right) \\cdot 2.000 = 4.977,77 $$<br><br><strong>Primeiro Quartil (\\(Q_1\\)):</strong> Posição 100 (classe 6.000 |- 8.000).<br>$$ Q_1 = 6.000 + \\left(\\frac{100 - 63}{102}\\right) \\cdot 2.000 = 6.725,50 $$<br><br><strong>Terceiro Quartil (\\(Q_3\\)):</strong> Posição 300 (classe 8.000 |- 10.000).<br>$$ Q_3 = 8.000 + \\left(\\frac{300 - 165}{143}\\right) \\cdot 2.000 = 9.888,11 $$<br><br><strong>Amplitude Interquartílica (AIQ):</strong><br>$$ AIQ = Q_3 - Q_1 = 9.888,11 - 6.725,50 = 3.162,61 $$<br><br><strong>Nonagésimo Quinto Percentil (\\(P_{95}\\)):</strong> Posição 380 (classe 12.000 |- 14.000).<br>$$ P_{95} = 12.000 + \\left(\\frac{380 - 359}{41}\\right) \\cdot 2.000 = 13.024,40 $$"
+        },
+        {
+          id: "LISTAP2-Q12",
+          numero: 12,
+          origem: "Lista P2",
+          dificuldade: "Médio",
+          relevancia: "Média",
+          enunciado: "A tabela abaixo representa os dados coletados sobre visitas diárias a um site de acordo com a faixa etária dos usuários. Calcule o primeiro quartil, terceiro decil e o octogésimo percentil.<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Idade</th><th style='border:1px solid var(--border); padding:8px;'>Usuários</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>15 |- 25</td><td style='border:1px solid var(--border); padding:8px;'>6</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>25 |- 35</td><td style='border:1px solid var(--border); padding:8px;'>7</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>35 |- 45</td><td style='border:1px solid var(--border); padding:8px;'>4</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>45 |- 55</td><td style='border:1px solid var(--border); padding:8px;'>3</td></tr></table>",
+          resposta: "Total de usuários \\( N = 20 \\).<br><br><strong>Primeiro Quartil (\\(Q_1\\)):</strong> Posição \\( 20/4 = 5 \\) (Classe 15 |- 25).<br>$$ Q_1 = 15 + \\left(\\frac{5 - 0}{6}\\right) \\cdot 10 = 23,33 $$<br><br><strong>Terceiro Decil (\\(D_3\\)):</strong> Posição \\( (3 \\times 20)/10 = 6 \\) (Classe 15 |- 25).<br>$$ D_3 = 15 + \\left(\\frac{6 - 0}{6}\\right) \\cdot 10 = 25,00 $$<br><br><strong>Octogésimo Percentil (\\(P_{80}\\)):</strong> Posição \\( (80 \\times 20)/100 = 16 \\) (Classe 35 |- 45. Freq. acum. anterior = 13).<br>$$ P_{80} = 35 + \\left(\\frac{16 - 13}{4}\\right) \\cdot 10 = 42,50 $$"
+        }
+      ]
+    },
+    {
+      materia: "Dispersão, Forma e Separatrizes",
+      subtopico: "Dispersão em Dados Agrupados",
+      secId: "dispersao_forma_p2",
       exercicios: [
         {
           id: "LISTAP2-Q01",
@@ -371,9 +398,9 @@ window.COURSES_DATA["estatistica"] = {
       ]
     },
     {
-      materia: "Medidas de Dispersão",
+      materia: "Dispersão, Forma e Separatrizes",
       subtopico: "Comparação e Dispersão Relativa",
-      secId: "dispersao_assimetria",
+      secId: "dispersao_forma_p2",
       exercicios: [
         {
           id: "LISTAP2-Q02",
@@ -396,9 +423,9 @@ window.COURSES_DATA["estatistica"] = {
       ]
     },
     {
-      materia: "Medidas de Dispersão",
+      materia: "Dispersão, Forma e Separatrizes",
       subtopico: "Média e Variância Ponderada",
-      secId: "dispersao_assimetria",
+      secId: "dispersao_forma_p2",
       exercicios: [
         {
           id: "LISTAP2-Q03",
@@ -412,9 +439,9 @@ window.COURSES_DATA["estatistica"] = {
       ]
     },
     {
-      materia: "Assimetria e Curtose",
-      subtopico: "Análise de Coeficientes",
-      secId: "dispersao_assimetria",
+      materia: "Dispersão, Forma e Separatrizes",
+      subtopico: "Assimetria e Curtose",
+      secId: "dispersao_forma_p2",
       exercicios: [
         {
           id: "LISTAP2-Q04",
@@ -437,9 +464,29 @@ window.COURSES_DATA["estatistica"] = {
       ]
     },
     {
-      materia: "Distribuição Normal",
+      materia: "Dispersão, Forma e Separatrizes",
+      subtopico: "Remoção de Outliers (Regra dos 2 Desvios)",
+      secId: "dispersao_forma_p2",
+      exercicios: [
+        {
+          id: "LISTAP2-Q06",
+          numero: 6,
+          origem: "Lista P2",
+          dificuldade: "Difícil",
+          relevancia: "Alta",
+          enunciado: "Um órgão do governo está interessado em determinar padrões sobre o investimento em educação, por habitante, realizado pelas prefeituras. De um levantamento de dez cidades, foram obtidos os valores: 20, 16, 14, 8, 19, 15, 14, 16, 19 e 18.<br><br>Será considerado como investimento básico a média final das observações calculada da seguinte maneira:<br>1. Obtém-se uma média inicial.<br>2. Eliminam-se do conjunto aquelas observações que forem superiores à média inicial mais duas vezes o desvio padrão, ou inferiores à média inicial menos duas vezes o desvio padrão (Regra empírica para outliers).<br>3. Calcula-se a média final com o novo conjunto de observações.<br><br>Qual o investimento básico que você daria como resposta?",
+          resposta: "<strong>Passo 1:</strong> Calculando a média e desvio padrão iniciais do conjunto de 10 cidades:<br>\\( \\bar{x} = 15,9 \\)<br>Variância \\( v(x) = 12,32 \\) e Desvio Padrão \\( \\sigma_x = 3,51 \\).<br><br><strong>Passo 2:</strong> Calculando o intervalo de aceitação \\( [\\bar{x} - 2\\sigma_x ; \\bar{x} + 2\\sigma_x] \\):<br>\\( [15,9 - 7,02 ; 15,9 + 7,02] = [8,88 ; 22,92] \\).<br>Deve-se excluir as cidades com investimentos fora desse intervalo. A única cidade que sai do estudo é a cidade com o valor 8.<br><br><strong>Passo 3:</strong> Calculando a nova média (investimento básico) sem o valor 8 (novo n = 9):<br>$$ \\bar{x}_{final} = 16,8 $$"
+        }
+      ]
+    },
+
+    // ==========================================
+    // SEÇÃO 4: DISTRIBUIÇÃO NORMAL E CORRELAÇÃO (P2)
+    // ==========================================
+    {
+      materia: "Distribuição Normal e Correlação",
       subtopico: "Escala de Desvios (Z-Score)",
-      secId: "normal_correlacao",
+      secId: "normal_correlacao_p2",
       exercicios: [
         {
           id: "LISTAP2-Q05",
@@ -453,25 +500,9 @@ window.COURSES_DATA["estatistica"] = {
       ]
     },
     {
-      materia: "Medidas de Dispersão",
-      subtopico: "Remoção de Outliers (Regra dos 2 Desvios)",
-      secId: "dispersao_assimetria",
-      exercicios: [
-        {
-          id: "LISTAP2-Q06",
-          numero: 6,
-          origem: "Lista P2",
-          dificuldade: "Difícil",
-          relevancia: "Alta",
-          enunciado: "Um órgão do governo está interessado em determinar padrões sobre o investimento em educação, por habitante, realizado pelas prefeituras. De um levantamento de dez cidades, foram obtidos os valores: 20, 16, 14, 8, 19, 15, 14, 16, 19 e 18.<br><br>Será considerado como investimento básico a média final das observações calculada da seguinte maneira:<br>1. Obtém-se uma média inicial.<br>2. Eliminam-se do conjunto aquelas observações que forem superiores à média inicial mais duas vezes o desvio padrão, ou inferiores à média inicial menos duas vezes o desvio padrão (Regra empírica para outliers).<br>3. Calcula-se a média final com o novo conjunto de observações.<br><br>Qual o investimento básico que você daria como resposta?",
-          resposta: "<strong>Passo 1:</strong> Calculando a média e desvio padrão iniciais do conjunto de 10 cidades:<br>\\( \\bar{x} = 15,9 \\)<br>Variância \\( v(x) = 12,32 \\) e Desvio Padrão \\( \\sigma_x = 3,51 \\).<br><br><strong>Passo 2:</strong> Calculando o intervalo de aceitação \\( [\\bar{x} - 2\\sigma_x ; \\bar{x} + 2\\sigma_x] \\):<br>\\( [15,9 - 7,02 ; 15,9 + 7,02] = [8,88 ; 22,92] \\).<br>Deve-se excluir as cidades com investimentos fora desse intervalo. A única cidade que sai do estudo é a cidade com o valor 8.<br><br><strong>Passo 3:</strong> Calculando a nova média (investimento básico) sem o valor 8 (novo n = 9):<br>$$ \\bar{x}_{final} = 16,8 $$"
-        }
-      ]
-    },
-    {
-      materia: "Correlação Linear",
+      materia: "Distribuição Normal e Correlação",
       subtopico: "Coeficiente de Pearson e Interpretação",
-      secId: "normal_correlacao",
+      secId: "normal_correlacao_p2",
       exercicios: [
         {
           id: "LISTAP2-Q09",
@@ -490,31 +521,6 @@ window.COURSES_DATA["estatistica"] = {
           relevancia: "Muito Alta",
           enunciado: "Um pesquisador da área de saúde está estudando a relação entre horas de atividade física praticada por semana (X) e o nível de colesterol LDL (Y) em mg/dL. Os dados de cinco pacientes (X, Y) foram: (0, 160), (1, 145), (3, 120), (5, 110), (6, 100).<br><br>Resultados descritivos das somatórias: \\( \\bar{x} = 3 \\), \\( \\bar{y} = 127 \\).<br>\\( \\sum(x_i - \\bar{x})^2 = 26 \\) ; \\( \\sum(y_i - \\bar{y})^2 = 2.480 \\) ; \\( \\sum(x_i - \\bar{x})(y_i - \\bar{y}) = -250 \\).<br><br>a) Calcule o coeficiente de correlação linear de Pearson e interprete o valor obtido.<br>b) Com base nos resultados, que tipo de recomendação um profissional de saúde poderia oferecer em uma campanha de prevenção?",
           resposta: "<strong>a) Cálculo:</strong><br>$$ r = \\frac{\\sum(x_i - \\bar{x})(y_i - \\bar{y})}{\\sqrt{\\sum(x_i - \\bar{x})^2 \\cdot \\sum(y_i - \\bar{y})^2}} = \\frac{-250}{\\sqrt{26 \\times 2480}} \\approx -0,985 $$<br><strong>Interpretação:</strong> O coeficiente \\( r \\approx -0,985 \\) indica uma correlação linear negativa muito forte entre as horas de atividade física e o nível de colesterol LDL (quando um sobe, o outro desce).<br><br><strong>b) Recomendação:</strong> A análise fornece evidência quantitativa forte para apoiar que o exercício regular diminui o colesterol. O profissional pode incentivar a prática regular, mostrando que a *quantidade* de horas semanais está inversamente e fortemente associada à redução do LDL. No entanto, é prudente lembrar que do ponto de vista puramente estatístico, correlação não é sinônimo absoluto de causalidade."
-        }
-      ]
-    },
-    {
-      materia: "Separatrizes (Posição)",
-      subtopico: "Dados Agrupados em Classes",
-      secId: "separatrizes_p2",
-      exercicios: [
-        {
-          id: "LISTAP2-Q11",
-          numero: 11,
-          origem: "Lista P2",
-          dificuldade: "Difícil",
-          relevancia: "Alta",
-          enunciado: "Para a distribuição de frequências abaixo, calcule o nonagésimo quinto percentil (\\( P_{95} \\)), o décimo decil (\\( D_{10} \\)) e a amplitude interquartílica (\\( AIQ \\)).<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Classes</th><th style='border:1px solid var(--border); padding:8px;'>Frequências</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>2.000 |- 4.000</td><td style='border:1px solid var(--border); padding:8px;'>18</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>4.000 |- 6.000</td><td style='border:1px solid var(--border); padding:8px;'>45</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>6.000 |- 8.000</td><td style='border:1px solid var(--border); padding:8px;'>102</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>8.000 |- 10.000</td><td style='border:1px solid var(--border); padding:8px;'>143</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>10.000 |- 12.000</td><td style='border:1px solid var(--border); padding:8px;'>51</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>12.000 |- 14.000</td><td style='border:1px solid var(--border); padding:8px;'>41</td></tr></table>",
-          resposta: "Total de elementos \\( N = 400 \\).<br><br><strong>Décimo Decil (\\(D_{10}\\)):</strong> Mesma posição que o \\(P_{10}\\) (posição 40). A classe contendo a posição 40 é 4.000 |- 6.000.<br>$$ D_{10} = 4.000 + \\left(\\frac{40 - 18}{45}\\right) \\cdot 2.000 = 4.977,77 $$<br><br><strong>Primeiro Quartil (\\(Q_1\\)):</strong> Posição 100 (classe 6.000 |- 8.000).<br>$$ Q_1 = 6.000 + \\left(\\frac{100 - 63}{102}\\right) \\cdot 2.000 = 6.725,50 $$<br><br><strong>Terceiro Quartil (\\(Q_3\\)):</strong> Posição 300 (classe 8.000 |- 10.000).<br>$$ Q_3 = 8.000 + \\left(\\frac{300 - 165}{143}\\right) \\cdot 2.000 = 9.888,11 $$<br><br><strong>Amplitude Interquartílica (AIQ):</strong><br>$$ AIQ = Q_3 - Q_1 = 9.888,11 - 6.725,50 = 3.162,61 $$<br><br><strong>Nonagésimo Quinto Percentil (\\(P_{95}\\)):</strong> Posição 380 (classe 12.000 |- 14.000).<br>$$ P_{95} = 12.000 + \\left(\\frac{380 - 359}{41}\\right) \\cdot 2.000 = 13.024,40 $$"
-        },
-        {
-          id: "LISTAP2-Q12",
-          numero: 12,
-          origem: "Lista P2",
-          dificuldade: "Médio",
-          relevancia: "Média",
-          enunciado: "A tabela abaixo representa os dados coletados sobre visitas diárias a um site de acordo com a faixa etária dos usuários. Calcule o primeiro quartil, terceiro decil e o octogésimo percentil.<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Idade</th><th style='border:1px solid var(--border); padding:8px;'>Usuários</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>15 |- 25</td><td style='border:1px solid var(--border); padding:8px;'>6</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>25 |- 35</td><td style='border:1px solid var(--border); padding:8px;'>7</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>35 |- 45</td><td style='border:1px solid var(--border); padding:8px;'>4</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>45 |- 55</td><td style='border:1px solid var(--border); padding:8px;'>3</td></tr></table>",
-          resposta: "Total de usuários \\( N = 20 \\).<br><br><strong>Primeiro Quartil (\\(Q_1\\)):</strong> Posição \\( 20/4 = 5 \\) (Classe 15 |- 25).<br>$$ Q_1 = 15 + \\left(\\frac{5 - 0}{6}\\right) \\cdot 10 = 23,33 $$<br><br><strong>Terceiro Decil (\\(D_3\\)):</strong> Posição \\( (3 \\times 20)/10 = 6 \\) (Classe 15 |- 25).<br>$$ D_3 = 15 + \\left(\\frac{6 - 0}{6}\\right) \\cdot 10 = 25,00 $$<br><br><strong>Octogésimo Percentil (\\(P_{80}\\)):</strong> Posição \\( (80 \\times 20)/100 = 16 \\) (Classe 35 |- 45. Freq. acum. anterior = 13).<br>$$ P_{80} = 35 + \\left(\\frac{16 - 13}{4}\\right) \\cdot 10 = 42,50 $$"
         }
       ]
     }
