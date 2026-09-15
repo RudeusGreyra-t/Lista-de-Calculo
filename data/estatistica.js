@@ -38,16 +38,23 @@ window.COURSES_DATA["estatistica"] = {
   name: "AED - Estatística",
   originConfig: {
     "Lista P1": { sequential: true },
+    "Lista P2": { sequential: true },
     "PDF Matéria": { sequential: false },
     "Dado em aula": { sequential: false },
-    "Provas": { sequential: true } // Configurado para permitir a listagem ordenada
+    "Provas": { sequential: true }
   },
   sections: [
     { id: "estatistica_descritiva", title: "Estatística Descritiva", etapa: "P1" },
     { id: "analise_exploratoria", title: "Análise Exploratória", etapa: "P1" },
-    { id: "boxplot_secao", title: "Boxplots", etapa: "P1" }
+    { id: "boxplot_secao", title: "Boxplots", etapa: "P1" },
+    { id: "dispersao_assimetria", title: "Dispersão, Assimetria e Curtose", etapa: "P2" },
+    { id: "normal_correlacao", title: "Distribuição Normal e Correlação", etapa: "P2" },
+    { id: "separatrizes_p2", title: "Separatrizes (Posição)", etapa: "P2" }
   ],
   topics: [
+    // ==========================================
+    // ETAPA: P1
+    // ==========================================
     {
       materia: "Estatística Descritiva",
       subtopico: "Medidas a partir de Dados Brutos",
@@ -340,6 +347,174 @@ window.COURSES_DATA["estatistica"] = {
           "relevancia": "Baixa",
           "enunciado": "Duas turmas (A e B) realizaram uma prova (0 a 100).<br><strong>Turma A:</strong> 45, 48, 52, 55, 58, 60, 62, 65, 68, 70, 72, 75, 78, 80, 82, 85, 88, 90, 92, 95.<br><strong>Turma B:</strong> 30, 40, 55, 60, 62, 65, 68, 70, 71, 72, 73, 74, 75, 76, 78, 80, 82, 90, 95, 100.<br><br>a) Determine os 5 números-resumo de cada turma e o AIQ.<br>b) Verifique se existem valores atípicos (outliers) utilizando a regra do AIQ.",
           "resposta": "<strong>Turma A:</strong> Min=45; Q1=59; Med=71; Q3=83,5; Max=95. \\( AIQ = 24,5 \\). Limites: [22,25 ; 120,25]. Não há outliers.<br><strong>Turma B:</strong> Min=30; Q1=63,5; Med=72,5; Q3=79; Max=100. \\( AIQ = 15,5 \\). Limites: [40,25 ; 102,25]. Outliers: 30 e 40."
+        }
+      ]
+    },
+
+    // ==========================================
+    // ETAPA: P2
+    // ==========================================
+    {
+      materia: "Medidas de Dispersão",
+      subtopico: "Dados Agrupados (Classes)",
+      secId: "dispersao_assimetria",
+      exercicios: [
+        {
+          id: "LISTAP2-Q01",
+          numero: 1,
+          origem: "Lista P2",
+          dificuldade: "Médio",
+          relevancia: "Alta",
+          enunciado: "Seja a distribuição de frequências abaixo resultado da observação de pesos, em kg, de um grupo de 50 pessoas adultas. Calcule suas medidas de dispersão (desvio médio, variância, desvio padrão e coeficiente de variação).<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Pesos (Kg)</th><th style='border:1px solid var(--border); padding:8px;'>Indivíduos</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>46 |- 56</td><td style='border:1px solid var(--border); padding:8px;'>4</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>56 |- 66</td><td style='border:1px solid var(--border); padding:8px;'>10</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>66 |- 76</td><td style='border:1px solid var(--border); padding:8px;'>16</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>76 |- 86</td><td style='border:1px solid var(--border); padding:8px;'>12</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>86 |- 96</td><td style='border:1px solid var(--border); padding:8px;'>8</td></tr></table>",
+          resposta: "A média calculada através dos pontos médios (\\(x_i\\)) é \\( \\bar{x} = 73 \\).<br><br><strong>Desvio Médio:</strong> $$ dm(x) = 9,6 $$<br><strong>Variância Amostral:</strong> $$ v(x) = 138,78 $$<br><strong>Desvio Padrão:</strong> $$ \\sigma_x = \\pm 11,78 $$<br><strong>Coeficiente de Variação:</strong> $$ CV(x) = 16,14\\% $$"
+        }
+      ]
+    },
+    {
+      materia: "Medidas de Dispersão",
+      subtopico: "Comparação e Dispersão Relativa",
+      secId: "dispersao_assimetria",
+      exercicios: [
+        {
+          id: "LISTAP2-Q02",
+          numero: 2,
+          origem: "Lista P2",
+          dificuldade: "Médio",
+          relevancia: "Alta",
+          enunciado: "Cinco pessoas, que se submeteram a uma mesma cirurgia no joelho, usaram dois instrumentos para indicar o nível de dor 12 horas após a operação. A seguir estão os escores de dor de cada pessoa, em cada instrumento. Com base nos dados, calcule para cada instrumento:<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Pessoa</th><th style='border:1px solid var(--border); padding:8px;'>A</th><th style='border:1px solid var(--border); padding:8px;'>B</th><th style='border:1px solid var(--border); padding:8px;'>C</th><th style='border:1px solid var(--border); padding:8px;'>D</th><th style='border:1px solid var(--border); padding:8px;'>E</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Dor (Inst. 1)</td><td style='border:1px solid var(--border); padding:8px;'>8</td><td style='border:1px solid var(--border); padding:8px;'>6</td><td style='border:1px solid var(--border); padding:8px;'>4</td><td style='border:1px solid var(--border); padding:8px;'>3</td><td style='border:1px solid var(--border); padding:8px;'>4</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Dor (Inst. 2)</td><td style='border:1px solid var(--border); padding:8px;'>9</td><td style='border:1px solid var(--border); padding:8px;'>7</td><td style='border:1px solid var(--border); padding:8px;'>4</td><td style='border:1px solid var(--border); padding:8px;'>4</td><td style='border:1px solid var(--border); padding:8px;'>6</td></tr></table><br>a) Desvio médio.<br>b) Variância.<br>c) Desvio padrão.<br>d) Coeficiente de variação. Interprete.<br>e) Coeficiente de Assimetria.",
+          resposta: "<strong>Resultados para o Instrumento 1 (Média = 5, Moda = 4):</strong><br>a) \\( dm(1) = 1,6 \\)<br>b) \\( V(1) = 4 \\)<br>c) \\( \\sigma(1) = 2 \\)<br>d) \\( CV(1) = 40\\% \\)<br>e) \\( \\Delta S_1 = \\frac{5 - 4}{2} = 0,5 \\)<br><br><strong>Resultados para o Instrumento 2 (Média = 6, Moda = 4):</strong><br>a) \\( dm(2) = 1,6 \\)<br>b) \\( V(2) = 4,5 \\)<br>c) \\( \\sigma(2) = 2,12 \\)<br>d) \\( CV(2) = 35,36\\% \\)<br>e) \\( \\Delta S_2 = \\frac{6 - 4}{2,1} = 0,95 \\)<br><br><strong>Interpretação (d):</strong> O coeficiente de variação permite comparar a dispersão de ambos os instrumentos. O Instrumento 1 apresenta maior variabilidade relativa (40%) do que o Instrumento 2 (35,36%)."
+        },
+        {
+          id: "LISTAP2-Q07",
+          numero: 7,
+          origem: "Lista P2",
+          dificuldade: "Fácil",
+          relevancia: "Média",
+          enunciado: "O atributo X tem média amostral 20 e variância amostral 2,56. O atributo Y tem média amostral 45 e desvio padrão amostral 6,2. Calcule o valor do coeficiente de variação para ambas as variáveis. O que se pode interpretar?",
+          resposta: "<strong>Variável X:</strong> \\(\\bar{x} = 20\\), \\(\\sigma_x = \\sqrt{2,56} = 1,6\\).<br>$$ CV(X) = \\frac{1,6}{20} \\times 100 = 8,00\\% \\text{ (baixa dispersão)} $$<br><br><strong>Variável Y:</strong> \\(\\bar{y} = 45\\), \\(\\sigma_y = 6,2\\).<br>$$ CV(Y) = \\frac{6,2}{45} \\times 100 = 13,78\\% \\text{ (baixa dispersão)} $$<br><br><strong>Interpretação:</strong> Ambas as variáveis têm baixa dispersão. Ainda assim, podemos concluir que os dados da variável X são menos dispersos (menor variabilidade relativa) do que os dados da variável Y."
+        }
+      ]
+    },
+    {
+      materia: "Medidas de Dispersão",
+      subtopico: "Média e Variância Ponderada",
+      secId: "dispersao_assimetria",
+      exercicios: [
+        {
+          id: "LISTAP2-Q03",
+          numero: 3,
+          origem: "Lista P2",
+          dificuldade: "Fácil",
+          relevancia: "Média",
+          enunciado: "Um candidato obteve, nas diversas provas de um concurso, as seguintes notas com seus respectivos pesos descritas abaixo. Calcule o desvio padrão e o coeficiente de variação das notas deste candidato. Interprete o coeficiente de variação.<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Matéria</th><th style='border:1px solid var(--border); padding:8px;'>Nota</th><th style='border:1px solid var(--border); padding:8px;'>Peso</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Português</td><td style='border:1px solid var(--border); padding:8px;'>66</td><td style='border:1px solid var(--border); padding:8px;'>3</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Contabilidade</td><td style='border:1px solid var(--border); padding:8px;'>63</td><td style='border:1px solid var(--border); padding:8px;'>3</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Estatística</td><td style='border:1px solid var(--border); padding:8px;'>70</td><td style='border:1px solid var(--border); padding:8px;'>2</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Direito</td><td style='border:1px solid var(--border); padding:8px;'>79</td><td style='border:1px solid var(--border); padding:8px;'>2</td></tr></table>",
+          resposta: "<strong>Média Ponderada (\\(\\bar{x}\\)):</strong> 68,5.<br><strong>Variância Populacional (\\(V(x)\\)):</strong> 33,45.<br><strong>Desvio Padrão (\\(\\sigma_x\\)):</strong> \\( \\pm 5,78 \\).<br><strong>Coeficiente de Variação (\\(CV(x)\\)):</strong> 8,44%.<br><br><strong>Interpretação:</strong> O valor do CV indica que a dispersão é baixa em torno da média das notas do candidato."
+        }
+      ]
+    },
+    {
+      materia: "Assimetria e Curtose",
+      subtopico: "Análise de Coeficientes",
+      secId: "dispersao_assimetria",
+      exercicios: [
+        {
+          id: "LISTAP2-Q04",
+          numero: 4,
+          origem: "Lista P2",
+          dificuldade: "Difícil",
+          relevancia: "Alta",
+          enunciado: "A tabela abaixo mostra as medidas calculadas das distribuições X, Y e Z. Dados os valores, calcule e interprete os coeficientes de assimetria (usando Média, Moda e Desvio Padrão) e curtose.<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Medidas</th><th style='border:1px solid var(--border); padding:8px;'>X</th><th style='border:1px solid var(--border); padding:8px;'>Y</th><th style='border:1px solid var(--border); padding:8px;'>Z</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Média</td><td style='border:1px solid var(--border); padding:8px;'>5</td><td style='border:1px solid var(--border); padding:8px;'>103,9</td><td style='border:1px solid var(--border); padding:8px;'>1.063,2</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Moda</td><td style='border:1px solid var(--border); padding:8px;'>3</td><td style='border:1px solid var(--border); padding:8px;'>125</td><td style='border:1px solid var(--border); padding:8px;'>253,6</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Desvio Padrão</td><td style='border:1px solid var(--border); padding:8px;'>2</td><td style='border:1px solid var(--border); padding:8px;'>28,7</td><td style='border:1px solid var(--border); padding:8px;'>189,6</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>1º Quartil (\\(Q_1\\))</td><td style='border:1px solid var(--border); padding:8px;'>2</td><td style='border:1px solid var(--border); padding:8px;'>16,3</td><td style='border:1px solid var(--border); padding:8px;'>321,5</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>3º Quartil (\\(Q_3\\))</td><td style='border:1px solid var(--border); padding:8px;'>8</td><td style='border:1px solid var(--border); padding:8px;'>75,9</td><td style='border:1px solid var(--border); padding:8px;'>1.452,6</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>10º Percentil (\\(P_{10}\\))</td><td style='border:1px solid var(--border); padding:8px;'>3</td><td style='border:1px solid var(--border); padding:8px;'>22,1</td><td style='border:1px solid var(--border); padding:8px;'>254,8</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>90º Percentil (\\(P_{90}\\))</td><td style='border:1px solid var(--border); padding:8px;'>15</td><td style='border:1px solid var(--border); padding:8px;'>95,8</td><td style='border:1px solid var(--border); padding:8px;'>1.325,8</td></tr></table>",
+          resposta: "<strong>Coeficiente de Assimetria (\\(\\Delta S\\)):</strong><br>\\( \\Delta S(X) = 1 \\)<br>\\( \\Delta S(Y) = -0,74 \\)<br>\\( \\Delta S(Z) = 4,27 \\)<br><strong>Interpretação:</strong> As distribuições X e Z são assimétricas positivas (à direita), e a distribuição Y é assimétrica negativa (à esquerda).<br><br><strong>Coeficiente de Curtose (\\(K\\)):</strong><br>Utilizando a fórmula \\( K = \\frac{Q_3 - Q_1}{2(P_{90} - P_{10})} \\):<br>\\( K(X) = 0,25 \\)<br>\\( K(Y) = 0,40 \\)<br>\\( K(Z) = 0,53 \\)<br><strong>Interpretação:</strong> O padrão normal de curtose é 0,263. A distribuição X (\\(< 0,263\\)) é <strong>Leptocúrtica</strong>. As distribuições Y e Z (\\(> 0,263\\)) são <strong>Platicúrticas</strong>."
+        },
+        {
+          id: "LISTAP2-Q08",
+          numero: 8,
+          origem: "Lista P2",
+          dificuldade: "Médio",
+          relevancia: "Alta",
+          enunciado: "Um órgão de planejamento governamental está avaliando a distribuição da renda per capita entre os municípios de um determinado estado. A equipe de análise produziu o seguinte resumo estatístico:<br>Média: R$ 850,00<br>Mediana: R$ 700,00<br>Moda: R$ 600,00<br>Coeficiente de curtose: 0,213<br><br>a) Interprete a assimetria da distribuição da renda per capita. Que tipo de política pública pode ser sugerida com base nessa informação?<br>b) O valor do coeficiente de curtose indica uma distribuição mais ou menos concentrada em torno da média? O que isso pode representar em termos de variação de renda entre os municípios?",
+          resposta: "<strong>a) Assimetria:</strong> A distribuição é assimétrica à direita (positiva), pois Média > Mediana > Moda. Isso indica que há poucos municípios com renda muito alta puxando a média para cima, enquanto a maioria tem renda mais baixa. Podem ser sugeridas políticas redistributivas, como aumento de repasses para os municípios mais pobres.<br><br><strong>b) Curtose:</strong> A curtose (0,213) é menor que 0,263, indicando uma distribuição <strong>leptocúrtica</strong>. Há uma maior concentração de valores próximos da média, mas com caudas mais pesadas. Isso sugere que, embora muitos municípios tenham rendas próximas ao centro, existem casos extremos significativos de rendas muito altas ou muito baixas, o que reforça a necessidade de políticas direcionadas aos extremos."
+        }
+      ]
+    },
+    {
+      materia: "Distribuição Normal",
+      subtopico: "Escala de Desvios (Z-Score)",
+      secId: "normal_correlacao",
+      exercicios: [
+        {
+          id: "LISTAP2-Q05",
+          numero: 5,
+          origem: "Lista P2",
+          dificuldade: "Fácil",
+          relevancia: "Média",
+          enunciado: "Suponha que as notas de um vestibular tenham distribuição normal com média 60 e desvio padrão de 15 pontos.<br><br>a) Se você prestou este vestibular e obteve nota igual a 40 pontos, qual a sua posição em termos de unidades de desvios padrão, com relação à média das notas?<br>b) Se foram considerados aprovados os candidatos que obtiveram nota mínima correspondente a 1 desvio padrão acima da média, qual a nota mínima de aprovação na escala original?<br>c) Se a nota mínima de aprovação foi de 2 desvios padrão acima da média, qual o valor na escala original?<br>d) Se foi 2,5 desvios padrão acima da média, qual o valor?<br>e) Se foram considerados reprovados os que obtiveram nota mínima correspondente a 0,5 desvios padrão abaixo da média, qual a nota de reprovação?",
+          resposta: "a) \\( Z = \\frac{40 - 60}{15} = -1,33 \\) desvios padrão.<br>b) \\( 60 + 1(15) = 75 \\) pontos.<br>c) \\( 60 + 2(15) = 90 \\) pontos.<br>d) \\( 60 + 2,5(15) = 97,5 \\) pontos.<br>e) \\( 60 - 0,5(15) = 52,5 \\) pontos."
+        }
+      ]
+    },
+    {
+      materia: "Medidas de Dispersão",
+      subtopico: "Remoção de Outliers (Regra dos 2 Desvios)",
+      secId: "dispersao_assimetria",
+      exercicios: [
+        {
+          id: "LISTAP2-Q06",
+          numero: 6,
+          origem: "Lista P2",
+          dificuldade: "Difícil",
+          relevancia: "Alta",
+          enunciado: "Um órgão do governo está interessado em determinar padrões sobre o investimento em educação, por habitante, realizado pelas prefeituras. De um levantamento de dez cidades, foram obtidos os valores: 20, 16, 14, 8, 19, 15, 14, 16, 19 e 18.<br><br>Será considerado como investimento básico a média final das observações calculada da seguinte maneira:<br>1. Obtém-se uma média inicial.<br>2. Eliminam-se do conjunto aquelas observações que forem superiores à média inicial mais duas vezes o desvio padrão, ou inferiores à média inicial menos duas vezes o desvio padrão (Regra empírica para outliers).<br>3. Calcula-se a média final com o novo conjunto de observações.<br><br>Qual o investimento básico que você daria como resposta?",
+          resposta: "<strong>Passo 1:</strong> Calculando a média e desvio padrão iniciais do conjunto de 10 cidades:<br>\\( \\bar{x} = 15,9 \\)<br>Variância \\( v(x) = 12,32 \\) e Desvio Padrão \\( \\sigma_x = 3,51 \\).<br><br><strong>Passo 2:</strong> Calculando o intervalo de aceitação \\( [\\bar{x} - 2\\sigma_x ; \\bar{x} + 2\\sigma_x] \\):<br>\\( [15,9 - 7,02 ; 15,9 + 7,02] = [8,88 ; 22,92] \\).<br>Deve-se excluir as cidades com investimentos fora desse intervalo. A única cidade que sai do estudo é a cidade com o valor 8.<br><br><strong>Passo 3:</strong> Calculando a nova média (investimento básico) sem o valor 8 (novo n = 9):<br>$$ \\bar{x}_{final} = 16,8 $$"
+        }
+      ]
+    },
+    {
+      materia: "Correlação Linear",
+      subtopico: "Coeficiente de Pearson e Interpretação",
+      secId: "normal_correlacao",
+      exercicios: [
+        {
+          id: "LISTAP2-Q09",
+          numero: 9,
+          origem: "Lista P2",
+          dificuldade: "Fácil",
+          relevancia: "Alta",
+          enunciado: "Um pesquisador coletou dados sobre o número de horas de estudo por semana (X) e as notas finais (Y, em escala de 0 a 10) de 4 alunos. Os pares ordenados (X, Y) são: Aluno 1 (2, 4); Aluno 2 (4, 6); Aluno 3 (6, 8); e Aluno 4 (8, 10).<br><br>a) Calcule o coeficiente de correlação de Pearson entre as horas de estudo e as notas finais. Interprete o resultado.<br>b) Com base no coeficiente calculado, é possível afirmar que estudar mais horas causa um aumento na nota? Justifique sua resposta.",
+          resposta: "<strong>a) Cálculo do Coeficiente (r):</strong><br>\\( \\bar{x} = 5 \\) ; \\( \\bar{y} = 7 \\).<br>\\( \\sum(x_i - \\bar{x})^2 = 20 \\) ; \\( \\sum(y_i - \\bar{y})^2 = 20 \\).<br>\\( \\sum(x_i - \\bar{x})(y_i - \\bar{y}) = 20 \\).<br>$$ r = 1 $$<br><strong>Interpretação:</strong> O coeficiente \\( r = 1 \\) indica uma correlação linear positiva perfeita entre as horas de estudo e as notas.<br><br><strong>b) Causalidade:</strong> Não. Apenas com a correlação estatística não podemos afirmar causa e efeito direto. Correlação não implica causalidade. Existem outras variáveis não observadas (qualidade do estudo, conhecimento prévio, etc.) que influenciam a nota."
+        },
+        {
+          id: "LISTAP2-Q10",
+          numero: 10,
+          origem: "Lista P2",
+          dificuldade: "Médio",
+          relevancia: "Muito Alta",
+          enunciado: "Um pesquisador da área de saúde está estudando a relação entre horas de atividade física praticada por semana (X) e o nível de colesterol LDL (Y) em mg/dL. Os dados de cinco pacientes (X, Y) foram: (0, 160), (1, 145), (3, 120), (5, 110), (6, 100).<br><br>Resultados descritivos das somatórias: \\( \\bar{x} = 3 \\), \\( \\bar{y} = 127 \\).<br>\\( \\sum(x_i - \\bar{x})^2 = 26 \\) ; \\( \\sum(y_i - \\bar{y})^2 = 2.480 \\) ; \\( \\sum(x_i - \\bar{x})(y_i - \\bar{y}) = -250 \\).<br><br>a) Calcule o coeficiente de correlação linear de Pearson e interprete o valor obtido.<br>b) Com base nos resultados, que tipo de recomendação um profissional de saúde poderia oferecer em uma campanha de prevenção?",
+          resposta: "<strong>a) Cálculo:</strong><br>$$ r = \\frac{\\sum(x_i - \\bar{x})(y_i - \\bar{y})}{\\sqrt{\\sum(x_i - \\bar{x})^2 \\cdot \\sum(y_i - \\bar{y})^2}} = \\frac{-250}{\\sqrt{26 \\times 2480}} \\approx -0,985 $$<br><strong>Interpretação:</strong> O coeficiente \\( r \\approx -0,985 \\) indica uma correlação linear negativa muito forte entre as horas de atividade física e o nível de colesterol LDL (quando um sobe, o outro desce).<br><br><strong>b) Recomendação:</strong> A análise fornece evidência quantitativa forte para apoiar que o exercício regular diminui o colesterol. O profissional pode incentivar a prática regular, mostrando que a *quantidade* de horas semanais está inversamente e fortemente associada à redução do LDL. No entanto, é prudente lembrar que do ponto de vista puramente estatístico, correlação não é sinônimo absoluto de causalidade."
+        }
+      ]
+    },
+    {
+      materia: "Separatrizes (Posição)",
+      subtopico: "Dados Agrupados em Classes",
+      secId: "separatrizes_p2",
+      exercicios: [
+        {
+          id: "LISTAP2-Q11",
+          numero: 11,
+          origem: "Lista P2",
+          dificuldade: "Difícil",
+          relevancia: "Alta",
+          enunciado: "Para a distribuição de frequências abaixo, calcule o nonagésimo quinto percentil (\\( P_{95} \\)), o décimo decil (\\( D_{10} \\)) e a amplitude interquartílica (\\( AIQ \\)).<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Classes</th><th style='border:1px solid var(--border); padding:8px;'>Frequências</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>2.000 |- 4.000</td><td style='border:1px solid var(--border); padding:8px;'>18</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>4.000 |- 6.000</td><td style='border:1px solid var(--border); padding:8px;'>45</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>6.000 |- 8.000</td><td style='border:1px solid var(--border); padding:8px;'>102</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>8.000 |- 10.000</td><td style='border:1px solid var(--border); padding:8px;'>143</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>10.000 |- 12.000</td><td style='border:1px solid var(--border); padding:8px;'>51</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>12.000 |- 14.000</td><td style='border:1px solid var(--border); padding:8px;'>41</td></tr></table>",
+          resposta: "Total de elementos \\( N = 400 \\).<br><br><strong>Décimo Decil (\\(D_{10}\\)):</strong> Mesma posição que o \\(P_{10}\\) (posição 40). A classe contendo a posição 40 é 4.000 |- 6.000.<br>$$ D_{10} = 4.000 + \\left(\\frac{40 - 18}{45}\\right) \\cdot 2.000 = 4.977,77 $$<br><br><strong>Primeiro Quartil (\\(Q_1\\)):</strong> Posição 100 (classe 6.000 |- 8.000).<br>$$ Q_1 = 6.000 + \\left(\\frac{100 - 63}{102}\\right) \\cdot 2.000 = 6.725,50 $$<br><br><strong>Terceiro Quartil (\\(Q_3\\)):</strong> Posição 300 (classe 8.000 |- 10.000).<br>$$ Q_3 = 8.000 + \\left(\\frac{300 - 165}{143}\\right) \\cdot 2.000 = 9.888,11 $$<br><br><strong>Amplitude Interquartílica (AIQ):</strong><br>$$ AIQ = Q_3 - Q_1 = 9.888,11 - 6.725,50 = 3.162,61 $$<br><br><strong>Nonagésimo Quinto Percentil (\\(P_{95}\\)):</strong> Posição 380 (classe 12.000 |- 14.000).<br>$$ P_{95} = 12.000 + \\left(\\frac{380 - 359}{41}\\right) \\cdot 2.000 = 13.024,40 $$"
+        },
+        {
+          id: "LISTAP2-Q12",
+          numero: 12,
+          origem: "Lista P2",
+          dificuldade: "Médio",
+          relevancia: "Média",
+          enunciado: "A tabela abaixo representa os dados coletados sobre visitas diárias a um site de acordo com a faixa etária dos usuários. Calcule o primeiro quartil, terceiro decil e o octogésimo percentil.<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Idade</th><th style='border:1px solid var(--border); padding:8px;'>Usuários</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>15 |- 25</td><td style='border:1px solid var(--border); padding:8px;'>6</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>25 |- 35</td><td style='border:1px solid var(--border); padding:8px;'>7</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>35 |- 45</td><td style='border:1px solid var(--border); padding:8px;'>4</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>45 |- 55</td><td style='border:1px solid var(--border); padding:8px;'>3</td></tr></table>",
+          resposta: "Total de usuários \\( N = 20 \\).<br><br><strong>Primeiro Quartil (\\(Q_1\\)):</strong> Posição \\( 20/4 = 5 \\) (Classe 15 |- 25).<br>$$ Q_1 = 15 + \\left(\\frac{5 - 0}{6}\\right) \\cdot 10 = 23,33 $$<br><br><strong>Terceiro Decil (\\(D_3\\)):</strong> Posição \\( (3 \\times 20)/10 = 6 \\) (Classe 15 |- 25).<br>$$ D_3 = 15 + \\left(\\frac{6 - 0}{6}\\right) \\cdot 10 = 25,00 $$<br><br><strong>Octogésimo Percentil (\\(P_{80}\\)):</strong> Posição \\( (80 \\times 20)/100 = 16 \\) (Classe 35 |- 45. Freq. acum. anterior = 13).<br>$$ P_{80} = 35 + \\left(\\frac{16 - 13}{4}\\right) \\cdot 10 = 42,50 $$"
         }
       ]
     }
