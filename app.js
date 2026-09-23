@@ -73,7 +73,7 @@ let selectedOrigens = new Set();
 let selectedDificuldades = new Set();
 let sectionSubtopicos = {};
 let currentStatusFilter = "all";
-let currentEtapaFilter = "PF"; // Valor padrão para carregar focado na P2
+let currentEtapaFilter = "P2"; // Valor padrão para carregar focado na P2
 let isSequentialMode = false;
 let allAnswersShown = false;
 
