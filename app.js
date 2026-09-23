@@ -39,7 +39,6 @@ function parseWebTex(text) {
   if (!text) return "";
   text = text.replace(/\$\$(.*?)\$\$/g, (m, tex) => `<div class="webtex-block"><img src="https://latex.codecogs.com/svg.image?\\Large\\displaystyle ${encodeURIComponent(tex.trim())}" alt="Formula"></div>`);
   text = text.replace(/\\\((.*?)\\\)/g, (m, tex) => `<img class="webtex-inline" src="https://latex.codecogs.com/svg.image?\\large\\textstyle ${encodeURIComponent(tex.trim())}" alt="Formula">`);
-  text = text.replace(/\$([^$]+?)\$/g, (m, tex) => `<img class="webtex-inline" src="https://latex.codecogs.com/svg.image?\\large\\textstyle ${encodeURIComponent(tex.trim())}" alt="Formula">`);
   return text;
 }
 
