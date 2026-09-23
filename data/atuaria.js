@@ -32,19 +32,8 @@ window.COURSES_DATA["atuaria"] = {
         },
         {
           id: "TAB-PROB-002", numero: 1, origem: "Lista Matéria", dificuldade: "Fácil", relevancia: "Média",
-          enunciado: `Exemplo 1. Dada a tábua hipotética abaixo:
-<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">
-  <tr><th>\\(X\\)</th><th>\\(q_x\\)</th></tr>
-  <tr><td>0</td><td>0,005</td></tr>
-  <tr><td>1</td><td>0,001</td></tr>
-  <tr><td>2</td><td>0,002</td></tr>
-  <tr><td>99</td><td>0,7</td></tr>
-  <tr><td>100</td><td>1</td></tr>
-</table>
-Determine a probabilidade de uma pessoa de 0 ano morrer antes de completar 1 ano, a de 2 anos antes de 3 anos, e a de 99 anos antes de 100 anos.`,
-          resposta: `Probabilidade de uma pessoa de 0 ano morrer antes de completar 1 ano = \\( q_0 = 0,005 \\)<br>
-Probabilidade de uma pessoa de 2 anos morrer antes de completar 3 anos = \\( q_2 = 0,002 \\)<br>
-Probabilidade de uma pessoa de 99 anos morrer antes de completar 100 anos = \\( q_{99} = 0,7 \\)`
+          enunciado: `Exemplo 1. Dada a tábua hipotética abaixo:\n<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">\n  <tr><th>\\(X\\)</th><th>\\(q_x\\)</th></tr>\n  <tr><td>0</td><td>0,005</td></tr>\n  <tr><td>1</td><td>0,001</td></tr>\n  <tr><td>2</td><td>0,002</td></tr>\n  <tr><td>99</td><td>0,7</td></tr>\n  <tr><td>100</td><td>1</td></tr>\n</table>\nDetermine a probabilidade de uma pessoa de 0 ano morrer antes de completar 1 ano, a de 2 anos antes de 3 anos, e a de 99 anos antes de 100 anos.`,
+          resposta: `Probabilidade de uma pessoa de 0 ano morrer antes de completar 1 ano = \\( q_0 = 0,005 \\)<br>\nProbabilidade de uma pessoa de 2 anos morrer antes de completar 3 anos = \\( q_2 = 0,002 \\)<br>\nProbabilidade de uma pessoa de 99 anos morrer antes de completar 100 anos = \\( q_{99} = 0,7 \\)`
         },
         {
           id: "TAB-PROB-004", numero: 3, origem: "Lista Matéria", dificuldade: "Médio", relevancia: "Alta",
@@ -77,19 +66,8 @@ Probabilidade de uma pessoa de 99 anos morrer antes de completar 100 anos = \\( 
       exercicios: [
         {
           id: "TAB-FUNC-001", numero: 2, origem: "Lista Matéria", dificuldade: "Fácil", relevancia: "Alta",
-          enunciado: `Exemplo 2. Complete as colunas \\( p_x, l_x \\) e \\( d_x \\) para as idades de 0 a 3, partindo de \\( l_0 = 10.000 \\):
-<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">
-  <tr><th>\\(X\\)</th><th>\\(q_x\\)</th><th>\\(p_x\\)</th><th>\\(l_x\\)</th><th>\\(d_x\\)</th></tr>
-  <tr><td>0</td><td>0,01</td><td></td><td></td><td></td></tr>
-  <tr><td>1</td><td>0,02</td><td></td><td></td><td></td></tr>
-  <tr><td>2</td><td>0,03</td><td></td><td></td><td></td></tr>
-  <tr><td>3</td><td>0,035</td><td></td><td></td><td></td></tr>
-</table>`,
-          resposta: `Fórmulas: \\( p_x = 1 - q_x \\); \\( l_{x+1} = l_x \\cdot p_x \\); \\( d_x = l_x \\cdot q_x \\)<br><br>
-Idade 0: \\( p_0 = 0,99 \\); \\( l_0 = 10.000 \\); \\( d_0 = 100 \\)<br>
-Idade 1: \\( p_1 = 0,98 \\); \\( l_1 = 9.900 \\); \\( d_1 = 198 \\)<br>
-Idade 2: \\( p_2 = 0,97 \\); \\( l_2 = 9.702 \\); \\( d_2 = 291,06 \\)<br>
-Idade 3: \\( p_3 = 0,965 \\); \\( l_3 = 9.410,94 \\); \\( d_3 = 329,38 \\)`
+          enunciado: `Exemplo 2. Complete as colunas \\( p_x, l_x \\) e \\( d_x \\) para as idades de 0 a 3, partindo de \\( l_0 = 10.000 \\):\n<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">\n  <tr><th>\\(X\\)</th><th>\\(q_x\\)</th><th>\\(p_x\\)</th><th>\\(l_x\\)</th><th>\\(d_x\\)</th></tr>\n  <tr><td>0</td><td>0,01</td><td></td><td></td><td></td></tr>\n  <tr><td>1</td><td>0,02</td><td></td><td></td><td></td></tr>\n  <tr><td>2</td><td>0,03</td><td></td><td></td><td></td></tr>\n  <tr><td>3</td><td>0,035</td><td></td><td></td><td></td></tr>\n</table>`,
+          resposta: `Fórmulas: \\( p_x = 1 - q_x \\); \\( l_{x+1} = l_x \\cdot p_x \\); \\( d_x = l_x \\cdot q_x \\)<br><br>\nIdade 0: \\( p_0 = 0,99 \\); \\( l_0 = 10.000 \\); \\( d_0 = 100 \\)<br>\nIdade 1: \\( p_1 = 0,98 \\); \\( l_1 = 9.900 \\); \\( d_1 = 198 \\)<br>\nIdade 2: \\( p_2 = 0,97 \\); \\( l_2 = 9.702 \\); \\( d_2 = 291,06 \\)<br>\nIdade 3: \\( p_3 = 0,965 \\); \\( l_3 = 9.410,94 \\); \\( d_3 = 329,38 \\)`
         },
         {
           id: "TAB-FUNC-002", numero: 4, origem: "Lista Matéria", dificuldade: "Fácil", relevancia: "Média",
@@ -115,21 +93,8 @@ Idade 3: \\( p_3 = 0,965 \\); \\( l_3 = 9.410,94 \\); \\( d_3 = 329,38 \\)`
         },
         {
           id: "ESP-VIDA-002", numero: 5, origem: "Lista Matéria", dificuldade: "Médio", relevancia: "Alta",
-          enunciado: `Exemplo 4. Com base na tabela, calcule a expectativa de vida completa e a expectativa de vida incompleta aos 95 anos.
-<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">
-  <tr><th>\\(x\\)</th><th>\\(q_x\\)</th><th>\\(p_x\\)</th><th>\\(l_x\\)</th><th>\\(d_x\\)</th></tr>
-  <tr><td>95</td><td>0,2</td><td>0,8</td><td>10.000</td><td>2.000</td></tr>
-  <tr><td>96</td><td>0,4</td><td>0,6</td><td>8.000</td><td>3.200</td></tr>
-  <tr><td>97</td><td>0,5</td><td>0,5</td><td>4.800</td><td>2.400</td></tr>
-  <tr><td>98</td><td>0,6</td><td>0,4</td><td>2.400</td><td>1.440</td></tr>
-  <tr><td>99</td><td>0,7</td><td>0,3</td><td>960</td><td>672</td></tr>
-  <tr><td>100</td><td>1,0</td><td>0,0</td><td>288</td><td>288</td></tr>
-</table>`,
-          resposta: `Expectativa de vida incompleta \\((e_{95})\\):<br>
-$$e_{95} = \\frac{8.000 + 4.800 + 2.400 + 960 + 288}{10.000} = 1,6448 \\text{ anos}$$
-<br>
-Expectativa de vida completa \\((e^\\circ_{95})\\):<br>
-$$e^\\circ_{95} = e_{95} + 0,5 = 1,6448 + 0,5 = 2,1448 \\text{ anos}$$`
+          enunciado: `Exemplo 4. Com base na tabela, calcule a expectativa de vida completa e a expectativa de vida incompleta aos 95 anos.\n<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">\n  <tr><th>\\(x\\)</th><th>\\(q_x\\)</th><th>\\(p_x\\)</th><th>\\(l_x\\)</th><th>\\(d_x\\)</th></tr>\n  <tr><td>95</td><td>0,2</td><td>0,8</td><td>10.000</td><td>2.000</td></tr>\n  <tr><td>96</td><td>0,4</td><td>0,6</td><td>8.000</td><td>3.200</td></tr>\n  <tr><td>97</td><td>0,5</td><td>0,5</td><td>4.800</td><td>2.400</td></tr>\n  <tr><td>98</td><td>0,6</td><td>0,4</td><td>2.400</td><td>1.440</td></tr>\n  <tr><td>99</td><td>0,7</td><td>0,3</td><td>960</td><td>672</td></tr>\n  <tr><td>100</td><td>1,0</td><td>0,0</td><td>288</td><td>288</td></tr>\n</table>`,
+          resposta: `Expectativa de vida incompleta \\((e_{95})\\):<br>\n$$e_{95} = \\frac{8.000 + 4.800 + 2.400 + 960 + 288}{10.000} = 1,6448 \\text{ anos}$$<br>\nExpectativa de vida completa \\((e^\\circ_{95})\\):<br>\n$$e^\\circ_{95} = e_{95} + 0,5 = 1,6448 + 0,5 = 2,1448 \\text{ anos}$$`
         }
       ]
     },
@@ -151,25 +116,12 @@ $$e^\\circ_{95} = e_{95} + 0,5 = 1,6448 + 0,5 = 2,1448 \\text{ anos}$$`
         {
           id: "ANU-REND-003", numero: 10, origem: "Lista Matéria", dificuldade: "Fácil", relevancia: "Alta",
           enunciado: `Exemplo 8. Uma pessoa de 60 anos quer comprar uma renda postecipada vitalícia atuarial de R$ 50.000,00. Sabendo que a seguradora arbitrou \\( a_{60} = 25 \\), qual o valor do prêmio puro?`,
-          resposta: `$$ \\text{Prêmio} = \\text{Renda} \\times a_{60} $$
-$$ \\text{Prêmio} = 50.000 \\times 25 = \\text{R\\$ } 1.250.000,00 $$`
+          resposta: `$$ \\text{Prêmio} = \\text{Renda} \\times a_{60} $$\n$$ \\text{Prêmio} = 50.000 \\times 25 = \\text{R\\$ } 1.250.000,00 $$`
         },
         {
           id: "ANU-REND-004", numero: 11, origem: "Lista Matéria", dificuldade: "Médio", relevancia: "Alta",
-          enunciado: `Exemplo 9. Seja a tábua de mortalidade dada uma taxa de juros garantida de 5% a.a.
-<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">
-  <tr><th>\\(X\\)</th><th>\\(q_x\\)</th><th>\\(p_x\\)</th></tr>
-  <tr><td>96</td><td>0,4</td><td>0,6</td></tr>
-  <tr><td>97</td><td>0,45</td><td>0,55</td></tr>
-  <tr><td>98</td><td>0,8</td><td>0,2</td></tr>
-  <tr><td>99</td><td>1</td><td>0</td></tr>
-</table>
-Calcule \\( \\ddot{a}_{96} \\).<br>
-Qual o valor do prêmio à vista para uma pessoa de 96 anos receber uma renda vitalícia, no início de cada ano, de R$ 150.000?`,
-          resposta: `$$ \\ddot{a}_{96} = 1 + v \\cdot p_{96} + v^2 \\cdot {}_2p_{96} + v^3 \\cdot {}_3p_{96} $$
-$$ \\ddot{a}_{96} = 1 + (1,05)^{-1} \\cdot 0,60 + (1,05)^{-2} \\cdot (0,60 \\times 0,55) + (1,05)^{-3} \\cdot (0,60 \\times 0,55 \\times 0,20) $$
-$$ \\ddot{a}_{96} = 1 + 0,5714 + 0,2993 + 0,0570 = 1,9277 $$<br>
-$$ \\text{Prêmio} = \\text{Renda} \\times \\ddot{a}_{96} = 150.000 \\times 1,9277 = \\text{R\\$ } 289.155,00 $$`
+          enunciado: `Exemplo 9. Seja a tábua de mortalidade dada uma taxa de juros garantida de 5% a.a.\n<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">\n  <tr><th>\\(X\\)</th><th>\\(q_x\\)</th><th>\\(p_x\\)</th></tr>\n  <tr><td>96</td><td>0,4</td><td>0,6</td></tr>\n  <tr><td>97</td><td>0,45</td><td>0,55</td></tr>\n  <tr><td>98</td><td>0,8</td><td>0,2</td></tr>\n  <tr><td>99</td><td>1</td><td>0</td></tr>\n</table>\nCalcule \\( \\ddot{a}_{96} \\).<br>\nQual o valor do prêmio à vista para uma pessoa de 96 anos receber uma renda vitalícia, no início de cada ano, de R$ 150.000?`,
+          resposta: `$$ \\ddot{a}_{96} = 1 + v \\cdot p_{96} + v^2 \\cdot {}_2p_{96} + v^3 \\cdot {}_3p_{96} $$\n$$ \\ddot{a}_{96} = 1 + (1,05)^{-1} \\cdot 0,60 + (1,05)^{-2} \\cdot (0,60 \\times 0,55) + (1,05)^{-3} \\cdot (0,60 \\times 0,55 \\times 0,20) $$\n$$ \\ddot{a}_{96} = 1 + 0,5714 + 0,2993 + 0,0570 = 1,9277 $$<br>\n$$ \\text{Prêmio} = \\text{Renda} \\times \\ddot{a}_{96} = 150.000 \\times 1,9277 = \\text{R\\$ } 289.155,00 $$`
         }
       ]
     },
@@ -180,19 +132,8 @@ $$ \\text{Prêmio} = \\text{Renda} \\times \\ddot{a}_{96} = 150.000 \\times 1,92
       exercicios: [
         {
           id: "ANU-REND-002", numero: 5, origem: "Lista de Revisão", dificuldade: "Fácil", relevancia: "Alta",
-          enunciado: `3. Uma pessoa de 60 anos quer pagar um prêmio único e se aposentar. Ela quer receber R$ 50.000,00 no fim de cada ano. Seja a tabela de anuidades da seguradora:
-<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">
-  <tr><th>Anuidade</th><th>Valor</th></tr>
-  <tr><td>\\( a_{60} \\)</td><td>20,0</td></tr>
-  <tr><td>\\( \\ddot{a}_{60} \\)</td><td>21,0</td></tr>
-  <tr><td>\\( a_{61} \\)</td><td>18,7</td></tr>
-  <tr><td>\\( \\ddot{a}_{61} \\)</td><td>19,7</td></tr>
-</table>
-Qual o valor do prêmio? (Dica: prêmio = renda × anuidade unica)`,
-          resposta: `O indivíduo deseja receber um valor ao final de cada ano (caracterizando uma anuidade postecipada) para o resto da vida. Logo, utilizaremos a anuidade \\( a_{60} \\) (valor 20,0).<br>
-A fórmula do prêmio único para uma anuidade é:
-$$ \\text{Prêmio} = \\text{Renda} \\times \\text{Fator de Anuidade} $$
-$$ P = R \\cdot a_{60} = 50.000,00 \\times 20 = \\text{R\\$ } 1.000.000,00 $$`
+          enunciado: `3. Uma pessoa de 60 anos quer pagar um prêmio único e se aposentar. Ela quer receber R$ 50.000,00 no fim de cada ano. Seja a tabela de anuidades da seguradora:\n<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">\n  <tr><th>Anuidade</th><th>Valor</th></tr>\n  <tr><td>\\( a_{60} \\)</td><td>20,0</td></tr>\n  <tr><td>\\( \\ddot{a}_{60} \\)</td><td>21,0</td></tr>\n  <tr><td>\\( a_{61} \\)</td><td>18,7</td></tr>\n  <tr><td>\\( \\ddot{a}_{61} \\)</td><td>19,7</td></tr>\n</table>\nQual o valor do prêmio? (Dica: prêmio = renda × anuidade unica)`,
+          resposta: `O indivíduo deseja receber um valor ao final de cada ano (caracterizando uma anuidade postecipada) para o resto da vida. Logo, utilizaremos a anuidade \\( a_{60} \\) (valor 20,0).<br>\nA fórmula do prêmio único para uma anuidade é:\n$$ \\text{Prêmio} = \\text{Renda} \\times \\text{Fator de Anuidade} $$\n$$ P = R \\cdot a_{60} = 50.000,00 \\times 20 = \\text{R\\$ } 1.000.000,00 $$`
         }
       ]
     },
@@ -203,35 +144,23 @@ $$ P = R \\cdot a_{60} = 50.000,00 \\times 20 = \\text{R\\$ } 1.000.000,00 $$`
       exercicios: [
         {
           id: "SEG-DOT-001", numero: 4, origem: "Lista de Revisão", dificuldade: "Médio", relevancia: "Alta",
-          enunciado: `Considerando os dados da questão anterior (Tábua de mortalidade para idades de 94 a 100 e taxa de juros de 3% a.a.):<br>
-g) Uma pessoa de 94 anos quer contratar um seguro dotal puro com capital segurado de R$ 250.000,00. Ela receberá esse valor se chegar viva aos 99 anos. Qual o valor do prêmio puro?`,
-          resposta: `Dotal Puro (Capital de R$ 250.000 recebido aos 99 anos por pessoa de 94):<br>
-$$ P = C.S \\cdot (1 + i)^{-5} \\cdot {}_5p_{94} $$
-Calculando a probabilidade de sobrevivência:
-$$ {}_5p_{94} = p_{94} \\cdot p_{95} \\cdot p_{96} \\cdot p_{97} \\cdot p_{98} = 0,55 \\times 0,50 \\times 0,47 \\times 0,40 \\times 0,28 = 0,014476 $$
-Calculando o Prêmio:
-$$ P = 250.000 \\cdot (1,03)^{-5} \\cdot 0,014476 = 3.121,78 $$
-Resposta: R$ 3.121,78`
+          enunciado: `Considerando os dados da questão anterior (Tábua de mortalidade para idades de 94 a 100 e taxa de juros de 3% a.a.):<br>\ng) Uma pessoa de 94 anos quer contratar um seguro dotal puro com capital segurado de R$ 250.000,00. Ela receberá esse valor se chegar viva aos 99 anos. Qual o valor do prêmio puro?`,
+          resposta: `Dotal Puro (Capital de R$ 250.000 recebido aos 99 anos por pessoa de 94):<br>\n$$ P = C.S \\cdot (1 + i)^{-5} \\cdot {}_5p_{94} $$\nCalculando a probabilidade de sobrevivência:\n$$ {}_5p_{94} = p_{94} \\cdot p_{95} \\cdot p_{96} \\cdot p_{97} \\cdot p_{98} = 0,55 \\times 0,50 \\times 0,47 \\times 0,40 \\times 0,28 = 0,014476 $$\nCalculando o Prêmio:\n$$ P = 250.000 \\cdot (1,03)^{-5} \\cdot 0,014476 = 3.121,78 $$\nResposta: R$ 3.121,78`
         },
         {
           id: "SEG-DOT-002", numero: 7, origem: "Lista Matéria", dificuldade: "Fácil", relevancia: "Média",
           enunciado: `Exemplo 5. Uma pessoa de 40 anos quer contratar um seguro de vida com sobrevivência que pague um capital segurado de 200 mil, se ele chegar vivo aos 65 anos. Sabendo que a probabilidade de uma pessoa de 40 anos chegar viva à idade de 65 anos é 0,83, e que a seguradora garante uma taxa de juros de 6% a.a., qual o valor do prêmio puro?`,
-          resposta: `$$ \\text{Prêmio} = C.S \\cdot (1+i)^{-n} \\cdot {}_np_x $$
-$$ \\text{Prêmio} = 200.000 \\cdot (1,06)^{-25} \\cdot 0,83 = 200.000 \\cdot 0,23299 \\cdot 0,83 = \\text{R\\$ } 38.677,78 $$`
+          resposta: `$$ \\text{Prêmio} = C.S \\cdot (1+i)^{-n} \\cdot {}_np_x $$\n$$ \\text{Prêmio} = 200.000 \\cdot (1,06)^{-25} \\cdot 0,83 = 200.000 \\cdot 0,23299 \\cdot 0,83 = \\text{R\\$ } 38.677,78 $$`
         },
         {
           id: "SEG-DOT-003", numero: 8, origem: "Lista Matéria", dificuldade: "Médio", relevancia: "Alta",
           enunciado: `Exemplo 6. Uma pessoa de 35 anos paga um prêmio de R$ 50.000 para receber um capital segurado, se chegar viva a idade de 60 anos. A seguradora garante uma taxa de juros de 3% a.a. e no contrato estabelece uma tábua de mortalidade que estima tal probabilidade de sobrevivência em 0,90 \\(({}_{25}p_{35} = 0,90)\\). Qual o valor do capital segurado contratado?`,
-          resposta: `$$ C.S = \\frac{\\text{Prêmio}}{(1+i)^{-n} \\cdot {}_np_x} $$
-$$ C.S = \\frac{50.000}{(1,03)^{-25} \\cdot 0,90} = 50.000 \\times 2,0937 \\times 1,1111 = \\text{R\\$ } 116.322,22 $$`
+          resposta: `$$ C.S = \\frac{\\text{Prêmio}}{(1+i)^{-n} \\cdot {}_np_x} $$\n$$ C.S = \\frac{50.000}{(1,03)^{-25} \\cdot 0,90} = 50.000 \\times 2,0937 \\times 1,1111 = \\text{R\\$ } 116.322,22 $$`
         },
         {
           id: "SEG-DOT-004", numero: 9, origem: "Lista Matéria", dificuldade: "Difícil", relevancia: "Alta",
           enunciado: `Exemplo 7. Uma seguradora vendeu seguro dotal puro para 10.000 pessoas de 20 anos. Cobrou um prêmio de R$ 50.000,00 cada no mesmo momento. No contrato garantiram uma taxa de juros de 3% a.a. O C.S será recebido por quem chegar vivo aos 50 anos. A tábua de mortalidade estima que sobrevivem 9.500 pessoas \\(({}_{30}p_{20} = 0,95)\\). Qual o capital segurado (C.S)?`,
-          resposta: `Fundo total arrecadado (Prêmios) = \\( 10.000 \\times 50.000 = 500.000.000,00 \\)<br>
-Montante final (capitalizado a 3% a.a. por 30 anos) = \\( 500.000.000 \\cdot (1,03)^{30} = 1.213.631.235,59 \\)<br>
-Quantidade de Sobreviventes = \\( 10.000 \\times 0,95 = 9.500 \\)<br>
-$$ C.S = \\frac{\\text{Montante final}}{\\text{Sobreviventes}} = \\frac{1.213.631.235,59}{9.500} = \\text{R\\$ } 127.750,66 $$`
+          resposta: `Fundo total arrecadado (Prêmios) = \\( 10.000 \\times 50.000 = 500.000.000,00 \\)<br>\nMontante final (capitalizado a 3% a.a. por 30 anos) = \\( 500.000.000 \\cdot (1,03)^{30} = 1.213.631.235,59 \\)<br>\nQuantidade de Sobreviventes = \\( 10.000 \\times 0,95 = 9.500 \\)<br>\n$$ C.S = \\frac{\\text{Montante final}}{\\text{Sobreviventes}} = \\frac{1.213.631.235,59}{9.500} = \\text{R\\$ } 127.750,66 $$`
         }
       ]
     }
