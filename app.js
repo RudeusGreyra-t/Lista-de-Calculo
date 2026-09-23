@@ -73,7 +73,7 @@ let selectedOrigens = new Set();
 let selectedDificuldades = new Set();
 let sectionSubtopicos = {};
 let currentStatusFilter = "all";
-let currentEtapaFilter = "P2"; // Valor padrão para carregar focado na P2
+let currentEtapaFilter = "P2"; // Focado na P2 como padrão
 let isSequentialMode = false;
 let allAnswersShown = false;
 
@@ -108,7 +108,6 @@ function loadCourse(courseKey) {
   buildNav();
   buildContent();
   
-  // Sincroniza visualmente os botões de Etapa de acordo com o estado atual
   document.querySelectorAll(".etapa-btn").forEach(btn => {
       btn.classList.toggle("active", btn.dataset.etapa === currentEtapaFilter);
   });
@@ -121,23 +120,42 @@ function setReviewed(map){
   try{ localStorage.setItem(`revisados_${currentCourseKey}`, JSON.stringify(map)); }catch(e){}
 }
 
-/* ======================= VISIBILIDADE DAS ETAPAS (P1/P2/PF) ======================= */
+/* ======================= VISIBILIDADE DAS ETAPAS & ORIGENS (P1/P2/PF) ======================= */
+function updateOriginFilterVisibility() {
+    const validSecIds = SECTION_ORDER.filter(secId => 
+        currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId]
+    );
+    const validGroups = DATA.filter(g => validSecIds.includes(g.secId));
+    const origensAtuais = [...new Set(validGroups.flatMap(g => g.exercicios.map(e => origemCategoria(e.origem))))];
+    
+    const originDropdown = document.getElementById("dd-origem");
+    if(originDropdown) {
+        originDropdown.querySelectorAll('.dropdown-item').forEach(label => {
+            const optName = label.textContent.trim();
+            if (origensAtuais.includes(optName)) {
+                label.style.display = "flex";
+            } else {
+                label.style.display = "none";
+            }
+        });
+    }
+}
+
 function updateUIForEtapa() {
     SECTION_ORDER.forEach(secId => {
         const isVisible = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
         
-        // Esconde ou exibe o Dropdown de subtopicos
         const dd = document.getElementById(`dd-${secId}`);
         if (dd) dd.style.display = isVisible ? "" : "none";
         
-        // Esconde ou exibe as pílulas de navegação (topo e flutuante)
         document.querySelectorAll(`.nav-pill-group[data-sec="${secId}"]`).forEach(pill => {
             pill.style.display = isVisible && !isSequentialMode ? "inline-flex" : "none";
         });
     });
+    
+    updateOriginFilterVisibility();
 }
 
-// Event Listeners dos Botões de Etapa
 document.querySelectorAll(".etapa-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
         document.querySelectorAll(".etapa-btn").forEach(b => b.classList.remove("active"));
@@ -149,7 +167,7 @@ document.querySelectorAll(".etapa-btn").forEach(btn => {
     });
 });
 
-/* INICIALIZA OS DROPDOWNS BASEADOS EXCLUSIVAMENTE NAS SEÇÕES */
+/* INICIALIZA OS DROPDOWNS */
 function initFilters() {
   const origensDisponiveis = [...new Set(DATA.flatMap(g => g.exercicios.map(e => origemCategoria(e.origem))))];
   const dificuldadesDisponiveis = ["Fácil","Médio","Difícil","Muito difícil"];
@@ -270,12 +288,20 @@ function buildNav() {
         e.preventDefault();
         const secId = resetBtn.dataset.sec;
         DATA.filter(g => g.secId === secId).flatMap(g => g.exercicios).forEach(ex => {
-          reviewedMap[ex.id] = false;
+          
           const card = document.getElementById("ex-" + ex.id);
           if (card) {
             card.classList.remove("reviewed");
-            const chk = card.querySelector(".reviewed-toggle input");
-            if (chk) chk.checked = false;
+            const mainChk = card.querySelector(".main-reviewed-cb");
+            if (mainChk) {
+                mainChk.checked = false;
+                reviewedMap[ex.id] = false;
+            }
+            card.querySelectorAll(".sub-reviewed-cb").forEach(chk => {
+                chk.checked = false;
+                reviewedMap[chk.dataset.subid] = false;
+                chk.closest('.sub-item').classList.remove('reviewed');
+            });
           }
         });
         setReviewed(reviewedMap);
@@ -299,17 +325,59 @@ function createCard(ex, group) {
   card.dataset.origemCat = origemCategoria(ex.origem);
   card.dataset.dificuldade = ex.dificuldade;
   card.id = "ex-" + ex.id;
-  if(reviewedMap[ex.id]) card.classList.add("reviewed");
+  
+  const hasItems = ex.itens && ex.itens.length > 0;
+  let itemsHtml = "";
+  
+  if (hasItems) {
+      ex.itens.forEach((item, index) => {
+          const subId = `${ex.id}-${item.id || index}`;
+          const isSubRev = reviewedMap[subId];
+          itemsHtml += `
+            <div class="sub-item ${isSubRev ? 'reviewed' : ''}" id="sub-${subId}">
+              <div class="enunciado sub-enunciado">${parseWebTex(item.enunciado)}</div>
+              <div class="card-foot sub-foot">
+                <button class="toggle-answer">Mostrar resposta</button>
+                <label class="reviewed-toggle">
+                  <input type="checkbox" class="sub-reviewed-cb" data-subid="${subId}" ${isSubRev ? "checked" : ""}> revisado
+                </label>
+              </div>
+              <div class="resposta">
+                <span class="label">Resposta</span>
+                ${parseWebTex(item.resposta)}
+              </div>
+            </div>
+          `;
+      });
+  }
 
   let svgHTML = ex.svg ? (ex.svg.trim().startsWith("<div") ? ex.svg : `<div class="svg-wrap">${ex.svg}</div>`) : "";
+
+  let mainFootHtml = "";
+  let mainAnswerHtml = "";
+
+  if (hasItems) {
+      if (ex.resposta) {
+         mainFootHtml = `<div class="card-foot"><button class="toggle-answer main-toggle">Mostrar Contexto Base</button></div>`;
+         mainAnswerHtml = `<div class="resposta"><span class="label">Contexto Base</span>${parseWebTex(ex.resposta)}${ex.svg && ex.svgPos === "resposta" ? svgHTML : ""}</div>`;
+      }
+  } else {
+      mainFootHtml = `
+        <div class="card-foot">
+          <button class="toggle-answer">Mostrar resposta</button>
+          <label class="reviewed-toggle">
+            <input type="checkbox" class="main-reviewed-cb" data-id="${ex.id}" ${reviewedMap[ex.id] ? "checked" : ""}> marcar como revisado
+          </label>
+        </div>`;
+      mainAnswerHtml = `<div class="resposta"><span class="label">Resposta final</span>${parseWebTex(ex.resposta)}${ex.svg && ex.svgPos === "resposta" ? svgHTML : ""}</div>`;
+  }
 
   card.innerHTML = `
     <div class="card-head">
       <h4>${ex.id}</h4>
       <div class="badges-wrapper">
         <div class="badges-top">
-          <span class="badge ${dc}">${ex.dificuldade}</span>
-          ${ex.oficial ? `<span class="selo-oficial">${ex.oficial}</span>` : ""}
+          <span class="badge ${dc}">${ex.dificuldade}</span>${ex.oficial ? `<span class="selo-oficial">${ex.oficial}</span>` : ""}
           <span class="badge rel">Relevância: ${ex.relevancia}</span>
         </div>
         <span class="badge orig ${origCSSClass(ex.origem)}">${origemCategoria(ex.origem)}</span>
@@ -319,35 +387,53 @@ function createCard(ex, group) {
       <span><b>Matéria:</b> ${group.materia || SECTION_TITLES[group.secId]}</span>
       <span><b>Subtópico:</b> ${group.subtopico}</span>
     </div>
-    <div class="enunciado">${parseWebTex(ex.enunciado)}</div>
-    ${ex.svg && ex.svgPos !== "resposta" ? svgHTML : ""}
-    <div class="card-foot">
-      <button class="toggle-answer">Mostrar resposta</button>
-      <label class="reviewed-toggle">
-        <input type="checkbox" ${reviewedMap[ex.id] ? "checked" : ""}> marcar como revisado
-      </label>
-    </div>
-    <div class="resposta">
-      <span class="label">Resposta final</span>
-      ${parseWebTex(ex.resposta)}
-      ${ex.svg && ex.svgPos === "resposta" ? svgHTML : ""}
-    </div>
+    <div class="enunciado">${parseWebTex(ex.enunciado)}</div>${ex.svg && ex.svgPos !== "resposta" ? svgHTML : ""}
+    ${mainFootHtml}
+    ${mainAnswerHtml}${hasItems ? `<div class="sub-items-container">${itemsHtml}</div>` : ""}
   `;
 
-  const answerBox = card.querySelector(".resposta");
-  const toggleBtn = card.querySelector(".toggle-answer");
-  toggleBtn.addEventListener("click", () => {
-    const showing = answerBox.classList.toggle("show");
-    toggleBtn.textContent = showing ? "Esconder resposta" : "Mostrar resposta";
+  // Event Listeners para Mostrar/Esconder
+  card.querySelectorAll(".toggle-answer").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const respDiv = e.target.parentElement.nextElementSibling;
+      const showing = respDiv.classList.toggle("show");
+      if (btn.classList.contains("main-toggle")) {
+          btn.textContent = showing ? "Esconder Contexto Base" : "Mostrar Contexto Base";
+      } else {
+          btn.textContent = showing ? "Esconder resposta" : "Mostrar resposta";
+      }
+    });
   });
 
-  const reviewedCheckbox = card.querySelector(".reviewed-toggle input");
-  reviewedCheckbox.addEventListener("change", (e) => {
-    reviewedMap[ex.id] = e.target.checked;
-    setReviewed(reviewedMap);
-    card.classList.toggle("reviewed", e.target.checked);
-    applyFilters();
-  });
+  // Event Listeners para Revisado
+  if (hasItems) {
+      const checkCardReviewedState = () => {
+          const allSubs = card.querySelectorAll('.sub-reviewed-cb');
+          const allChecked = Array.from(allSubs).every(cb => cb.checked);
+          card.classList.toggle("reviewed", allChecked);
+      };
+
+      card.querySelectorAll(".sub-reviewed-cb").forEach(chk => {
+          chk.addEventListener("change", (e) => {
+              const subId = e.target.dataset.subid;
+              reviewedMap[subId] = e.target.checked;
+              setReviewed(reviewedMap);
+              e.target.closest('.sub-item').classList.toggle('reviewed', e.target.checked);
+              checkCardReviewedState();
+              applyFilters();
+          });
+      });
+      checkCardReviewedState();
+  } else {
+      const mainChk = card.querySelector(".main-reviewed-cb");
+      mainChk.addEventListener("change", (e) => {
+          reviewedMap[ex.id] = e.target.checked;
+          setReviewed(reviewedMap);
+          card.classList.toggle("reviewed", e.target.checked);
+          applyFilters();
+      });
+      card.classList.toggle("reviewed", mainChk.checked);
+  }
 
   return card;
 }
@@ -463,8 +549,14 @@ function applyFilters() {
     const matchesBase = okOrigem && okDif && okTema && okEtapa;
     
     if (matchesBase) {
-      metaTotal++;
-      if (card.classList.contains("reviewed")) metaReviewed++;
+      const subCbs = card.querySelectorAll('.sub-reviewed-cb');
+      if (subCbs.length > 0) {
+          metaTotal += subCbs.length;
+          subCbs.forEach(cb => { if(cb.checked) metaReviewed++; });
+      } else {
+          metaTotal++;
+          if (card.classList.contains("reviewed")) metaReviewed++;
+      }
     }
 
     let okStatus = true;
@@ -497,7 +589,7 @@ function applyFilters() {
       }).length;
 
       const countEl = sec.querySelector(".sec-count");
-      if (countEl) countEl.textContent = (visibleCardsInSec.length === totalSecBase) ? `${totalSecBase} exercícios` : `${visibleCardsInSec.length} de ${totalSecBase} visíveis`;
+      if (countEl) countEl.textContent = (visibleCardsInSec.length === totalSecBase) ? `${totalSecBase} exercícios` : `${visibleCardsInSec.length} de${totalSecBase} visíveis`;
 
       document.querySelectorAll(`.nav-count-${secId}`).forEach(el => el.textContent = `(${visibleCardsInSec.length}/${totalSecBase})`);
     });
@@ -542,7 +634,13 @@ document.getElementById("resetFilters").addEventListener("click", () => {
 document.getElementById("toggleAllAnswers").addEventListener("click", (e) => {
   allAnswersShown = !allAnswersShown;
   document.querySelectorAll(".resposta").forEach(r => r.classList.toggle("show", allAnswersShown));
-  document.querySelectorAll(".toggle-answer").forEach(b => b.textContent = allAnswersShown ? "Esconder resposta" : "Mostrar resposta");
+  document.querySelectorAll(".toggle-answer").forEach(b => {
+      if (b.classList.contains("main-toggle")) {
+          b.textContent = allAnswersShown ? "Esconder Contexto Base" : "Mostrar Contexto Base";
+      } else {
+          b.textContent = allAnswersShown ? "Esconder resposta" : "Mostrar resposta";
+      }
+  });
   e.target.textContent = allAnswersShown ? "Ocultar Respostas" : "Revelar Respostas";
   toggleAllAnswersFloat.textContent = allAnswersShown ? "Ocultar" : "Respostas";
 });
@@ -590,12 +688,22 @@ document.addEventListener("click", (e) => { if(!resetMenu.contains(e.target)) re
 
 document.getElementById("btnClearScoped").addEventListener("click", () => {
   document.querySelectorAll(".card").forEach(card => {
-    if (!card.classList.contains("hidden") && card.classList.contains("reviewed")) {
-      const id = card.id.replace("ex-", "");
-      reviewedMap[id] = false;
+    if (!card.classList.contains("hidden")) {
       card.classList.remove("reviewed");
-      const chk = card.querySelector(".reviewed-toggle input");
-      if (chk) chk.checked = false;
+      
+      const mainChk = card.querySelector(".main-reviewed-cb");
+      if (mainChk && mainChk.checked) {
+          mainChk.checked = false;
+          reviewedMap[mainChk.dataset.id] = false;
+      }
+      
+      card.querySelectorAll(".sub-reviewed-cb").forEach(chk => {
+          if (chk.checked) {
+              chk.checked = false;
+              reviewedMap[chk.dataset.subid] = false;
+              chk.closest('.sub-item').classList.remove('reviewed');
+          }
+      });
     }
   });
   setReviewed(reviewedMap);
@@ -608,6 +716,7 @@ document.getElementById("btnClearAllTotal").addEventListener("click", () => {
   setReviewed(reviewedMap);
   document.querySelectorAll(".card.reviewed").forEach(c => c.classList.remove("reviewed"));
   document.querySelectorAll(".reviewed-toggle input").forEach(i => i.checked = false);
+  document.querySelectorAll(".sub-item.reviewed").forEach(s => s.classList.remove("reviewed"));
   applyFilters();
   resetMenu.classList.remove("open");
 });

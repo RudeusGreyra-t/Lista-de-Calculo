@@ -724,3 +724,36 @@ footer.credit {
   background: #f59e0b;
   color: #451a03;
 }
+
+/* =========================================
+   SUB-ITENS DE EXERCÍCIOS
+========================================= */
+.sub-items-container {
+  margin-top: 20px;
+  border-top: 1px dashed var(--border);
+  padding-top: 16px;
+}
+.sub-item {
+  margin-bottom: 20px;
+  padding-left: 14px;
+  border-left: 3px solid var(--border);
+  transition: opacity 0.2s;
+}
+.sub-item:last-child {
+  margin-bottom: 0;
+}
+.sub-item.reviewed {
+  opacity: 0.55;
+}
+.sub-enunciado {
+  font-size: 15px;
+  margin-bottom: 12px;
+  margin-top: 0;
+}
+.sub-foot {
+  gap: 12px;
+  margin-top: 8px;
+}
+.sub-item .resposta {
+  margin-top: 12px;
+}
