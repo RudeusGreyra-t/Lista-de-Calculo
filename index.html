@@ -27,20 +27,12 @@
 <header class="top">
   <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
     <h1 id="pageTitle" style="margin:0;">Lista de Revisão</h1>
-    
     <select id="courseSelect" style="padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--text-main); font-size: 14px; font-weight: 600; cursor: pointer;">
       <option value="calc1">📐 Cálculo 1</option>
       <option value="estatistica">📊 AED - Estatística</option>
+      <option value="atuaria">📉 Introdução à Atuária</option>
     </select>
-
-    <!-- NOVO: Toggle de Etapas P1 / P2 / PF -->
-    <div class="etapa-toggle" id="etapaToggle">
-      <button class="etapa-btn" data-etapa="P1">P1</button>
-<button class="etapa-btn" data-etapa="P2">P2</button>
-<button class="etapa-btn active" data-etapa="PF">PF (Tudo)</button>
-    </div>
   </div>
-  
   <button id="themeToggle" class="btn">🌓 Alternar Tema</button>
 </header>
 
@@ -74,7 +66,7 @@
     <div class="tray-footer-left">
       <button class="btn" id="toggleMaterias">Desmarcar Matérias</button>
       
-      <!-- BOTÃO SEQUENCIAL DINÂMICO -->
+      <!-- BOTÃO SEQUENCIAL DINÂMICO (SÓ APARECE SE A ORIGEM FOR SEQUENCIAL) -->
       <button class="btn" id="btnToggleSequential" style="display: none; margin-left: 8px; border-color: var(--accent); color: var(--accent);">
         🔢 Ver em Ordem Sequencial
       </button>
@@ -115,6 +107,7 @@
 <!-- DADOS DAS DISCIPLINAS -->
 <script src="data/calculo1.js"></script>
 <script src="data/estatistica.js"></script>
+<script src="data/atuaria.js"></script>
 
 <!-- MOTOR DO APLICATIVO -->
 <script src="app.js"></script>
