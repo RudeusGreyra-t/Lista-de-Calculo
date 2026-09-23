@@ -76,7 +76,7 @@ window.COURSES_DATA["atuaria"] = {
         },
         {
           id: "TAB-FUNC-002", numero: 6, origem: "Lista Matéria", dificuldade: "Fácil", relevancia: "Média",
-          enunciado: "Qual a taxa central de mortalidade para a idade limite da tábua? (Assuma \\( q_{100} = 1 \\)).",
+          enunciado: `Qual a taxa central de mortalidade para uma pessoa de 100 anos, assumindo que a probabilidade de morte é máxima \\( (q_{100} = 1) \\)?`,
           resposta: "$$ m_{100} = \\frac{q_{100}}{1 - 0,5 \\cdot q_{100}} = \\frac{1}{1 - 0,5} = \\frac{1}{0,5} = 2 $$"
         }
       ]
