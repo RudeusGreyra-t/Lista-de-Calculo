@@ -20,40 +20,15 @@ window.COURSES_DATA["atuaria"] = {
       exercicios: [
         {
           id: "TAB-PROB-001", numero: 1, origem: "Lista de Revisão", dificuldade: "Médio", relevancia: "Alta",
-          enunciado: `Seja a tábua de mortalidade abaixo:
-<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">
-  <tr><th>Idade \\((x)\\)</th><th>\\(q_x\\)</th></tr>
-  <tr><td>15</td><td>0,020</td></tr>
-  <tr><td>16</td><td>0,025</td></tr>
-  <tr><td>17</td><td>0,030</td></tr>
-  <tr><td>18</td><td>0,037</td></tr>
-  <tr><td>19</td><td>0,040</td></tr>
-  <tr><td>20</td><td>0,050</td></tr>
-</table>
-Calcule:<br>
-a) A taxa central de mortalidade aos 16 anos.<br>
-b) A probabilidade de uma pessoa de 16 anos morrer antes de completar 17 anos.<br>
-c) A probabilidade de uma pessoa de 15 anos chegar viva à idade de 18 anos.<br>
-d) A probabilidade de uma pessoa de 17 anos morrer exatamente aos 20 anos.<br>
-e) A probabilidade de uma pessoa de 17 anos morrer antes de completar 20 anos.`,
-          resposta: `A partir de \\( q_x \\), podemos encontrar \\( p_x = 1 - q_x \\):<br>
-\\( p_{15} = 0,980 \\)<br>
-\\( p_{16} = 0,975 \\)<br>
-\\( p_{17} = 0,970 \\)<br>
-\\( p_{18} = 0,963 \\)<br>
-\\( p_{19} = 0,960 \\)<br>
-\\( p_{20} = 0,950 \\)<br><br>
-a) Taxa central de mortalidade aos 16 anos \\((m_{16})\\):<br>
-$$ m_{16} = \\frac{q_{16}}{1 - \\frac{1}{2}q_{16}} = \\frac{0,025}{1 - 0,0125} = 0,0253 $$<br>
-b) Probabilidade de morrer antes dos 17 anos \\((q_{16})\\):<br>
-$$ q_{16} = 0,025 $$<br>
-c) Probabilidade de chegar viva aos 18 \\(({}_3p_{15})\\):<br>
-$$ {}_3p_{15} = p_{15} \\cdot p_{16} \\cdot p_{17} = 0,98 \\times 0,975 \\times 0,97 = 0,9268 $$<br>
-d) Morrer exatamente aos 20 \\(({}_{3|}q_{17})\\):<br>
-Significa sobreviver por 3 anos e morrer no 4º ano.<br>
-$$ {}_{3|}q_{17} = p_{17} \\cdot p_{18} \\cdot p_{19} \\cdot q_{20} = 0,97 \\times 0,963 \\times 0,96 \\times 0,05 = 0,0448 $$<br>
-e) Morrer antes de completar 20 anos \\(({}_3q_{17})\\):<br>
-$$ {}_3q_{17} = 1 - {}_3p_{17} = 1 - (p_{17} \\cdot p_{18} \\cdot p_{19}) = 1 - (0,97 \\times 0,963 \\times 0,96) = 1 - 0,8968 = 0,1032 $$`
+          enunciado: `Seja a tábua de mortalidade abaixo:\n<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">\n  <tr><th>Idade \\((x)\\)</th><th>\\(q_x\\)</th></tr>\n  <tr><td>15</td><td>0,020</td></tr>\n  <tr><td>16</td><td>0,025</td></tr>\n  <tr><td>17</td><td>0,030</td></tr>\n  <tr><td>18</td><td>0,037</td></tr>\n  <tr><td>19</td><td>0,040</td></tr>\n  <tr><td>20</td><td>0,050</td></tr>\n</table>\nCalcule as seguintes probabilidades e taxas:`,
+          resposta: `A partir de \\( q_x \\), podemos encontrar \\( p_x = 1 - q_x \\):<br>\n\\( p_{15} = 0,980 \\)<br>\n\\( p_{16} = 0,975 \\)<br>\n\\( p_{17} = 0,970 \\)<br>\n\\( p_{18} = 0,963 \\)<br>\n\\( p_{19} = 0,960 \\)<br>\n\\( p_{20} = 0,950 \\)`,
+          itens: [
+            { id: "A", enunciado: `a) A taxa central de mortalidade aos 16 anos.`, resposta: `Taxa central de mortalidade aos 16 anos \\((m_{16})\\):<br>\n$$m_{16} = \\frac{q_{16}}{1 - \\frac{1}{2}q_{16}} = \\frac{0,025}{1 - 0,0125} = 0,0253$$` },
+            { id: "B", enunciado: `b) A probabilidade de uma pessoa de 16 anos morrer antes de completar 17 anos.`, resposta: `Probabilidade de morrer antes dos 17 anos \\((q_{16})\\):<br>\n$$q_{16} = 0,025$$` },
+            { id: "C", enunciado: `c) A probabilidade de uma pessoa de 15 anos chegar viva à idade de 18 anos.`, resposta: `Probabilidade de chegar viva aos 18 \\(({}_3p_{15})\\):<br>\n$${}_3p_{15} = p_{15} \\cdot p_{16} \\cdot p_{17} = 0,98 \\times 0,975 \\times 0,97 = 0,9268$$` },
+            { id: "D", enunciado: `d) A probabilidade de uma pessoa de 17 anos morrer exatamente aos 20 anos.`, resposta: `Morrer exatamente aos 20 \\(({}_{3\vert{}}q_{17})\\):<br>\nSignifica sobreviver por 3 anos e morrer no 4º ano.<br>\n$${}_{3\vert{}}q_{17} = p_{17} \\cdot p_{18} \\cdot p_{19} \\cdot q_{20} = 0,97 \\times 0,963 \\times 0,96 \\times 0,05 = 0,0448$$` },
+            { id: "E", enunciado: `e) A probabilidade de uma pessoa de 17 anos morrer antes de completar 20 anos.`, resposta: `Morrer antes de completar 20 anos \\(({}_3q_{17})\\):<br>\n$${}_3q_{17} = 1 - {}_3p_{17} = 1 - (p_{17} \\cdot p_{18} \\cdot p_{19}) = 1 - (0,97 \\times 0,963 \\times 0,96) = 1 - 0,8968 = 0,1032$$` }
+          ]
         },
         {
           id: "TAB-PROB-002", numero: 1, origem: "Lista Matéria", dificuldade: "Fácil", relevancia: "Média",
@@ -73,50 +48,25 @@ Probabilidade de uma pessoa de 99 anos morrer antes de completar 100 anos = \\( 
         },
         {
           id: "TAB-PROB-004", numero: 3, origem: "Lista Matéria", dificuldade: "Médio", relevancia: "Alta",
-          enunciado: `Exercício 1. Seja a tábua de mortalidade:
-<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">
-  <tr><th>\\(X\\)</th><th>\\(q_x\\)</th><th>\\(p_x\\)</th></tr>
-  <tr><td>30</td><td>0,08</td><td>0,92</td></tr>
-  <tr><td>31</td><td>0,09</td><td>0,91</td></tr>
-  <tr><td>32</td><td>0,11</td><td>0,89</td></tr>
-  <tr><td>33</td><td>0,13</td><td>0,87</td></tr>
-  <tr><td>34</td><td>0,14</td><td>0,86</td></tr>
-  <tr><td>35</td><td>0,16</td><td>0,84</td></tr>
-</table>
-Calcule:<br>
-a) \\( {}_3p_{30} \\)<br>
-b) Probabilidade de uma pessoa de 30 anos morrer exatamente com 33 anos<br>
-c) Probabilidade de uma pessoa de 30 anos morrer entre 30 e 33 anos<br>
-d) Probabilidade de uma pessoa de 32 anos morrer com 35 anos`,
-          resposta: `a) $$ {}_3p_{30} = p_{30} \\cdot p_{31} \\cdot p_{32} = 0,92 \\times 0,91 \\times 0,89 = 0,7451 $$<br>
-b) $$ {}_{3|}q_{30} = {}_3p_{30} \\cdot q_{33} = 0,7451 \\times 0,13 = 0,0968 $$<br>
-c) $$ {}_3q_{30} = 1 - {}_3p_{30} = 1 - 0,7451 = 0,2549 $$<br>
-d) Morrer com 35 anos tendo hoje 32 significa chegar vivo aos 35 e morrer no ano seguinte (entre 35 e 36).<br>
-$$ {}_{3|}q_{32} = p_{32} \\cdot p_{33} \\cdot p_{34} \\cdot q_{35} = 0,89 \\times 0,87 \\times 0,86 \\times 0,16 = 0,1065 $$`
+          enunciado: `Exercício 1. Seja a tábua de mortalidade:\n<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">\n  <tr><th>\\(X\\)</th><th>\\(q_x\\)</th><th>\\(p_x\\)</th></tr>\n  <tr><td>30</td><td>0,08</td><td>0,92</td></tr>\n  <tr><td>31</td><td>0,09</td><td>0,91</td></tr>\n  <tr><td>32</td><td>0,11</td><td>0,89</td></tr>\n  <tr><td>33</td><td>0,13</td><td>0,87</td></tr>\n  <tr><td>34</td><td>0,14</td><td>0,86</td></tr>\n  <tr><td>35</td><td>0,16</td><td>0,84</td></tr>\n</table>\nCalcule:`,
+          resposta: ``,
+          itens: [
+            { id: "A", enunciado: `a) \\({}_3p_{30} \\)`, resposta: `$${}_3p_{30} = p_{30} \\cdot p_{31} \\cdot p_{32} = 0,92 \\times 0,91 \\times 0,89 = 0,7451$$` },
+            { id: "B", enunciado: `b) Probabilidade de uma pessoa de 30 anos morrer exatamente com 33 anos`, resposta: `$${}_{3\vert{}}q_{30} = {}_3p_{30} \\cdot q_{33} = 0,7451 \\times 0,13 = 0,0968$$` },
+            { id: "C", enunciado: `c) Probabilidade de uma pessoa de 30 anos morrer entre 30 e 33 anos`, resposta: `$${}_3q_{30} = 1 - {}_3p_{30} = 1 - 0,7451 = 0,2549$$` },
+            { id: "D", enunciado: `d) Probabilidade de uma pessoa de 32 anos morrer com 35 anos`, resposta: `Morrer com 35 anos tendo hoje 32 significa chegar vivo aos 35 e morrer no ano seguinte (entre 35 e 36).<br>\n$${}_{3\vert{}}q_{32} = p_{32} \\cdot p_{33} \\cdot p_{34} \\cdot q_{35} = 0,89 \\times 0,87 \\times 0,86 \\times 0,16 = 0,1065$$` }
+          ]
         },
         {
           id: "TAB-PROB-006", numero: 6, origem: "Lista Matéria", dificuldade: "Médio", relevancia: "Alta",
-          enunciado: `Exercício 2. Seja a tábua de mortalidade:
-<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">
-  <tr><th>\\(X\\)</th><th>\\(q_x\\)</th><th>\\(p_x\\)</th></tr>
-  <tr><td>92</td><td>0,05</td><td>0,95</td></tr>
-  <tr><td>93</td><td>0,15</td><td>0,85</td></tr>
-  <tr><td>94</td><td>0,25</td><td>0,75</td></tr>
-  <tr><td>95</td><td>0,31</td><td>0,69</td></tr>
-  <tr><td>96</td><td>0,42</td><td>0,58</td></tr>
-  <tr><td>97</td><td>0,50</td><td>0,50</td></tr>
-  <tr><td>98</td><td>0,80</td><td>0,20</td></tr>
-  <tr><td>99</td><td>1,00</td><td>0</td></tr>
-</table>
-Calcule:<br>
-a) Probabilidade de uma pessoa de 92 anos chegar viva à idade de 95 anos.<br>
-b) Probabilidade de uma pessoa de 92 anos morrer exatamente com 96 anos.<br>
-c) Probabilidade de uma pessoa de 92 anos não chegar viva à idade de 97 anos.<br>
-d) Taxa Central de mortalidade aos 92 anos.`,
-          resposta: `a) $$ {}_3p_{92} = 0,95 \\times 0,85 \\times 0,75 = 0,6056 $$<br>
-b) $$ {}_{4|}q_{92} = (0,95 \\times 0,85 \\times 0,75 \\times 0,69) \\cdot q_{96} = 0,4178 \\times 0,42 = 0,1755 $$<br>
-c) $$ {}_5q_{92} = 1 - {}_5p_{92} = 1 - (0,95 \\times 0,85 \\times 0,75 \\times 0,69 \\times 0,58) = 1 - 0,2423 = 0,7577 $$<br>
-d) $$ m_{92} = \\frac{q_{92}}{1 - 0,5 \\cdot q_{92}} = \\frac{0,05}{1 - 0,025} = \\frac{0,05}{0,975} = 0,05128 $$`
+          enunciado: `Exercício 2. Seja a tábua de mortalidade:\n<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">\n  <tr><th>\\(X\\)</th><th>\\(q_x\\)</th><th>\\(p_x\\)</th></tr>\n  <tr><td>92</td><td>0,05</td><td>0,95</td></tr>\n  <tr><td>93</td><td>0,15</td><td>0,85</td></tr>\n  <tr><td>94</td><td>0,25</td><td>0,75</td></tr>\n  <tr><td>95</td><td>0,31</td><td>0,69</td></tr>\n  <tr><td>96</td><td>0,42</td><td>0,58</td></tr>\n  <tr><td>97</td><td>0,50</td><td>0,50</td></tr>\n  <tr><td>98</td><td>0,80</td><td>0,20</td></tr>\n  <tr><td>99</td><td>1,00</td><td>0</td></tr>\n</table>\nCalcule:`,
+          resposta: ``,
+          itens: [
+            { id: "A", enunciado: `a) Probabilidade de uma pessoa de 92 anos chegar viva à idade de 95 anos.`, resposta: `$${}_3p_{92} = 0,95 \\times 0,85 \\times 0,75 = 0,6056$$` },
+            { id: "B", enunciado: `b) Probabilidade de uma pessoa de 92 anos morrer exatamente com 96 anos.`, resposta: `$${}_{4\vert{}}q_{92} = (0,95 \\times 0,85 \\times 0,75 \\times 0,69) \\cdot q_{96} = 0,4178 \\times 0,42 = 0,1755$$` },
+            { id: "C", enunciado: `c) Probabilidade de uma pessoa de 92 anos não chegar viva à idade de 97 anos.`, resposta: `$${}_5q_{92} = 1 - {}_5p_{92} = 1 - (0,95 \\times 0,85 \\times 0,75 \\times 0,69 \\times 0,58) = 1 - 0,2423 = 0,7577$$` },
+            { id: "D", enunciado: `d) Taxa Central de mortalidade aos 92 anos.`, resposta: `$$m_{92} = \\frac{q_{92}}{1 - 0,5 \\cdot q_{92}} = \\frac{0,05}{1 - 0,025} = \\frac{0,05}{0,975} = 0,05128$$` }
+          ]
         }
       ]
     },
@@ -144,7 +94,7 @@ Idade 3: \\( p_3 = 0,965 \\); \\( l_3 = 9.410,94 \\); \\( d_3 = 329,38 \\)`
         {
           id: "TAB-FUNC-002", numero: 4, origem: "Lista Matéria", dificuldade: "Fácil", relevancia: "Média",
           enunciado: `Exemplo 3. Com base na tabela, qual a taxa central de mortalidade com idade 100? (Assuma \\( q_{100} = 1 \\)).`,
-          resposta: `$$ m_{100} = \\frac{q_{100}}{1 - 0,5 \\cdot q_{100}} = \\frac{1}{1 - 0,5} = \\frac{1}{0,5} = 2 $$`
+          resposta: `$$m_{100} = \\frac{q_{100}}{1 - 0,5 \\cdot q_{100}} = \\frac{1}{1 - 0,5} = \\frac{1}{0,5} = 2$$`
         }
       ]
     },
@@ -155,35 +105,13 @@ Idade 3: \\( p_3 = 0,965 \\); \\( l_3 = 9.410,94 \\); \\( d_3 = 329,38 \\)`
       exercicios: [
         {
           id: "ESP-VIDA-001", numero: 2, origem: "Lista de Revisão", dificuldade: "Difícil", relevancia: "Alta",
-          enunciado: `Seja a tábua de mortalidade:
-<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">
-  <tr><th>Idade \\((x)\\)</th><th>\\(q_x\\)</th></tr>
-  <tr><td>94</td><td>0,45</td></tr>
-  <tr><td>95</td><td>0,50</td></tr>
-  <tr><td>96</td><td>0,53</td></tr>
-  <tr><td>97</td><td>0,60</td></tr>
-  <tr><td>98</td><td>0,72</td></tr>
-  <tr><td>99</td><td>0,80</td></tr>
-  <tr><td>100</td><td>1,00</td></tr>
-</table>
-Calcule:<br>
-a) Expectativa de vida completa aos 97 anos.<br>
-b) Expectativa de vida incompleta aos 96 anos.<br>
-c) Expectativa de vida completa aos 96 anos.`,
-          resposta: `Construindo a coluna de sobreviventes \\((l_x)\\) a partir de uma raiz hipotética \\( l_{94} = 10.000 \\), sabendo que \\( p_x = 1 - q_x \\):<br>
-\\( l_{94} = 10.000 \\)<br>
-\\( l_{95} = 10.000 \\times 0,55 = 5.500 \\)<br>
-\\( l_{96} = 5.500 \\times 0,50 = 2.750 \\)<br>
-\\( l_{97} = 2.750 \\times 0,47 = 1.292,50 \\)<br>
-\\( l_{98} = 1.292,50 \\times 0,40 = 517 \\)<br>
-\\( l_{99} = 517 \\times 0,20 = 144,76 \\)<br>
-\\( l_{100} = 144,76 \\times 0,20 = 28,952 \\)<br><br>
-a) Expectativa de vida completa aos 97 anos \\((e^\\circ_{97})\\):<br>
-$$ e^\\circ_{97} = 0,5 + \\frac{l_{98} + l_{99} + l_{100}}{l_{97}} = 0,5 + \\frac{517 + 144,76 + 28,952}{1.292,50} = 0,5 + 0,5344 = 1,0344 \\text{ anos} $$<br>
-b) Expectativa de vida incompleta aos 96 anos \\((e_{96})\\):<br>
-$$ e_{96} = \\frac{l_{97} + l_{98} + l_{99} + l_{100}}{l_{96}} = \\frac{1.292,50 + 517 + 144,76 + 28,952}{2.750} = 0,7212 \\text{ anos} $$<br>
-c) Expectativa de vida completa aos 96 anos \\((e^\\circ_{96})\\):<br>
-$$ e^\\circ_{96} = 0,5 + e_{96} = 0,5 + 0,7212 = 1,2212 \\text{ anos} $$`
+          enunciado: `Seja a tábua de mortalidade:\n<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 8px; margin-bottom: 8px; text-align: center;">\n  <tr><th>Idade \\((x)\\)</th><th>\\(q_x\\)</th></tr>\n  <tr><td>94</td><td>0,45</td></tr>\n  <tr><td>95</td><td>0,50</td></tr>\n  <tr><td>96</td><td>0,53</td></tr>\n  <tr><td>97</td><td>0,60</td></tr>\n  <tr><td>98</td><td>0,72</td></tr>\n  <tr><td>99</td><td>0,80</td></tr>\n  <tr><td>100</td><td>1,00</td></tr>\n</table>\nCalcule:`,
+          resposta: `Construindo a coluna de sobreviventes \\((l_x)\\) a partir de uma raiz hipotética \\( l_{94} = 10.000 \\), sabendo que \\( p_x = 1 - q_x \\):<br>\n\\( l_{94} = 10.000 \\)<br>\n\\( l_{95} = 10.000 \\times 0,55 = 5.500 \\)<br>\n\\( l_{96} = 5.500 \\times 0,50 = 2.750 \\)<br>\n\\( l_{97} = 2.750 \\times 0,47 = 1.292,50 \\)<br>\n\\( l_{98} = 1.292,50 \\times 0,40 = 517 \\)<br>\n\\( l_{99} = 517 \\times 0,20 = 144,76 \\)<br>\n\\( l_{100} = 144,76 \\times 0,20 = 28,952 \\)`,
+          itens: [
+            { id: "A", enunciado: `a) Expectativa de vida completa aos 97 anos.`, resposta: `Expectativa de vida completa aos 97 anos \\((e^\\circ_{97})\\):<br>\n$$e^\\circ_{97} = 0,5 + \\frac{l_{98} + l_{99} + l_{100}}{l_{97}} = 0,5 + \\frac{517 + 144,76 + 28,952}{1.292,50} = 0,5 + 0,5344 = 1,0344 \\text{ anos}$$` },
+            { id: "B", enunciado: `b) Expectativa de vida incompleta aos 96 anos.`, resposta: `Expectativa de vida incompleta aos 96 anos \\((e_{96})\\):<br>\n$$e_{96} = \\frac{l_{97} + l_{98} + l_{99} + l_{100}}{l_{96}} = \\frac{1.292,50 + 517 + 144,76 + 28,952}{2.750} = 0,7212 \\text{ anos}$$` },
+            { id: "C", enunciado: `c) Expectativa de vida completa aos 96 anos.`, resposta: `Expectativa de vida completa aos 96 anos \\((e^\\circ_{96})\\):<br>\n$$e^\\circ_{96} = 0,5 + e_{96} = 0,5 + 0,7212 = 1,2212 \\text{ anos}$$` }
+          ]
         },
         {
           id: "ESP-VIDA-002", numero: 5, origem: "Lista Matéria", dificuldade: "Médio", relevancia: "Alta",
@@ -198,9 +126,10 @@ $$ e^\\circ_{96} = 0,5 + e_{96} = 0,5 + 0,7212 = 1,2212 \\text{ anos} $$`
   <tr><td>100</td><td>1,0</td><td>0,0</td><td>288</td><td>288</td></tr>
 </table>`,
           resposta: `Expectativa de vida incompleta \\((e_{95})\\):<br>
-$$ e_{95} = \\frac{8.000 + 4.800 + 2.400 + 960 + 288}{10.000} = 1,6448 \\text{ anos} $$<br>
+$$e_{95} = \\frac{8.000 + 4.800 + 2.400 + 960 + 288}{10.000} = 1,6448 \\text{ anos}$$
+<br>
 Expectativa de vida completa \\((e^\\circ_{95})\\):<br>
-$$ e^\\circ_{95} = e_{95} + 0,5 = 1,6448 + 0,5 = 2,1448 \\text{ anos} $$`
+$$e^\\circ_{95} = e_{95} + 0,5 = 1,6448 + 0,5 = 2,1448 \\text{ anos}$$`
         }
       ]
     },
@@ -211,18 +140,13 @@ $$ e^\\circ_{95} = e_{95} + 0,5 = 1,6448 + 0,5 = 2,1448 \\text{ anos} $$`
       exercicios: [
         {
           id: "ANU-REND-001", numero: 3, origem: "Lista de Revisão", dificuldade: "Difícil", relevancia: "Alta",
-          enunciado: `Utilizando a tábua de mortalidade da questão anterior (idades 94 a 100), e considerando que a taxa de juros garantida pela companhia é de 3% a.a., calcule:<br>
-d) \\( a_{97} \\)<br>
-e) \\( \\ddot{a}_{97} \\)<br>
-f) \\( a_{94:\\overline{2|}} \\)`,
-          resposta: `d) \\( a_{97} \\) (Anuidade vitalícia postecipada, \\( i = 3\\% \\)):<br>
-$$ a_{97} = \\frac{l_{98}}{l_{97}}(1,03)^{-1} + \\frac{l_{99}}{l_{97}}(1,03)^{-2} + \\frac{l_{100}}{l_{97}}(1,03)^{-3} $$
-$$ = 0,3883 + 0,1056 + 0,0205 = 0,5144 $$<br>
-e) \\( \\ddot{a}_{97} \\) (Anuidade vitalícia antecipada):<br>
-$$ \\ddot{a}_{97} = 1 + a_{97} = 1 + 0,5144 = 1,5144 $$<br>
-f) \\( a_{94:\\overline{2|}} \\) (Anuidade temporária por 2 anos, postecipada):<br>
-$$ a_{94:\\overline{2|}} = p_{94}(1,03)^{-1} + p_{94} \\cdot p_{95}(1,03)^{-2} $$
-$$ = 0,55(1,03)^{-1} + (0,55 \\times 0,50)(1,03)^{-2} = 0,5340 + 0,2592 = 0,7932 $$`
+          enunciado: `Utilizando a tábua de mortalidade da questão anterior (idades 94 a 100), e considerando que a taxa de juros garantida pela companhia é de 3% a.a., calcule:`,
+          resposta: ``,
+          itens: [
+            { id: "D", enunciado: `d) \\( a_{97} \\)`, resposta: `\\( a_{97} \\) (Anuidade vitalícia postecipada, \\( i = 3\\% \\)):<br>\n$$ a_{97} = \\frac{l_{98}}{l_{97}}(1,03)^{-1} + \\frac{l_{99}}{l_{97}}(1,03)^{-2} + \\frac{l_{100}}{l_{97}}(1,03)^{-3} $$<br>\n$$ = 0,3883 + 0,1056 + 0,0205 = 0,5144 $$` },
+            { id: "E", enunciado: `e) \\( \\ddot{a}_{97} \\)`, resposta: `\\( \\ddot{a}_{97} \\) (Anuidade vitalícia antecipada):<br>\n$$ \\ddot{a}_{97} = 1 + a_{97} = 1 + 0,5144 = 1,5144 $$` },
+            { id: "F", enunciado: `f) \\( a_{94:\\overline{2|}} \\)`, resposta: `\\( a_{94:\\overline{2|}} \\) (Anuidade temporária por 2 anos, postecipada):<br>\n$$ a_{94:\\overline{2|}} = p_{94}(1,03)^{-1} + p_{94} \\cdot p_{95}(1,03)^{-2} $$<br>\n$$ = 0,55(1,03)^{-1} + (0,55 \\times 0,50)(1,03)^{-2} = 0,5340 + 0,2592 = 0,7932 $$` }
+          ]
         },
         {
           id: "ANU-REND-003", numero: 10, origem: "Lista Matéria", dificuldade: "Fácil", relevancia: "Alta",
