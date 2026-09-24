@@ -825,6 +825,18 @@ document.addEventListener('click', (e) => {
   }
 });
 
+// Rolar a tela para baixo ao expandir a resolução
+document.addEventListener('toggle', (e) => {
+    if (e.target.tagName === 'DETAILS' && e.target.open) {
+        // Pequeno atraso para garantir que o navegador renderizou a expansão
+        setTimeout(() => {
+            // Desconta 90px para a navbar flutuante + margem de respiro
+            const y = e.target.getBoundingClientRect().top + window.scrollY - 90;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }, 10);
+    }
+}, true); // useCapture = true pois o evento 'toggle' não faz bubble
+
 /* INICIALIZAÇÃO */
 window.addEventListener('DOMContentLoaded', () => {
     loadCourse(currentCourseKey);
