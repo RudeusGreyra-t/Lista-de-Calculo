@@ -76,59 +76,59 @@ window.COURSES_DATA["calc1"] = {
   topics: [
 {materia:"Limites", subtopico:"Substituição direta", secId:"limites", exercicios:[
   {id:"LIM-SUB-001", origem:"Prova antiga", dificuldade:"Fácil", relevancia:"Baixa",
-   enunciado:"Calcule o limite: $$\\lim_{x \\to 0} \\frac{5+\\cos(x)}{x+3}$$",
-   resposta: "$$2$$"},
+   enunciado:"Calcule o limite: $$ \\lim_{x \\to 0} \\frac{5+\\cos(x)}{x+3} $$",
+   resposta: "$$ 2 $$"},
   {id:"LIM-SUB-002", origem:"Dado em aula 21/07/2026", dificuldade:"Fácil", relevancia:"Baixa",
-   enunciado:"Calcule o limite: $$\\lim_{x \\to 0} \\left[ e^{\\frac{x^2}{3}} + x^3 + 5 + \\cos(x) \\right]$$",
-   resposta: "$$7$$"},
+   enunciado:"Calcule o limite: $$ \\lim_{x \\to 0} \\left[ e^{\\frac{x^2}{3}} + x^3 + 5 + \\cos(x) \\right] $$",
+   resposta: "$$ 7 $$"},
   {id:"LIM-SUB-003", origem:"Gerado a partir das listas Lista 2", dificuldade:"Fácil", relevancia:"Baixa",
-   enunciado:"Calcule: $$\\lim_{x \\to \\pi} [2\\cos(x) + \\sin(x/2)]$$",
-   resposta: "$$-1$$"},
+   enunciado:"Calcule: $$ \\lim_{x \\to \\pi} [2\\cos(x) + \\sin(x/2)] $$",
+   resposta: "$$ -1 $$"},
 ]},
 {materia:"Limites", subtopico:"Fatoração e produtos notáveis", secId:"limites", exercicios:[
   {id:"LIM-FAT-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Calcule o limite: $$\\lim_{x \\to 3} \\frac{x-3}{x^3-27}$$",
-   resposta: "$$\\frac{1}{27}$$"},
+   enunciado:"Calcule o limite: $$ \\lim_{x \\to 3} \\frac{x-3}{x^3-27} $$",
+   resposta: "$$ \\frac{1}{27} $$"},
   {id:"LIM-FAT-002", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
-   enunciado:"Calcule: $$\\lim_{x \\to 2} \\frac{x^6-64}{x-2}$$",
-   resposta: "$$192$$"},
+   enunciado:"Calcule: $$ \\lim_{x \\to 2} \\frac{x^6-64}{x-2} $$",
+   resposta: "$$ 192 $$"},
   {id:"LIM-FAT-003", origem:"Dado em aula 28/07/2026", dificuldade:"Médio", relevancia:"Média",
-   enunciado:"Calcule o limite: $$\\lim_{x \\to 2} \\frac{x^5-32}{x-2}$$",
-   resposta: "$$80$$"},
+   enunciado:"Calcule o limite: $$ \\lim_{x \\to 2} \\frac{x^5-32}{x-2} $$",
+   resposta: "$$ 80 $$"},
   {id:"LIM-FAT-004", origem:"Gerado a partir das listas Lista 2", dificuldade:"Fácil", relevancia:"Baixa",
-   enunciado:"Calcule, por fatoração: $$\\lim_{x \\to 4} \\frac{x^2-16}{x-4}$$",
-   resposta: "$$8$$"},
+   enunciado:"Calcule, por fatoração: $$ \\lim_{x \\to 4} \\frac{x^2-16}{x-4} $$",
+   resposta: "$$ 8 $$"},
 ]},
 {materia:"Limites", subtopico:"Racionalização (Raízes)", secId:"limites", exercicios:[
   {id:"LIM-RAC-001", origem:"Prova antiga", dificuldade:"Muito difícil", relevancia:"Alta",
-   enunciado:"Calcule o limite: $$\\lim_{x \\to 8} \\frac{x-8}{\\sqrt[3]{x} - \\sqrt[3]{8}}$$",
-   resposta: "$$12$$"},
+   enunciado:"Calcule o limite: $$ \\lim_{x \\to 8} \\frac{x-8}{\\sqrt[3]{x} - \\sqrt[3]{8}} $$",
+   resposta: "$$ 12 $$"},
   {id:"LIM-RAC-002", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
-   enunciado:"Calcule: $$\\lim_{x \\to 1/3} \\frac{\\sqrt[6]{3x}-1}{\\sqrt{3x}-1}$$",
-   resposta: "$$\\frac{1}{3}$$"},
+   enunciado:"Calcule: $$ \\lim_{x \\to 1/3} \\frac{\\sqrt[6]{3x}-1}{\\sqrt{3x}-1} $$",
+   resposta: "$$ \\frac{1}{3} $$"},
   {id:"LIM-RAC-003", origem:"Gerado a partir das listas Lista 2", dificuldade:"Médio", relevancia:"Média",
-   enunciado:"Calcule, racionalizando: $$\\lim_{x \\to 4} \\frac{\\sqrt{x+5}-3}{x-4}$$",
-   resposta: "$$\\frac{1}{6}$$"},
+   enunciado:"Calcule, racionalizando: $$ \\lim_{x \\to 4} \\frac{\\sqrt{x+5}-3}{x-4} $$",
+   resposta: "$$ \\frac{1}{6} $$"},
 ]},
 {materia:"Limites", subtopico:"Laterais e módulo", secId:"limites", exercicios:[
   {id:"LIM-LAT-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Calcule, caso exista: $$\\lim_{x \\to 5} \\frac{|x-5|}{2x-10}$$",
-   resposta:"O limite não existe (limite lateral esquerdo é \\(-\\frac{1}{2} \\) e o direito é \\(\\frac{1}{2} \\))."},
+   enunciado:"Calcule, caso exista: $$ \\lim_{x \\to 5} \\frac{|x-5|}{2x-10} $$",
+   resposta:"O limite não existe (limite lateral esquerdo é \\( -\\frac{1}{2} \\) e o direito é \\( \\frac{1}{2} \\))."},
   {id:"LIM-LAT-002", origem:"Gerado a partir das listas Lista 2", dificuldade:"Fácil", relevancia:"Média",
    enunciado:"Determine os limites laterais e diga se o limite bilateral existe para \\( f(x) = 2x + 1 \\) se \\( x < 1 \\); e \\( f(x) = x + 4 \\), se \\( x \\ge 1 \\), quando \\( x \\to 1 \\).",
    resposta:"\\( \\lim_{x \\to 1^-} f(x) = 3 \\) e \\( \\lim_{x \\to 1^+} f(x) = 5 \\). O limite bilateral não existe."},
   {id:"LIM-LAT-003", origem:"Aula de revisão", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Caso exista, calcule \\(\\lim_{x\\to 2} f(x) \\), onde \\(f(x) = \\begin{cases} \\frac{x^2 - 4}{x - 2}, & \\text{se } x > 2 \\\\ 7x - 3, & \\text{se } x \\le 2 \\end{cases} \\)",
+   enunciado:"Caso exista, calcule \\( \\lim_{x\\to 2} f(x) \\), onde \\( f(x) = \\begin{cases} \\frac{x^2 - 4}{x - 2}, & \\text{se } x > 2 \\\\ 7x - 3, & \\text{se } x \\le 2 \\end{cases} \\)",
    resposta:"O limite bilateral não existe, pois \\( \\lim_{x\\to 2^+} f(x) = 4 \\) e \\( \\lim_{x\\to 2^-} f(x) = 11 \\)."},
 ]},
 {materia:"Limites", subtopico:"Teorema do Confronto", secId:"limites", exercicios:[
   {id:"LIM-CON-001", origem:"Gerado a partir das listas Lista 1", dificuldade:"Médio", relevancia:"Média",
-   enunciado:"Sabendo que \\( -1 \\le \\sin\\left(\\frac{1}{x}\\right) \\le 1 \\), calcule: $$\\lim_{x \\to 0} x^2 \\sin\\left(\\frac{1}{x}\\right)$$",
-   resposta: "$$0$$"},
+   enunciado:"Sabendo que \\( -1 \\le \\sin\\left(\\frac{1}{x}\\right) \\le 1 \\), calcule: $$ \\lim_{x \\to 0} x^2 \\sin\\left(\\frac{1}{x}\\right) $$",
+   resposta: "$$ 0 $$"},
 ]},
 {materia:"Limites", subtopico:"Infinitos e assíntotas", secId:"limites", exercicios:[
   {id:"LIM-INF-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Sejam \\(f : \\mathbb{R} \\to \\mathbb{R} \\) uma função e \\(a \\in \\mathbb{R} \\). Defina o significado da expressão $$\\lim_{x \\to a} f(x) = -\\infty$$ Esboce um desenho para representar.",
+   enunciado:"Sejam \\( f : \\mathbb{R} \\to \\mathbb{R} \\) uma função e \\(a \\in \\mathbb{R} \\). Defina o significado da expressão $$\\lim_{x \\to a} f(x) = -\\infty$$ Esboce um desenho para representar.",
    resposta:"Significa que os valores de \\(f(x) \\) decrescem ilimitadamente (ficam arbitrariamente negativos) à medida que \\( x \\) se aproxima de \\( a \\).",
    svg: SVG_LIM_INF_001, 
    svgPos: "resposta"},
@@ -315,6 +315,9 @@ window.COURSES_DATA["calc1"] = {
       \\end{aligned} 
       $$
     </div>
+    <div style="text-align: right; margin-top: 15px;">
+      <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
+    </div>
   </details>`},
   {id:"INT-PAR-002", origem:"Dado em aula[cite: 5]", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int x \\sin(x) \\, dx$$",
@@ -333,6 +336,9 @@ window.COURSES_DATA["calc1"] = {
       &= -x \\cos(x) + \\sin(x) + C; \\; C \\in \\mathbb{R} 
       \\end{aligned} 
       $$
+    </div>
+    <div style="text-align: right; margin-top: 15px;">
+      <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
     </div>
   </details>`},
   {id:"INT-PAR-003", origem:"Dado em aula[cite: 5]", dificuldade:"Difícil", relevancia:"Alta",
@@ -367,6 +373,9 @@ window.COURSES_DATA["calc1"] = {
       \\end{aligned} 
       $$
     </div>
+    <div style="text-align: right; margin-top: 15px;">
+      <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
+    </div>
   </details>`},
   {id:"INT-PAR-004", origem:"Dado em aula[cite: 6]", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int x^2 e^x \\, dx$$",
@@ -392,6 +401,9 @@ window.COURSES_DATA["calc1"] = {
       \\end{aligned} 
       $$
     </div>
+    <div style="text-align: right; margin-top: 15px;">
+      <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
+    </div>
   </details>`},
   {id:"INT-PAR-005", origem:"Dado em aula[cite: 6]", dificuldade:"Fácil", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int \\ln(x) \\, dx$$",
@@ -410,6 +422,9 @@ window.COURSES_DATA["calc1"] = {
       &= x \\ln(x) - x + C; \\; C \\in \\mathbb{R} 
       \\end{aligned} 
       $$
+    </div>
+    <div style="text-align: right; margin-top: 15px;">
+      <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
     </div>
   </details>`},
   {id:"INT-PAR-006", origem:"Dado em aula[cite: 6]", dificuldade:"Difícil", relevancia:"Alta",
@@ -443,6 +458,9 @@ window.COURSES_DATA["calc1"] = {
       \\end{aligned} 
       $$
     </div>
+    <div style="text-align: right; margin-top: 15px;">
+      <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
+    </div>
   </details>`},
   {id:"INT-PAR-007", origem:"Dado em aula[cite: 6]", dificuldade:"Difícil", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int x^3 e^{x^2} \\, dx$$",
@@ -465,6 +483,9 @@ window.COURSES_DATA["calc1"] = {
       $$<br>
       Voltando para \\( x \\):<br>
       $$ = \\frac{1}{2} x^2 e^{x^2} - \\frac{1}{2} e^{x^2} + C; \\; C \\in \\mathbb{R} $$
+    </div>
+    <div style="text-align: right; margin-top: 15px;">
+      <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
     </div>
   </details>`}
 ]},
@@ -498,6 +519,9 @@ window.COURSES_DATA["calc1"] = {
       Logo,<br>
       $$ \\int \\frac{3}{(x-1)(x+2)} \\, dx = \\ln(x-1) - \\ln(x+2) + C; \\; C \\in \\mathbb{R} $$
     </div>
+    <div style="text-align: right; margin-top: 15px;">
+      <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
+    </div>
   </details>`},
   {id:"INT-SOM-002", origem:"Dado em aula[cite: 7]", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int \\frac{x}{x^2-9} \\, dx$$",
@@ -529,6 +553,9 @@ window.COURSES_DATA["calc1"] = {
       Logo,<br>
       $$ \\int \\frac{x}{x^2-9} \\, dx = \\frac{1}{2} \\ln(x-3) + \\frac{1}{2} \\ln(x+3) + C; \\; C \\in \\mathbb{R} $$
     </div>
+    <div style="text-align: right; margin-top: 15px;">
+      <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
+    </div>
   </details>`},
   {id:"INT-SOM-003", origem:"Dado em aula[cite: 7]", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int \\frac{2}{x^2-x-2} \\, dx$$",
@@ -558,6 +585,9 @@ window.COURSES_DATA["calc1"] = {
       Para \\( x = -1 \\): \\( 2 = -3B \\implies B = -\\frac{2}{3} \\)<br><br>
       Então,<br>
       $$ \\int \\frac{2}{x^2-x-2} \\, dx = \\frac{2}{3} \\ln(x-2) - \\frac{2}{3} \\ln(x+1) + C; \\; C \\in \\mathbb{R} $$
+    </div>
+    <div style="text-align: right; margin-top: 15px;">
+      <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
     </div>
   </details>`}
 ]}
