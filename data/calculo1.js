@@ -76,60 +76,60 @@ window.COURSES_DATA["calc1"] = {
   topics: [
 {materia:"Limites", subtopico:"Substituição direta", secId:"limites", exercicios:[
   {id:"LIM-SUB-001", origem:"Prova antiga", dificuldade:"Fácil", relevancia:"Baixa",
-   enunciado:"Calcule o limite: $$ \\lim_{x \\to 0} \\frac{5+\\cos(x)}{x+3} $$",
-   resposta: "$$ 2 $$"},
+   enunciado:"Calcule o limite: $$\\lim_{x \\to 0} \\frac{5+\\cos(x)}{x+3}$$",
+   resposta: "$$2$$"},
   {id:"LIM-SUB-002", origem:"Dado em aula 21/07/2026", dificuldade:"Fácil", relevancia:"Baixa",
-   enunciado:"Calcule o limite: $$ \\lim_{x \\to 0} \\left[ e^{\\frac{x^2}{3}} + x^3 + 5 + \\cos(x) \\right] $$",
-   resposta: "$$ 7 $$"},
+   enunciado:"Calcule o limite: $$\\lim_{x \\to 0} \\left[ e^{\\frac{x^2}{3}} + x^3 + 5 + \\cos(x) \\right]$$",
+   resposta: "$$7$$"},
   {id:"LIM-SUB-003", origem:"Gerado a partir das listas Lista 2", dificuldade:"Fácil", relevancia:"Baixa",
-   enunciado:"Calcule: $$ \\lim_{x \\to \\pi} [2\\cos(x) + \\sin(x/2)] $$",
-   resposta: "$$ -1 $$"},
+   enunciado:"Calcule: $$\\lim_{x \\to \\pi} [2\\cos(x) + \\sin(x/2)]$$",
+   resposta: "$$-1$$"},
 ]},
 {materia:"Limites", subtopico:"Fatoração e produtos notáveis", secId:"limites", exercicios:[
   {id:"LIM-FAT-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Calcule o limite: $$ \\lim_{x \\to 3} \\frac{x-3}{x^3-27} $$",
-   resposta: "$$ \\frac{1}{27} $$"},
+   enunciado:"Calcule o limite: $$\\lim_{x \\to 3} \\frac{x-3}{x^3-27}$$",
+   resposta: "$$\\frac{1}{27}$$"},
   {id:"LIM-FAT-002", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
-   enunciado:"Calcule: $$ \\lim_{x \\to 2} \\frac{x^6-64}{x-2} $$",
-   resposta: "$$ 192 $$"},
+   enunciado:"Calcule: $$\\lim_{x \\to 2} \\frac{x^6-64}{x-2}$$",
+   resposta: "$$192$$"},
   {id:"LIM-FAT-003", origem:"Dado em aula 28/07/2026", dificuldade:"Médio", relevancia:"Média",
-   enunciado:"Calcule o limite: $$ \\lim_{x \\to 2} \\frac{x^5-32}{x-2} $$",
-   resposta: "$$ 80 $$"},
+   enunciado:"Calcule o limite: $$\\lim_{x \\to 2} \\frac{x^5-32}{x-2}$$",
+   resposta: "$$80$$"},
   {id:"LIM-FAT-004", origem:"Gerado a partir das listas Lista 2", dificuldade:"Fácil", relevancia:"Baixa",
-   enunciado:"Calcule, por fatoração: $$ \\lim_{x \\to 4} \\frac{x^2-16}{x-4} $$",
-   resposta: "$$ 8 $$"},
+   enunciado:"Calcule, por fatoração: $$\\lim_{x \\to 4} \\frac{x^2-16}{x-4}$$",
+   resposta: "$$8$$"},
 ]},
 {materia:"Limites", subtopico:"Racionalização (Raízes)", secId:"limites", exercicios:[
   {id:"LIM-RAC-001", origem:"Prova antiga", dificuldade:"Muito difícil", relevancia:"Alta",
-   enunciado:"Calcule o limite: $$ \\lim_{x \\to 8} \\frac{x-8}{\\sqrt[3]{x} - \\sqrt[3]{8}} $$",
-   resposta: "$$ 12 $$"},
+   enunciado:"Calcule o limite: $$\\lim_{x \\to 8} \\frac{x-8}{\\sqrt[3]{x} - \\sqrt[3]{8}}$$",
+   resposta: "$$12$$"},
   {id:"LIM-RAC-002", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
-   enunciado:"Calcule: $$ \\lim_{x \\to 1/3} \\frac{\\sqrt[6]{3x}-1}{\\sqrt{3x}-1} $$",
-   resposta: "$$ \\frac{1}{3} $$"},
+   enunciado:"Calcule: $$\\lim_{x \\to 1/3} \\frac{\\sqrt[6]{3x}-1}{\\sqrt{3x}-1}$$",
+   resposta: "$$\\frac{1}{3}$$"},
   {id:"LIM-RAC-003", origem:"Gerado a partir das listas Lista 2", dificuldade:"Médio", relevancia:"Média",
-   enunciado:"Calcule, racionalizando: $$ \\lim_{x \\to 4} \\frac{\\sqrt{x+5}-3}{x-4} $$",
-   resposta: "$$ \\frac{1}{6} $$"},
+   enunciado:"Calcule, racionalizando: $$\\lim_{x \\to 4} \\frac{\\sqrt{x+5}-3}{x-4}$$",
+   resposta: "$$\\frac{1}{6}$$"},
 ]},
 {materia:"Limites", subtopico:"Laterais e módulo", secId:"limites", exercicios:[
   {id:"LIM-LAT-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Calcule, caso exista: $$ \\lim_{x \\to 5} \\frac{|x-5|}{2x-10} $$",
-   resposta:"O limite não existe (limite lateral esquerdo é \\( -\\frac{1}{2} \\) e o direito é \\( \\frac{1}{2} \\))."},
+   enunciado:"Calcule, caso exista: $$\\lim_{x \\to 5} \\frac{|x-5|}{2x-10}$$",
+   resposta:"O limite não existe (limite lateral esquerdo é \\(-\\frac{1}{2} \\) e o direito é \\(\\frac{1}{2} \\))."},
   {id:"LIM-LAT-002", origem:"Gerado a partir das listas Lista 2", dificuldade:"Fácil", relevancia:"Média",
    enunciado:"Determine os limites laterais e diga se o limite bilateral existe para \\( f(x) = 2x + 1 \\) se \\( x < 1 \\); e \\( f(x) = x + 4 \\), se \\( x \\ge 1 \\), quando \\( x \\to 1 \\).",
    resposta:"\\( \\lim_{x \\to 1^-} f(x) = 3 \\) e \\( \\lim_{x \\to 1^+} f(x) = 5 \\). O limite bilateral não existe."},
   {id:"LIM-LAT-003", origem:"Aula de revisão", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Caso exista, calcule \\( \\lim_{x\\to 2} f(x) \\), onde \\( f(x) = \\begin{cases} \\frac{x^2 - 4}{x - 2}, & \\text{se } x > 2 \\\\ 7x - 3, & \\text{se } x \\le 2 \\end{cases} \\)",
+   enunciado:"Caso exista, calcule \\(\\lim_{x\\to 2} f(x) \\), onde \\(f(x) = \\begin{cases} \\frac{x^2 - 4}{x - 2}, & \\text{se } x > 2 \\\\ 7x - 3, & \\text{se } x \\le 2 \\end{cases} \\)",
    resposta:"O limite bilateral não existe, pois \\( \\lim_{x\\to 2^+} f(x) = 4 \\) e \\( \\lim_{x\\to 2^-} f(x) = 11 \\)."},
 ]},
 {materia:"Limites", subtopico:"Teorema do Confronto", secId:"limites", exercicios:[
   {id:"LIM-CON-001", origem:"Gerado a partir das listas Lista 1", dificuldade:"Médio", relevancia:"Média",
-   enunciado:"Sabendo que \\( -1 \\le \\sin\\left(\\frac{1}{x}\\right) \\le 1 \\), calcule: $$ \\lim_{x \\to 0} x^2 \\sin\\left(\\frac{1}{x}\\right) $$",
-   resposta: "$$ 0 $$"},
+   enunciado:"Sabendo que \\( -1 \\le \\sin\\left(\\frac{1}{x}\\right) \\le 1 \\), calcule: $$\\lim_{x \\to 0} x^2 \\sin\\left(\\frac{1}{x}\\right)$$",
+   resposta: "$$0$$"},
 ]},
 {materia:"Limites", subtopico:"Infinitos e assíntotas", secId:"limites", exercicios:[
   {id:"LIM-INF-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Sejam \\( f : \\mathbb{R} \\to \\mathbb{R} \\) uma função e \\( a \\in \\mathbb{R} \\). Defina o significado da expressão $$ \\lim_{x \\to a} f(x) = -\\infty $$ Esboce um desenho para representar.",
-   resposta:"Significa que os valores de \\( f(x) \\) decrescem ilimitadamente (ficam arbitrariamente negativos) à medida que \\( x \\) se aproxima de \\( a \\).",
+   enunciado:"Sejam \\(f : \\mathbb{R} \\to \\mathbb{R} \\) uma função e \\(a \\in \\mathbb{R} \\). Defina o significado da expressão $$\\lim_{x \\to a} f(x) = -\\infty$$ Esboce um desenho para representar.",
+   resposta:"Significa que os valores de \\(f(x) \\) decrescem ilimitadamente (ficam arbitrariamente negativos) à medida que \\( x \\) se aproxima de \\( a \\).",
    svg: SVG_LIM_INF_001, 
    svgPos: "resposta"},
 ]},
@@ -141,61 +141,61 @@ window.COURSES_DATA["calc1"] = {
 ]},
 {materia:"Continuidade", subtopico:"Funções por partes", secId:"continuidade", exercicios:[
   {id:"P1-OFI-001", numero: 1, origem:"Prova antiga", oficial:"⭐ P1 Oficial", dificuldade:"Médio", relevancia:"Muito Alta",
-   enunciado:"Analise a continuidade da função \\( f \\) no ponto 2:<br>$$ f(x) = \\begin{cases} \\frac{x^3-8}{x-2}, & \\text{se } x < 2 \\\\ 2x-8, & \\text{se } x \\ge 2 \\end{cases} $$",
-   resposta:"A função não é contínua em \\( x = 2 \\). Para ser contínua, \\( \\lim_{x \\to 2} f(x) \\) deve existir e ser igual a \\( f(2) \\).<br><br>Temos \\( f(2) = 2(2) - 8 = -4 \\).<br><br>Calculando os limites laterais:<br>Pela direita: \\( \\lim_{x \\to 2^+} (2x - 8) = -4 \\)<br>Pela esquerda: \\( \\lim_{x \\to 2^-} \\frac{x^3-8}{x-2} = \\lim_{x \\to 2^-} \\frac{(x-2)(x^2+2x+4)}{x-2} = 4 + 4 + 4 = 12 \\).<br><br>Como os limites laterais são diferentes, o limite global não existe."},
+   enunciado:"Analise a continuidade da função \\( f \\) no ponto 2:<br>$$f(x) = \\begin{cases} \\frac{x^3-8}{x-2}, & \\text{se } x < 2 \\\\ 2x-8, & \\text{se } x \\ge 2 \\end{cases}$$",
+   resposta:"A função não é contínua em \\( x = 2 \\). Para ser contínua, \\(\\lim_{x \\to 2} f(x) \\) deve existir e ser igual a \\(f(2) \\).<br><br>Temos \\( f(2) = 2(2) - 8 = -4 \\).<br><br>Calculando os limites laterais:<br>Pela direita: \\( \\lim_{x \\to 2^+} (2x - 8) = -4 \\)<br>Pela esquerda: \\( \\lim_{x \\to 2^-} \\frac{x^3-8}{x-2} = \\lim_{x \\to 2^-} \\frac{(x-2)(x^2+2x+4)}{x-2} = 4 + 4 + 4 = 12 \\).<br><br>Como os limites laterais são diferentes, o limite global não existe."},
   {id:"CON-PAR-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Determine o valor de L para que a função dada abaixo seja contínua em 3: $$ f(x) = \\begin{cases} 2x+1, & \\text{se } x \\ne 3 \\\\ L, & \\text{se } x = 3 \\end{cases} $$",
-   resposta: "$$ L = 7 $$"},
+   enunciado:"Determine o valor de L para que a função dada abaixo seja contínua em 3: $$f(x) = \\begin{cases} 2x+1, & \\text{se } x \\ne 3 \\\\ L, & \\text{se } x = 3 \\end{cases}$$",
+   resposta: "$$L = 7$$"},
   {id:"CON-PAR-002", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
-   enunciado:"Seja $$ f(x) = \\begin{cases} \\frac{x^2-1}{x-1}, & \\text{se } x \\ne 1 \\\\ 2x, & \\text{se } x = 1 \\end{cases} $$ Calcule, caso exista, \\( \\lim_{x \\to 1} f(x) \\). A função \\( f \\) é contínua em \\( x = 1 \\)?",
-   resposta: "$$ \\lim_{x \\to 1} f(x) = 2 $$ Sim, a função é contínua em \\( x = 1 \\)."},
+   enunciado:"Seja $$f(x) = \\begin{cases} \\frac{x^2-1}{x-1}, & \\text{se } x \\ne 1 \\\\ 2x, & \\text{se } x = 1 \\end{cases}$$ Calcule, caso exista, \\(\\lim_{x \\to 1} f(x) \\). A função \\( f \\) é contínua em \\( x = 1 \\)?",
+   resposta: "$$\\lim_{x \\to 1} f(x) = 2$$ Sim, a função é contínua em \\( x = 1 \\)."},
   {id:"CON-PAR-003", origem:"Dado em aula 21/07/2026", dificuldade:"Médio", relevancia:"Média",
-   enunciado:"Considere a função $$ f(x) = \\begin{cases} \\frac{x^3-8}{x-2}, & \\text{se } x \\ne 2 \\\\ 5, & \\text{se } x = 2 \\end{cases} $$ Essa função é contínua em \\( x = 2 \\)? (Justifique usando limites). Caso não seja, qual deveria ser o valor de \\( f(2) \\) para que ela se tornasse contínua?",
-   resposta:"Não é contínua, pois o limite quando \\( x \\to 2 \\) é 12, mas \\( f(2) = 5 \\). Para ser contínua, o valor de \\( f(2) \\) deveria ser 12."},
+   enunciado:"Considere a função $$f(x) = \\begin{cases} \\frac{x^3-8}{x-2}, & \\text{se } x \\ne 2 \\\\ 5, & \\text{se } x = 2 \\end{cases}$$ Essa função é contínua em \\( x = 2 \\)? (Justifique usando limites). Caso não seja, qual deveria ser o valor de \\(f(2) \\) para que ela se tornasse contínua?",
+   resposta:"Não é contínua, pois o limite quando \\( x \\to 2 \\) é 12, mas \\( f(2) = 5 \\). Para ser contínua, o valor de \\(f(2) \\) deveria ser 12."},
   {id:"CON-PAR-004", origem:"Prova antiga", dificuldade:"Muito difícil", relevancia:"Alta",
-   enunciado:"Considere a função \\( f : \\mathbb{R} \\to \\mathbb{R} \\) dada por: $$ f(x) = \\begin{cases} \\cos(x^2-1)-4, & \\text{se } x > 1 \\\\ \\frac{x^2-x-2}{x+1}, & \\text{se } x < 1 \\\\ 2, & \\text{se } x = 1 \\end{cases} $$ a) Existe \\( \\lim_{x \\to 1} f(x) \\)? b) \\( f \\) é contínua no ponto \\( x = 1 \\)?",
+   enunciado:"Considere a função \\(f : \\mathbb{R} \\to \\mathbb{R} \\) dada por: $$f(x) = \\begin{cases} \\cos(x^2-1)-4, & \\text{se } x > 1 \\\\ \\frac{x^2-x-2}{x+1}, & \\text{se } x < 1 \\\\ 2, & \\text{se } x = 1 \\end{cases}$$ a) Existe \\(\\lim_{x \\to 1} f(x) \\)? b) \\( f \\) é contínua no ponto \\( x = 1 \\)?",
    resposta:"a) Não existe (o limite à esquerda é −1 e o limite à direita é −3). b) Não, pois o limite bilateral não existe."},
   {id:"CON-PAR-005", origem:"Aula de revisão", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Seja \\( f(x) = \\begin{cases} 2x + 1, & \\text{se } x \\ne 2 \\\\ L, & \\text{se } x = 2 \\end{cases} \\). Encontre o valor de \\( L \\) para que \\( f \\) seja contínua em \\( 2 \\).",
+   enunciado:"Seja \\(f(x) = \\begin{cases} 2x + 1, & \\text{se } x \\ne 2 \\\\ L, & \\text{se } x = 2 \\end{cases} \\). Encontre o valor de \\( L \\) para que \\( f \\) seja contínua em \\( 2 \\).",
    resposta:"Para \\( f \\) ser contínua em \\( 2 \\), devemos ter \\( \\lim_{x\\to 2} f(x) = f(2) = L \\). Como \\( \\lim_{x\\to 2} (2x + 1) = 2(2) + 1 = 5 \\), segue que \\( L = 5 \\).<br><br><strong>Resposta final:</strong> \\( L = 5 \\)"},
 ]},
 {materia:"Continuidade", subtopico:"Definição formal", secId:"continuidade", exercicios:[
   {id:"CON-DEF-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"a) Pela definição, o que significa dizer que uma função \\( f \\) é contínua num ponto \\( p \\) do seu domínio? b) Pela definição, o que significa dizer que uma função \\( f \\) é contínua?",
-   resposta:"a) Significa que \\( \\lim_{x \\to p} f(x) = f(p) \\). b) Significa que a função é contínua em todos os pontos do seu domínio."},
+   resposta:"a) Significa que \\(\\lim_{x \\to p} f(x) = f(p) \\). b) Significa que a função é contínua em todos os pontos do seu domínio."},
   {id:"CON-DEF-002", origem:"Aula de revisão", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"A afirmação \\( \\exists \\lim_{x\\to x_0} f(x) \\implies f \\) é contínua em \\( x_0 \\), é verdadeira ou falsa? Justifique sua resposta e esboce um gráfico que ilustre a situação.",
-   resposta:"Falsa. A existência do limite \\( \\lim_{x\\to x_0} f(x) = L \\) não garante continuidade, pois o ponto pode não pertencer ao domínio (\\( x_0 \\notin \\text{Dom}(f) \\)) ou o valor da função pode ser diferente do limite (\\( f(x_0) \\ne L \\)).",
+   resposta:"Falsa. A existência do limite \\( \\lim_{x\\to x_0} f(x) = L \\) não garante continuidade, pois o ponto pode não pertencer ao domínio (\\(x_0 \\notin \\text{Dom}(f) \\)) ou o valor da função pode ser diferente do limite (\\( f(x_0) \\ne L \\)).",
    svg: SVG_CON_DEF_002,
    svgPos: "resposta"},
 ]},
 {materia:"Derivadas", subtopico:"Pela definição formal", secId:"derivadas", exercicios:[
   {id:"P1-OFI-002", numero: 2, origem:"Prova antiga", oficial:"⭐ P1 Oficial", dificuldade:"Fácil", relevancia:"Muito Alta",
-   enunciado:"Use a definição de derivada para encontrar \\( f'(2) \\), sendo \\( f(x) = x^2 \\).",
-   resposta:"$$ f'(2) = \\lim_{x \\to 2} \\frac{f(x) - f(2)}{x - 2} = \\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2} = \\lim_{x \\to 2} \\frac{(x-2)(x+2)}{x-2} = \\lim_{x \\to 2} (x+2) = 4 $$"},
+   enunciado:"Use a definição de derivada para encontrar \\(f'(2) \\), sendo \\( f(x) = x^2 \\).",
+   resposta:"$$f'(2) = \\lim_{x \\to 2} \\frac{f(x) - f(2)}{x - 2} = \\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2} = \\lim_{x \\to 2} \\frac{(x-2)(x+2)}{x-2} = \\lim_{x \\to 2} (x+2) = 4$$"},
   {id:"DER-DEF-001", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
-   enunciado:"Seja \\( f(x) = x^4 - 16 \\). Calcule \\( f'(2) \\) pela definição.",
-   resposta: "$$ 32 $$"},
+   enunciado:"Seja \\( f(x) = x^4 - 16 \\). Calcule \\(f'(2) \\) pela definição.",
+   resposta: "$$32$$"},
   {id:"DER-DEF-002", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Use a definição de derivada para calcular \\( f'(x) \\) onde \\( f(x) = x^2 - 3x \\).",
-   resposta:"$$ f'(x) = 2x - 3 $$"},
+   enunciado:"Use a definição de derivada para calcular \\(f'(x) \\) onde \\( f(x) = x^2 - 3x \\).",
+   resposta:"$$f'(x) = 2x - 3$$"},
   {id:"DER-DEF-003", origem:"Dado em aula 04/08/2026", dificuldade:"Difícil", relevancia:"Média",
-   enunciado:"Calcule \\( f'(3) \\) usando a definição para a função \\( f(x) = ax^2 + bx + c \\).",
-   resposta:"$$ f'(3) = 6a + b $$"},
+   enunciado:"Calcule \\(f'(3) \\) usando a definição para a função \\( f(x) = ax^2 + bx + c \\).",
+   resposta:"$$f'(3) = 6a + b$$"},
   {id:"DER-DEF-004", origem:"Aula de revisão", dificuldade:"Difícil", relevancia:"Alta",
-   enunciado:"Use a definição de derivada para encontrar \\( f'(2) \\), sendo \\( f(x) = x^4 - 16 \\).",
-   resposta:"$$ f'(2) = \\lim_{x\\to 2} \\frac{f(x) - f(2)}{x - 2} = \\lim_{x\\to 2} \\frac{x^4 - 16}{x - 2} = \\lim_{x\\to 2} \\frac{(x-2)(x^3 + 2x^2 + 4x + 8)}{x-2} $$<br><br>$$ = 2^3 + 2(2^2) + 4(2) + 8 = 32 $$<br><br><strong>Resposta final:</strong> \\( f'(2) = 32 \\)"},
+   enunciado:"Use a definição de derivada para encontrar \\(f'(2) \\), sendo \\( f(x) = x^4 - 16 \\).",
+   resposta:"$$f'(2) = \\lim_{x\\to 2} \\frac{f(x) - f(2)}{x - 2} = \\lim_{x\\to 2} \\frac{x^4 - 16}{x - 2} = \\lim_{x\\to 2} \\frac{(x-2)(x^3 + 2x^2 + 4x + 8)}{x-2}$$<br><br>$$= 2^3 + 2(2^2) + 4(2) + 8 = 32$$<br><br><strong>Resposta final:</strong> \\( f'(2) = 32 \\)"},
 ]},
 {materia:"Derivadas", subtopico:"Regras do produto e quociente", secId:"derivadas", exercicios:[
   {id:"DER-PRO-001", origem:"Dado em aula 04/08/2026", dificuldade:"Fácil", relevancia:"Média",
    enunciado:"Calcule a derivada de \\( f(x) = x^{13} + \\sin(x) - e^x \\).",
-   resposta:"$$ f'(x) = 13x^{12} + \\cos(x) - e^x $$"},
+   resposta:"$$f'(x) = 13x^{12} + \\cos(x) - e^x$$"},
   {id:"DER-PRO-002", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Calcule a derivada de \\( y = e^x + x^3\\cos(x) \\).",
-   resposta:"$$ y' = e^x + x^2(3\\cos(x) - x\\sin(x)) $$"},
+   enunciado:"Calcule a derivada de \\(y = e^x + x^3\\cos(x) \\).",
+   resposta:"$$y' = e^x + x^2(3\\cos(x) - x\\sin(x))$$"},
   {id:"DER-PRO-003", origem:"Dado em aula 04/08/2026", dificuldade:"Médio", relevancia:"Média",
-   enunciado:"Calcule a derivada de \\( f(x) = \\cos(x) \\cdot \\ln(x) \\).",
-   resposta:"$$ f'(x) = \\frac{\\cos(x)}{x} - \\sin(x)\\ln(x) $$"},
+   enunciado:"Calcule a derivada de \\(f(x) = \\cos(x) \\cdot \\ln(x) \\).",
+   resposta:"$$f'(x) = \\frac{\\cos(x)}{x} - \\sin(x)\\ln(x)$$"},
   {id:"DER-PRO-004", origem:"Prova antiga", dificuldade:"Fácil", relevancia:"Alta",
    enunciado:"Derive a função: \\(g(x) = \\frac{2x+1}{x} \\).",
    resposta:"$$g'(x) = -\\frac{1}{x^2}$$"},
@@ -299,36 +299,267 @@ window.COURSES_DATA["calc1"] = {
 {materia:"Técnicas de Integração", subtopico:"Integração por Partes", secId:"tecnicas_integracao", etapa: "P2", exercicios:[
   {id:"INT-PAR-001", origem:"Dado em aula[cite: 5]", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral utilizando a técnica de integração por partes: $$\\int x e^x \\, dx$$",
-   resposta:"Temos \\( f(x) = x \\) e \\( g'(x) = e^x \\). Logo, \\( f'(x) = 1 \\) e \\( g(x) = e^x \\).<br>Aplicando a fórmula da integração por partes:<br>$$\\int x e^x \\, dx = x e^x - \\int 1 \\cdot e^x \\, dx$$<br>$$= x e^x - \\int e^x \\, dx$$<br>$$= x e^x - e^x + C; \\; C \\in \\mathbb{R}$$"},
+   resposta:`
+  <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
+    $$ \\int x e^x \\, dx = x e^x - e^x + C; \\; C \\in \\mathbb{R} $$
+  </div>
+  <details style="margin-top: 15px; cursor: pointer; color: #64748b;">
+    <summary><b>Ver resolução passo a passo</b></summary>
+    <div style="margin-top: 10px; padding-left: 15px; border-left: 3px solid #cbd5e1; color: var(--text-color);">
+      Temos \\( f(x) = x \\) e \\( g'(x) = e^x \\). Logo, \\( f'(x) = 1 \\) e \\( g(x) = e^x \\).<br><br>
+      $$ 
+      \\begin{aligned} 
+      \\int x e^x \\, dx &= x e^x - \\int 1 \\cdot e^x \\, dx \\\\ 
+      &= x e^x - \\int e^x \\, dx \\\\ 
+      &= x e^x - e^x + C; \\; C \\in \\mathbb{R} 
+      \\end{aligned} 
+      $$
+    </div>
+  </details>`},
   {id:"INT-PAR-002", origem:"Dado em aula[cite: 5]", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int x \\sin(x) \\, dx$$",
-   resposta:"Temos \\( f(x) = x \\) e \\(g'(x) = \\sin(x) \\). Logo, \\( f'(x) = 1 \\) e \\(g(x) = -\\cos(x) \\).<br>Aplicando a integração por partes:<br>$$\\int x \\sin(x) \\, dx = -x \\cos(x) - \\int 1 \\cdot (-\\cos(x)) \\, dx$$<br>$$= -x \\cos(x) + \\int \\cos(x) \\, dx$$<br>$$= -x \\cos(x) + \\sin(x) + C; \\; C \\in \\mathbb{R}$$"},
+   resposta:`
+  <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
+    $$ \\int x \\sin(x) \\, dx = -x \\cos(x) + \\sin(x) + C; \\; C \\in \\mathbb{R} $$
+  </div>
+  <details style="margin-top: 15px; cursor: pointer; color: #64748b;">
+    <summary><b>Ver resolução passo a passo</b></summary>
+    <div style="margin-top: 10px; padding-left: 15px; border-left: 3px solid #cbd5e1; color: var(--text-color);">
+      Temos \\( f(x) = x \\) e \\( g'(x) = \\sin(x) \\). Logo, \\( f'(x) = 1 \\) e \\( g(x) = -\\cos(x) \\).<br><br>
+      $$ 
+      \\begin{aligned} 
+      \\int x \\sin(x) \\, dx &= -x \\cos(x) - \\int 1 \\cdot (-\\cos(x)) \\, dx \\\\ 
+      &= -x \\cos(x) + \\int \\cos(x) \\, dx \\\\ 
+      &= -x \\cos(x) + \\sin(x) + C; \\; C \\in \\mathbb{R} 
+      \\end{aligned} 
+      $$
+    </div>
+  </details>`},
   {id:"INT-PAR-003", origem:"Dado em aula[cite: 5]", dificuldade:"Difícil", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int \\sin^2(x) \\, dx$$",
-   resposta:"Reescrevendo como \\( \\int \\sin(x)\\sin(x) \\, dx \\). Temos \\(f(x) = \\sin(x) \\) e \\(g'(x) = \\sin(x) \\). Logo, \\(f'(x) = \\cos(x) \\) e \\(g(x) = -\\cos(x) \\).<br>$$\\int \\sin^2(x) \\, dx = -\\sin(x)\\cos(x) - \\int \\cos(x)(-\\cos(x)) \\, dx$$<br>$$= -\\sin(x)\\cos(x) + \\int \\cos^2(x) \\, dx$$<br>Usando a identidade \\(\\cos^2(x) = 1 - \\sin^2(x) \\):<br>$$\\int \\sin^2(x) \\, dx = -\\sin(x)\\cos(x) + \\int [1 - \\sin^2(x)] \\, dx$$<br>$$\\int \\sin^2(x) \\, dx = -\\sin(x)\\cos(x) + \\int 1 \\, dx - \\int \\sin^2(x) \\, dx$$<br>Passando a integral para o outro lado:<br>$$2 \\int \\sin^2(x) \\, dx = -\\sin(x)\\cos(x) + x + C$$<br>$$\\int \\sin^2(x) \\, dx = \\frac{1}{2} (-\\sin(x)\\cos(x) + x) + C; \\; C \\in \\mathbb{R}$$"},
+   resposta:`
+  <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
+    $$ \\int \\sin^2(x) \\, dx = \\frac{1}{2} (-\\sin(x)\\cos(x) + x) + C; \\; C \\in \\mathbb{R} $$
+  </div>
+  <details style="margin-top: 15px; cursor: pointer; color: #64748b;">
+    <summary><b>Ver resolução passo a passo</b></summary>
+    <div style="margin-top: 10px; padding-left: 15px; border-left: 3px solid #cbd5e1; color: var(--text-color);">
+      Reescrevendo como \\( \\int \\sin(x)\\sin(x) \\, dx \\). Temos \\( f(x) = \\sin(x) \\) e \\( g'(x) = \\sin(x) \\). Logo, \\( f'(x) = \\cos(x) \\) e \\( g(x) = -\\cos(x) \\).<br><br>
+      $$ 
+      \\begin{aligned} 
+      \\int \\sin^2(x) \\, dx &= -\\sin(x)\\cos(x) - \\int \\cos(x)(-\\cos(x)) \\, dx \\\\ 
+      &= -\\sin(x)\\cos(x) + \\int \\cos^2(x) \\, dx 
+      \\end{aligned} 
+      $$<br>
+      Usando a identidade \\( \\cos^2(x) = 1 - \\sin^2(x) \\):<br>
+      $$ 
+      \\begin{aligned} 
+      \\int \\sin^2(x) \\, dx &= -\\sin(x)\\cos(x) + \\int [1 - \\sin^2(x)] \\, dx \\\\ 
+      \\int \\sin^2(x) \\, dx &= -\\sin(x)\\cos(x) + \\int 1 \\, dx - \\int \\sin^2(x) \\, dx \\\\ 
+      \\int \\sin^2(x) \\, dx &= -\\sin(x)\\cos(x) + x - \\int \\sin^2(x) \\, dx 
+      \\end{aligned} 
+      $$<br>
+      Passando a integral para o outro lado:<br>
+      $$ 
+      \\begin{aligned} 
+      2 \\int \\sin^2(x) \\, dx &= -\\sin(x)\\cos(x) + x + C \\\\
+      \\int \\sin^2(x) \\, dx &= \\frac{1}{2} (-\\sin(x)\\cos(x) + x) + C; \\; C \\in \\mathbb{R}
+      \\end{aligned} 
+      $$
+    </div>
+  </details>`},
   {id:"INT-PAR-004", origem:"Dado em aula[cite: 6]", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int x^2 e^x \\, dx$$",
-   resposta:"Temos \\( f(x) = x^2 \\) e \\( g'(x) = e^x \\). Logo, \\( f'(x) = 2x \\) e \\( g(x) = e^x \\).<br>$$\\int x^2 e^x \\, dx = x^2 e^x - \\int 2x e^x \\, dx$$<br>$$= x^2 e^x - 2 \\int x e^x \\, dx$$<br>Aplicando integração por partes novamente (ou usando o resultado anterior onde \\( \\int x e^x \\, dx = x e^x - \\int e^x \\, dx \\)):<br>$$= x^2 e^x - 2(x e^x - \\int e^x \\, dx)$$<br>$$= x^2 e^x - 2x e^x + 2e^x + C; \\; C \\in \\mathbb{R}$$"},
+   resposta:`
+  <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
+    $$ \\int x^2 e^x \\, dx = x^2 e^x - 2x e^x + 2e^x + C; \\; C \\in \\mathbb{R} $$
+  </div>
+  <details style="margin-top: 15px; cursor: pointer; color: #64748b;">
+    <summary><b>Ver resolução passo a passo</b></summary>
+    <div style="margin-top: 10px; padding-left: 15px; border-left: 3px solid #cbd5e1; color: var(--text-color);">
+      Temos \\( f(x) = x^2 \\) e \\( g'(x) = e^x \\). Logo, \\( f'(x) = 2x \\) e \\( g(x) = e^x \\).<br><br>
+      $$ 
+      \\begin{aligned} 
+      \\int x^2 e^x \\, dx &= x^2 e^x - \\int 2x e^x \\, dx \\\\ 
+      &= x^2 e^x - 2 \\int x e^x \\, dx 
+      \\end{aligned} 
+      $$<br>
+      Usando o resultado de integração por partes na integral de \\( x e^x \\) (onde \\( \\int x e^x \\, dx = x e^x - \\int e^x \\, dx \\)):<br>
+      $$ 
+      \\begin{aligned} 
+      \\int x^2 e^x \\, dx &= x^2 e^x - 2(x e^x - \\int e^x \\, dx) \\\\ 
+      &= x^2 e^x - 2x e^x + 2e^x + C; \\; C \\in \\mathbb{R} 
+      \\end{aligned} 
+      $$
+    </div>
+  </details>`},
   {id:"INT-PAR-005", origem:"Dado em aula[cite: 6]", dificuldade:"Fácil", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int \\ln(x) \\, dx$$",
-   resposta:"Reescrevendo como \\( \\int 1 \\cdot \\ln(x) \\, dx \\). Temos \\(f(x) = \\ln(x) \\) e \\( g'(x) = 1 \\). Logo, \\(f'(x) = \\frac{1}{x} \\) e \\( g(x) = x \\).<br>$$\\int \\ln(x) \\, dx = x \\ln(x) - \\int \\frac{1}{x} \\cdot x \\, dx$$<br>$$= x \\ln(x) - \\int 1 \\, dx$$<br>$$= x \\ln(x) - x + C; \\; C \\in \\mathbb{R}$$"},
+   resposta:`
+  <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
+    $$ \\int \\ln(x) \\, dx = x \\ln(x) - x + C; \\; C \\in \\mathbb{R} $$
+  </div>
+  <details style="margin-top: 15px; cursor: pointer; color: #64748b;">
+    <summary><b>Ver resolução passo a passo</b></summary>
+    <div style="margin-top: 10px; padding-left: 15px; border-left: 3px solid #cbd5e1; color: var(--text-color);">
+      Reescrevendo como \\( \\int 1 \\cdot \\ln(x) \\, dx \\). Temos \\( f(x) = \\ln(x) \\) e \\( g'(x) = 1 \\). Logo, \\( f'(x) = \\frac{1}{x} \\) e \\( g(x) = x \\).<br><br>
+      $$ 
+      \\begin{aligned} 
+      \\int \\ln(x) \\, dx &= x \\ln(x) - \\int \\frac{1}{x} \\cdot x \\, dx \\\\ 
+      &= x \\ln(x) - \\int 1 \\, dx \\\\ 
+      &= x \\ln(x) - x + C; \\; C \\in \\mathbb{R} 
+      \\end{aligned} 
+      $$
+    </div>
+  </details>`},
   {id:"INT-PAR-006", origem:"Dado em aula[cite: 6]", dificuldade:"Difícil", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int e^x \\cos(x) \\, dx$$",
-   resposta:"Temos \\(f(x) = \\cos(x) \\) e \\( g'(x) = e^x \\). Logo, \\(f'(x) = -\\sin(x) \\) e \\( g(x) = e^x \\).<br>$$\\int e^x \\cos(x) \\, dx = e^x \\cos(x) - \\int (-\\sin(x)) e^x \\, dx$$<br>$$= e^x \\cos(x) + \\int e^x \\sin(x) \\, dx$$<br>Aplicando partes novamente para a nova integral com \\(f(x) = \\sin(x) \\) e \\( g'(x) = e^x \\):<br>$$= e^x \\cos(x) + \\left[ e^x \\sin(x) - \\int \\cos(x) e^x \\, dx \\right]$$<br>$$\\int e^x \\cos(x) \\, dx = e^x \\cos(x) + e^x \\sin(x) - \\int e^x \\cos(x) \\, dx$$<br>Passando a integral para o outro lado:<br>$$2 \\int e^x \\cos(x) \\, dx = e^x(\\cos(x) + \\sin(x))$$<br>$$\\int e^x \\cos(x) \\, dx = \\frac{e^x}{2}(\\cos(x) + \\sin(x)) + C; \\; C \\in \\mathbb{R}$$"},
+   resposta:`
+  <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
+    $$ \\int e^x \\cos(x) \\, dx = \\frac{e^x}{2}(\\cos(x) + \\sin(x)) + C; \\; C \\in \\mathbb{R} $$
+  </div>
+  <details style="margin-top: 15px; cursor: pointer; color: #64748b;">
+    <summary><b>Ver resolução passo a passo</b></summary>
+    <div style="margin-top: 10px; padding-left: 15px; border-left: 3px solid #cbd5e1; color: var(--text-color);">
+      Temos \\( f(x) = \\cos(x) \\) e \\( g'(x) = e^x \\). Logo, \\( f'(x) = -\\sin(x) \\) e \\( g(x) = e^x \\).<br><br>
+      $$ 
+      \\begin{aligned} 
+      \\int e^x \\cos(x) \\, dx &= e^x \\cos(x) - \\int (-\\sin(x)) e^x \\, dx \\\\ 
+      &= e^x \\cos(x) + \\int e^x \\sin(x) \\, dx 
+      \\end{aligned} 
+      $$<br>
+      Aplicando partes novamente para a nova integral com \\( f(x) = \\sin(x) \\) e \\( g'(x) = e^x \\):<br>
+      $$ 
+      \\begin{aligned} 
+      \\int e^x \\cos(x) \\, dx &= e^x \\cos(x) + \\left[ e^x \\sin(x) - \\int \\cos(x) e^x \\, dx \\right] \\\\ 
+      \\int e^x \\cos(x) \\, dx &= e^x \\cos(x) + e^x \\sin(x) - \\int e^x \\cos(x) \\, dx 
+      \\end{aligned} 
+      $$<br>
+      Passando a integral para o outro lado:<br>
+      $$ 
+      \\begin{aligned} 
+      2 \\int e^x \\cos(x) \\, dx &= e^x(\\cos(x) + \\sin(x)) \\\\ 
+      \\int e^x \\cos(x) \\, dx &= \\frac{e^x}{2}(\\cos(x) + \\sin(x)) + C; \\; C \\in \\mathbb{R} 
+      \\end{aligned} 
+      $$
+    </div>
+  </details>`},
   {id:"INT-PAR-007", origem:"Dado em aula[cite: 6]", dificuldade:"Difícil", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int x^3 e^{x^2} \\, dx$$",
-   resposta:"Reescrevendo a integral como \\( \\int x^2 \\cdot x e^{x^2} \\, dx \\).<br>Fazendo a substituição \\( u = x^2 \\implies du = 2x \\, dx \\implies x \\, dx = \\frac{1}{2} du \\):<br>$$\\int x^3 e^{x^2} \\, dx = \\frac{1}{2} \\int u e^u \\, du$$<br>Aplicando integração por partes com \\( f(u) = u \\) e \\( g'(u) = e^u \\):<br>$$= \\frac{1}{2} \\left[ u e^u - \\int e^u \\, du \\right]$$<br>$$= \\frac{1}{2} \\left[ u e^u - e^u \\right] + C$$<br>Voltando para \\( x \\):<br>$$= \\frac{1}{2} x^2 e^{x^2} - \\frac{1}{2} e^{x^2} + C; \\; C \\in \\mathbb{R}$$"}
+   resposta:`
+  <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
+    $$ \\int x^3 e^{x^2} \\, dx = \\frac{1}{2} x^2 e^{x^2} - \\frac{1}{2} e^{x^2} + C; \\; C \\in \\mathbb{R} $$
+  </div>
+  <details style="margin-top: 15px; cursor: pointer; color: #64748b;">
+    <summary><b>Ver resolução passo a passo</b></summary>
+    <div style="margin-top: 10px; padding-left: 15px; border-left: 3px solid #cbd5e1; color: var(--text-color);">
+      Reescrevendo a integral como \\( \\int x^2 \\cdot x e^{x^2} \\, dx \\).<br><br>
+      Fazendo a substituição \\( u = x^2 \\implies du = 2x \\, dx \\implies x \\, dx = \\frac{1}{2} du \\):<br>
+      $$ \\int x^3 e^{x^2} \\, dx = \\frac{1}{2} \\int u e^u \\, du $$<br>
+      Aplicando integração por partes com \\( f(u) = u \\) e \\( g'(u) = e^u \\):<br>
+      $$ 
+      \\begin{aligned} 
+      \\frac{1}{2} \\int u e^u \\, du &= \\frac{1}{2} \\left[ u e^u - \\int e^u \\, du \\right] \\\\ 
+      &= \\frac{1}{2} \\left[ u e^u - e^u \\right] + C 
+      \\end{aligned} 
+      $$<br>
+      Voltando para \\( x \\):<br>
+      $$ = \\frac{1}{2} x^2 e^{x^2} - \\frac{1}{2} e^{x^2} + C; \\; C \\in \\mathbb{R} $$
+    </div>
+  </details>`}
 ]},
 {materia:"Técnicas de Integração", subtopico:"Somas Parciais", secId:"tecnicas_integracao", etapa: "P2", exercicios:[
   {id:"INT-SOM-001", origem:"Dado em aula[cite: 7]", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int \\frac{3}{(x-1)(x+2)} \\, dx$$",
-   resposta:"$$\\int \\frac{3}{(x-1)(x+2)} \\, dx = \\int \\left[ \\frac{A}{x-1} + \\frac{B}{x+2} \\right] \\, dx$$<br>$$= A \\int \\frac{1}{x-1} \\, dx + B \\int \\frac{1}{x+2} \\, dx$$<br>$$= A \\ln(x-1) + B \\ln(x+2) + C$$<br><br>Encontrando A e B:<br>$$\\frac{3}{(x-1)(x+2)} = \\frac{A(x+2) + B(x-1)}{(x-1)(x+2)}$$<br>$$3 = A(x+2) + B(x-1)$$<br>Para \\( x = 1 \\): \\( 3 = 3A \\implies A = 1 \\)<br>Para \\( x = -2 \\): \\( 3 = -3B \\implies B = -1 \\)<br><br>Logo,<br>$$\\int \\frac{3}{(x-1)(x+2)} \\, dx = \\ln(x-1) - \\ln(x+2) + C; \\; C \\in \\mathbb{R}$$"},
+   resposta:`
+  <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
+    $$ \\int \\frac{3}{(x-1)(x+2)} \\, dx = \\ln(x-1) - \\ln(x+2) + C; \\; C \\in \\mathbb{R} $$
+  </div>
+  <details style="margin-top: 15px; cursor: pointer; color: #64748b;">
+    <summary><b>Ver resolução passo a passo</b></summary>
+    <div style="margin-top: 10px; padding-left: 15px; border-left: 3px solid #cbd5e1; color: var(--text-color);">
+      Decompondo em frações parciais:<br>
+      $$ 
+      \\begin{aligned} 
+      \\int \\frac{3}{(x-1)(x+2)} \\, dx &= \\int \\left[ \\frac{A}{x-1} + \\frac{B}{x+2} \\right] \\, dx \\\\ 
+      &= A \\int \\frac{1}{x-1} \\, dx + B \\int \\frac{1}{x+2} \\, dx \\\\ 
+      &= A \\ln(x-1) + B \\ln(x+2) + C 
+      \\end{aligned} 
+      $$<br>
+      Encontrando A e B:<br>
+      $$ 
+      \\begin{aligned} 
+      \\frac{3}{(x-1)(x+2)} &= \\frac{A(x+2) + B(x-1)}{(x-1)(x+2)} \\\\ 
+      3 &= A(x+2) + B(x-1) 
+      \\end{aligned} 
+      $$<br>
+      Para \\( x = 1 \\): \\( 3 = 3A \\implies A = 1 \\)<br>
+      Para \\( x = -2 \\): \\( 3 = -3B \\implies B = -1 \\)<br><br>
+      Logo,<br>
+      $$ \\int \\frac{3}{(x-1)(x+2)} \\, dx = \\ln(x-1) - \\ln(x+2) + C; \\; C \\in \\mathbb{R} $$
+    </div>
+  </details>`},
   {id:"INT-SOM-002", origem:"Dado em aula[cite: 7]", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int \\frac{x}{x^2-9} \\, dx$$",
-   resposta:"$$\\int \\frac{x}{x^2-9} \\, dx = \\int \\frac{x}{(x-3)(x+3)} \\, dx$$<br>$$= \\int \\left[ \\frac{A}{x-3} + \\frac{B}{x+3} \\right] \\, dx$$<br>$$= A \\int \\frac{1}{x-3} \\, dx + B \\int \\frac{1}{x+3} \\, dx$$<br>$$= A \\ln(x-3) + B \\ln(x+3) + C$$<br><br>Encontrando A e B:<br>$$\\frac{x}{(x-3)(x+3)} = \\frac{A(x+3) + B(x-3)}{(x-3)(x+3)}$$<br>$$x = A(x+3) + B(x-3)$$<br>Para \\( x = 3 \\): \\(3 = 6A \\implies A = \\frac{3}{6} = \\frac{1}{2} \\)<br>Para \\( x = -3 \\): \\(-3 = -6B \\implies B = \\frac{-3}{-6} = \\frac{1}{2} \\)<br><br>Logo,<br>$$\\int \\frac{x}{x^2-9} \\, dx = \\frac{1}{2} \\ln(x-3) + \\frac{1}{2} \\ln(x+3) + C; \\; C \\in \\mathbb{R}$$"},
+   resposta:`
+  <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
+    $$ \\int \\frac{x}{x^2-9} \\, dx = \\frac{1}{2} \\ln(x-3) + \\frac{1}{2} \\ln(x+3) + C; \\; C \\in \\mathbb{R} $$
+  </div>
+  <details style="margin-top: 15px; cursor: pointer; color: #64748b;">
+    <summary><b>Ver resolução passo a passo</b></summary>
+    <div style="margin-top: 10px; padding-left: 15px; border-left: 3px solid #cbd5e1; color: var(--text-color);">
+      Fatorando o denominador e decompondo:<br>
+      $$ 
+      \\begin{aligned} 
+      \\int \\frac{x}{x^2-9} \\, dx &= \\int \\frac{x}{(x-3)(x+3)} \\, dx \\\\ 
+      &= \\int \\left[ \\frac{A}{x-3} + \\frac{B}{x+3} \\right] \\, dx \\\\ 
+      &= A \\int \\frac{1}{x-3} \\, dx + B \\int \\frac{1}{x+3} \\, dx \\\\ 
+      &= A \\ln(x-3) + B \\ln(x+3) + C 
+      \\end{aligned} 
+      $$<br>
+      Encontrando A e B:<br>
+      $$ 
+      \\begin{aligned} 
+      \\frac{x}{(x-3)(x+3)} &= \\frac{A(x+3) + B(x-3)}{(x-3)(x+3)} \\\\ 
+      x &= A(x+3) + B(x-3) 
+      \\end{aligned} 
+      $$<br>
+      Para \\( x = 3 \\): \\( 3 = 6A \\implies A = \\frac{3}{6} = \\frac{1}{2} \\)<br>
+      Para \\( x = -3 \\): \\( -3 = -6B \\implies B = \\frac{-3}{-6} = \\frac{1}{2} \\)<br><br>
+      Logo,<br>
+      $$ \\int \\frac{x}{x^2-9} \\, dx = \\frac{1}{2} \\ln(x-3) + \\frac{1}{2} \\ln(x+3) + C; \\; C \\in \\mathbb{R} $$
+    </div>
+  </details>`},
   {id:"INT-SOM-003", origem:"Dado em aula[cite: 7]", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int \\frac{2}{x^2-x-2} \\, dx$$",
-   resposta:"Encontrando as raízes do denominador: \\( x^2 - x - 2 = 0 \\implies x = 2 \\text{ e } x = -1 \\). Logo, \\(x^2 - x - 2 = (x-2)(x+1) \\).<br>$$\\int \\frac{2}{x^2-x-2} \\, dx = \\int \\frac{2}{(x-2)(x+1)} \\, dx$$<br>$$= \\int \\left[ \\frac{A}{x-2} + \\frac{B}{x+1} \\right] \\, dx$$<br>$$= A \\ln(x-2) + B \\ln(x+1) + C$$<br><br>Encontrando A e B:<br>$$\\frac{2}{(x-2)(x+1)} = \\frac{A(x+1) + B(x-2)}{(x-2)(x+1)}$$<br>$$2 = A(x+1) + B(x-2)$$<br>Para \\( x = 2 \\): \\(2 = 3A \\implies A = \\frac{2}{3} \\)<br>Para \\( x = -1 \\): \\(2 = -3B \\implies B = -\\frac{2}{3} \\)<br><br>Então,<br>$$\\int \\frac{2}{x^2-x-2} \\, dx = \\frac{2}{3} \\ln(x-2) - \\frac{2}{3} \\ln(x+1) + C; \\; C \\in \\mathbb{R}$$"}
+   resposta:`
+  <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
+    $$ \\int \\frac{2}{x^2-x-2} \\, dx = \\frac{2}{3} \\ln(x-2) - \\frac{2}{3} \\ln(x+1) + C; \\; C \\in \\mathbb{R} $$
+  </div>
+  <details style="margin-top: 15px; cursor: pointer; color: #64748b;">
+    <summary><b>Ver resolução passo a passo</b></summary>
+    <div style="margin-top: 10px; padding-left: 15px; border-left: 3px solid #cbd5e1; color: var(--text-color);">
+      Encontrando as raízes do denominador: \\( x^2 - x - 2 = 0 \\implies x = 2 \\text{ e } x = -1 \\). Logo, \\( x^2 - x - 2 = (x-2)(x+1) \\).<br><br>
+      $$ 
+      \\begin{aligned} 
+      \\int \\frac{2}{x^2-x-2} \\, dx &= \\int \\frac{2}{(x-2)(x+1)} \\, dx \\\\ 
+      &= \\int \\left[ \\frac{A}{x-2} + \\frac{B}{x+1} \\right] \\, dx \\\\ 
+      &= A \\ln(x-2) + B \\ln(x+1) + C 
+      \\end{aligned} 
+      $$<br>
+      Encontrando A e B:<br>
+      $$ 
+      \\begin{aligned} 
+      \\frac{2}{(x-2)(x+1)} &= \\frac{A(x+1) + B(x-2)}{(x-2)(x+1)} \\\\ 
+      2 &= A(x+1) + B(x-2) 
+      \\end{aligned} 
+      $$<br>
+      Para \\( x = 2 \\): \\( 2 = 3A \\implies A = \\frac{2}{3} \\)<br>
+      Para \\( x = -1 \\): \\( 2 = -3B \\implies B = -\\frac{2}{3} \\)<br><br>
+      Então,<br>
+      $$ \\int \\frac{2}{x^2-x-2} \\, dx = \\frac{2}{3} \\ln(x-2) - \\frac{2}{3} \\ln(x+1) + C; \\; C \\in \\mathbb{R} $$
+    </div>
+  </details>`}
 ]}
   ]
 };
