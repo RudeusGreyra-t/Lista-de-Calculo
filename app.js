@@ -73,7 +73,7 @@ let selectedOrigens = new Set();
 let selectedDificuldades = new Set();
 let sectionSubtopicos = {};
 let currentStatusFilter = "all";
-let currentEtapaFilter = "P2"; // Valor padrão para carregar focado na P2
+let currentEtapaFilter = "P2"; // Valor padrão
 let isSequentialMode = false;
 let allAnswersShown = false;
 
@@ -108,7 +108,6 @@ function loadCourse(courseKey) {
   buildNav();
   buildContent();
   
-  // Sincroniza visualmente os botões de Etapa de acordo com o estado atual
   document.querySelectorAll(".etapa-btn").forEach(btn => {
       btn.classList.toggle("active", btn.dataset.etapa === currentEtapaFilter);
   });
@@ -121,41 +120,57 @@ function setReviewed(map){
   try{ localStorage.setItem(`revisados_${currentCourseKey}`, JSON.stringify(map)); }catch(e){}
 }
 
-/* ======================= VISIBILIDADE DAS ETAPAS E ORIGENS ======================= */
+/* ======================= LÓGICA DE HERANÇA MACRO-MICRO (ETAPAS) ======================= */
+function isSectionVisibleInCurrentEtapa(secId) {
+    if (currentEtapaFilter === "PF") return true;
+    return DATA.some(g => {
+        if (g.secId !== secId) return false;
+        const gEtapa = g.etapa || SECTION_ETAPAS[g.secId] || "P1";
+        return gEtapa === currentEtapaFilter || gEtapa === "PF";
+    });
+}
+
 function updateOriginFilterVisibility() {
-    const validSecIds = SECTION_ORDER.filter(secId => 
-        currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId]
-    );
-    const validGroups = DATA.filter(g => validSecIds.includes(g.secId));
+    const validGroups = DATA.filter(g => {
+        const gEtapa = g.etapa || SECTION_ETAPAS[g.secId] || "P1";
+        return currentEtapaFilter === "PF" || gEtapa === currentEtapaFilter || gEtapa === "PF";
+    });
     const origensAtuais = [...new Set(validGroups.flatMap(g => g.exercicios.map(e => origemCategoria(e.origem))))];
     
     const originDropdown = document.getElementById("dd-origem");
     if(originDropdown) {
         originDropdown.querySelectorAll('.dropdown-item').forEach(label => {
             const optName = label.textContent.trim();
-            if (origensAtuais.includes(optName)) {
-                label.style.display = "flex";
-            } else {
-                label.style.display = "none";
-            }
+            label.style.display = origensAtuais.includes(optName) ? "flex" : "none";
         });
     }
 }
 
 function updateUIForEtapa() {
     SECTION_ORDER.forEach(secId => {
-        const isVisible = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
-        
-        // Esconde ou exibe o Dropdown de subtopicos
-        const dd = document.getElementById(`dd-${secId}`);
-        if (dd) dd.style.display = isVisible ? "" : "none";
+        const isVisible = isSectionVisibleInCurrentEtapa(secId);
         
         // Esconde ou exibe as pílulas de navegação
         document.querySelectorAll(`.nav-pill-group[data-sec="${secId}"]`).forEach(pill => {
             pill.style.display = isVisible && !isSequentialMode ? "inline-flex" : "none";
         });
+
+        // Atualiza a visibilidade das opções no dropdown da matéria
+        const dd = document.getElementById(`dd-${secId}`);
+        if (dd) {
+            dd.style.display = isVisible ? "" : "none";
+            dd.querySelectorAll('.dropdown-item').forEach(label => {
+                const subName = label.textContent.trim();
+                const group = DATA.find(g => g.secId === secId && g.subtopico === subName);
+                if (group) {
+                    const gEtapa = group.etapa || SECTION_ETAPAS[group.secId] || "P1";
+                    const isSubVisible = currentEtapaFilter === "PF" || gEtapa === currentEtapaFilter || gEtapa === "PF";
+                    label.style.display = isSubVisible ? "flex" : "none";
+                }
+            });
+            updateDropdownButton(dd);
+        }
     });
-    
     updateOriginFilterVisibility();
 }
 
@@ -170,7 +185,7 @@ document.querySelectorAll(".etapa-btn").forEach(btn => {
     });
 });
 
-/* INICIALIZA OS DROPDOWNS BASEADOS EXCLUSIVAMENTE NAS SEÇÕES */
+/* INICIALIZA OS DROPDOWNS BASEADOS NAS SEÇÕES */
 function initFilters() {
   const origensDisponiveis = [...new Set(DATA.flatMap(g => g.exercicios.map(e => origemCategoria(e.origem))))];
   const dificuldadesDisponiveis = ["Fácil","Médio","Difícil","Muito difícil"];
@@ -228,16 +243,26 @@ function setupDropdownWithActions(dropdownId, title, options, selectedSet) {
 
   details.querySelector('.select-all').addEventListener('click', (e) => {
     e.preventDefault();
-    options.forEach(o => selectedSet.add(o));
-    container.querySelectorAll('input').forEach(i => i.checked = true);
+    container.querySelectorAll('.dropdown-item').forEach(label => {
+        if (label.style.display !== "none") {
+            const opt = label.textContent.trim();
+            selectedSet.add(opt);
+            label.querySelector('input').checked = true;
+        }
+    });
     applyFilters();
     updateDropdownButton(details);
   });
 
   details.querySelector('.deselect-all').addEventListener('click', (e) => {
     e.preventDefault();
-    selectedSet.clear();
-    container.querySelectorAll('input').forEach(i => i.checked = false);
+    container.querySelectorAll('.dropdown-item').forEach(label => {
+        if (label.style.display !== "none") {
+            const opt = label.textContent.trim();
+            selectedSet.delete(opt);
+            label.querySelector('input').checked = false;
+        }
+    });
     applyFilters();
     updateDropdownButton(details);
   });
@@ -247,10 +272,11 @@ function setupDropdownWithActions(dropdownId, title, options, selectedSet) {
 
 function updateDropdownButton(detailsEl) {
   if(!detailsEl) return;
-  const checkedCount = detailsEl.querySelectorAll('.dropdown-item input:checked').length;
-  const totalCount = detailsEl.querySelectorAll('.dropdown-item input').length;
+  const visibleItems = Array.from(detailsEl.querySelectorAll('.dropdown-item')).filter(el => el.style.display !== 'none');
+  const checkedCount = visibleItems.filter(el => el.querySelector('input').checked).length;
+  const totalCount = visibleItems.length;
   const summaryCount = detailsEl.querySelector('.count');
-  if(summaryCount) summaryCount.textContent = (checkedCount === totalCount) ? "" : `(${checkedCount})`;
+  if(summaryCount) summaryCount.textContent = (checkedCount === totalCount && totalCount > 0) ? "" : `(${checkedCount})`;
 }
 
 /* ======================= RENDERIZAÇÃO ======================= */
@@ -273,7 +299,7 @@ function buildNavPills(container) {
       <button type="button" class="nav-pill-reset" data-sec="${secId}" title="Zerar revisões de ${SECTION_TITLES[secId]}">↺</button>
     `;
     
-    const isVisible = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
+    const isVisible = isSectionVisibleInCurrentEtapa(secId);
     pillGroup.style.display = isVisible ? "inline-flex" : "none";
     
     container.appendChild(pillGroup);
@@ -323,6 +349,8 @@ function createCard(ex, group) {
       card.classList.add("card-oficial");
   }
   
+  const calculatedEtapa = group.etapa || SECTION_ETAPAS[group.secId] || "P1";
+  card.dataset.etapa = calculatedEtapa;
   card.dataset.secId = group.secId;
   card.dataset.subtopico = group.subtopico;
   card.dataset.origemCat = origemCategoria(ex.origem);
@@ -398,7 +426,6 @@ function createCard(ex, group) {
     ${hasItems ? `<div class="sub-items-container">${itemsHtml}</div>` : ""}
   `;
 
-  // Event Listeners para Mostrar/Esconder
   card.querySelectorAll(".toggle-answer").forEach(btn => {
     btn.addEventListener("click", (e) => {
       const respDiv = e.target.parentElement.nextElementSibling;
@@ -411,7 +438,6 @@ function createCard(ex, group) {
     });
   });
 
-  // Event Listeners para Revisado
   if (hasItems) {
       const checkCardReviewedState = () => {
           const allSubs = card.querySelectorAll('.sub-reviewed-cb');
@@ -499,11 +525,21 @@ function buildContent() {
 function updateToggleMateriasButton() {
     let allChecked = true;
     SECTION_ORDER.forEach(secId => {
-        const isVisible = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
+        const isVisible = isSectionVisibleInCurrentEtapa(secId);
         if (!isVisible) return; 
         
-        const totalSubs = [...new Set(DATA.filter(g => g.secId === secId).map(g => g.subtopico))].length;
-        if(sectionSubtopicos[secId] && sectionSubtopicos[secId].size < totalSubs) allChecked = false;
+        const validSubs = [...new Set(DATA.filter(g => {
+            if (g.secId !== secId) return false;
+            const gEtapa = g.etapa || SECTION_ETAPAS[g.secId] || "P1";
+            return currentEtapaFilter === "PF" || gEtapa === currentEtapaFilter || gEtapa === "PF";
+        }).map(g => g.subtopico))];
+        
+        let checkedCount = 0;
+        validSubs.forEach(s => {
+            if (sectionSubtopicos[secId] && sectionSubtopicos[secId].has(s)) checkedCount++;
+        });
+        
+        if(checkedCount < validSubs.length) allChecked = false;
     });
     const btn = document.getElementById("toggleMaterias");
     if (btn) {
@@ -516,17 +552,14 @@ function checkSequentialAvailability() {
   const btn = document.getElementById("btnToggleSequential");
   if (!btn) return;
 
-  // 1. Identifica quais origens são válidas para a Etapa atual (ignorando "fantasmas")
-  const validSecIds = SECTION_ORDER.filter(secId => 
-      currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId]
-  );
-  const validGroups = DATA.filter(g => validSecIds.includes(g.secId));
+  const validGroups = DATA.filter(g => {
+      const gEtapa = g.etapa || SECTION_ETAPAS[g.secId] || "P1";
+      return currentEtapaFilter === "PF" || gEtapa === currentEtapaFilter || gEtapa === "PF";
+  });
   const origensAtuais = [...new Set(validGroups.flatMap(g => g.exercicios.map(e => origemCategoria(e.origem))))];
 
-  // 2. Filtra as origens selecionadas para considerar apenas as que estão visíveis na tela agora
   const activeVisibleOrigens = [...selectedOrigens].filter(o => origensAtuais.includes(o));
 
-  // 3. Verifica se existe pelo menos uma origem e se TODAS elas possuem caráter sequencial
   let isOriginSequential = false;
   if (activeVisibleOrigens.length > 0) {
       isOriginSequential = activeVisibleOrigens.every(origin => 
@@ -559,8 +592,9 @@ function applyFilters() {
     const secId = card.dataset.secId, s = card.dataset.subtopico;
     const okTema = sectionSubtopicos[secId] && sectionSubtopicos[secId].has(s);
     
-    // Filtro Global da Etapa
-    const okEtapa = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
+    // Filtro Micro (Subtópicos herdam a regra)
+    const cardEtapa = card.dataset.etapa;
+    const okEtapa = currentEtapaFilter === "PF" || cardEtapa === currentEtapaFilter || cardEtapa === "PF";
 
     const matchesBase = okOrigem && okDif && okTema && okEtapa;
     
@@ -595,11 +629,13 @@ function applyFilters() {
       const secCards = sec.querySelectorAll(".card");
       const visibleCardsInSec = [...secCards].filter(c => !c.classList.contains("hidden"));
       
-      const okEtapa = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
-      sec.style.display = (visibleCardsInSec.length > 0 && okEtapa) ? "" : "none";
+      const isVisible = isSectionVisibleInCurrentEtapa(secId);
+      sec.style.display = (visibleCardsInSec.length > 0 && isVisible) ? "" : "none";
 
       const totalSecBase = [...secCards].filter(c => {
-        return selectedOrigens.has(c.dataset.origemCat) &&
+        const cEtapa = c.dataset.etapa;
+        const cOkEtapa = currentEtapaFilter === "PF" || cEtapa === currentEtapaFilter || cEtapa === "PF";
+        return cOkEtapa && selectedOrigens.has(c.dataset.origemCat) &&
                selectedDificuldades.has(c.dataset.dificuldade) &&
                (sectionSubtopicos[c.dataset.secId] && sectionSubtopicos[c.dataset.secId].has(c.dataset.subtopico));
       }).length;
@@ -664,30 +700,45 @@ document.getElementById("toggleAllAnswers").addEventListener("click", (e) => {
 document.getElementById("toggleMaterias").addEventListener("click", () => {
     let allChecked = true;
     SECTION_ORDER.forEach(secId => {
-        const isVisible = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
+        const isVisible = isSectionVisibleInCurrentEtapa(secId);
         if (!isVisible) return;
         
-        const totalSubs = [...new Set(DATA.filter(g => g.secId === secId).map(g => g.subtopico))].length;
-        if(sectionSubtopicos[secId] && sectionSubtopicos[secId].size < totalSubs) allChecked = false;
+        const validSubs = [...new Set(DATA.filter(g => {
+            if (g.secId !== secId) return false;
+            const gEtapa = g.etapa || SECTION_ETAPAS[g.secId] || "P1";
+            return currentEtapaFilter === "PF" || gEtapa === currentEtapaFilter || gEtapa === "PF";
+        }).map(g => g.subtopico))];
+        
+        let checkedCount = 0;
+        validSubs.forEach(s => {
+            if (sectionSubtopicos[secId] && sectionSubtopicos[secId].has(s)) checkedCount++;
+        });
+        
+        if(checkedCount < validSubs.length) allChecked = false;
     });
 
     if (allChecked) {
         SECTION_ORDER.forEach(secId => {
-            const isVisible = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
-            if(isVisible) {
-                sectionSubtopicos[secId].clear();
+            if(isSectionVisibleInCurrentEtapa(secId)) {
                 const dd = document.getElementById(`dd-${secId}`);
-                if(dd) dd.querySelectorAll('.dropdown-item input').forEach(inp => inp.checked = false);
+                if(dd) dd.querySelectorAll('.dropdown-item').forEach(label => {
+                    if (label.style.display !== "none") {
+                        label.querySelector('input').checked = false;
+                        sectionSubtopicos[secId].delete(label.textContent.trim());
+                    }
+                });
             }
         });
     } else {
         SECTION_ORDER.forEach(secId => {
-            const isVisible = currentEtapaFilter === "PF" || SECTION_ETAPAS[secId] === currentEtapaFilter || !SECTION_ETAPAS[secId];
-            if(isVisible) {
-                const subs = [...new Set(DATA.filter(g => g.secId === secId).map(g => g.subtopico))];
-                subs.forEach(s => sectionSubtopicos[secId].add(s));
+            if(isSectionVisibleInCurrentEtapa(secId)) {
                 const dd = document.getElementById(`dd-${secId}`);
-                if(dd) dd.querySelectorAll('.dropdown-item input').forEach(inp => inp.checked = true);
+                if(dd) dd.querySelectorAll('.dropdown-item').forEach(label => {
+                    if (label.style.display !== "none") {
+                        label.querySelector('input').checked = true;
+                        sectionSubtopicos[secId].add(label.textContent.trim());
+                    }
+                });
             }
         });
     }
