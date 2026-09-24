@@ -37,8 +37,9 @@ scrollTopBtn.addEventListener('click', () => {
 /* ======================= WEBTEX & HELPERS ======================= */
 function parseWebTex(text) {
   if (!text) return "";
-  text = text.replace(/\$\$(.*?)\$\$/g, (m, tex) => `<div class="webtex-block"><img src="https://latex.codecogs.com/svg.image?\\Large\\displaystyle ${encodeURIComponent(tex.trim())}" alt="Formula"></div>`);
-  text = text.replace(/\\\((.*?)\\\)/g, (m, tex) => `<img class="webtex-inline" src="https://latex.codecogs.com/svg.image?\\large\\textstyle ${encodeURIComponent(tex.trim())}" alt="Formula">`);
+  // O [\s\S]*? permite a leitura de quebras de linha dentro do bloco LaTeX
+  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (m, tex) => `<div class="webtex-block"><img src="https://latex.codecogs.com/svg.image?\\Large\\displaystyle ${encodeURIComponent(tex.trim())}" alt="Formula"></div>`);
+  text = text.replace(/\\\(([\s\S]*?)\\\)/g, (m, tex) => `<img class="webtex-inline" src="https://latex.codecogs.com/svg.image?\\large\\textstyle ${encodeURIComponent(tex.trim())}" alt="Formula">`);
   return text;
 }
 
