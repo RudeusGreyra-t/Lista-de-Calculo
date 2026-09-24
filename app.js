@@ -436,6 +436,11 @@ function createCard(ex, group) {
       } else {
           btn.textContent = showing ? "Esconder resposta" : "Mostrar resposta";
       }
+      
+      // Recolher a expansão (details) silenciosamente ao fechar a resposta principal
+      if (!showing) {
+          respDiv.querySelectorAll("details").forEach(d => d.removeAttribute("open"));
+      }
     });
   });
 
@@ -686,7 +691,14 @@ document.getElementById("resetFilters").addEventListener("click", () => {
 
 document.getElementById("toggleAllAnswers").addEventListener("click", (e) => {
   allAnswersShown = !allAnswersShown;
-  document.querySelectorAll(".resposta").forEach(r => r.classList.toggle("show", allAnswersShown));
+  document.querySelectorAll(".resposta").forEach(r => {
+      r.classList.toggle("show", allAnswersShown);
+      // Recolher expansões se estiver ocultando todas
+      if (!allAnswersShown) {
+          r.querySelectorAll("details").forEach(d => d.removeAttribute("open"));
+      }
+  });
+  
   document.querySelectorAll(".toggle-answer").forEach(b => {
       if (b.classList.contains("main-toggle")) {
           b.textContent = allAnswersShown ? "Esconder Contexto Base" : "Mostrar Contexto Base";
@@ -789,12 +801,28 @@ document.getElementById("btnClearAllTotal").addEventListener("click", () => {
   resetMenu.classList.remove("open");
 });
 
+// Fechar menus ou expansões ao clicar fora ou no botão dedicado
 document.addEventListener('click', (e) => {
+  // Fechar dropdowns nativos
   document.querySelectorAll('details.dropdown').forEach(details => {
     if (details.open && !details.contains(e.target)) {
       details.removeAttribute('open');
     }
   });
+  
+  // Ação do novo botão de "Ocultar passo a passo" com smooth scroll
+  if (e.target.classList.contains("close-details-btn")) {
+      const details = e.target.closest("details");
+      if (details) {
+          details.removeAttribute("open");
+          const card = details.closest(".card");
+          if (card) {
+              // Scroll suave de volta para o topo do cartão (compensando 80px da navbar)
+              const y = card.getBoundingClientRect().top + window.scrollY - 80;
+              window.scrollTo({ top: y, behavior: "smooth" });
+          }
+      }
+  }
 });
 
 /* INICIALIZAÇÃO */
