@@ -37,9 +37,10 @@ scrollTopBtn.addEventListener('click', () => {
 /* ======================= WEBTEX & HELPERS ======================= */
 function parseWebTex(text) {
   if (!text) return "";
-  // Utilizamos \Huge para blocos multilinhas e \Large para linha, com um espaço preventivo antes da equação
-  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (m, tex) => `<div class="webtex-block" style="overflow-x: auto; text-align: center; margin: 15px 0;"><img src="https://latex.codecogs.com/svg.image?\\Huge\\displaystyle ${encodeURIComponent(' ' + tex.trim())}" alt="Formula" style="max-width: 100%; height: auto;"></div>`);
-  text = text.replace(/\\\(([\s\S]*?)\\\)/g, (m, tex) => `<img class="webtex-inline" src="https://latex.codecogs.com/svg.image?\\Large\\textstyle ${encodeURIComponent(' ' + tex.trim())}" alt="Formula" style="max-width: 100%; height: auto; vertical-align: middle;">`);
+  // Solução definitiva: Usar a propriedade nativa do navegador 'zoom' para ampliar os vetores SVG.
+  // Como são vetores, eles crescem sem perder 1% de qualidade, driblando o bloqueio do \begin{aligned}.
+  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (m, tex) => `<div class="webtex-block" style="overflow-x: auto; text-align: center; margin: 20px 0;"><img src="https://latex.codecogs.com/svg.image?\\displaystyle ${encodeURIComponent(tex.trim())}" alt="Formula" style="zoom: 1.6; max-width: 100%; height: auto;"></div>`);
+  text = text.replace(/\\\(([\s\S]*?)\\\)/g, (m, tex) => `<img class="webtex-inline" src="https://latex.codecogs.com/svg.image?\\textstyle ${encodeURIComponent(tex.trim())}" alt="Formula" style="zoom: 1.3; max-width: 100%; height: auto; vertical-align: middle;">`);
   return text;
 }
 
