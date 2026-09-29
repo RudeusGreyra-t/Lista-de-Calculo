@@ -37,9 +37,9 @@ scrollTopBtn.addEventListener('click', () => {
 /* ======================= WEBTEX & HELPERS ======================= */
 function parseWebTex(text) {
   if (!text) return "";
-  // O [\s\S]*? permite a leitura de quebras de linha dentro do bloco LaTeX
-  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (m, tex) => `<div class="webtex-block"><img src="https://latex.codecogs.com/svg.image?\\Large\\displaystyle ${encodeURIComponent(tex.trim())}" alt="Formula"></div>`);
-  text = text.replace(/\\\(([\s\S]*?)\\\)/g, (m, tex) => `<img class="webtex-inline" src="https://latex.codecogs.com/svg.image?\\large\\textstyle ${encodeURIComponent(tex.trim())}" alt="Formula">`);
+  // Trocado para \huge (bloco) e \Large (linha) para as equações ficarem maiores e mais legíveis
+  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (m, tex) => `<div class="webtex-block"><img src="https://latex.codecogs.com/svg.image?\\huge\\displaystyle ${encodeURIComponent(tex.trim())}" alt="Formula"></div>`);
+  text = text.replace(/\\\(([\s\S]*?)\\\)/g, (m, tex) => `<img class="webtex-inline" src="https://latex.codecogs.com/svg.image?\\Large\\textstyle ${encodeURIComponent(tex.trim())}" alt="Formula">`);
   return text;
 }
 
@@ -825,13 +825,15 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Rolar a tela para baixo ao expandir a resolução
+// Rolar a tela para manter o resultado principal em foco ao expandir a resolução
 document.addEventListener('toggle', (e) => {
     if (e.target.tagName === 'DETAILS' && e.target.open) {
         // Pequeno atraso para garantir que o navegador renderizou a expansão
         setTimeout(() => {
+            // Encontra a div '.resposta' inteira para manter o resultado no frame
+            const respostaContainer = e.target.closest('.resposta') || e.target;
             // Desconta 90px para a navbar flutuante + margem de respiro
-            const y = e.target.getBoundingClientRect().top + window.scrollY - 90;
+            const y = respostaContainer.getBoundingClientRect().top + window.scrollY - 90;
             window.scrollTo({ top: y, behavior: 'smooth' });
         }, 10);
     }
