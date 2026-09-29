@@ -83,7 +83,7 @@ window.COURSES_DATA["estatistica"] = {
           origem: "PDF Matéria",
           dificuldade: "Fácil",
           relevancia: "Média",
-          enunciado: `Exercício Relâmpago: Sabendo-se que o nível de colesterol (mg/100 ml) de um conjunto de sete pacientes clínicos foi de 10, 14, 13, 15, 16, 18 e 12, qual o colesterol médio desses pacientes?`,
+          enunciado: `Sabendo-se que o nível de colesterol (mg/100 ml) de um conjunto de sete pacientes clínicos foi de 10, 14, 13, 15, 16, 18 e 12, qual o colesterol médio desses pacientes?`,
           resposta: `$$ \\bar{X} = \\frac{10+14+13+15+16+18+12}{7} = \\frac{98}{7} = 14 \\text{ mg/100 ml} $$`
         },
         {
@@ -91,7 +91,7 @@ window.COURSES_DATA["estatistica"] = {
           origem: "PDF Matéria",
           dificuldade: "Fácil",
           relevancia: "Alta",
-          enunciado: `Exercício Relâmpago: Sabendo-se que o nível de colesterol (mg/100 ml) de um conjunto de oito pacientes clínicos foi de 10, 10, 13, 15, 16, 16, 12 e 18, qual a mediana e a moda do colesterol desses pacientes?`,
+          enunciado: `Sabendo-se que o nível de colesterol (mg/100 ml) de um conjunto de oito pacientes clínicos foi de 10, 10, 13, 15, 16, 16, 12 e 18, qual a mediana e a moda do colesterol desses pacientes?`,
           resposta: `Rol: \\( X = \\{10, 10, 12, 13, 15, 16, 16, 18\\} \\) \\( \\Rightarrow n=8 \\) (par).<br>\\( Md(X) = \\frac{13+15}{2} = 14 \\)<br>\\( Mo(X) = 10 \\) e \\( 16 \\) (Distribuição Bimodal).`
         },
         {
@@ -466,6 +466,38 @@ window.COURSES_DATA["estatistica"] = {
             { id: "A", enunciado: `a) Calcule o valor do coeficiente de variação para ambas as variáveis.`, resposta: `<strong>Variável X:</strong> \\( \\bar{x} = 20 \\), \\( \\sigma_x = \\sqrt{2,56} = 1,6 \\).<br>$$CV(X) = \\frac{1,6}{20} \\times 100 = 8,00\\%$$<br><strong>Variável Y:</strong> \\( \\bar{y} = 45 \\), \\( \\sigma_y = 6,2 \\).<br>$$CV(Y) = \\frac{6,2}{45} \\times 100 = 13,78\\%$$` },
             { id: "B", enunciado: `b) O que se pode interpretar a partir desses coeficientes?`, resposta: `Ambas as variáveis têm baixa dispersão (\\(< 30\\% \\)). No entanto, os dados da variável X são relativamente menos dispersos do que os da variável Y.` }
           ]
+        },
+        {
+          id: "PDF-P2-001",
+          origem: "PDF Matéria",
+          dificuldade: "Fácil",
+          relevancia: "Média",
+          enunciado: `Em duas rodas de amigos, foi pesquisado as notas que tinham obtido em um trabalho do curso. Cada grupo tinha três pessoas e as notas estão descritas abaixo. Calcule o desvio médio.<br><br>Roda 1 = {3, 10, 8}<br>Roda 2 = {7, 6, 8}`,
+          resposta: `Roda 1: DM = 2,67<br>Roda 2: DM = 0,67<br>(A Roda 2 afasta-se menos da média, sendo mais homogênea).`
+        },
+        {
+          id: "PDF-P2-002",
+          origem: "PDF Matéria",
+          dificuldade: "Médio",
+          relevancia: "Média",
+          enunciado: `Voltando à situação das rodas entre amigos do exercício anterior, calcule a variância, o desvio padrão e o coeficiente de variação.`,
+          resposta: `<strong>Roda 1:</strong> S² = 13 | S = 3,61 | CV = 51,57% (Alta dispersão).<br><strong>Roda 2:</strong> S² = 1 | S = 1 | CV = 14,29% (Baixa dispersão).`
+        },
+        {
+          id: "PDF-P2-003",
+          origem: "PDF Matéria",
+          dificuldade: "Fácil",
+          relevancia: "Média",
+          enunciado: `Um professor de educação física registrou o tempo de corrida de três alunos na esteira: o primeiro correu 40 minutos, o segundo 45 e o terceiro 50. Calcule a variância e o desvio padrão do tempo.`,
+          resposta: `Média = 45 min.<br>Variância (S²) = 25 min².<br>Desvio Padrão (S) = 5 min.`
+        },
+        {
+          id: "PDF-P2-004",
+          origem: "PDF Matéria",
+          dificuldade: "Fácil",
+          relevancia: "Alta",
+          enunciado: `Um médico descreveu as medidas das estaturas e dos pesos de um mesmo grupo de indivíduos. Calcule o coeficiente de dispersão (variação) para a estatura e para o peso.<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Medidas</th><th style='border:1px solid var(--border); padding:8px;'>Média (X)</th><th style='border:1px solid var(--border); padding:8px;'>Desvio Padrão (S)</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Estaturas</td><td style='border:1px solid var(--border); padding:8px;'>175 cm</td><td style='border:1px solid var(--border); padding:8px;'>5,0 cm</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Pesos</td><td style='border:1px solid var(--border); padding:8px;'>68 kg</td><td style='border:1px solid var(--border); padding:8px;'>2,0 kg</td></tr></table>`,
+          resposta: `CV (Estaturas) = 2,85%<br>CV (Pesos) = 2,94%<br><br>(A variável peso apresenta maior grau de dispersão relativa do que a estatura).`
         }
       ]
     },
@@ -601,6 +633,14 @@ window.COURSES_DATA["estatistica"] = {
             { id: "A", enunciado: `a) Calcule o coeficiente de correlação linear de Pearson e interprete o valor obtido.`, resposta: `$$ r = \\frac{\\sum(x_i - \\bar{x})(y_i - \\bar{y})}{\\sqrt{\\sum(x_i - \\bar{x})^2 \\cdot \\sum(y_i - \\bar{y})^2}} = \\frac{-250}{\\sqrt{26 \\times 2480}} \\approx -0,985 $$<br><strong>Interpretação:</strong> O coeficiente \\( r \\approx -0,985 \\) indica uma correlação linear negativa muito forte entre as horas de atividade física e o nível de colesterol LDL (quando um sobe, o outro desce).` },
             { id: "B", enunciado: `b) Com base nos resultados, que tipo de recomendação um profissional de saúde poderia oferecer em uma campanha de prevenção?`, resposta: `A análise fornece evidência quantitativa forte para apoiar que o exercício regular diminui o colesterol. O profissional pode incentivar a prática regular, mostrando que a *quantidade* de horas semanais está inversamente e fortemente associada à redução do LDL. No entanto, é prudente lembrar que do ponto de vista puramente estatístico, correlação não é sinônimo absoluto de causalidade.` }
           ]
+        },
+        {
+          id: "PDF-P2-005",
+          origem: "PDF Matéria",
+          dificuldade: "Médio",
+          relevancia: "Alta",
+          enunciado: `Um educador deseja investigar se existe relação entre o tempo diário de leitura (em horas) e o desempenho em um teste de vocabulário (pontuação de 0 a 100). Os dados coletados de quatro estudantes são:<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Estudante</th><th style='border:1px solid var(--border); padding:8px;'>Tempo de Leitura</th><th style='border:1px solid var(--border); padding:8px;'>Pontuação no Teste</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>A</td><td style='border:1px solid var(--border); padding:8px;'>0,5</td><td style='border:1px solid var(--border); padding:8px;'>55</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>B</td><td style='border:1px solid var(--border); padding:8px;'>1,0</td><td style='border:1px solid var(--border); padding:8px;'>60</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>C</td><td style='border:1px solid var(--border); padding:8px;'>1,5</td><td style='border:1px solid var(--border); padding:8px;'>55</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>D</td><td style='border:1px solid var(--border); padding:8px;'>2,0</td><td style='border:1px solid var(--border); padding:8px;'>70</td></tr></table>`,
+          resposta: `r = 0,73.<br><br>(Indica uma forte correlação linear positiva entre o tempo de leitura e a pontuação no teste).`
         }
       ]
     }
