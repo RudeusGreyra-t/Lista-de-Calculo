@@ -37,9 +37,9 @@ scrollTopBtn.addEventListener('click', () => {
 /* ======================= WEBTEX & HELPERS ======================= */
 function parseWebTex(text) {
   if (!text) return "";
-  // Trocado para \huge (bloco) e \Large (linha) para as equações ficarem maiores e mais legíveis
-  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (m, tex) => `<div class="webtex-block"><img src="https://latex.codecogs.com/svg.image?\\huge\\displaystyle ${encodeURIComponent(tex.trim())}" alt="Formula"></div>`);
-  text = text.replace(/\\\(([\s\S]*?)\\\)/g, (m, tex) => `<img class="webtex-inline" src="https://latex.codecogs.com/svg.image?\\Large\\textstyle ${encodeURIComponent(tex.trim())}" alt="Formula">`);
+  // \dpi{200} e \dpi{150} forçam o SVG a ser gerado em alta densidade, aumentando o tamanho real da imagem independentemente dos comandos internos do LaTeX
+  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (m, tex) => `<div class="webtex-block" style="overflow-x: auto; text-align: center; margin: 15px 0;"><img src="https://latex.codecogs.com/svg.image?\\dpi{200}\\displaystyle ${encodeURIComponent(tex.trim())}" alt="Formula" style="max-width: 100%; height: auto;"></div>`);
+  text = text.replace(/\\\(([\s\S]*?)\\\)/g, (m, tex) => `<img class="webtex-inline" src="https://latex.codecogs.com/svg.image?\\dpi{150}\\textstyle ${encodeURIComponent(tex.trim())}" alt="Formula" style="max-width: 100%; height: auto; vertical-align: middle;">`);
   return text;
 }
 
