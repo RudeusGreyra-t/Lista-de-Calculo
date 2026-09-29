@@ -77,59 +77,59 @@ window.COURSES_DATA["calc1"] = {
   topics: [
 {materia:"Limites", subtopico:"Substituição direta", secId:"limites", exercicios:[
   {id:"LIM-SUB-001", origem:"Prova antiga", dificuldade:"Fácil", relevancia:"Baixa",
-   enunciado:"Calcule o limite: $$ \\lim_{x \\to 0} \\frac{5+\\cos(x)}{x+3} $$",
-   resposta: "$$ 2 $$"},
+   enunciado:"Calcule o limite: $$\\lim_{x \\to 0} \\frac{5+\\cos(x)}{x+3}$$",
+   resposta: "$$2$$"},
   {id:"LIM-SUB-002", origem:"Dado em aula 21/07/2026", dificuldade:"Fácil", relevancia:"Baixa",
-   enunciado:"Calcule o limite: $$ \\lim_{x \\to 0} \\left[ e^{\\frac{x^2}{3}} + x^3 + 5 + \\cos(x) \\right] $$",
-   resposta: "$$ 7 $$"},
+   enunciado:"Calcule o limite: $$\\lim_{x \\to 0} \\left[ e^{\\frac{x^2}{3}} + x^3 + 5 + \\cos(x) \\right]$$",
+   resposta: "$$7$$"},
   {id:"LIM-SUB-003", origem:"Gerado a partir das listas Lista 2", dificuldade:"Fácil", relevancia:"Baixa",
-   enunciado:"Calcule: $$ \\lim_{x \\to \\pi} [2\\cos(x) + \\sin(x/2)] $$",
-   resposta: "$$ -1 $$"},
+   enunciado:"Calcule: $$\\lim_{x \\to \\pi} [2\\cos(x) + \\sin(x/2)]$$",
+   resposta: "$$-1$$"},
 ]},
 {materia:"Limites", subtopico:"Fatoração e produtos notáveis", secId:"limites", exercicios:[
   {id:"LIM-FAT-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Calcule o limite: $$ \\lim_{x \\to 3} \\frac{x-3}{x^3-27} $$",
-   resposta: "$$ \\frac{1}{27} $$"},
+   enunciado:"Calcule o limite: $$\\lim_{x \\to 3} \\frac{x-3}{x^3-27}$$",
+   resposta: "$$\\frac{1}{27}$$"},
   {id:"LIM-FAT-002", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
-   enunciado:"Calcule: $$ \\lim_{x \\to 2} \\frac{x^6-64}{x-2} $$",
-   resposta: "$$ 192 $$"},
+   enunciado:"Calcule: $$\\lim_{x \\to 2} \\frac{x^6-64}{x-2}$$",
+   resposta: "$$192$$"},
   {id:"LIM-FAT-003", origem:"Dado em aula 28/07/2026", dificuldade:"Médio", relevancia:"Média",
-   enunciado:"Calcule o limite: $$ \\lim_{x \\to 2} \\frac{x^5-32}{x-2} $$",
-   resposta: "$$ 80 $$"},
+   enunciado:"Calcule o limite: $$\\lim_{x \\to 2} \\frac{x^5-32}{x-2}$$",
+   resposta: "$$80$$"},
   {id:"LIM-FAT-004", origem:"Gerado a partir das listas Lista 2", dificuldade:"Fácil", relevancia:"Baixa",
-   enunciado:"Calcule, por fatoração: $$ \\lim_{x \\to 4} \\frac{x^2-16}{x-4} $$",
-   resposta: "$$ 8 $$"},
+   enunciado:"Calcule, por fatoração: $$\\lim_{x \\to 4} \\frac{x^2-16}{x-4}$$",
+   resposta: "$$8$$"},
 ]},
 {materia:"Limites", subtopico:"Racionalização (Raízes)", secId:"limites", exercicios:[
   {id:"LIM-RAC-001", origem:"Prova antiga", dificuldade:"Muito difícil", relevancia:"Alta",
-   enunciado:"Calcule o limite: $$ \\lim_{x \\to 8} \\frac{x-8}{\\sqrt[3]{x} - \\sqrt[3]{8}} $$",
-   resposta: "$$ 12 $$"},
+   enunciado:"Calcule o limite: $$\\lim_{x \\to 8} \\frac{x-8}{\\sqrt[3]{x} - \\sqrt[3]{8}}$$",
+   resposta: "$$12$$"},
   {id:"LIM-RAC-002", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
-   enunciado:"Calcule: $$ \\lim_{x \\to 1/3} \\frac{\\sqrt[6]{3x}-1}{\\sqrt{3x}-1} $$",
-   resposta: "$$ \\frac{1}{3} $$"},
+   enunciado:"Calcule: $$\\lim_{x \\to 1/3} \\frac{\\sqrt[6]{3x}-1}{\\sqrt{3x}-1}$$",
+   resposta: "$$\\frac{1}{3}$$"},
   {id:"LIM-RAC-003", origem:"Gerado a partir das listas Lista 2", dificuldade:"Médio", relevancia:"Média",
-   enunciado:"Calcule, racionalizando: $$ \\lim_{x \\to 4} \\frac{\\sqrt{x+5}-3}{x-4} $$",
-   resposta: "$$ \\frac{1}{6} $$"},
+   enunciado:"Calcule, racionalizando: $$\\lim_{x \\to 4} \\frac{\\sqrt{x+5}-3}{x-4}$$",
+   resposta: "$$\\frac{1}{6}$$"},
 ]},
 {materia:"Limites", subtopico:"Laterais e módulo", secId:"limites", exercicios:[
   {id:"LIM-LAT-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Calcule, caso exista: $$ \\lim_{x \\to 5} \\frac{|x-5|}{2x-10} $$",
-   resposta:"O limite não existe (limite lateral esquerdo é \\( -\\frac{1}{2} \\) e o direito é \\( \\frac{1}{2} \\))."},
+   enunciado:"Calcule, caso exista: $$\\lim_{x \\to 5} \\frac{|x-5|}{2x-10}$$",
+   resposta:"O limite não existe (limite lateral esquerdo é \\(-\\frac{1}{2} \\) e o direito é \\(\\frac{1}{2} \\))."},
   {id:"LIM-LAT-002", origem:"Gerado a partir das listas Lista 2", dificuldade:"Fácil", relevancia:"Média",
    enunciado:"Determine os limites laterais e diga se o limite bilateral existe para \\( f(x) = 2x + 1 \\) se \\( x < 1 \\); e \\( f(x) = x + 4 \\), se \\( x \\ge 1 \\), quando \\( x \\to 1 \\).",
    resposta:"\\( \\lim_{x \\to 1^-} f(x) = 3 \\) e \\( \\lim_{x \\to 1^+} f(x) = 5 \\). O limite bilateral não existe."},
   {id:"LIM-LAT-003", origem:"Aula de revisão", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Caso exista, calcule \\( \\lim_{x\\to 2} f(x) \\), onde \\( f(x) = \\begin{cases} \\frac{x^2 - 4}{x - 2}, & \\text{se } x > 2 \\\\ 7x - 3, & \\text{se } x \\le 2 \\end{cases} \\)",
+   enunciado:"Caso exista, calcule \\(\\lim_{x\\to 2} f(x) \\), onde \\(f(x) = \\begin{cases} \\frac{x^2 - 4}{x - 2}, & \\text{se } x > 2 \\\\ 7x - 3, & \\text{se } x \\le 2 \\end{cases} \\)",
    resposta:"O limite bilateral não existe, pois \\( \\lim_{x\\to 2^+} f(x) = 4 \\) e \\( \\lim_{x\\to 2^-} f(x) = 11 \\)."},
 ]},
 {materia:"Limites", subtopico:"Teorema do Confronto", secId:"limites", exercicios:[
   {id:"LIM-CON-001", origem:"Gerado a partir das listas Lista 1", dificuldade:"Médio", relevancia:"Média",
-   enunciado:"Sabendo que \\( -1 \\le \\sin\\left(\\frac{1}{x}\\right) \\le 1 \\), calcule: $$ \\lim_{x \\to 0} x^2 \\sin\\left(\\frac{1}{x}\\right) $$",
-   resposta: "$$ 0 $$"},
+   enunciado:"Sabendo que \\( -1 \\le \\sin\\left(\\frac{1}{x}\\right) \\le 1 \\), calcule: $$\\lim_{x \\to 0} x^2 \\sin\\left(\\frac{1}{x}\\right)$$",
+   resposta: "$$0$$"},
 ]},
 {materia:"Limites", subtopico:"Infinitos e assíntotas", secId:"limites", exercicios:[
   {id:"LIM-INF-001", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Sejam \\( f : \\mathbb{R} \\to \\mathbb{R} \\) uma função e \\(a \\in \\mathbb{R} \\). Defina o significado da expressão $$\\lim_{x \\to a} f(x) = -\\infty$$ Esboce um desenho para representar.",
+   enunciado:"Sejam \\(f : \\mathbb{R} \\to \\mathbb{R} \\) uma função e \\(a \\in \\mathbb{R} \\). Defina o significado da expressão $$\\lim_{x \\to a} f(x) = -\\infty$$ Esboce um desenho para representar.",
    resposta:"Significa que os valores de \\(f(x) \\) decrescem ilimitadamente (ficam arbitrariamente negativos) à medida que \\( x \\) se aproxima de \\( a \\).",
    svg: SVG_LIM_INF_001, 
    svgPos: "resposta"},
@@ -592,45 +592,16 @@ window.COURSES_DATA["calc1"] = {
     </div>
   </details>`}
 ]},
-{
-  materia: "Reta Tangente", 
-  subtopico: "Equação da Reta Tangente", 
-  secId: "reta_tangente", 
-  etapa: "P2", 
-  exercicios: [
-    {
-      id: "RET-TAN-001", 
-      origem: "Dado em aula", 
-      dificuldade: "Fácil", 
-      relevancia: "Alta",
-      enunciado: "Encontre a equação da reta r que passa pelo ponto (1, 3) e o coeficiente angular é a = 2.",
-      resposta: "$$ y = 2x + 1 $$"
-    },
-    {
-      id: "RET-TAN-002", 
-      origem: "Dado em aula", 
-      dificuldade: "Médio", 
-      relevancia: "Alta",
-      enunciado: "Encontre a equação da reta t tangente ao gráfico de f no ponto de abscissa dada:<br>$$ f(x) = x^2 + 2x $$ ; $$ x_o = 1 $$",
-      resposta: "$$ y = 4x - 1 $$"
-    },
-    {
-      id: "RET-TAN-003", 
-      origem: "Dado em aula", 
-      dificuldade: "Difícil", 
-      relevancia: "Alta",
-      enunciado: "Encontre a equação da reta t tangente ao gráfico de f no ponto de abscissa dada:<br>$$ f(x) = \\sqrt[4]{x} $$ ; $$ x_o = 3 $$",
-      resposta: "$$ y = \\sqrt[4]{3} + \\frac{1}{4\\sqrt[4]{27}}(x - 3) $$"
-    },
-    {
-      id: "RET-TAN-004", 
-      origem: "Dado em aula", 
-      dificuldade: "Médio", 
-      relevancia: "Alta",
-      enunciado: "Encontre a equação da reta t tangente ao gráfico de f no ponto de abscissa dada:<br>$$ f(x) = \\frac{1}{x^3} $$ ; $$ x_o = 1 $$",
-      resposta: "$$ y = -3x + 4 $$"
-    }
-  ]
-}
+{materia:"Reta Tangente", subtopico:"Equação da Reta Tangente", secId:"reta_tangente", etapa: "P2", exercicios:[
+  {id:"RET-TAN-001", origem:"Dado em aula", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Encontre a equação da reta t tangente ao gráfico de f no ponto de abscissa dada:<br>$$f(x) = x^2 + 2x \\quad ; \\quad x_o = 1$$",
+   resposta: "$$y = 4x - 1$$"},
+  {id:"RET-TAN-002", origem:"Dado em aula", dificuldade:"Difícil", relevancia:"Alta",
+   enunciado:"Encontre a equação da reta t tangente ao gráfico de f no ponto de abscissa dada:<br>$$f(x) = \\sqrt[4]{x} \\quad ; \\quad x_o = 3$$",
+   resposta: "$$y = \\sqrt[4]{3} + \\frac{1}{4\\sqrt[4]{27}}(x - 3)$$"},
+  {id:"RET-TAN-003", origem:"Dado em aula", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Encontre a equação da reta t tangente ao gráfico de f no ponto de abscissa dada:<br>$$f(x) = \\frac{1}{x^3} \\quad ; \\quad x_o = 1$$",
+   resposta: "$$y = -3x + 4$$"}
+]}
   ]
 };
