@@ -71,7 +71,8 @@ window.COURSES_DATA["calc1"] = {
     { id: "continuidade", title: "Continuidade", etapa: "P1" },
     { id: "derivadas", title: "Derivadas", etapa: "P1" },
     { id: "integrais", title: "Integrais", etapa: "PF" },
-    { id: "tecnicas_integracao", title: "Técnicas de Integração", etapa: "P2" }
+    { id: "tecnicas_integracao", title: "Técnicas de Integração", etapa: "P2" },
+    { id: "reta_tangente", title: "Reta Tangente", etapa: "P2" }
   ],
   topics: [
 {materia:"Limites", subtopico:"Substituição direta", secId:"limites", exercicios:[
@@ -297,7 +298,7 @@ window.COURSES_DATA["calc1"] = {
    resposta: "$$\\frac{\\sin(x^5)}{5} + C; \\; C \\in \\mathbb{R}$$"}
 ]},
 {materia:"Técnicas de Integração", subtopico:"Integração por Partes", secId:"tecnicas_integracao", etapa: "P2", exercicios:[
-  {id:"INT-PAR-001", origem:"Dado em aula[cite: 5]", dificuldade:"Médio", relevancia:"Alta",
+  {id:"INT-PAR-001", origem:"Dado em aula", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral utilizando a técnica de integração por partes: $$\\int x e^x \\, dx$$",
    resposta:`
   <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
@@ -319,7 +320,7 @@ window.COURSES_DATA["calc1"] = {
       <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
     </div>
   </details>`},
-  {id:"INT-PAR-002", origem:"Dado em aula[cite: 5]", dificuldade:"Médio", relevancia:"Alta",
+  {id:"INT-PAR-002", origem:"Dado em aula", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int x \\sin(x) \\, dx$$",
    resposta:`
   <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
@@ -341,7 +342,7 @@ window.COURSES_DATA["calc1"] = {
       <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
     </div>
   </details>`},
-  {id:"INT-PAR-003", origem:"Dado em aula[cite: 5]", dificuldade:"Difícil", relevancia:"Alta",
+  {id:"INT-PAR-003", origem:"Dado em aula", dificuldade:"Difícil", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int \\sin^2(x) \\, dx$$",
    resposta:`
   <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
@@ -377,7 +378,7 @@ window.COURSES_DATA["calc1"] = {
       <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
     </div>
   </details>`},
-  {id:"INT-PAR-004", origem:"Dado em aula[cite: 6]", dificuldade:"Médio", relevancia:"Alta",
+  {id:"INT-PAR-004", origem:"Dado em aula", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int x^2 e^x \\, dx$$",
    resposta:`
   <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
@@ -405,7 +406,7 @@ window.COURSES_DATA["calc1"] = {
       <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
     </div>
   </details>`},
-  {id:"INT-PAR-005", origem:"Dado em aula[cite: 6]", dificuldade:"Fácil", relevancia:"Alta",
+  {id:"INT-PAR-005", origem:"Dado em aula", dificuldade:"Fácil", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int \\ln(x) \\, dx$$",
    resposta:`
   <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
@@ -427,7 +428,7 @@ window.COURSES_DATA["calc1"] = {
       <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
     </div>
   </details>`},
-  {id:"INT-PAR-006", origem:"Dado em aula[cite: 6]", dificuldade:"Difícil", relevancia:"Alta",
+  {id:"INT-PAR-006", origem:"Dado em aula", dificuldade:"Difícil", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int e^x \\cos(x) \\, dx$$",
    resposta:`
   <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
@@ -462,7 +463,7 @@ window.COURSES_DATA["calc1"] = {
       <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
     </div>
   </details>`},
-  {id:"INT-PAR-007", origem:"Dado em aula[cite: 6]", dificuldade:"Difícil", relevancia:"Alta",
+  {id:"INT-PAR-007", origem:"Dado em aula", dificuldade:"Difícil", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int x^3 e^{x^2} \\, dx$$",
    resposta:`
   <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
@@ -490,7 +491,7 @@ window.COURSES_DATA["calc1"] = {
   </details>`}
 ]},
 {materia:"Técnicas de Integração", subtopico:"Somas Parciais", secId:"tecnicas_integracao", etapa: "P2", exercicios:[
-  {id:"INT-SOM-001", origem:"Dado em aula[cite: 7]", dificuldade:"Médio", relevancia:"Alta",
+  {id:"INT-SOM-001", origem:"Dado em aula", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int \\frac{3}{(x-1)(x+2)} \\, dx$$",
    resposta:`
   <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
@@ -523,7 +524,7 @@ window.COURSES_DATA["calc1"] = {
       <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
     </div>
   </details>`},
-  {id:"INT-SOM-002", origem:"Dado em aula[cite: 7]", dificuldade:"Médio", relevancia:"Alta",
+  {id:"INT-SOM-002", origem:"Dado em aula", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int \\frac{x}{x^2-9} \\, dx$$",
    resposta:`
   <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
@@ -557,7 +558,7 @@ window.COURSES_DATA["calc1"] = {
       <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
     </div>
   </details>`},
-  {id:"INT-SOM-003", origem:"Dado em aula[cite: 7]", dificuldade:"Médio", relevancia:"Alta",
+  {id:"INT-SOM-003", origem:"Dado em aula", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int \\frac{2}{x^2-x-2} \\, dx$$",
    resposta:`
   <div style="font-size: 1.1em; font-weight: bold; text-align: center;">
@@ -590,6 +591,46 @@ window.COURSES_DATA["calc1"] = {
       <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
     </div>
   </details>`}
-]}
+]},
+{
+  materia: "Reta Tangente", 
+  subtopico: "Equação da Reta Tangente", 
+  secId: "reta_tangente", 
+  etapa: "P2", 
+  exercicios: [
+    {
+      id: "RET-TAN-001", 
+      origem: "Dado em aula", 
+      dificuldade: "Fácil", 
+      relevancia: "Alta",
+      enunciado: "Encontre a equação da reta r que passa pelo ponto (1, 3) e o coeficiente angular é a = 2.",
+      resposta: "$$ y = 2x + 1 $$"
+    },
+    {
+      id: "RET-TAN-002", 
+      origem: "Dado em aula", 
+      dificuldade: "Médio", 
+      relevancia: "Alta",
+      enunciado: "Encontre a equação da reta t tangente ao gráfico de f no ponto de abscissa dada:<br>$$ f(x) = x^2 + 2x $$ ; $$ x_o = 1 $$",
+      resposta: "$$ y = 4x - 1 $$"
+    },
+    {
+      id: "RET-TAN-003", 
+      origem: "Dado em aula", 
+      dificuldade: "Difícil", 
+      relevancia: "Alta",
+      enunciado: "Encontre a equação da reta t tangente ao gráfico de f no ponto de abscissa dada:<br>$$ f(x) = \\sqrt[4]{x} $$ ; $$ x_o = 3 $$",
+      resposta: "$$ y = \\sqrt[4]{3} + \\frac{1}{4\\sqrt[4]{27}}(x - 3) $$"
+    },
+    {
+      id: "RET-TAN-004", 
+      origem: "Dado em aula", 
+      dificuldade: "Médio", 
+      relevancia: "Alta",
+      enunciado: "Encontre a equação da reta t tangente ao gráfico de f no ponto de abscissa dada:<br>$$ f(x) = \\frac{1}{x^3} $$ ; $$ x_o = 1 $$",
+      resposta: "$$ y = -3x + 4 $$"
+    }
+  ]
+}
   ]
 };
