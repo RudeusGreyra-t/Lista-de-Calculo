@@ -603,13 +603,13 @@ window.COURSES_DATA["calc1"] = {
    enunciado:"Encontre a equação da reta t tangente ao gráfico de f no ponto de abscissa dada:<br>$$f(x) = \\frac{1}{x^3} \\quad ; \\quad x_o = 1$$",
    resposta: "$$y = -3x + 4$$"},
   {id:"RET-TAN-004", origem:"Dado em aula", dificuldade:"Médio", relevancia:"Alta",
-   enunciado:"Encontre a reta t tangente ao gráfico de $$f(x) = 3x^2 + 2x - 1$$ no ponto de abscissa $$x_o = 2$$.",
+   enunciado:"Encontre a reta t tangente ao gráfico de $$f(x) = 3x^2 + 2x - 1$$ no ponto de abscissa $$x_o = 2$$",
    resposta: "$$y = 14x - 13$$"},
   {id:"RET-TAN-005", origem:"Dado em aula", dificuldade:"Difícil", relevancia:"Alta",
-   enunciado:"Encontre a equação da reta t tangente ao gráfico de $$f(x) = -x^2 + 2x + 3$$ e paralela à reta $$r: y = 3x + 1$$.",
+   enunciado:"Encontre a equação da reta t tangente ao gráfico de $$f(x) = -x^2 + 2x + 3$$ e paralela à reta $$r: y = 3x + 1$$",
    resposta: "$$y = \\frac{7}{4} + 3\\left(x + \\frac{1}{2}\\right)$$"},
   {id:"RET-TAN-006", origem:"Dado em aula", dificuldade:"Difícil", relevancia:"Alta",
-   enunciado:"Encontre a reta t tangente ao gráfico de $$f(x) = 2x^2 - 3x$$ e paralela à reta $$r: y = 8x + 1$$.",
+   enunciado:"Encontre a reta t tangente ao gráfico de $$f(x) = 2x^2 - 3x$$ e paralela à reta $$r: y = 8x + 1$$",
    resposta: "$$y = \\frac{55}{8} + 8\\left(x - \\frac{11}{4}\\right)$$"}
 ]}
   ]
