@@ -379,6 +379,26 @@ window.COURSES_DATA["estatistica"] = {
     // ==========================================
     {
       materia: "Dispersão, Forma e Separatrizes",
+      subtopico: "Tipos de Amostragem",
+      secId: "dispersao_forma_p2",
+      exercicios: [
+        {
+          id: "PROVA-P2-Q01",
+          numero: 1,
+          origem: "Provas",
+          dificuldade: "Fácil",
+          relevancia: "Muito Alta",
+          enunciado: `1. Indique quais tipos de amostragem foram elaboradas nos itens abaixo:`,
+          resposta: ``,
+          itens: [
+            { id: "A", enunciado: `a) Um hospital quer um levantamento com os membros religiosos da cidade sobre o que eles esperam da capela do hospital, então escolheu aleatoriamente 5 encontros religiosos da cidade e fez a pesquisa com todos os participantes desses encontros.`, resposta: `Amostragem por Conglomerados. A população foi dividida em grupos (os encontros religiosos). O hospital sorteou alguns desses grupos na sua totalidade e inquiriu todos os elementos que pertenciam aos aglomerados selecionados.` },
+            { id: "B", enunciado: `b) Trabalhadores da segurança de um aeroporto escolhem aleatoriamente uma das primeiras 50 pessoas para passar por uma verificação de segurança extra. Depois dessa pessoa, o procedimento é repetido a cada 50 pessoas.`, resposta: `Amostragem Sistemática. Foi estabelecido um ponto de partida aleatório e, a partir daí, os indivíduos foram selecionados mediante um intervalo fixo e regular (a cada 50 pessoas).` }
+          ]
+        }
+      ]
+    },
+    {
+      materia: "Dispersão, Forma e Separatrizes",
       subtopico: "Separatrizes e Posição",
       secId: "dispersao_forma_p2",
       exercicios: [
@@ -430,6 +450,15 @@ window.COURSES_DATA["estatistica"] = {
             { id: "B", enunciado: `b) Variância Amostral e Desvio Padrão.`, resposta: `Variância: $$v(x) = 138,78$$<br>Desvio Padrão: $$\\sigma_x = \\pm 11,78$$` },
             { id: "C", enunciado: `c) Coeficiente de Variação.`, resposta: `$$CV(x) = 16,14\\%$$` }
           ]
+        },
+        {
+          id: "PROVA-P2-Q03",
+          numero: 3,
+          origem: "Provas",
+          dificuldade: "Médio",
+          relevancia: "Muito Alta",
+          enunciado: `Uma turma de alfabetização contém 12 alunos. Sabe-se que a média é 19,5. Calcule a variância e o desvio padrão das idades.<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Idades</th><th style='border:1px solid var(--border); padding:8px;'>Alunos (\\(f_i\\))</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>13 |- 16</td><td style='border:1px solid var(--border); padding:8px;'>2</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>16 |- 19</td><td style='border:1px solid var(--border); padding:8px;'>4</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>19 |- 22</td><td style='border:1px solid var(--border); padding:8px;'>3</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>22 |- 25</td><td style='border:1px solid var(--border); padding:8px;'>2</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>25 |- 28</td><td style='border:1px solid var(--border); padding:8px;'>1</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'><strong>Total</strong></td><td style='border:1px solid var(--border); padding:8px;'><strong>12</strong></td></tr></table>`,
+          resposta: `Cálculo dos pontos médios \\((x_i)\\) para cada classe e dos desvios quadráticos ponderados \\((x_i - \\bar{x})^2 \\cdot f_i\\), sabendo que a Média \\((\\bar{x})\\) é 19,5:<br><br>• Classe 1 \\((13 \\vdash 16)\\): \\(x_1 = 14,5 \\Rightarrow (14,5 - 19,5)^2 \\cdot 2 = (-5)^2 \\cdot 2 = 25 \\cdot 2 = 50\\)<br>• Classe 2 \\((16 \\vdash 19)\\): \\(x_2 = 17,5 \\Rightarrow (17,5 - 19,5)^2 \\cdot 4 = (-2)^2 \\cdot 4 = 4 \\cdot 4 = 16\\)<br>• Classe 3 \\((19 \\vdash 22)\\): \\(x_3 = 20,5 \\Rightarrow (20,5 - 19,5)^2 \\cdot 3 = (1)^2 \\cdot 3 = 1 \\cdot 3 = 3\\)<br>• Classe 4 \\((22 \\vdash 25)\\): \\(x_4 = 23,5 \\Rightarrow (23,5 - 19,5)^2 \\cdot 2 = (4)^2 \\cdot 2 = 16 \\cdot 2 = 32\\)<br>• Classe 5 \\((25 \\vdash 28)\\): \\(x_5 = 26,5 \\Rightarrow (26,5 - 19,5)^2 \\cdot 1 = (7)^2 \\cdot 1 = 49 \\cdot 1 = 49\\)<br><br>A soma total dos desvios quadráticos é: \\(50 + 16 + 3 + 32 + 49 = 150\\).<br><br>Tratando-se de uma turma amostral de alunos, dividimos por \\(n-1\\):<br>\\(n = 12\\) alunos &rarr; Denominador \\(= 12 - 1 = 11\\).<br><br>• <strong>Variância (\\(S^2\\)):</strong> \\(150 \\div 11 \\approx 13,63\\)<br>• <strong>Desvio Padrão (S):</strong> \\(\\sqrt{13,63} \\approx 3,69\\)`
         }
       ]
     },
@@ -498,6 +527,19 @@ window.COURSES_DATA["estatistica"] = {
           relevancia: "Alta",
           enunciado: `Um médico descreveu as medidas das estaturas e dos pesos de um mesmo grupo de indivíduos. Calcule o coeficiente de dispersão (variação) para a estatura e para o peso.<br><br><table style='width:100%; border-collapse:collapse; background-color:var(--bg); text-align:center;'><tr style='background-color:rgba(128,128,128,0.1);'><th style='border:1px solid var(--border); padding:8px;'>Medidas</th><th style='border:1px solid var(--border); padding:8px;'>Média (X)</th><th style='border:1px solid var(--border); padding:8px;'>Desvio Padrão (S)</th></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Estaturas</td><td style='border:1px solid var(--border); padding:8px;'>175 cm</td><td style='border:1px solid var(--border); padding:8px;'>5,0 cm</td></tr><tr><td style='border:1px solid var(--border); padding:8px;'>Pesos</td><td style='border:1px solid var(--border); padding:8px;'>68 kg</td><td style='border:1px solid var(--border); padding:8px;'>2,0 kg</td></tr></table>`,
           resposta: `CV (Estaturas) = 2,85%<br>CV (Pesos) = 2,94%<br><br>(A variável peso apresenta maior grau de dispersão relativa do que a estatura).`
+        },
+        {
+          id: "PROVA-P2-Q04",
+          numero: 4,
+          origem: "Provas",
+          dificuldade: "Médio",
+          relevancia: "Muito Alta",
+          enunciado: `Um analista está comparando a variabilidade relativa dos salários em dois setores da economia (A e B). Os dados coletados apresentam as seguintes estatísticas descritivas:<br>• Setor A: Média salarial: R$ 5.200,00 | Desvio padrão: R$ 1.040,00<br>• Setor B: Média salarial: R$ 8.600,00 | Desvio padrão: R$ 1.290,00`,
+          resposta: ``,
+          itens: [
+            { id: "A", enunciado: `a) Calcule o coeficiente de variação para cada setor. Compare a variabilidade relativa dos salários entre os dois setores. Qual setor apresenta maior dispersão relativa em relação à sua média?`, resposta: `O Coeficiente de Variação (CV) é dado por \\(CV = \\frac{\\sigma}{\\bar{x}}\\):<br>• Setor A: \\(CV_A = \\frac{1040}{5200} = 0,20\\) (ou 20%)<br>• Setor B: \\(CV_B = \\frac{1290}{8600} = 0,15\\) (ou 15%)<br><br>O Setor A apresenta a maior dispersão relativa (20%) em relação à sua média.` },
+            { id: "B", enunciado: `b) Considerando que o Setor A representa o comércio varejista e o Setor B o setor financeiro, como você interpretaria esses resultados em termos de desigualdade salarial?`, resposta: `Em termos de desigualdade salarial, a discrepância proporcional entre ordenados é mais severa no comércio varejista (Setor A). Embora o setor financeiro (Setor B) tenha uma variação absoluta maior em reais (R$ 1.290), esse impacto é diluído pela média salarial elevada. No comércio varejista, a variabilidade afeta muito mais o poder de compra da categoria, evidenciando uma desigualdade estrutural maior.` }
+          ]
         }
       ]
     },
@@ -540,16 +582,16 @@ window.COURSES_DATA["estatistica"] = {
           ]
         },
         {
-          id: "LISTAP2-Q08",
-          numero: 8,
-          origem: "Lista P2",
+          id: "PROVA-P2-Q02",
+          numero: 2,
+          origem: "Provas",
           dificuldade: "Médio",
-          relevancia: "Alta",
-          enunciado: `Um órgão de planejamento governamental está avaliando a distribuição da renda per capita entre os municípios de um determinado estado. A equipe de análise produziu o seguinte resumo estatístico:<br>Média: R$ 850,00<br>Mediana: R$ 700,00<br>Moda: R$ 600,00<br>Coeficiente de curtose: 0,213`,
+          relevancia: "Muito Alta",
+          enunciado: `Um órgão de planejamento governamental está avaliando a distribuição da renda per capita entre os municípios de um determinado estado, com o objetivo de direcionar políticas públicas de combate à desigualdade. A equipe de análise produziu o seguinte resumo estatístico com base nos dados coletados:<br>• Média: R$ 850,00<br>• Mediana: R$ 700,00<br>• Moda: R$ 600,00<br>• Coeficiente de curtose: 0,213<br><br>Com base nessas informações, responda às perguntas abaixo:`,
           resposta: ``,
           itens: [
-            { id: "A", enunciado: `a) Interprete a assimetria da distribuição da renda per capita. Que tipo de política pública pode ser sugerida com base nessa informação?`, resposta: `A distribuição é assimétrica à direita (positiva), pois Média > Mediana > Moda. Isso indica que há poucos municípios com renda muito alta puxando a média para cima, enquanto a maioria tem renda mais baixa. Podem ser sugeridas políticas redistributivas, como aumento de repasses para os municípios mais pobres.` },
-            { id: "B", enunciado: `b) O valor do coeficiente de curtose indica uma distribuição mais ou menos concentrada em torno da média? O que isso pode representar em termos de variação de renda entre os municípios?`, resposta: `A curtose (0,213) é menor que 0,263, indicando uma distribuição <strong>leptocúrtica</strong>. Há uma maior concentração de valores próximos da média, mas com caudas mais pesadas. Isso sugere que, embora muitos municípios tenham rendas próximas ao centro, existem casos extremos significativos de rendas muito altas ou muito baixas, o que reforça a necessidade de políticas direcionadas aos extremos.` }
+            { id: "A", enunciado: `a) Interprete a assimetria da distribuição da renda per capita. Que tipo de política pública pode ser sugerida com base nessa informação?`, resposta: `A distribuição é assimétrica à direita (ou positiva), uma vez que a Média (850) > Mediana (700) > Moda (600). Isto significa que a grande maioria dos municípios possui uma renda mais baixa, enquanto uma pequena quantidade de municípios com rendas extremamente elevadas puxa a média para cima. Sugere-se a aplicação de políticas redistributivas focadas na base, aumentando repasses para os municípios mais pobres.` },
+            { id: "B", enunciado: `b) O valor do coeficiente de curtose indica uma distribuição mais ou menos concentrada em torno da média? O que isso pode representar em termos de variação de renda entre os municípios?`, resposta: `O coeficiente de curtose de 0,213 é inferior à referência de 0,263, classificando a distribuição como leptocúrtica. Isso indica uma distribuição mais concentrada em torno da média, mas com caudas mais pesadas. Representa que, embora exista um bloco de municípios com rendas semelhantes, existem extremos pronunciados (extrema riqueza ou extrema pobreza) ditando a desigualdade no estado.` }
           ]
         }
       ]
