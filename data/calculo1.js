@@ -72,7 +72,8 @@ window.COURSES_DATA["calc1"] = {
     { id: "derivadas", title: "Derivadas", etapa: "P1" },
     { id: "integrais", title: "Integrais", etapa: "PF" },
     { id: "tecnicas_integracao", title: "Técnicas de Integração", etapa: "P2" },
-    { id: "reta_tangente", title: "Reta Tangente", etapa: "P2" }
+    { id: "reta_tangente", title: "Reta Tangente", etapa: "P2" },
+    { id: "crescimento", title: "Crescimento e Extremos", etapa: "P2" }
   ],
   topics: [
 {materia:"Limites", subtopico:"Substituição direta", secId:"limites", exercicios:[
@@ -227,53 +228,6 @@ window.COURSES_DATA["calc1"] = {
    enunciado:"Derive a função: \\(f(x) = \\frac{e^{x^2 + 2}}{\\ln(\\cos(x^2 + 1))} \\).",
    resposta:"\\(f'(x) = \\frac{2x\\, e^{x^2 + 2}\\ln(\\cos(x^2 + 1)) + 2x\\, e^{x^2 + 2}\\tan(x^2 + 1)}{\\ln^2(\\cos(x^2 + 1))} \\)"},
 ]},
-{
-  materia: "Derivadas",
-  subtopico: "Crescimento, Decrescimento e Máximos/Mínimos",
-  secId: "derivadas",
-  exercicios: [
-    {
-      id: "DER-CRE-001",
-      origem: "Dado em aula",
-      dificuldade: "Médio",
-      relevancia: "Alta",
-      enunciado: "Determine os intervalos de crescimento e decrescimento bem como os máximos e mínimos da função abaixo:<br>$$f(x) = x^2 + 2x - 1 \\quad ; \\quad -2 \\le x \\le 3$$",
-      resposta: "$$f'(x) = 2x + 2$$<br>A derivada é positiva para \\(x > -1\\) e negativa para \\(x < -1\\).<br>Portanto, \\(f\\) é crescente em \\((-1, 3)\\) e decrescente em \\((-2, -1)\\).<br><br><b>Extremos:</b><br>- O ponto \\(x = -1\\) é ponto de mínimo global.<br>- Os pontos \\(x = -2\\) e \\(x = 3\\) são pontos de máximos locais, sendo \\(x = 3\\) o ponto de máximo global."
-    },
-    {
-      id: "DER-CRE-002",
-      origem: "Dado em aula",
-      dificuldade: "Médio",
-      relevancia: "Alta",
-      enunciado: "Determine os intervalos de crescimento e decrescimento bem como os máximos e mínimos da função abaixo:<br>$$f(x) = 3x^2 - x + 2$$",
-      resposta: "$$f'(x) = 6x - 1$$<br>A derivada é positiva para \\(x > \\frac{1}{6}\\) e negativa para \\(x < \\frac{1}{6}\\).<br><br><b>Extremos:</b><br>- O ponto \\(x = \\frac{1}{6}\\) é ponto de mínimo global.<br>- Como \\(\\lim_{x \\to \\pm\\infty} (3x^2 - x + 2) = +\\infty\\), a função não possui ponto de máximo."
-    },
-    {
-      id: "DER-CRE-003",
-      origem: "Dado em aula",
-      dificuldade: "Médio",
-      relevancia: "Alta",
-      enunciado: "Determine os intervalos de crescimento e decrescimento bem como os máximos e mínimos da função abaixo:<br>$$f(x) = x^3 - x^2 + x - 1 \\quad ; \\quad x \\in [-2, 1]$$",
-      resposta: "$$f'(x) = 3x^2 - 2x + 1$$<br>As raízes da derivada não pertencem aos reais (\\(\\Delta = -8\\)), logo \\(f'(x) > 0\\) para todo \\(x\\). A função é sempre crescente.<br><br><b>Extremos (avaliando os limites do intervalo restrito):</b><br>- O ponto \\(x = -2\\) é mínimo global.<br>- O ponto \\(x = 1\\) é máximo global."
-    },
-    {
-      id: "DER-CRE-004",
-      origem: "Dado em aula",
-      dificuldade: "Difícil",
-      relevancia: "Alta",
-      enunciado: "Determine os intervalos de crescimento e decrescimento bem como os máximos e mínimos da função abaixo:<br>$$f(x) = x^3 + x^2 - x$$",
-      resposta: "$$f'(x) = 3x^2 + 2x - 1$$<br>A derivada zera em \\(x = -1\\) e \\(x = \\frac{1}{3}\\).<br><br><b>Extremos:</b><br>- O ponto \\(x = -1\\) é ponto de máximo local.<br>- O ponto \\(x = \\frac{1}{3}\\) é ponto de mínimo local.<br>- Como os limites tendem ao infinito quando \\(x \\to \\pm\\infty\\), a função não possui máximo nem mínimo global."
-    },
-    {
-      id: "DER-CRE-005",
-      origem: "Dado em aula",
-      dificuldade: "Médio",
-      relevancia: "Alta",
-      enunciado: "Determine os intervalos de crescimento e decrescimento bem como os máximos e mínimos da função abaixo:<br>$$f(x) = \\frac{x - 3}{x + 1}$$",
-      resposta: "$$f'(x) = \\frac{4}{(x+1)^2}$$<br>Como \\(f'(x) > 0\\) para todo \\(x \\neq -1\\), a função é crescente.<br><br><b>Extremos:</b><br>- Logo, a função não possui ponto de máximo nem de mínimo."
-    }
-  ]
-},
 {materia:"Integrais", subtopico:"Integração direta", secId:"integrais", etapa: "P1", exercicios:[
   {id:"P1-OFI-004", numero: 4, origem:"Prova antiga", oficial:"⭐ P1 Oficial", dificuldade:"Fácil", relevancia:"Muito Alta",
    enunciado:"Calcule a integral: $$\\int 2x^7 \\, dx$$",
@@ -658,6 +612,54 @@ window.COURSES_DATA["calc1"] = {
   {id:"RET-TAN-006", origem:"Dado em aula", dificuldade:"Difícil", relevancia:"Alta",
    enunciado:"Encontre a reta t tangente ao gráfico de $$f(x) = 2x^2 - 3x$$ e paralela à reta $$r: y = 8x + 1$$",
    resposta: "$$y = \\frac{55}{8} + 8\\left(x - \\frac{11}{4}\\right)$$"}
-]}
+]},
+{
+  materia: "Crescimento e Extremos",
+  subtopico: "Intervalos, Máximos e Mínimos",
+  secId: "crescimento",
+  etapa: "P2",
+  exercicios: [
+    {
+      id: "CRE-EXT-001",
+      origem: "Dado em aula",
+      dificuldade: "Médio",
+      relevancia: "Alta",
+      enunciado: "Determine os intervalos de crescimento e decrescimento bem como os máximos e mínimos da função abaixo:<br>$$f(x) = x^2 + 2x - 1 \\quad ; \\quad -2 \\le x \\le 3$$",
+      resposta: "$$f'(x) = 2x + 2$$<br>A derivada é positiva para \\(x > -1\\) e negativa para \\(x < -1\\).<br>Portanto, \\(f\\) é crescente em \\((-1, 3)\\) e decrescente em \\((-2, -1)\\).<br><br><b>Extremos:</b><br>- O ponto \\(x = -1\\) é ponto de mínimo global.<br>- Os pontos \\(x = -2\\) e \\(x = 3\\) são pontos de máximos locais, sendo \\(x = 3\\) o ponto de máximo global."
+    },
+    {
+      id: "CRE-EXT-002",
+      origem: "Dado em aula",
+      dificuldade: "Médio",
+      relevancia: "Alta",
+      enunciado: "Determine os intervalos de crescimento e decrescimento bem como os máximos e mínimos da função abaixo:<br>$$f(x) = 3x^2 - x + 2$$",
+      resposta: "$$f'(x) = 6x - 1$$<br>A derivada é positiva para \\(x > \\frac{1}{6}\\) e negativa para \\(x < \\frac{1}{6}\\).<br><br><b>Extremos:</b><br>- O ponto \\(x = \\frac{1}{6}\\) é ponto de mínimo global.<br>- Como \\(\\lim_{x \\to \\pm\\infty} (3x^2 - x + 2) = +\\infty\\), a função não possui ponto de máximo."
+    },
+    {
+      id: "CRE-EXT-003",
+      origem: "Dado em aula",
+      dificuldade: "Médio",
+      relevancia: "Alta",
+      enunciado: "Determine os intervalos de crescimento e decrescimento bem como os máximos e mínimos da função abaixo:<br>$$f(x) = x^3 - x^2 + x - 1 \\quad ; \\quad x \\in [-2, 1]$$",
+      resposta: "$$f'(x) = 3x^2 - 2x + 1$$<br>As raízes da derivada não pertencem aos reais (\\(\\Delta = -8\\)), logo \\(f'(x) > 0\\) para todo \\(x\\). A função é sempre crescente.<br><br><b>Extremos (avaliando os limites do intervalo restrito):</b><br>- O ponto \\(x = -2\\) é mínimo global.<br>- O ponto \\(x = 1\\) é máximo global."
+    },
+    {
+      id: "CRE-EXT-004",
+      origem: "Dado em aula",
+      dificuldade: "Difícil",
+      relevancia: "Alta",
+      enunciado: "Determine os intervalos de crescimento e decrescimento bem como os máximos e mínimos da função abaixo:<br>$$f(x) = x^3 + x^2 - x$$",
+      resposta: "$$f'(x) = 3x^2 + 2x - 1$$<br>A derivada zera em \\(x = -1\\) e \\(x = \\frac{1}{3}\\).<br><br><b>Extremos:</b><br>- O ponto \\(x = -1\\) é ponto de máximo local.<br>- O ponto \\(x = \\frac{1}{3}\\) é ponto de mínimo local.<br>- Como os limites tendem ao infinito quando \\(x \\to \\pm\\infty\\), a função não possui máximo nem mínimo global."
+    },
+    {
+      id: "CRE-EXT-005",
+      origem: "Dado em aula",
+      dificuldade: "Médio",
+      relevancia: "Alta",
+      enunciado: "Determine os intervalos de crescimento e decrescimento bem como os máximos e mínimos da função abaixo:<br>$$f(x) = \\frac{x - 3}{x + 1}$$",
+      resposta: "$$f'(x) = \\frac{4}{(x+1)^2}$$<br>Como \\(f'(x) > 0\\) para todo \\(x \\neq -1\\), a função é crescente.<br><br><b>Extremos:</b><br>- Logo, a função não possui ponto de máximo nem de mínimo."
+    }
+  ]
+}
   ]
 };
