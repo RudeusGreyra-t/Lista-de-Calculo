@@ -489,7 +489,13 @@ window.COURSES_DATA["calc1"] = {
     <div style="text-align: right; margin-top: 15px;">
       <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
     </div>
-  </details>`}
+  </details>`},
+  {id:"INT-PAR-008", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
+   enunciado:"Calcule a integral: $$\\int x^2 \\sin(x) \\, dx$$",
+   resposta:"$$-x^2\\cos(x) + 2x\\sin(x) + 2\\cos(x) + C; \\; C \\in \\mathbb{R}$$"},
+  {id:"INT-PAR-009", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Calcule a integral: $$\\int x \\cos(x) \\, dx$$",
+   resposta:"$$x\\sin(x) + \\cos(x) + C; \\; C \\in \\mathbb{R}$$"}
 ]},
 {materia:"Técnicas de Integração", subtopico:"Somas Parciais", secId:"tecnicas_integracao", etapa: "P2", exercicios:[
   {id:"INT-SOM-001", origem:"Dado em aula", dificuldade:"Médio", relevancia:"Alta",
@@ -591,7 +597,13 @@ window.COURSES_DATA["calc1"] = {
     <div style="text-align: right; margin-top: 15px;">
       <button type="button" class="close-details-btn" style="background: transparent; border: none; color: #3b82f6; cursor: pointer; font-weight: bold; padding: 5px 0;">▴ Ocultar passo a passo</button>
     </div>
-  </details>`}
+  </details>`},
+  {id:"INT-SOM-004", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Calcule a integral: $$\\int \\frac{2x+3}{(x+1)(x-2)} \\, dx$$",
+   resposta:"$$-\\frac{1}{3}\\ln\vert{}x+1\vert{} + \\frac{7}{3}\\ln\vert{}x-2\vert{} + C; \\; C \\in \\mathbb{R}$$"},
+  {id:"INT-SOM-005", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Calcule a integral: $$\\int \\frac{5x+3}{x^2-x-6} \\, dx$$",
+   resposta:"$$\\frac{18}{5}\\ln\vert{}x-3\vert{} + \\frac{7}{5}\\ln\vert{}x+2\vert{} + C; \\; C \\in \\mathbb{R}$$"}
 ]},
 {materia:"Reta Tangente", subtopico:"Equação da Reta Tangente", secId:"reta_tangente", etapa: "P2", exercicios:[
   {id:"RET-TAN-001", origem:"Dado em aula", dificuldade:"Médio", relevancia:"Alta",
@@ -611,7 +623,13 @@ window.COURSES_DATA["calc1"] = {
    resposta: "$$y = \\frac{7}{4} + 3\\left(x + \\frac{1}{2}\\right)$$"},
   {id:"RET-TAN-006", origem:"Dado em aula", dificuldade:"Difícil", relevancia:"Alta",
    enunciado:"Encontre a reta t tangente ao gráfico de $$f(x) = 2x^2 - 3x$$ e paralela à reta $$r: y = 8x + 1$$",
-   resposta: "$$y = \\frac{55}{8} + 8\\left(x - \\frac{11}{4}\\right)$$"}
+   resposta: "$$y = \\frac{55}{8} + 8\\left(x - \\frac{11}{4}\\right)$$"},
+  {id:"RET-TAN-007", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
+   enunciado:"Encontre as equações das retas $$t_1$$ e $$t_2$$ tangentes ao gráfico de $$f(x)=x^2+3x+1$$ e que passam pelos pontos (1, 1).",
+   resposta:"$$t_1: y = x$$ e $$t_2: y = 9x - 8$$"},
+  {id:"RET-TAN-008", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Encontre a equação da reta t tangente ao gráfico de $$f(x)=x^2+x-3$$ e que é paralela à reta $$r: y=5x-1$$",
+   resposta:"$$y = 5x - 7$$"}
 ]},
 {
   materia: "Crescimento e Extremos",
@@ -658,6 +676,22 @@ window.COURSES_DATA["calc1"] = {
       relevancia: "Alta",
       enunciado: "Determine os intervalos de crescimento e decrescimento bem como os máximos e mínimos da função abaixo:<br>$$f(x) = \\frac{x - 3}{x + 1}$$",
       resposta: "$$f'(x) = \\frac{4}{(x+1)^2}$$<br>Como \\(f'(x) > 0\\) para todo \\(x \\neq -1\\), a função é crescente.<br><br><b>Extremos:</b><br>- Logo, a função não possui ponto de máximo nem de mínimo."
+    },
+    {
+      id: "CRE-EXT-006",
+      origem: "Prova antiga",
+      dificuldade: "Médio",
+      relevancia: "Alta",
+      enunciado: "Encontre os pontos de máximo e mínimo locais de $$f(x)=x^3+2x^2+x+1$$.",
+      resposta: "Ponto de máximo local em $$x = -1$$. Ponto de mínimo local em $$x = -\\frac{1}{3}$$."
+    },
+    {
+      id: "CRE-EXT-007",
+      origem: "Prova antiga",
+      dificuldade: "Médio",
+      relevancia: "Alta",
+      enunciado: "Seja $$f: \\mathbb{R} \\to \\mathbb{R}$$ dada por $$f(x)=x^3-6x$$.<br>(a) Determine os intervalos de crescimento e decrescimento de f;<br>(b) Analise f com relação aos máximos e mínimos locais e globais.",
+      resposta: "(a) Crescente em $$(-\\infty, -\\sqrt{2})$$ e $$(\\sqrt{2}, +\\infty)$$; Decrescente em $$(-\\sqrt{2}, \\sqrt{2})$$.<br>(b) Máximo local em $$x = -\\sqrt{2}$$ e mínimo local em $$x = \\sqrt{2}$$. Não possui extremos globais."
     }
   ]
 }
