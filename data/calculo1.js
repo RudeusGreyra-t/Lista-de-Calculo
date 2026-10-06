@@ -600,10 +600,19 @@ window.COURSES_DATA["calc1"] = {
   </details>`},
   {id:"INT-SOM-004", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int \\frac{2x+3}{(x+1)(x-2)} \\, dx$$",
-   resposta:"$$-\\frac{1}{3}\\ln\vert{}x+1\vert{} + \\frac{7}{3}\\ln\vert{}x-2\vert{} + C; \\; C \\in \\mathbb{R}$$"},
+   resposta:"$$-\\frac{1}{3}\\ln\\vert{}x+1\\vert{} + \\frac{7}{3}\\ln\\vert{}x-2\\vert{} + C; \\; C \\in \\mathbb{R}$$"},
   {id:"INT-SOM-005", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Calcule a integral: $$\\int \\frac{5x+3}{x^2-x-6} \\, dx$$",
-   resposta:"$$\\frac{18}{5}\\ln\vert{}x-3\vert{} + \\frac{7}{5}\\ln\vert{}x+2\vert{} + C; \\; C \\in \\mathbb{R}$$"}
+   resposta:"$$\\frac{18}{5}\\ln\\vert{}x-3\\vert{} + \\frac{7}{5}\\ln\\vert{}x+2\\vert{} + C; \\; C \\in \\mathbb{R}$$"},
+  {id:"INT-SOM-006", origem:"Listas de IA", dificuldade:"Fácil", relevancia:"Alta",
+   enunciado:"Calcule a integral: $$\\int \\frac{4}{x^2 - 4} \\, dx$$",
+   resposta:"$$\\ln\vert{}x-2\vert{} - \\ln\vert{}x+2\vert{} + C; \\; C \\in \\mathbb{R}$$"},
+  {id:"INT-SOM-007", origem:"Listas de IA", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Calcule a integral: $$\\int \\frac{3x+1}{x^2-x-6} \\, dx$$",
+   resposta:"$$2\\ln\vert{}x-3\vert{} + \\ln\vert{}x+2\vert{} + C; \\; C \\in \\mathbb{R}$$"},
+  {id:"INT-SOM-008", origem:"Listas de IA", dificuldade:"Médio", relevancia:"Média",
+   enunciado:"Calcule a integral: $$\\int \\frac{5x-4}{x^2-4x} \\, dx$$",
+   resposta:"$$\\ln\vert{}x\vert{} + 4\\ln\vert{}x-4\vert{} + C; \\; C \\in \\mathbb{R}$$"}
 ]},
 {materia:"Reta Tangente", subtopico:"Equação da Reta Tangente", secId:"reta_tangente", etapa: "P2", exercicios:[
   {id:"RET-TAN-001", origem:"Dado em aula", dificuldade:"Médio", relevancia:"Alta",
@@ -629,7 +638,13 @@ window.COURSES_DATA["calc1"] = {
    resposta:"\\(t_1: y = x\\) e \\(t_2: y = 9x - 8\\)"},
   {id:"RET-TAN-008", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Encontre a equação da reta t tangente ao gráfico de $$f(x)=x^2+x-3$$ e que é paralela à reta $$r: y=5x-1$$",
-   resposta:"$$y = 5x - 7$$"}
+   resposta:"$$y = 5x - 7$$"},
+  {id:"RET-TAN-009", origem:"Listas de IA", dificuldade:"Médio", relevancia:"Alta",
+   enunciado:"Encontre as equações das retas tangentes ao gráfico de $$f(x) = x^3 - 3x + 2$$ que são paralelas à reta $$r: y = 9x - 5$$",
+   resposta:"$$f'(x) = 3x^2 - 3$$. Igualando a 9, temos \\(x = \\pm 2\\).<br>As retas são: $$y = 9x - 14$$ (para o ponto \\(x=2\\)) e $$y = 9x + 18$$ (para o ponto \\(x=-2\\))."},
+  {id:"RET-TAN-010", origem:"Listas de IA", dificuldade:"Fácil", relevancia:"Média",
+   enunciado:"Encontre a equação da reta tangente ao gráfico da função exponencial no ponto de abscissa dada:<br>$$f(x) = e^{2x} \\quad ; \\quad x_o = 0$$",
+   resposta:"$$f'(x) = 2e^{2x}$$. Em \\(x_o = 0\\), a derivada é \\(f'(0) = 2\\) e a função é \\(f(0) = 1\\).<br>A equação da reta é $$y = 2x + 1$$."}
 ]},
 {
   materia: "Crescimento e Extremos",
@@ -665,35 +680,4 @@ window.COURSES_DATA["calc1"] = {
       id: "CRE-EXT-004",
       origem: "Dado em aula",
       dificuldade: "Difícil",
-      relevancia: "Alta",
-      enunciado: "Determine os intervalos de crescimento e decrescimento bem como os máximos e mínimos da função abaixo:<br>$$f(x) = x^3 + x^2 - x$$",
-      resposta: "$$f'(x) = 3x^2 + 2x - 1$$<br>A derivada zera em \\(x = -1\\) e \\(x = \\frac{1}{3}\\).<br><br><b>Extremos:</b><br>- O ponto \\(x = -1\\) é ponto de máximo local.<br>- O ponto \\(x = \\frac{1}{3}\\) é ponto de mínimo local.<br>- Como os limites tendem ao infinito quando \\(x \\to \\pm\\infty\\), a função não possui máximo nem mínimo global."
-    },
-    {
-      id: "CRE-EXT-005",
-      origem: "Dado em aula",
-      dificuldade: "Médio",
-      relevancia: "Alta",
-      enunciado: "Determine os intervalos de crescimento e decrescimento bem como os máximos e mínimos da função abaixo:<br>$$f(x) = \\frac{x - 3}{x + 1}$$",
-      resposta: "$$f'(x) = \\frac{4}{(x+1)^2}$$<br>Como \\(f'(x) > 0\\) para todo \\(x \\neq -1\\), a função é crescente.<br><br><b>Extremos:</b><br>- Logo, a função não possui ponto de máximo nem de mínimo."
-    },
-    {
-      id: "CRE-EXT-006",
-      origem: "Prova antiga",
-      dificuldade: "Médio",
-      relevancia: "Alta",
-      enunciado: "Encontre os pontos de máximo e mínimo locais de $$f(x)=x^3+2x^2+x+1$$",
-      resposta: "Ponto de máximo local em \\(x = -1\\). Ponto de mínimo local em \\(x = -\\frac{1}{3}\\)."
-    },
-    {
-      id: "CRE-EXT-007",
-      origem: "Prova antiga",
-      dificuldade: "Médio",
-      relevancia: "Alta",
-      enunciado: "Seja \\(f: \\mathbb{R} \\to \\mathbb{R}\\) dada por \\(f(x)=x^3-6x\\).<br>(a) Determine os intervalos de crescimento e decrescimento de f;<br>(b) Analise f com relação aos máximos e mínimos locais e globais.",
-      resposta: "(a) Crescente em \\((-\\infty, -\\sqrt{2})\\) e \\((\\sqrt{2}, +\\infty)\\); Decrescente em \\((-\\sqrt{2}, \\sqrt{2})\\).<br>(b) Máximo local em \\(x = -\\sqrt{2}\\) e mínimo local em \\(x = \\sqrt{2}\\). Não possui extremos globais."
-    }
-  ]
-}
-  ]
-};
+      relevancia: "
