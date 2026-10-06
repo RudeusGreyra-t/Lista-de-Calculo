@@ -625,8 +625,8 @@ window.COURSES_DATA["calc1"] = {
    enunciado:"Encontre a reta t tangente ao gráfico de $$f(x) = 2x^2 - 3x$$ e paralela à reta $$r: y = 8x + 1$$",
    resposta: "$$y = \\frac{55}{8} + 8\\left(x - \\frac{11}{4}\\right)$$"},
   {id:"RET-TAN-007", origem:"Prova antiga", dificuldade:"Difícil", relevancia:"Alta",
-   enunciado:"Encontre as equações das retas $$t_1$$ e $$t_2$$ tangentes ao gráfico de $$f(x)=x^2+3x+1$$ e que passam pelos pontos (1, 1).",
-   resposta:"$$t_1: y = x$$ e $$t_2: y = 9x - 8$$"},
+   enunciado:"Encontre as equações das retas \\(t_1\\) e \\(t_2\\) tangentes ao gráfico de \\(f(x)=x^2+3x+1\\) e que passam pelos pontos (1, 1).",
+   resposta:"\\(t_1: y = x\\) e \\(t_2: y = 9x - 8\\)"},
   {id:"RET-TAN-008", origem:"Prova antiga", dificuldade:"Médio", relevancia:"Alta",
    enunciado:"Encontre a equação da reta t tangente ao gráfico de $$f(x)=x^2+x-3$$ e que é paralela à reta $$r: y=5x-1$$",
    resposta:"$$y = 5x - 7$$"}
@@ -682,16 +682,16 @@ window.COURSES_DATA["calc1"] = {
       origem: "Prova antiga",
       dificuldade: "Médio",
       relevancia: "Alta",
-      enunciado: "Encontre os pontos de máximo e mínimo locais de $$f(x)=x^3+2x^2+x+1$$.",
-      resposta: "Ponto de máximo local em $$x = -1$$. Ponto de mínimo local em $$x = -\\frac{1}{3}$$."
+      enunciado: "Encontre os pontos de máximo e mínimo locais de $$f(x)=x^3+2x^2+x+1$$",
+      resposta: "Ponto de máximo local em \\(x = -1\\). Ponto de mínimo local em \\(x = -\\frac{1}{3}\\)."
     },
     {
       id: "CRE-EXT-007",
       origem: "Prova antiga",
       dificuldade: "Médio",
       relevancia: "Alta",
-      enunciado: "Seja $$f: \\mathbb{R} \\to \\mathbb{R}$$ dada por $$f(x)=x^3-6x$$.<br>(a) Determine os intervalos de crescimento e decrescimento de f;<br>(b) Analise f com relação aos máximos e mínimos locais e globais.",
-      resposta: "(a) Crescente em $$(-\\infty, -\\sqrt{2})$$ e $$(\\sqrt{2}, +\\infty)$$; Decrescente em $$(-\\sqrt{2}, \\sqrt{2})$$.<br>(b) Máximo local em $$x = -\\sqrt{2}$$ e mínimo local em $$x = \\sqrt{2}$$. Não possui extremos globais."
+      enunciado: "Seja \\(f: \\mathbb{R} \\to \\mathbb{R}\\) dada por \\(f(x)=x^3-6x\\).<br>(a) Determine os intervalos de crescimento e decrescimento de f;<br>(b) Analise f com relação aos máximos e mínimos locais e globais.",
+      resposta: "(a) Crescente em \\((-\\infty, -\\sqrt{2})\\) e \\((\\sqrt{2}, +\\infty)\\); Decrescente em \\((-\\sqrt{2}, \\sqrt{2})\\).<br>(b) Máximo local em \\(x = -\\sqrt{2}\\) e mínimo local em \\(x = \\sqrt{2}\\). Não possui extremos globais."
     }
   ]
 }
