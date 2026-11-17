@@ -9,12 +9,15 @@
 <meta property="og:type" content="website">
 <link rel="stylesheet" href="style.css">
 
-<!-- Configuração e Injeção do MathJax -->
+<!-- Configuração e Injeção do MathJax com escala ampliada -->
 <script>
   window.MathJax = {
     tex: {
       inlineMath: [['\\(', '\\)']],
       displayMath: [['$$', '$$']]
+    },
+    chtml: {
+      scale: 1.3
     }
   };
 </script>
@@ -122,7 +125,7 @@
 
 <p class="empty-msg" id="emptyMsg">🧹 Nenhum exercício bate com os filtros selecionados.</p>
 
-<footer class="credit">Interface limpa adaptável (Claro/Escuro). Fórmulas matemáticas via WebTeX.</footer>
+<footer class="credit">Interface limpa adaptável (Claro/Escuro). Fórmulas matemáticas via MathJax.</footer>
 
 <!-- DADOS DAS DISCIPLINAS -->
 <script src="data/calculo1.js"></script>
