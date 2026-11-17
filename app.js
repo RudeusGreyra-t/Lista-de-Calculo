@@ -37,10 +37,9 @@ scrollTopBtn.addEventListener('click', () => {
 /* ======================= WEBTEX & HELPERS ======================= */
 function parseWebTex(text) {
   if (!text) return "";
-  // Solução definitiva: Usar a propriedade nativa do navegador 'zoom' para ampliar os vetores SVG.
-  // Como são vetores, eles crescem sem perder 1% de qualidade, driblando o bloqueio do \begin{aligned}.
-  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (m, tex) => `<div class="webtex-block" style="overflow-x: auto; text-align: center; margin: 20px 0;"><img src="https://latex.codecogs.com/svg.image?\\displaystyle ${encodeURIComponent(tex.trim())}" alt="Formula" style="zoom: 1.6; max-width: 100%; height: auto;"></div>`);
-  text = text.replace(/\\\(([\s\S]*?)\\\)/g, (m, tex) => `<img class="webtex-inline" src="https://latex.codecogs.com/svg.image?\\textstyle ${encodeURIComponent(tex.trim())}" alt="Formula" style="zoom: 1.3; max-width: 100%; height: auto; vertical-align: middle;">`);
+  // Keeps the mobile-friendly scrolling wrapper for block equations, but leaves the actual $$ LaTeX $$ intact so MathJax renders it natively.
+  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (m, tex) => `<div class="webtex-block" style="overflow-x: auto; text-align: center; margin: 20px 0;">$$ ${tex.trim()} $$</div>`);
+  // MathJax automatically picks up inline \( \) tags natively, so no replace is needed for those.
   return text;
 }
 
@@ -502,31 +501,37 @@ function buildContent() {
     });
 
     main.appendChild(seqSection);
-    return;
+  } else {
+    SECTION_ORDER.forEach(secId => {
+      const groups = DATA.filter(g => g.secId === secId);
+      if(groups.length === 0) return;
+      const total = groups.reduce((n,g) => n + g.exercicios.length, 0);
+
+      const section = document.createElement("section");
+      section.className = "topic";
+      section.id = secId;
+      section.innerHTML = `<h2>${SECTION_TITLES[secId]}</h2><div class="topic-count sec-count" data-sec="${secId}">${total} exercícios</div>`;
+
+      groups.forEach(group => {
+        const subBlock = document.createElement("div");
+        subBlock.className = "subtopic-block";
+        subBlock.innerHTML = `<h3 class="subtopic">${group.subtopico}</h3>`;
+
+        group.exercicios.forEach(ex => {
+          subBlock.appendChild(createCard(ex, group));
+        });
+        section.appendChild(subBlock);
+      });
+      main.appendChild(section);
+    });
   }
 
-  SECTION_ORDER.forEach(secId => {
-    const groups = DATA.filter(g => g.secId === secId);
-    if(groups.length === 0) return;
-    const total = groups.reduce((n,g) => n + g.exercicios.length, 0);
-
-    const section = document.createElement("section");
-    section.className = "topic";
-    section.id = secId;
-    section.innerHTML = `<h2>${SECTION_TITLES[secId]}</h2><div class="topic-count sec-count" data-sec="${secId}">${total} exercícios</div>`;
-
-    groups.forEach(group => {
-      const subBlock = document.createElement("div");
-      subBlock.className = "subtopic-block";
-      subBlock.innerHTML = `<h3 class="subtopic">${group.subtopico}</h3>`;
-
-      group.exercicios.forEach(ex => {
-        subBlock.appendChild(createCard(ex, group));
+  // Aciona a re-renderização nativa do MathJax
+  if (window.MathJax) {
+      MathJax.typesetPromise().catch(function (err) {
+          console.error('MathJax rendering error:', err.message);
       });
-      section.appendChild(subBlock);
-    });
-    main.appendChild(section);
-  });
+  }
 }
 
 function updateToggleMateriasButton() {
