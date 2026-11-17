@@ -38,7 +38,8 @@ scrollTopBtn.addEventListener('click', () => {
 function parseWebTex(text) {
   if (!text) return "";
   // Keeps the mobile-friendly scrolling wrapper for block equations, but leaves the actual $$ LaTeX $$ intact so MathJax renders it natively.
-  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (m, tex) => `<div class="webtex-block" style="overflow-x: auto; text-align: center; margin: 20px 0;">$$ ${tex.trim()} $$</div>`);
+  // Increased font size in the wrapper to make formulas larger.
+  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (m, tex) => `<div class="webtex-block" style="overflow-x: auto; text-align: center; margin: 20px 0; font-size: 1.6em;">$$ ${tex.trim()} $$</div>`);
   // MathJax automatically picks up inline \( \) tags natively, so no replace is needed for those.
   return text;
 }
@@ -102,7 +103,7 @@ function loadCourse(courseKey) {
 
   ORIGIN_CONFIG = course.originConfig || {};
 
-  reviewedMap = JSON.parse(localStorage.getItem(`revisados_${courseKey}`) || "{}");
+  reviewedMap = JSON.parse(localStorage.getItem(\`revisados_\${courseKey}\`) || "{}");
   isSequentialMode = false;
 
   initFilters();
@@ -118,7 +119,7 @@ function loadCourse(courseKey) {
 }
 
 function setReviewed(map){
-  try{ localStorage.setItem(`revisados_${currentCourseKey}`, JSON.stringify(map)); }catch(e){}
+  try{ localStorage.setItem(\`revisados_\${currentCourseKey}\`, JSON.stringify(map)); }catch(e){}
 }
 
 /* ======================= LÓGICA DE HERANÇA MACRO-MICRO (ETAPAS) ======================= */
@@ -152,12 +153,12 @@ function updateUIForEtapa() {
         const isVisible = isSectionVisibleInCurrentEtapa(secId);
         
         // Esconde ou exibe as pílulas de navegação
-        document.querySelectorAll(`.nav-pill-group[data-sec="${secId}"]`).forEach(pill => {
+        document.querySelectorAll(\`.nav-pill-group[data-sec="\${secId}"]\`).forEach(pill => {
             pill.style.display = isVisible && !isSequentialMode ? "inline-flex" : "none";
         });
 
         // Atualiza a visibilidade das opções no dropdown da matéria
-        const dd = document.getElementById(`dd-${secId}`);
+        const dd = document.getElementById(\`dd-\${secId}\`);
         if (dd) {
             dd.style.display = isVisible ? "" : "none";
             dd.querySelectorAll('.dropdown-item').forEach(label => {
@@ -208,7 +209,7 @@ function initFilters() {
 
     const details = document.createElement("details");
     details.className = "dropdown";
-    details.id = `dd-${secId}`;
+    details.id = \`dd-\${secId}\`;
     dynamicSectionContainer.appendChild(details);
 
     setupDropdownWithActions(details.id, secTitle, subtopicos, sectionSubtopicos[secId]);
@@ -218,8 +219,8 @@ function initFilters() {
 function setupDropdownWithActions(dropdownId, title, options, selectedSet) {
   const details = document.getElementById(dropdownId);
   if (!details) return;
-  details.innerHTML = `
-    <summary class="dropdown-btn">${title} <span class="count"></span> ▾</summary>
+  details.innerHTML = \`
+    <summary class="dropdown-btn">\${title} <span class="count"></span> ▾</summary>
     <div class="dropdown-content">
       <div class="dropdown-actions">
         <button type="button" class="select-all">Todos</button>
@@ -227,13 +228,13 @@ function setupDropdownWithActions(dropdownId, title, options, selectedSet) {
       </div>
       <div class="dropdown-items-container"></div>
     </div>
-  `;
+  \`;
   
   const container = details.querySelector('.dropdown-items-container');
   options.forEach(opt => {
     const labelEl = document.createElement("label");
     labelEl.className = "dropdown-item";
-    labelEl.innerHTML = `<input type="checkbox" ${selectedSet.has(opt) ? "checked" : ""}> ${opt}`;
+    labelEl.innerHTML = \`<input type="checkbox" \${selectedSet.has(opt) ? "checked" : ""}> \${opt}\`;
     labelEl.querySelector("input").addEventListener("change", (e) => {
       if(e.target.checked) selectedSet.add(opt); else selectedSet.delete(opt);
       applyFilters();
@@ -277,7 +278,7 @@ function updateDropdownButton(detailsEl) {
   const checkedCount = visibleItems.filter(el => el.querySelector('input').checked).length;
   const totalCount = visibleItems.length;
   const summaryCount = detailsEl.querySelector('.count');
-  if(summaryCount) summaryCount.textContent = (checkedCount === totalCount && totalCount > 0) ? "" : `(${checkedCount})`;
+  if(summaryCount) summaryCount.textContent = (checkedCount === totalCount && totalCount > 0) ? "" : \`(\${checkedCount})\`;
 }
 
 /* ======================= RENDERIZAÇÃO ======================= */
@@ -293,12 +294,12 @@ function buildNavPills(container) {
     const pillGroup = document.createElement("div");
     pillGroup.className = "nav-pill-group";
     pillGroup.dataset.sec = secId;
-    pillGroup.innerHTML = `
-      <a href="#${secId}" class="nav-pill-link">
-        ${SECTION_TITLES[secId]} <span class="count nav-count-${secId}">(0/0)</span>
+    pillGroup.innerHTML = \`
+      <a href="#\${secId}" class="nav-pill-link">
+        \${SECTION_TITLES[secId]} <span class="count nav-count-\${secId}">(0/0)</span>
       </a>
-      <button type="button" class="nav-pill-reset" data-sec="${secId}" title="Zerar revisões de ${SECTION_TITLES[secId]}">↺</button>
-    `;
+      <button type="button" class="nav-pill-reset" data-sec="\${secId}" title="Zerar revisões de \${SECTION_TITLES[secId]}">↺</button>
+    \`;
     
     const isVisible = isSectionVisibleInCurrentEtapa(secId);
     pillGroup.style.display = isVisible ? "inline-flex" : "none";
@@ -363,69 +364,69 @@ function createCard(ex, group) {
   
   if (hasItems) {
       ex.itens.forEach((item, index) => {
-          const subId = `${ex.id}-${item.id || index}`;
+          const subId = \`\${ex.id}-\${item.id || index}\`;
           const isSubRev = reviewedMap[subId];
-          itemsHtml += `
-            <div class="sub-item ${isSubRev ? 'reviewed' : ''}" id="sub-${subId}">
-              <div class="enunciado sub-enunciado">${parseWebTex(item.enunciado)}</div>
+          itemsHtml += \`
+            <div class="sub-item \${isSubRev ? 'reviewed' : ''}" id="sub-\${subId}">
+              <div class="enunciado sub-enunciado">\${parseWebTex(item.enunciado)}</div>
               <div class="card-foot sub-foot">
                 <button class="toggle-answer">Mostrar resposta</button>
                 <label class="reviewed-toggle">
-                  <input type="checkbox" class="sub-reviewed-cb" data-subid="${subId}" ${isSubRev ? "checked" : ""}> revisado
+                  <input type="checkbox" class="sub-reviewed-cb" data-subid="\${subId}" \${isSubRev ? "checked" : ""}> revisado
                 </label>
               </div>
               <div class="resposta">
                 <span class="label">Resposta</span>
-                ${parseWebTex(item.resposta)}
+                \${parseWebTex(item.resposta)}
               </div>
             </div>
-          `;
+          \`;
       });
   }
 
-  let svgHTML = ex.svg ? (ex.svg.trim().startsWith("<div") ? ex.svg : `<div class="svg-wrap">${ex.svg}</div>`) : "";
+  let svgHTML = ex.svg ? (ex.svg.trim().startsWith("<div") ? ex.svg : \`<div class="svg-wrap">\${ex.svg}</div>\`) : "";
 
   let mainFootHtml = "";
   let mainAnswerHtml = "";
 
   if (hasItems) {
       if (ex.resposta) {
-         mainFootHtml = `<div class="card-foot"><button class="toggle-answer main-toggle">Mostrar Contexto Base</button></div>`;
-         mainAnswerHtml = `<div class="resposta"><span class="label">Contexto Base</span>${parseWebTex(ex.resposta)}${ex.svg && ex.svgPos === "resposta" ? svgHTML : ""}</div>`;
+         mainFootHtml = \`<div class="card-foot"><button class="toggle-answer main-toggle">Mostrar Contexto Base</button></div>\`;
+         mainAnswerHtml = \`<div class="resposta"><span class="label">Contexto Base</span>\${parseWebTex(ex.resposta)}\${ex.svg && ex.svgPos === "resposta" ? svgHTML : ""}</div>\`;
       }
   } else {
-      mainFootHtml = `
+      mainFootHtml = \`
         <div class="card-foot">
           <button class="toggle-answer">Mostrar resposta</button>
           <label class="reviewed-toggle">
-            <input type="checkbox" class="main-reviewed-cb" data-id="${ex.id}" ${reviewedMap[ex.id] ? "checked" : ""}> marcar como revisado
+            <input type="checkbox" class="main-reviewed-cb" data-id="\${ex.id}" \${reviewedMap[ex.id] ? "checked" : ""}> marcar como revisado
           </label>
-        </div>`;
-      mainAnswerHtml = `<div class="resposta"><span class="label">Resposta final</span>${parseWebTex(ex.resposta)}${ex.svg && ex.svgPos === "resposta" ? svgHTML : ""}</div>`;
+        </div>\`;
+      mainAnswerHtml = \`<div class="resposta"><span class="label">Resposta final</span>\${parseWebTex(ex.resposta)}\${ex.svg && ex.svgPos === "resposta" ? svgHTML : ""}</div>\`;
   }
 
-  card.innerHTML = `
+  card.innerHTML = \`
     <div class="card-head">
-      <h4>${ex.id}</h4>
+      <h4>\${ex.id}</h4>
       <div class="badges-wrapper">
         <div class="badges-top">
-          <span class="badge ${dc}">${ex.dificuldade}</span>
-          ${ex.oficial ? `<span class="selo-oficial">${ex.oficial}</span>` : ""}
-          <span class="badge rel">Relevância: ${ex.relevancia}</span>
+          <span class="badge \${dc}">\${ex.dificuldade}</span>
+          \${ex.oficial ? \`<span class="selo-oficial">\${ex.oficial}</span>\` : ""}
+          <span class="badge rel">Relevância: \${ex.relevancia}</span>
         </div>
-        <span class="badge orig ${origCSSClass(ex.origem)}">${origemCategoria(ex.origem)}</span>
+        <span class="badge orig \${origCSSClass(ex.origem)}">\${origemCategoria(ex.origem)}</span>
       </div>
     </div>
     <div class="meta">
-      <span><b>Matéria:</b> ${group.materia || SECTION_TITLES[group.secId]}</span>
-      <span><b>Subtópico:</b> ${group.subtopico}</span>
+      <span><b>Matéria:</b> \${group.materia || SECTION_TITLES[group.secId]}</span>
+      <span><b>Subtópico:</b> \${group.subtopico}</span>
     </div>
-    <div class="enunciado">${parseWebTex(ex.enunciado)}</div>
-    ${ex.svg && ex.svgPos !== "resposta" ? svgHTML : ""}
-    ${mainFootHtml}
-    ${mainAnswerHtml}
-    ${hasItems ? `<div class="sub-items-container">${itemsHtml}</div>` : ""}
-  `;
+    <div class="enunciado">\${parseWebTex(ex.enunciado)}</div>
+    \${ex.svg && ex.svgPos !== "resposta" ? svgHTML : ""}
+    \${mainFootHtml}
+    \${mainAnswerHtml}
+    \${hasItems ? \`<div class="sub-items-container">\${itemsHtml}</div>\` : ""}
+  \`;
 
   card.querySelectorAll(".toggle-answer").forEach(btn => {
     btn.addEventListener("click", (e) => {
@@ -510,12 +511,12 @@ function buildContent() {
       const section = document.createElement("section");
       section.className = "topic";
       section.id = secId;
-      section.innerHTML = `<h2>${SECTION_TITLES[secId]}</h2><div class="topic-count sec-count" data-sec="${secId}">${total} exercícios</div>`;
+      section.innerHTML = \`<h2>\${SECTION_TITLES[secId]}</h2><div class="topic-count sec-count" data-sec="\${secId}">\${total} exercícios</div>\`;
 
       groups.forEach(group => {
         const subBlock = document.createElement("div");
         subBlock.className = "subtopic-block";
-        subBlock.innerHTML = `<h3 class="subtopic">${group.subtopico}</h3>`;
+        subBlock.innerHTML = \`<h3 class="subtopic">\${group.subtopico}</h3>\`;
 
         group.exercicios.forEach(ex => {
           subBlock.appendChild(createCard(ex, group));
@@ -653,14 +654,14 @@ function applyFilters() {
       }).length;
 
       const countEl = sec.querySelector(".sec-count");
-      if (countEl) countEl.textContent = (visibleCardsInSec.length === totalSecBase) ? `${totalSecBase} exercícios` : `${visibleCardsInSec.length} de ${totalSecBase} visíveis`;
+      if (countEl) countEl.textContent = (visibleCardsInSec.length === totalSecBase) ? `\${totalSecBase} exercícios` : \`\${visibleCardsInSec.length} de \${totalSecBase} visíveis\`;
 
-      document.querySelectorAll(`.nav-count-${secId}`).forEach(el => el.textContent = `(${visibleCardsInSec.length}/${totalSecBase})`);
+      document.querySelectorAll(\`.nav-count-\${secId}\`).forEach(el => el.textContent = \`(\${visibleCardsInSec.length}/\${totalSecBase})\`);
     });
   }
 
   document.getElementById("emptyMsg").style.display = visibleCount === 0 ? "block" : "none";
-  document.getElementById("progressLabel").textContent = `${metaReviewed}/${metaTotal} revisados`;
+  document.getElementById("progressLabel").textContent = \`\${metaReviewed}/\${metaTotal} revisados\`;
   document.getElementById("countScoped").textContent = metaReviewed;
   document.getElementById("countAll").textContent = Object.values(reviewedMap).filter(Boolean).length;
   
@@ -739,7 +740,7 @@ document.getElementById("toggleMaterias").addEventListener("click", () => {
     if (allChecked) {
         SECTION_ORDER.forEach(secId => {
             if(isSectionVisibleInCurrentEtapa(secId)) {
-                const dd = document.getElementById(`dd-${secId}`);
+                const dd = document.getElementById(\`dd-\${secId}\`);
                 if(dd) dd.querySelectorAll('.dropdown-item').forEach(label => {
                     if (label.style.display !== "none") {
                         label.querySelector('input').checked = false;
@@ -751,7 +752,7 @@ document.getElementById("toggleMaterias").addEventListener("click", () => {
     } else {
         SECTION_ORDER.forEach(secId => {
             if(isSectionVisibleInCurrentEtapa(secId)) {
-                const dd = document.getElementById(`dd-${secId}`);
+                const dd = document.getElementById(\`dd-\${secId}\`);
                 if(dd) dd.querySelectorAll('.dropdown-item').forEach(label => {
                     if (label.style.display !== "none") {
                         label.querySelector('input').checked = true;
@@ -762,7 +763,7 @@ document.getElementById("toggleMaterias").addEventListener("click", () => {
         });
     }
     
-    SECTION_ORDER.forEach(secId => updateDropdownButton(document.getElementById(`dd-${secId}`)));
+    SECTION_ORDER.forEach(secId => updateDropdownButton(document.getElementById(\`dd-\${secId}\`)));
     applyFilters();
 });
 
